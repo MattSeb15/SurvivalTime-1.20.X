@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "survivaltimemod:opal_block"
+    }
+  ],
+  "result": {
+    "item": "survivaltimemod:opal",
+    "count": 9
+  }
+}
