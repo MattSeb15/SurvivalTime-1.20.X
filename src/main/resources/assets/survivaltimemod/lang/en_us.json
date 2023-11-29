@@ -1,5 +1,4 @@
 {
-  "item.survivaltimemod.opal": "Opal",
   "item.survivaltimemod.opal_shard_chrona": "Chrona Opal Shard",
   "item.survivaltimemod.opal_shard_tempora": "Tempora Opal Shard",
   "item.survivaltimemod.opal_shard_epoch": "Epoch Opal Shard",
@@ -7,6 +6,10 @@
   "item.survivaltimemod.opal_shard_loop": "Loop Opal Shard",
   "item.survivaltimemod.opal_raw": "Raw Opal",
   "item.survivaltimemod.opal_ingot": "Opal Ingot",
+  "item.survivaltimemod.lost_time_sphere": "Lost Time Sphere",
+  "item.survivaltimemod.temporal_tuber": "Temporal Tuber",
+  "item.survivaltimemod.temporal_tuber_cooked": "Cooked Temporal Tuber",
+  "item.survivaltimemod.temporal_tuber_rotten": "Rotten Temporal Tuber",
   "block.survivaltimemod.opal_block": "Block of Opal",
   "block.survivaltimemod.opal_raw_block": "Opal Raw Block",
   "block.survivaltimemod.opal_ore": "Opal Ore",

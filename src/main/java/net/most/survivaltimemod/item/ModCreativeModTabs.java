@@ -17,7 +17,7 @@ public class ModCreativeModTabs {
 
     public static final RegistryObject<CreativeModeTab> SURVIVAL_TIME_TAB =
             CREATIVE_MODE_TABS.register("survival_time_tab",
-                    () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.OPAL.get()))
+                    () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.OPAL_INGOT.get()))
                             .title(Component.translatable("creativetab.survivaltimemod_tab"))
                             .displayItems((pParameters, pOutput) -> {
                                 for (RegistryObject<Item> item : ModItems.ITEMS_LIST) {

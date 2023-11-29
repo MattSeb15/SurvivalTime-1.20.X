@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "survivaltimemod:item/opal"
+    "layer0": "survivaltimemod:item/temporal_tuber"
   }
 }

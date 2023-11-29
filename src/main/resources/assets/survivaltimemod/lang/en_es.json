@@ -1,0 +1,20 @@
+{
+  "item.survivaltimemod.opal_shard_chrona": "Fragmento de Opal Crona",
+  "item.survivaltimemod.opal_shard_tempora": "Fragmento de Opal Tempora",
+  "item.survivaltimemod.opal_shard_epoch": "Fragmento de Opal Epoch",
+  "item.survivaltimemod.opal_shard_flux": "Fragmento de Opal Flux",
+  "item.survivaltimemod.opal_shard_loop": "Fragmento de Opal Loop",
+  "item.survivaltimemod.opal_raw": "Opal en Bruto",
+  "item.survivaltimemod.opal_ingot": "Lingote de Opal",
+  "item.survivaltimemod.lost_time_sphere": "Esfera del Tiempo Perdido",
+  "item.survivaltimemod.temporal_tuber": "Tubérculo Temporal",
+  "item.survivaltimemod.temporal_tuber_cooked": "Tubérculo Temporal Cocinado",
+  "item.survivaltimemod.temporal_tuber_rotten": "Tubérculo Temporal Podrido",
+  "block.survivaltimemod.opal_block": "Bloque de Opal",
+  "block.survivaltimemod.opal_raw_block": "Bloque de Opal en Bruto",
+  "block.survivaltimemod.opal_ore": "Mineral de Opal",
+  "block.survivaltimemod.deepslate_opal_ore": "Mineral de Opal de Pizarra",
+  "block.survivaltimemod.nether_opal_ore": "Mineral de Opal del Nether",
+  "block.survivaltimemod.end_stone_opal_ore": "Mineral de Opal de End",
+  "creativetab.survivaltimemod_tab": "Survival Time Mod"
+}
