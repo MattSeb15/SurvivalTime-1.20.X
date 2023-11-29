@@ -1,0 +1,122 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "survivaltimemod:deepslate_opal_ore",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:group",
+              "children": [
+                {
+                  "type": "minecraft:item",
+                  "weight": 5,
+                  "name": "survivaltimemod:opal_shard_loop",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": {
+                        "type": "minecraft:uniform",
+                        "min": 2,
+                        "max": 3
+                      },
+                      "add": false
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:item",
+                  "weight": 4,
+                  "name": "survivaltimemod:opal_shard_flux",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": {
+                        "type": "minecraft:uniform",
+                        "min": 2,
+                        "max": 3
+                      },
+                      "add": false
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:item",
+                  "weight": 3,
+                  "name": "survivaltimemod:opal_shard_epoch",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": {
+                        "type": "minecraft:uniform",
+                        "min": 3,
+                        "max": 4
+                      },
+                      "add": false
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:item",
+                  "weight": 2,
+                  "name": "survivaltimemod:opal_shard_tempora",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": {
+                        "type": "minecraft:uniform",
+                        "min": 2,
+                        "max": 4
+                      },
+                      "add": false
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:item",
+                  "weight": 1,
+                  "name": "survivaltimemod:opal_shard_chrona",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": {
+                        "type": "minecraft:uniform",
+                        "min": 2,
+                        "max": 5
+                      },
+                      "add": false
+                    }
+                  ]
+                }
+              ]
+            }
+
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "survivaltimemod:blocks/deepslate_opal_ore"
+}

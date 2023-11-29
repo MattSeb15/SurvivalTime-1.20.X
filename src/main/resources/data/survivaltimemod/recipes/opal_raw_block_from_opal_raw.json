@@ -9,11 +9,11 @@
   ],
   "key": {
     "#": {
-      "item": "survivaltimemod:opal"
+      "item": "survivaltimemod:opal_raw"
     }
   },
   "result": {
-    "item": "survivaltimemod:opal_block",
+    "item": "survivaltimemod:opal_raw_block",
     "count": 1
   }
 }

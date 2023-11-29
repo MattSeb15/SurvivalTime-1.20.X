@@ -4,11 +4,11 @@
   "group": "opal",
   "ingredients": [
     {
-      "item": "survivaltimemod:opal_block"
+      "item": "survivaltimemod:opal_raw_block"
     }
   ],
   "result": {
-    "item": "survivaltimemod:opal",
+    "item": "survivaltimemod:opal_raw",
     "count": 9
   }
 }

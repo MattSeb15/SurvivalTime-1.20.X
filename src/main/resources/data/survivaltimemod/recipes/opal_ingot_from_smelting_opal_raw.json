@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "group": "opal",
+  "cookingtime": 400,
+  "experience": 2.5,
+  "ingredient": {
+    "item": "survivaltimemod:opal_raw"
+  },
+  "result": "survivaltimemod:opal_ingot"
+}

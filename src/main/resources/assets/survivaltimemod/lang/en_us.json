@@ -1,10 +1,17 @@
 {
   "item.survivaltimemod.opal": "Opal",
   "item.survivaltimemod.opal_shard_chrona": "Chrona Opal Shard",
-  "item.survivaltimemod.opal_shard_tempora": "Chrona Opal Shard",
-  "item.survivaltimemod.opal_shard_epoch": "Chrona Opal Shard",
-  "item.survivaltimemod.opal_shard_flux": "Chrona Opal Shard",
-  "item.survivaltimemod.opal_shard_loop": "Chrona Opal Shard",
+  "item.survivaltimemod.opal_shard_tempora": "Tempora Opal Shard",
+  "item.survivaltimemod.opal_shard_epoch": "Epoch Opal Shard",
+  "item.survivaltimemod.opal_shard_flux": "Flux Opal Shard",
+  "item.survivaltimemod.opal_shard_loop": "Loop Opal Shard",
+  "item.survivaltimemod.opal_raw": "Raw Opal",
+  "item.survivaltimemod.opal_ingot": "Opal Ingot",
   "block.survivaltimemod.opal_block": "Block of Opal",
+  "block.survivaltimemod.opal_raw_block": "Opal Raw Block",
+  "block.survivaltimemod.opal_ore": "Opal Ore",
+  "block.survivaltimemod.deepslate_opal_ore": "Deepslate Opal Ore",
+  "block.survivaltimemod.nether_opal_ore": "Nether Opal Ore",
+  "block.survivaltimemod.end_stone_opal_ore": "End Stone Opal Ore",
   "creativetab.survivaltimemod_tab": "Survival Time Mod"
 }
