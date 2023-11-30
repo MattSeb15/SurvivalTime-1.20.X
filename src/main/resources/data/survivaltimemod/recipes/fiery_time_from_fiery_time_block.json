@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "opal",
+  "ingredients": [
+    {
+      "item": "survivaltimemod:fiery_time_block"
+    }
+  ],
+  "result": {
+    "item": "survivaltimemod:fiery_time",
+    "count": 9
+  }
+}

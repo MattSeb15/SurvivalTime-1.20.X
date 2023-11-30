@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.item.custom.FuelItem;
 import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 
 import java.util.List;
@@ -60,6 +61,11 @@ public class ModItems {
                             Item.Properties()
                             .food(ModFoods.TEMPORAL_TUBER_ROTTEN)
                     ));
+    public static final RegistryObject<Item> FIERY_TIME =
+            ITEMS.register("fiery_time", () -> new FuelItem(new Item.Properties()
+                    .stacksTo(60),
+                    2400)
+            );
 
 
     public static final List<RegistryObject<Item>> ITEMS_LIST = List.of(
@@ -73,7 +79,8 @@ public class ModItems {
             LOST_TIME_SPHERE,
             TEMPORAL_TUBER,
             TEMPORAL_TUBER_COOKED,
-            TEMPORAL_TUBER_ROTTEN
+            TEMPORAL_TUBER_ROTTEN,
+            FIERY_TIME
     );
 
     public static void register(IEventBus eventBus) {
