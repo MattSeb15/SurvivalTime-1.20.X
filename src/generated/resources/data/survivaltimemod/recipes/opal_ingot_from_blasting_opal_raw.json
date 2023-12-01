@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 600,
+  "experience": 2.7,
+  "group": "opal_ingot",
+  "ingredient": {
+    "item": "survivaltimemod:opal_raw"
+  },
+  "result": "survivaltimemod:opal_ingot"
+}
