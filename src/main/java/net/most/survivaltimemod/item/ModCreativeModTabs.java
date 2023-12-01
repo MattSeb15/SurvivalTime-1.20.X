@@ -20,10 +20,10 @@ public class ModCreativeModTabs {
                     () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.OPAL_INGOT.get()))
                             .title(Component.translatable("creativetab.survivaltimemod_tab"))
                             .displayItems((pParameters, pOutput) -> {
-                                for (RegistryObject<Item> item : ModItems.ITEMS_LIST) {
+                                for (RegistryObject<Item> item : ModItems.ITEMS.getEntries()) {
                                     pOutput.accept(item.get());
                                 }
-                                for(RegistryObject<Block> block : ModBlocks.BLOCK_LIST) {
+                                for(RegistryObject<Block> block : ModBlocks.BLOCKS.getEntries()) {
                                     pOutput.accept(block.get());
                                 }
                             })

@@ -61,6 +61,7 @@ public class ModBlocks {
 
 
 
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);
         registerBlockItem(name, registeredBlock);
@@ -86,17 +87,17 @@ public class ModBlocks {
         ModItems.ITEMS.register(name, () -> new FuelItemBlock(block.get(), properties,burnTime));
     }
 
-    public static List<RegistryObject<Block>> BLOCK_LIST = List.of(
-            OPAL_BLOCK,
-            OPAL_RAW_BLOCK,
-            //Ores
-            OPAL_ORE,
-            DEEPSLATE_OPAL_ORE,
-            NETHER_OPAL_ORE,
-            END_STONE_OPAL_ORE,
-            //Other
-            FIERY_TIME_BLOCK
-    );
+//    public static List<RegistryObject<Block>> BLOCK_LIST = List.of(
+//            OPAL_BLOCK,
+//            OPAL_RAW_BLOCK,
+//            //Ores
+//            OPAL_ORE,
+//            DEEPSLATE_OPAL_ORE,
+//            NETHER_OPAL_ORE,
+//            END_STONE_OPAL_ORE,
+//            //Other
+//            FIERY_TIME_BLOCK
+//    );
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

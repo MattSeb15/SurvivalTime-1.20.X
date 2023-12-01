@@ -68,21 +68,6 @@ public class ModItems {
             );
 
 
-    public static final List<RegistryObject<Item>> ITEMS_LIST = List.of(
-            OPAL_SHARD_CHRONA,
-            OPAL_SHARD_TEMPORA,
-            OPAL_SHARD_EPOCH,
-            OPAL_SHARD_FLUX,
-            OPAL_SHARD_LOOP,
-            OPAL_RAW,
-            OPAL_INGOT,
-            LOST_TIME_SPHERE,
-            TEMPORAL_TUBER,
-            TEMPORAL_TUBER_COOKED,
-            TEMPORAL_TUBER_ROTTEN,
-            FIERY_TIME
-    );
-
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
