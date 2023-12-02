@@ -59,6 +59,59 @@ public class ModBlocks {
                     .stacksTo(16),
             24000);
 
+    // raw shards blocks
+
+    public static final RegistryObject<Block> RAW_CHRONA_BLOCK = registerBlock("raw_chrona_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
+                    .mapColor(DyeColor.BLUE)
+                    .strength(20.0f, 50.0f)));
+
+    public static final RegistryObject<Block> RAW_TEMPORA_BLOCK = registerBlock("raw_tempora_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
+                    .mapColor(DyeColor.MAGENTA)
+                    .strength(17.0f, 40.0f)));
+
+    public static final RegistryObject<Block> RAW_EPOCH_BLOCK = registerBlock("raw_epoch_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
+                    .mapColor(DyeColor.RED)
+                    .strength(14.0f, 30.0f)));
+
+    public static final RegistryObject<Block> RAW_FLUX_BLOCK = registerBlock("raw_flux_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
+                    .mapColor(DyeColor.LIGHT_BLUE)
+                    .strength(11.0f, 20.0f)));
+
+    public static final RegistryObject<Block> RAW_LOOP_BLOCK = registerBlock("raw_loop_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
+                    .mapColor(DyeColor.PURPLE)
+                    .strength(9.0f, 10.0f)));
+
+    // shards blocks
+
+    public static final RegistryObject<Block> CHRONA_BLOCK = registerBlock("chrona_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .mapColor(DyeColor.BLUE)
+                    .strength(17.0f, 30.0f)));
+
+    public static final RegistryObject<Block> TEMPORA_BLOCK = registerBlock("tempora_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .mapColor(DyeColor.MAGENTA)
+                    .strength(15.0f, 30.0f)));
+
+    public static final RegistryObject<Block> EPOCH_BLOCK = registerBlock("epoch_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .mapColor(DyeColor.RED)
+                    .strength(11.0f, 30.0f)));
+
+    public static final RegistryObject<Block> FLUX_BLOCK = registerBlock("flux_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .mapColor(DyeColor.LIGHT_BLUE)
+                    .strength(9.0f, 30.0f)));
+
+    public static final RegistryObject<Block> LOOP_BLOCK = registerBlock("loop_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .mapColor(DyeColor.PURPLE)
+                    .strength(7.0f, 30.0f)));
 
 
 

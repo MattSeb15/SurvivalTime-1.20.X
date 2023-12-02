@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "survivaltimemod:opal_shard_loop"
+    },
+    "R": {
+      "item": "minecraft:clock"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#R#",
+    " # "
+  ],
+  "result": {
+    "count": 2,
+    "item": "survivaltimemod:raw_loop"
+  },
+  "show_notification": true
+}

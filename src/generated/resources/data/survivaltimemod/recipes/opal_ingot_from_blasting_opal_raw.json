@@ -3,7 +3,7 @@
   "category": "misc",
   "cookingtime": 600,
   "experience": 2.7,
-  "group": "opal_ingot",
+  "group": "survivaltimemod_ingot",
   "ingredient": {
     "item": "survivaltimemod:opal_raw"
   },

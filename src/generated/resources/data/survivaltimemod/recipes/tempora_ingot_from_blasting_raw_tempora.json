@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 350,
+  "experience": 1.6,
+  "group": "survivaltimemod_ingot",
+  "ingredient": {
+    "item": "survivaltimemod:raw_tempora"
+  },
+  "result": "survivaltimemod:tempora_ingot"
+}

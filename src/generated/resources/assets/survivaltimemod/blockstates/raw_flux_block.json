@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "survivaltimemod:block/raw_flux_block"
+    }
+  }
+}

@@ -10,7 +10,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
-import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -21,7 +20,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        for(RegistryObject<Item> item : SurvivalTimeUtilGenerator.ITEM_LIST) {
+        for(RegistryObject<Item> item : SurvivalTimeUtilGenerator.ITEM_REGISTER_MODEL_LIST) {
             simpleItem(item);
         }
 

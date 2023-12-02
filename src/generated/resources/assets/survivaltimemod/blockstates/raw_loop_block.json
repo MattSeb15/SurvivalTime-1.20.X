@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "survivaltimemod:block/raw_loop_block"
+    }
+  }
+}

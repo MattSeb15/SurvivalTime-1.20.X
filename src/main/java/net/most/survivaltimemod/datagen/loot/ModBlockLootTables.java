@@ -33,7 +33,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        for (RegistryObject<Block> block : SurvivalTimeUtilGenerator.DROP_SELF_LIST) {
+        for (RegistryObject<Block> block : SurvivalTimeUtilGenerator.DROP_SELF_BLOCKS_LOOT_TABLE_LIST) {
             this.dropSelf(block.get());
         }
         for (Map.Entry<RegistryObject<Block>, ShardOptions> entry : SurvivalTimeUtilGenerator.OPAL_ORE_LOOT_TABLE_MAP.entrySet()) {

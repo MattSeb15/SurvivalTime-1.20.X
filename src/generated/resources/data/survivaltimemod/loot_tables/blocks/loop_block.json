@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "survivaltimemod:loop_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "survivaltimemod:blocks/loop_block"
+}

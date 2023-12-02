@@ -6,6 +6,16 @@
     "survivaltimemod:deepslate_opal_ore",
     "survivaltimemod:nether_opal_ore",
     "survivaltimemod:end_stone_opal_ore",
-    "survivaltimemod:fiery_time_block"
+    "survivaltimemod:fiery_time_block",
+    "survivaltimemod:raw_chrona_block",
+    "survivaltimemod:raw_tempora_block",
+    "survivaltimemod:raw_epoch_block",
+    "survivaltimemod:raw_flux_block",
+    "survivaltimemod:raw_loop_block",
+    "survivaltimemod:chrona_block",
+    "survivaltimemod:tempora_block",
+    "survivaltimemod:epoch_block",
+    "survivaltimemod:flux_block",
+    "survivaltimemod:loop_block"
   ]
 }

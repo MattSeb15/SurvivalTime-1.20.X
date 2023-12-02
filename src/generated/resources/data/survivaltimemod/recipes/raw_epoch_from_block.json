@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "survivaltimemod:raw_epoch_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "survivaltimemod:raw_epoch"
+  }
+}

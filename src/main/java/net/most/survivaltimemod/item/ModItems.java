@@ -67,6 +67,35 @@ public class ModItems {
                     2400)
             );
 
+    //raw shards
+
+    public static final RegistryObject<Item> RAW_CHRONA =
+            ITEMS.register("raw_chrona", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_TEMPORA =
+            ITEMS.register("raw_tempora", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_EPOCH =
+            ITEMS.register("raw_epoch", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_FLUX =
+            ITEMS.register("raw_flux", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_LOOP =
+            ITEMS.register("raw_loop", () -> new Item(new Item.Properties()));
+
+    //shards ingots
+
+    public static final RegistryObject<Item> CHRONA_INGOT =
+            ITEMS.register("chrona_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TEMPORA_INGOT =
+            ITEMS.register("tempora_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EPOCH_INGOT =
+            ITEMS.register("epoch_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FLUX_INGOT =
+            ITEMS.register("flux_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LOOP_INGOT =
+            ITEMS.register("loop_ingot", () -> new Item(new Item.Properties()));
+
+
+
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
