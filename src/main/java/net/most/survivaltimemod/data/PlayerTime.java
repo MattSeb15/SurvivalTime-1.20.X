@@ -11,11 +11,10 @@ public class PlayerTime {
     //MAX_TIME IN SECONDS, MAX = 24 HOURS
     private static final int MAX_TIME = 86400;
     private static final int MIN_TIME = 0;
-
     public static final int DEFAULT_TIME = 86400;
-
     public static final String COMPOUND_TAG_KEY = "player_time_counter";
 
+    //TODO: Crear una neuva clase que se encargue de gestionar el tiempo de los jugadores.
     private static final HashMap<UUID, Integer> playertime = new HashMap<>();
     private static final HashMap<UUID, Boolean> isTimeStopped = new HashMap<>();
     private static final HashMap<UUID, Float> timeMultiplier = new HashMap<>();

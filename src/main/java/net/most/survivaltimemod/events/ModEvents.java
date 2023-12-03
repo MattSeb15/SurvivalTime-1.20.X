@@ -13,6 +13,7 @@ import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.gui.overlay.NamedGuiOverlay;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -23,10 +24,27 @@ import net.minecraftforge.fml.common.Mod;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.data.PlayerTime;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 @Mod.EventBusSubscriber(modid = SurvivalTimeMod.MOD_ID)
 public class ModEvents {
 
     private static int tickCounter = 0;
+    private static final Map<UUID, ScheduledExecutorService> playerSchedulers = new HashMap<>();
+
+    //hide the health bar and the hunger bar
+    @SubscribeEvent
+    public  static void onRenderGui(RenderGuiOverlayEvent.Pre event) {
+
+        if (event.getOverlay().id() == VanillaGuiOverlay.PLAYER_HEALTH.id()) {
+            event.setCanceled(true);
+        }
+    }
 
     @SubscribeEvent
     public static void onPlayerHurt(LivingDamageEvent event) {
@@ -68,6 +86,16 @@ public class ModEvents {
                 PlayerTime.setTime(player, PlayerTime.DEFAULT_TIME);
             }
 
+            ScheduledExecutorService playerScheduler = Executors.newScheduledThreadPool(1);
+            playerScheduler.scheduleAtFixedRate(() -> {
+                PlayerTime.decrementTime(player, 1);
+                player.displayClientMessage(
+                        Component.literal("Time: " + PlayerTime.getFormattedTime(player)),
+                        true);
+            }, 0, 1, TimeUnit.SECONDS);
+
+            playerSchedulers.put(player.getUUID(), playerScheduler);
+
         }
     }
 
@@ -79,29 +107,18 @@ public class ModEvents {
             CompoundTag playerData = player.getPersistentData();
             int time = PlayerTime.getTime(player);
             playerData.putInt(PlayerTime.COMPOUND_TAG_KEY, time);
-        }
-    }
 
-    @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-
-        if (event.phase == TickEvent.Phase.END) {
-            tickCounter++;
-            if (tickCounter >= 20) {
-                for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
-
-                    PlayerTime.decrementTime(player, 1);
-
-                    player.displayClientMessage(
-                            Component.literal("Time: " + PlayerTime.getFormattedTime(player)),
-                            true);
-                }
-                tickCounter = 0;
+            ScheduledExecutorService playerScheduler = playerSchedulers.get(player.getUUID());
+            if (playerScheduler != null) {
+                playerScheduler.shutdown();
+                playerSchedulers.remove(player.getUUID());
             }
 
         }
-    }
 
+
+
+    }
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
 
