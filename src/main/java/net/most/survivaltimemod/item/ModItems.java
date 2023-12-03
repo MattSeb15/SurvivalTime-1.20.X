@@ -2,6 +2,7 @@ package net.most.survivaltimemod.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -92,7 +93,56 @@ public class ModItems {
             ITEMS.register("flux_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LOOP_INGOT =
             ITEMS.register("loop_ingot", () -> new Item(new Item.Properties()));
+    //shard swords modify pAttackDamage by 1 and attackSpeed by 0.5
+//    public static final RegistryObject<Item> CHRONA_SWORD =
+//            ITEMS.register("chrona_sword",
+//                    () -> new SwordItem(
+//                            ModToolTiers.CHRONA,
+//                            4,
+//                            2,
+//                            new Item.Properties()
+//                    )
+//            );
 
+//    public static final RegistryObject<Item> TEMPORA_SWORD =
+//            ITEMS.register("tempora_sword",
+//                    () -> new SwordItem(
+//                            ModToolTiers.TEMPORA,
+//                            3,
+//                            2,
+//                            new Item.Properties()
+//                    )
+//            );
+
+//    public static final RegistryObject<Item> EPOCH_SWORD =
+//            ITEMS.register("epoch_sword",
+//                    () -> new SwordItem(
+//                            ModToolTiers.EPOCH,
+//                            3,
+//                            2,
+//                            new Item.Properties()
+//                    )
+//            );
+
+    public static final RegistryObject<Item> FLUX_SWORD =
+            ITEMS.register("flux_sword",
+                    () -> new SwordItem(
+                            ModToolTiers.FLUX,
+                            2,
+                            -2.2f,
+                            new Item.Properties().fireResistant()
+                    )
+            );
+
+    public static final RegistryObject<Item> LOOP_SWORD =
+            ITEMS.register("loop_sword",
+                    () -> new SwordItem(
+                            ModToolTiers.LOOP,
+                            2,
+                            -2.3f,
+                            new Item.Properties().fireResistant()
+                    )
+            );
 
 
 

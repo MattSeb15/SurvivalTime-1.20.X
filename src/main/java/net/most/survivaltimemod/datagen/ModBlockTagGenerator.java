@@ -10,6 +10,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.util.ModTags;
 import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,6 +45,32 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.NEEDS_NETHERITE_TOOL_LIST) {
             this.tag(Tags.Blocks.NEEDS_NETHERITE_TOOL).add(block.get());
         }
+
+
+        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.NEEDS_OPAL_TOOL_LIST) {
+            this.tag(ModTags.Blocks.NEEDS_OPAL_TOOL).add(block.get());
+        }
+
+        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.NEEDS_CHRONA_TOOL_LIST) {
+            this.tag(ModTags.Blocks.NEEDS_CHRONA_TOOL).add(block.get());
+        }
+
+        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.NEEDS_TEMPORA_TOOL_LIST) {
+            this.tag(ModTags.Blocks.NEEDS_TEMPORA_TOOL).add(block.get());
+        }
+
+        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.NEEDS_EPOCH_TOOL_LIST) {
+            this.tag(ModTags.Blocks.NEEDS_EPOCH_TOOL).add(block.get());
+        }
+
+        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.NEEDS_FLUX_TOOL_LIST) {
+            this.tag(ModTags.Blocks.NEEDS_FLUX_TOOL).add(block.get());
+        }
+
+        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.NEEDS_LOOP_TOOL_LIST) {
+            this.tag(ModTags.Blocks.NEEDS_LOOP_TOOL).add(block.get());
+        }
+
 
     }
 }

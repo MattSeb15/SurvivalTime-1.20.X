@@ -44,6 +44,32 @@ public class SurvivalTimeUtilGenerator {
     public final static List<RegistryObject<Block>> NEEDS_NETHERITE_TOOL_LIST = List.of(
 
     );
+    //.-.-.-.-.- needs shards tool lists
+    public final static List<RegistryObject<Block>> NEEDS_OPAL_TOOL_LIST = List.of(
+
+    );
+
+    public final static List<RegistryObject<Block>> NEEDS_CHRONA_TOOL_LIST = List.of(
+
+    );
+
+    public final static List<RegistryObject<Block>> NEEDS_TEMPORA_TOOL_LIST = List.of(
+
+    );
+
+    public final static List<RegistryObject<Block>> NEEDS_EPOCH_TOOL_LIST = List.of(
+
+    );
+
+    public final static List<RegistryObject<Block>> NEEDS_FLUX_TOOL_LIST = List.of(
+
+    );
+
+    public final static List<RegistryObject<Block>> NEEDS_LOOP_TOOL_LIST = List.of(
+
+    );
+
+
     ////----->>> ITEM REGISTER MODEL <<<-----\\\\----------------------->>> ITEM REGISTER MODEL <<<-----\\\\
     public final static List<RegistryObject<Item>> ITEM_REGISTER_MODEL_LIST = List.of(
             ModItems.OPAL_SHARD_CHRONA,
