@@ -144,6 +144,22 @@ public class ModItems {
                     )
             );
 
+    ////shards sticks
+    public static final RegistryObject<Item> CHRONA_STICK =
+            ITEMS.register("chrona_stick", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> TEMPORA_STICK =
+            ITEMS.register("tempora_stick", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> EPOCH_STICK =
+            ITEMS.register("epoch_stick", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> FLUX_STICK =
+            ITEMS.register("flux_stick", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> LOOP_STICK =
+            ITEMS.register("loop_stick", () -> new Item(new Item.Properties()));
+
 
 
 

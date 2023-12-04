@@ -69,6 +69,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .unlockedBy(getHasName(block), has(block))
                     .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "_from_block");
         }
+        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.STICKS_FROM_SHARDS_RECIPE_MAP.entrySet()) {
+            ItemLike result = entry.getKey();
+            ItemLike shard_item = entry.getValue();
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result, 1)
+                    .pattern(" # ")
+                    .pattern("#P#")
+                    .pattern(" # ")
+                    .define('#', shard_item)
+                    .define('P', Items.STICK)
+                    .unlockedBy(getHasName(shard_item), has(shard_item))
+                    .save(pWriter);
+        }
 
         for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.RAW_SHARDS_RECIPE_MAP.entrySet()) {
             ItemLike raw_item = entry.getKey();

@@ -8,10 +8,10 @@ import java.util.UUID;
 public class PlayerTime {
 
 
-    //MAX_TIME IN SECONDS, MAX = 24 HOURS
-    private static final int MAX_TIME = 86400;
+    //MAX_TIME IN SECONDS, MAX = 10 HOURS
+    private static final int MAX_TIME = 36000;
     private static final int MIN_TIME = 0;
-    public static final int DEFAULT_TIME = 86400;
+    public static final int DEFAULT_TIME = MAX_TIME;
     public static final String COMPOUND_TAG_KEY = "player_time_counter";
 
     //TODO: Crear una neuva clase que se encargue de gestionar el tiempo de los jugadores.
@@ -39,6 +39,10 @@ public class PlayerTime {
 
     public static int getTime(ServerPlayer player) {
         return playertime.getOrDefault(player.getUUID(), DEFAULT_TIME);
+    }
+
+    public static int getTime(UUID uuid) {
+        return playertime.getOrDefault(uuid, DEFAULT_TIME);
     }
 
     public static void setTime(ServerPlayer player, int time) {
