@@ -9,64 +9,117 @@ public class PlayerTime {
 
 
     //MAX_TIME IN SECONDS, MAX = 10 HOURS
-    private static final int MAX_TIME = 36000;
-    private static final int MIN_TIME = 0;
-    public static final int DEFAULT_TIME = MAX_TIME;
+
+    private static final float DEFAULT_TIME = 10 * 3600;
+    private static final float MIN_TIME = 0.0F;
+
     public static final String COMPOUND_TAG_KEY = "player_time_counter";
+    private static final HashMap<UUID, PlayerTimeData> playertimedata = new HashMap<>();
 
-    //TODO: Crear una neuva clase que se encargue de gestionar el tiempo de los jugadores.
-    private static final HashMap<UUID, Integer> playertime = new HashMap<>();
-    private static final HashMap<UUID, Boolean> isTimeStopped = new HashMap<>();
-    private static final HashMap<UUID, Float> timeMultiplier = new HashMap<>();
+    public static String getFormattedTime(UUID playerUUID) {
 
-    public static String getFormattedTime(ServerPlayer player) {
-        int totalSeconds = getTime(player);
+        float time = getTime(playerUUID);
+        float hours = time / 3600;
+        float minutes = (time % 3600) / 60;
+        float seconds = time % 60;
 
-        int hours = totalSeconds / 3600;
-        int minutes = (totalSeconds % 3600) / 60;
-        int seconds = totalSeconds % 60;
-
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return String.format("%02d:%02d:%02d", (int) hours, (int) minutes, (int) seconds);
     }
 
-    public static float getTimeMultiplier(ServerPlayer player) {
-        return timeMultiplier.getOrDefault(player.getUUID(), 1.0f);
+    public static String getFormattedTime(float time) {
+
+        float hours = time / 3600;
+        float minutes = (time % 3600) / 60;
+        float seconds = time % 60;
+
+        return String.format("%02d:%02d:%02d", (int) hours, (int) minutes, (int) seconds);
     }
 
-    public static void setTimeMultiplier(ServerPlayer player, float multiplier) {
-        timeMultiplier.put(player.getUUID(), multiplier);
+    public static String getFormattedTime(float time, FormatTimeType type) {
+        return FormatTimeType.getFormattedStringByType(type, time);
     }
 
-    public static int getTime(ServerPlayer player) {
-        return playertime.getOrDefault(player.getUUID(), DEFAULT_TIME);
+    public static PlayerTimeData getPlayerTimeData(UUID playerUUID) {
+        return playertimedata.getOrDefault(playerUUID, new PlayerTimeData(
+                DEFAULT_TIME,
+                DEFAULT_TIME,
+                false,
+                1.0f
+        ));
     }
 
-    public static int getTime(UUID uuid) {
-        return playertime.getOrDefault(uuid, DEFAULT_TIME);
+
+    public static float getTimeMultiplier(UUID playerUUID) {
+        return getPlayerTimeData(playerUUID).getTimeMultiplier();
     }
 
-    public static void setTime(ServerPlayer player, int time) {
-        playertime.put(player.getUUID(), time);
+    public static void setTimeMultiplier(UUID playerUUID, float multiplier) {
+        PlayerTimeData playerTimeData = getPlayerTimeData(playerUUID);
+        playerTimeData.setTimeMultiplier(multiplier);
+        playertimedata.put(playerUUID, playerTimeData);
     }
 
-    public static void incrementTime(ServerPlayer player, int increment) {
-        int currentTime = getTime(player);
-        setTime(player, Math.min(currentTime + increment, MAX_TIME));
+    public static float getTime(UUID playerUUID) {
+        return getPlayerTimeData(playerUUID).getTime();
     }
 
-    public static void decrementTime(ServerPlayer player, int decrement) {
-        if (!isTimeStopped.getOrDefault(player.getUUID(), false)) {
-            int currentTime = getTime(player);
-            float multiplier = getTimeMultiplier(player);
-            setTime(player, Math.max(currentTime - (int)(decrement * multiplier), MIN_TIME));
+    public static float getMaxTime(UUID playerUUID) {
+        return getPlayerTimeData(playerUUID).getMaxTime();
+    }
+
+
+    public static void setTime(UUID playerUUID, float time) {
+
+        PlayerTimeData playerTimeData = getPlayerTimeData(playerUUID);
+        playerTimeData.setTime(time);
+        playertimedata.put(playerUUID, playerTimeData);
+    }
+
+    public static void resetTime(UUID playerUUID) {
+        PlayerTimeData playerTimeData = getPlayerTimeData(playerUUID);
+        playerTimeData.setTime(DEFAULT_TIME);
+        playertimedata.put(playerUUID, playerTimeData);
+    }
+
+
+    public static void incrementTime(UUID playerUUID, float increment) {
+        float maxTime = getMaxTime(playerUUID);
+        float currentTime = getTime(playerUUID);
+        float multiplier = getTimeMultiplier(playerUUID);
+        setTime(playerUUID, Math.min(currentTime + (increment * multiplier), maxTime));
+
+    }
+
+    public static void decrementTime(UUID playerUUID, float decrement) {
+
+        float currentTime = getTime(playerUUID);
+        float multiplier = getTimeMultiplier(playerUUID);
+        setTime(playerUUID, Math.max(currentTime - (decrement * multiplier), MIN_TIME));
+    }
+
+    public static boolean getIsTimeStopped(UUID playerUUID) {
+        return getPlayerTimeData(playerUUID).isTimeStopped();
+    }
+
+    public static void toggleTimeStatus(UUID playerUUID) {
+        PlayerTimeData playerTimeData = getPlayerTimeData(playerUUID);
+        playerTimeData.setIsTimeStopped(!playerTimeData.isTimeStopped());
+        playertimedata.put(playerUUID, playerTimeData);
+    }
+
+    public static void stopTimeStatus(UUID playerUUID) {
+        PlayerTimeData playerTimeData = getPlayerTimeData(playerUUID);
+        if (!playerTimeData.isTimeStopped() && playerTimeData.getTime() > 0) {
+            playerTimeData.setIsTimeStopped(true);
+            playertimedata.put(playerUUID, playerTimeData);
         }
     }
 
-    public static void stopTime(ServerPlayer player) {
-        isTimeStopped.put(player.getUUID(), true);
-    }
-
-    public static void startTime(ServerPlayer player) {
-        isTimeStopped.put(player.getUUID(), false);
+    public static void startTimeStatus(UUID playerUUID) {
+        PlayerTimeData playerTimeData = getPlayerTimeData(playerUUID);
+        if (playerTimeData.isTimeStopped()) {
+            playerTimeData.setIsTimeStopped(false);
+            playertimedata.put(playerUUID, playerTimeData);
+        }
     }
 }

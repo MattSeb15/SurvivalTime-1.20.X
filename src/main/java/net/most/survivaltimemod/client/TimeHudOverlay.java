@@ -60,11 +60,11 @@ public class TimeHudOverlay {
             LocalPlayer player = gui.getMinecraft().player;
 
             if (player != null) {
-                int totalSeconds = PlayerTime.getTime(player.getUUID());
+                float totalSeconds = PlayerTime.getTime(player.getUUID());
 
-                int fullHours = totalSeconds / 3600; // 3600 seconds = 1 hour
+                float fullHours = totalSeconds / 3600; // 3600 seconds = 1 hour
 
-                int remainingSeconds = totalSeconds % 3600;
+                float remainingSeconds = totalSeconds % 3600;
                 //45-59 mins
                 int subFullHours = remainingSeconds >= 2700 ? 1 : 0;
                 //30-44 mins

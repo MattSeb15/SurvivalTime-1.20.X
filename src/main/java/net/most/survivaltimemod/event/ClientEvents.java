@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.events;
+package net.most.survivaltimemod.event;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -17,7 +17,7 @@ public class ClientEvents {
     public static class ClientModBusEvents{
         @SubscribeEvent
         public static void onRegisterOverlay(RegisterGuiOverlaysEvent event) {
-            event.registerAboveAll("survivaltimemod_time", TimeHudOverlay.HUD_TIME);
+            event.registerBelowAll("survivaltimemod_time", TimeHudOverlay.HUD_TIME);
 
         }
 

@@ -114,15 +114,15 @@ public class ModItems {
 //                    )
 //            );
 
-//    public static final RegistryObject<Item> EPOCH_SWORD =
-//            ITEMS.register("epoch_sword",
-//                    () -> new SwordItem(
-//                            ModToolTiers.EPOCH,
-//                            3,
-//                            2,
-//                            new Item.Properties()
-//                    )
-//            );
+    public static final RegistryObject<Item> EPOCH_SWORD =
+            ITEMS.register("epoch_sword",
+                    () -> new SwordItem(
+                            ModToolTiers.EPOCH,
+                            3,
+                            -2.2f,
+                            new Item.Properties().fireResistant()
+                    )
+            );
 
     public static final RegistryObject<Item> FLUX_SWORD =
             ITEMS.register("flux_sword",
