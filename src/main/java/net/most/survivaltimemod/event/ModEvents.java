@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -31,7 +32,9 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-
+//        if (event.getEntity().level().isClientSide) {
+//            return;
+//        }
         if (event.getEntity() instanceof ServerPlayer player) {
 
             CompoundTag playerData = player.getPersistentData();
@@ -45,16 +48,16 @@ public class ModEvents {
 
             ScheduledExecutorService playerScheduler = Executors.newScheduledThreadPool(1);
             playerScheduler.scheduleAtFixedRate(() -> {
-                if(PlayerTime.getIsTimeStopped(player.getUUID())){
+                if (PlayerTime.getIsTimeStopped(player.getUUID())) {
                     return;
                 }
-                if(PlayerTime.getTime(player.getUUID()) <= 0){
-                    if(player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR){
+                if (PlayerTime.getTime(player.getUUID()) <= 0) {
+                    if (player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) {
                         player.setGameMode(GameType.SPECTATOR);
                     }
                     return;
                 }
-                if(player.gameMode.getGameModeForPlayer() == GameType.SPECTATOR && PlayerTime.getTime(player.getUUID()) > 0){
+                if (player.gameMode.getGameModeForPlayer() == GameType.SPECTATOR && PlayerTime.getTime(player.getUUID()) > 0) {
                     player.setGameMode(GameType.SURVIVAL);
                 }
                 PlayerTime.decrementTime(player.getUUID(), 1);
@@ -67,39 +70,29 @@ public class ModEvents {
             playerSchedulers.put(player.getUUID(), playerScheduler);
 
         }
+
+
     }
 
     @SubscribeEvent
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
-
+//        if (event.getEntity().level().isClientSide) {
+//            return;
+//        }
         if (event.getEntity() instanceof ServerPlayer player) {
-
-            CompoundTag playerData = player.getPersistentData();
-            float time = PlayerTime.getTime(player.getUUID());
-            playerData.putFloat(PlayerTime.COMPOUND_TAG_KEY, time);
-
             ScheduledExecutorService playerScheduler = playerSchedulers.get(player.getUUID());
-            if (playerScheduler != null) {
-                playerScheduler.shutdown();
-                playerSchedulers.remove(player.getUUID());
-            }
-
+            playerScheduler.shutdown();
+            playerSchedulers.remove(player.getUUID());
         }
 
 
-    }
-
-    //hide the health bar and the hunger bar
-    @SubscribeEvent
-    public static void onRenderGui(RenderGuiOverlayEvent.Pre event) {
-
-        if (event.getOverlay().id() == VanillaGuiOverlay.PLAYER_HEALTH.id()) {
-            event.setCanceled(true);
-        }
     }
 
     @SubscribeEvent
     public static void onPlayerHurt(LivingDamageEvent event) {
+//        if (event.getEntity().level().isClientSide) {
+//            return;
+//        }
         if (event.getEntity() instanceof ServerPlayer player) {
             // Cancela el evento para evitar que el jugador reciba daño de la manera predeterminada
             float damage = event.getAmount();
@@ -112,10 +105,11 @@ public class ModEvents {
                 player.kill();
             } else {
                 // Si no, decrementa el tiempo del jugador
-                float timeToDecrement =  (damage * 20);
+                float timeToDecrement = (damage * 20);
 
                 player.displayClientMessage(
-                        Component.literal("Has recibido " + damage + " y perdido " + timeToDecrement + " segundos de " +
+                        Component.literal("Has recibido " + damage + " y perdido " + timeToDecrement + " segundos" +
+                                " de " +
                                 "tiempo."),
                         false);
 
@@ -123,20 +117,8 @@ public class ModEvents {
             }
 
         }
-    }
 
-//    @SubscribeEvent
-//    public static void onPlayerDeath(LivingDeathEvent event) {
-//
-//        if (event.getEntity() instanceof ServerPlayer player) {
-//            player.displayClientMessage(
-//                    Component.literal("Haz muerto, perderás tiempo al morir."),
-//                    false);
-//            //perder una hora de tiempo
-//            PlayerTime.decrementTime(player, 3600);
-//            PlayerTime.stopTimeStatus(player);
-//        }
-//    }
+    }
 
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {

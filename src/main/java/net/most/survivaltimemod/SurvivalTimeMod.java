@@ -15,6 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.item.ModCreativeModTabs;
 import net.most.survivaltimemod.item.ModItems;
+import net.most.survivaltimemod.networking.ModMessages;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -37,6 +38,7 @@ public class SurvivalTimeMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ModMessages.register();
     }
 
     // Add the example block item to the building blocks tab
@@ -51,13 +53,4 @@ public class SurvivalTimeMod {
 
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with
-    // @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-
-        }
-    }
 }
