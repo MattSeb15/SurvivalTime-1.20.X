@@ -5,7 +5,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.most.survivaltimemod.SurvivalTimeMod;
-import net.most.survivaltimemod.data.PlayerTime;
+import net.most.survivaltimemod.time.PlayerTimeData;
 
 public class TimeHudOverlay {
 
@@ -60,17 +60,23 @@ public class TimeHudOverlay {
             LocalPlayer player = gui.getMinecraft().player;
 
             if (player != null) {
-                float totalSeconds = PlayerTime.getTime(player.getUUID());
+                PlayerTimeData playerTimeData = ClientPlayerTimeData.get();
+                if(playerTimeData==null){
+                    return;
+                }
+                float totalSeconds = playerTimeData.getTime();
 
-                float fullHours = totalSeconds / 3600; // 3600 seconds = 1 hour
+                int fullHours = (int) (totalSeconds / 3600); // 3600 seconds = 1 hour
 
-                float remainingSeconds = totalSeconds % 3600;
+                int remainingSeconds = (int) (totalSeconds % 3600);
                 //45-59 mins
-                int subFullHours = remainingSeconds >= 2700 ? 1 : 0;
+                int subFullHours = remainingSeconds >= 2700.0f ? 1 : 0;
                 //30-44 mins
-                int halfHours = remainingSeconds >= 1800 ? 1 : 0;
+                int halfHours = remainingSeconds >= 1800.0f ? 1 : 0;
                 //1-29 mins
-                int subHalfHours = remainingSeconds >= 600 ? 1 : 0;
+                int subHalfHours = remainingSeconds >= 600.0f ? 1 : 0;
+
+
 
 
 

@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.data;
+package net.most.survivaltimemod.time;
 
 public class PlayerTimeData {
 

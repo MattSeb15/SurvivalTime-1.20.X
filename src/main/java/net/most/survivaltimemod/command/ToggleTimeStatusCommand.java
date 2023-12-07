@@ -9,17 +9,19 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.most.survivaltimemod.data.PlayerTime;
+import net.most.survivaltimemod.time.PlayerTimeProvider;
+
 
 import java.util.Collection;
 
 public class ToggleTimeStatusCommand {
     public ToggleTimeStatusCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("sut")
+                .requires(
+                        (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
+                )
                 .then(Commands.literal("time").then(Commands.literal("toggle").then(
-                        Commands.argument("player", EntityArgument.players()).requires(
-                                (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
-                        ).executes(this::execute)
+                        Commands.argument("player", EntityArgument.players()).executes(this::execute)
                 )))
         );
     }
@@ -31,26 +33,26 @@ public class ToggleTimeStatusCommand {
 
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
+                player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
+                    boolean isTimeStopped = playerTime.isTimeStopped();
+                    if (player == players.toArray()[players.size() - 1]) {
 
+                        playerNames.append(player.getName().getString()).append(
+                                isTimeStopped ? " (resumed)" : " (paused)"
+                        ).append("]");
+                    } else {
+                        playerNames.append(player.getName().getString()).append(
+                                isTimeStopped ? " (resumed)" : " (paused)"
+                        ).append(", ");
+                    }
 
-                boolean isTimeStopped = PlayerTime.getIsTimeStopped(player.getUUID());
-                if (player == players.toArray()[players.size() - 1]) {
-
-                    playerNames.append(player.getName().getString()).append(
-                            isTimeStopped ? " (resumed)" : " (paused)"
-                    ).append("]");
-                } else {
-                    playerNames.append(player.getName().getString()).append(
-                            isTimeStopped ? " (resumed)" : " (paused)"
-                    ).append(", ");
-                }
-
-                player.displayClientMessage(
-                        Component.literal(isTimeStopped
-                                ? "Your time has been resumed" : "Your time has been paused").withStyle(ChatFormatting.GREEN),
-                        false
-                );
-                PlayerTime.toggleTimeStatus(player.getUUID());
+                    player.displayClientMessage(
+                            Component.literal(isTimeStopped
+                                    ? "Your time has been resumed" : "Your time has been paused").withStyle(ChatFormatting.GREEN),
+                            false
+                    );
+                    playerTime.toggleTimeStatus(player);
+                });
 
 
             }

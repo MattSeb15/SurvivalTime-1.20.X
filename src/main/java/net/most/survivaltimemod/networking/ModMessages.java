@@ -8,6 +8,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.networking.packet.TemplateC2SPacket;
+import net.most.survivaltimemod.networking.packet.TimeDataSyncS2CPacket;
 
 public class ModMessages {
     private static SimpleChannel INSTANCE;
@@ -34,6 +35,12 @@ public class ModMessages {
 //                .encoder(TemplateC2SPacket::toBytes)
 //                .consumerMainThread(TemplateC2SPacket::handle)
 //                .add();
+
+        net.messageBuilder(TimeDataSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(TimeDataSyncS2CPacket::new)
+                .encoder(TimeDataSyncS2CPacket::toBytes)
+                .consumerMainThread(TimeDataSyncS2CPacket::handle)
+                .add();
 
     }
 

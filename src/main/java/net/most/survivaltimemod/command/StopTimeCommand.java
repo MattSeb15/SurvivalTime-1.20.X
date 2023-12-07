@@ -9,17 +9,19 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.most.survivaltimemod.data.PlayerTime;
+import net.most.survivaltimemod.time.PlayerTimeProvider;
 
 import java.util.Collection;
 
 public class StopTimeCommand {
     public StopTimeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("sut")
+                .requires(
+                        (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
+
+                )
                 .then(Commands.literal("time").then(Commands.literal("pause").then(
-                        Commands.argument("player", EntityArgument.players()).requires(
-                                (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
-                        ).executes(this::execute)
+                        Commands.argument("player", EntityArgument.players()).executes(this::execute)
                 )))
         );
     }
@@ -32,26 +34,27 @@ public class StopTimeCommand {
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
 
+                player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
+                    boolean isTimeStopped = playerTime.isTimeStopped();
+                    if (player == players.toArray()[players.size() - 1]) {
 
-                boolean isTimeStopped = PlayerTime.getIsTimeStopped(player.getUUID());
-                if (player == players.toArray()[players.size() - 1]) {
+                        playerNames.append(player.getName().getString()).append(
+                                !isTimeStopped ? " (stopped)" : " (x)"
+                        ).append("]");
+                    } else {
+                        playerNames.append(player.getName().getString()).append(
+                                !isTimeStopped ? " (stopped)" : " (x)"
+                        ).append(", ");
+                    }
 
-                    playerNames.append(player.getName().getString()).append(
-                            !isTimeStopped ? " (stopped)" : " (x)"
-                    ).append("]");
-                } else {
-                    playerNames.append(player.getName().getString()).append(
-                            !isTimeStopped ? " (stopped)" : " (x)"
-                    ).append(", ");
-                }
-
-                if(!isTimeStopped){
-                    player.displayClientMessage(
-                            Component.literal("Time stopped").withStyle(ChatFormatting.GREEN),
-                            false
-                    );
-                }
-                PlayerTime.stopTimeStatus(player.getUUID());
+                    if (!isTimeStopped) {
+                        player.displayClientMessage(
+                                Component.literal("Time stopped").withStyle(ChatFormatting.GREEN),
+                                false
+                        );
+                    }
+                    playerTime.stopTimeStatus(player);
+                });
 
 
             }

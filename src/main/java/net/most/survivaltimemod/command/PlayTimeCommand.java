@@ -9,19 +9,20 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.most.survivaltimemod.data.PlayerTime;
+import net.most.survivaltimemod.time.PlayerTimeProvider;
+
 
 import java.util.Collection;
 
 public class PlayTimeCommand {
 
     public PlayTimeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("sut")
-                .then(Commands.literal("time").then(Commands.literal("play").then(
-                        Commands.argument("player", EntityArgument.players()).requires(
+        dispatcher.register(Commands.literal("sut").requires(
                                 (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
-                        ).executes(this::execute)
-                )))
+                        )
+                        .then(Commands.literal("time").then(Commands.literal("play").then(
+                                Commands.argument("player", EntityArgument.players()).executes(this::execute)
+                        )))
         );
     }
 
@@ -33,26 +34,27 @@ public class PlayTimeCommand {
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
 
+                player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
+                    boolean isTimeStopped = playerTime.isTimeStopped();
+                    if (player == players.toArray()[players.size() - 1]) {
 
-                boolean isTimeStopped = PlayerTime.getIsTimeStopped(player.getUUID());
-                if (player == players.toArray()[players.size() - 1]) {
+                        playerNames.append(player.getName().getString()).append(
+                                isTimeStopped ? " (resumed)" : " (x)"
+                        ).append("]");
+                    } else {
+                        playerNames.append(player.getName().getString()).append(
+                                isTimeStopped ? " (resumed)" : " (x)"
+                        ).append(", ");
+                    }
 
-                    playerNames.append(player.getName().getString()).append(
-                            isTimeStopped ? " (resumed)" : " (x)"
-                    ).append("]");
-                } else {
-                    playerNames.append(player.getName().getString()).append(
-                            isTimeStopped ? " (resumed)" : " (x)"
-                    ).append(", ");
-                }
-
-                if(isTimeStopped){
-                    player.displayClientMessage(
-                            Component.literal("Time resumed").withStyle(ChatFormatting.GREEN),
-                            false
-                    );
-                }
-                PlayerTime.startTimeStatus(player.getUUID());
+                    if (isTimeStopped) {
+                        player.displayClientMessage(
+                                Component.literal("Time resumed").withStyle(ChatFormatting.GREEN),
+                                false
+                        );
+                    }
+                    playerTime.startTimeStatus(player);
+                });
 
 
             }
