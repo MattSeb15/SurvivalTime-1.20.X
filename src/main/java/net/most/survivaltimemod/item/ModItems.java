@@ -104,15 +104,15 @@ public class ModItems {
 //                    )
 //            );
 
-//    public static final RegistryObject<Item> TEMPORA_SWORD =
-//            ITEMS.register("tempora_sword",
-//                    () -> new SwordItem(
-//                            ModToolTiers.TEMPORA,
-//                            3,
-//                            2,
-//                            new Item.Properties()
-//                    )
-//            );
+    public static final RegistryObject<Item> TEMPORA_SWORD =
+            ITEMS.register("tempora_sword",
+                    () -> new SwordItem(
+                            ModToolTiers.TEMPORA,
+                            4,
+                            -2.2f,
+                            new Item.Properties()
+                    )
+            );
 
     public static final RegistryObject<Item> EPOCH_SWORD =
             ITEMS.register("epoch_sword",

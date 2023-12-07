@@ -46,7 +46,7 @@ public class ModToolTiers {
             new ForgeTier(
                     8,
                     4050,
-                    13.5f,
+                    12.5f,
                     8.5f,
                     17,
                     ModTags.Blocks.NEEDS_TEMPORA_TOOL,
