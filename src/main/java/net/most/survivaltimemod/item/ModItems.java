@@ -94,15 +94,15 @@ public class ModItems {
     public static final RegistryObject<Item> LOOP_INGOT =
             ITEMS.register("loop_ingot", () -> new Item(new Item.Properties()));
     //shard swords modify pAttackDamage by 1 and attackSpeed by 0.5
-//    public static final RegistryObject<Item> CHRONA_SWORD =
-//            ITEMS.register("chrona_sword",
-//                    () -> new SwordItem(
-//                            ModToolTiers.CHRONA,
-//                            4,
-//                            2,
-//                            new Item.Properties()
-//                    )
-//            );
+    public static final RegistryObject<Item> CHRONA_SWORD =
+            ITEMS.register("chrona_sword",
+                    () -> new SwordItem(
+                            ModToolTiers.CHRONA,
+                            4,
+                            -2.2f,
+                            new Item.Properties().fireResistant()
+                    )
+            );
 
     public static final RegistryObject<Item> TEMPORA_SWORD =
             ITEMS.register("tempora_sword",
@@ -110,7 +110,7 @@ public class ModItems {
                             ModToolTiers.TEMPORA,
                             4,
                             -2.2f,
-                            new Item.Properties()
+                            new Item.Properties().fireResistant()
                     )
             );
 

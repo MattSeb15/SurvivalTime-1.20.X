@@ -31,8 +31,8 @@ public class ModToolTiers {
             new ForgeTier(
                     9,
                     4550,
-                    14.0f,
-                    9.0f,
+                    13.0f,
+                    10.0f,
                     20,
                     ModTags.Blocks.NEEDS_CHRONA_TOOL,
                     () -> Ingredient.of(ModItems.CHRONA_INGOT.get())
@@ -47,7 +47,7 @@ public class ModToolTiers {
                     8,
                     4050,
                     12.5f,
-                    8.5f,
+                    9.0f,
                     17,
                     ModTags.Blocks.NEEDS_TEMPORA_TOOL,
                     () -> Ingredient.of(ModItems.TEMPORA_INGOT.get())
