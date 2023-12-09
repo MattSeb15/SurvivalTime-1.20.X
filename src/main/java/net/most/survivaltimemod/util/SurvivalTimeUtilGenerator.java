@@ -5,6 +5,9 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.block.custom.TemporalTuberCropBlock;
+import net.most.survivaltimemod.data.CropBlockSeedItem;
+import net.most.survivaltimemod.data.CropBlockSeedItemModel;
 import net.most.survivaltimemod.item.ModItems;
 
 import java.util.List;
@@ -69,7 +72,35 @@ public class SurvivalTimeUtilGenerator {
 
     );
 
+    ////----->>> BLOCK REGISTER MODEL <<<-----\\\\----------------------->>> BLOCK REGISTER MODEL <<<-----\\\\
 
+    public final static List<RegistryObject<Block>> BLOCK_REGISTER_MODEL_LIST = List.of(
+            ModBlocks.OPAL_BLOCK,
+            ModBlocks.OPAL_RAW_BLOCK,
+            ModBlocks.OPAL_ORE,
+            ModBlocks.DEEPSLATE_OPAL_ORE,
+            ModBlocks.NETHER_OPAL_ORE,
+            ModBlocks.END_STONE_OPAL_ORE,
+            ModBlocks.FIERY_TIME_BLOCK,
+            //raw shards blocks
+            ModBlocks.RAW_CHRONA_BLOCK,
+            ModBlocks.RAW_TEMPORA_BLOCK,
+            ModBlocks.RAW_EPOCH_BLOCK,
+            ModBlocks.RAW_FLUX_BLOCK,
+            ModBlocks.RAW_LOOP_BLOCK,
+            //shards blocks
+            ModBlocks.CHRONA_BLOCK,
+            ModBlocks.TEMPORA_BLOCK,
+            ModBlocks.EPOCH_BLOCK,
+            ModBlocks.FLUX_BLOCK,
+            ModBlocks.LOOP_BLOCK
+    );
+
+    public final static List<CropBlockSeedItemModel> CROP_REGISTER_MODEL_LIST = List.of(
+            new CropBlockSeedItemModel((TemporalTuberCropBlock) ModBlocks.TEMPORAL_TUBER_CROP.get(),
+                    "temporal_tuber_stage",
+                    "temporal_tuber_stage", 6)
+    );
     ////----->>> ITEM REGISTER MODEL <<<-----\\\\----------------------->>> ITEM REGISTER MODEL <<<-----\\\\
     public final static List<RegistryObject<Item>> ITEM_REGISTER_MODEL_LIST = List.of(
             ModItems.OPAL_SHARD_CHRONA,
@@ -103,7 +134,9 @@ public class SurvivalTimeUtilGenerator {
             ModItems.TEMPORA_STICK,
             ModItems.EPOCH_STICK,
             ModItems.FLUX_STICK,
-            ModItems.LOOP_STICK
+            ModItems.LOOP_STICK,
+            //seeds
+            ModItems.TEMPORAL_TUBER_SEEDS
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\
@@ -184,6 +217,11 @@ public class SurvivalTimeUtilGenerator {
             ModBlocks.EPOCH_BLOCK,
             ModBlocks.FLUX_BLOCK,
             ModBlocks.LOOP_BLOCK
+    );
+
+    public final static List<CropBlockSeedItem> CROP_BLOCK_SEED_ITEM_LIST = List.of(
+            new CropBlockSeedItem(ModBlocks.TEMPORAL_TUBER_CROP.get(), ModItems.TEMPORAL_TUBER_SEEDS.get(),
+                    ModItems.TEMPORAL_TUBER.get(), TemporalTuberCropBlock.AGE, TemporalTuberCropBlock.MAX_AGE)
     );
     public final static Map<RegistryObject<Block>, ShardOptions> OPAL_ORE_LOOT_TABLE_MAP = Map.of(
             ModBlocks.OPAL_ORE, new ShardOptions(

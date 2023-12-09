@@ -16,8 +16,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.item.custom.FuelItemBlock;
+import net.most.survivaltimemod.block.custom.TemporalTuberCropBlock;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -113,6 +113,8 @@ public class ModBlocks {
                     .mapColor(DyeColor.PURPLE)
                     .strength(7.0f, 30.0f)));
 
+    public static final RegistryObject<Block> TEMPORAL_TUBER_CROP = BLOCKS.register("temporal_tuber_crop",
+            () -> new TemporalTuberCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
@@ -120,24 +122,33 @@ public class ModBlocks {
         registerBlockItem(name, registeredBlock);
         return registeredBlock;
     }
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, Item.Properties properties) {
+
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block,
+                                                                     Item.Properties properties) {
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);
         registerBlockItem(name, registeredBlock, properties);
         return registeredBlock;
     }
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, Item.Properties properties, int burnTime) {
+
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block,
+                                                                     Item.Properties properties, int burnTime) {
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);
         registerBlockItem(name, registeredBlock, properties, burnTime);
         return registeredBlock;
     }
+
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
-    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, Item.Properties properties) {
+
+    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block,
+                                                            Item.Properties properties) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), properties));
     }
-    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, Item.Properties properties, int burnTime) {
-        ModItems.ITEMS.register(name, () -> new FuelItemBlock(block.get(), properties,burnTime));
+
+    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block,
+                                                            Item.Properties properties, int burnTime) {
+        ModItems.ITEMS.register(name, () -> new FuelItemBlock(block.get(), properties, burnTime));
     }
 
 //    public static List<RegistryObject<Block>> BLOCK_LIST = List.of(

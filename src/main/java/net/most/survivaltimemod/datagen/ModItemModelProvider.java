@@ -25,7 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
 
 
-        for(RegistryObject<Block> block : ModBlocks.BLOCKS.getEntries()) {
+        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.BLOCK_REGISTER_MODEL_LIST) {
             simpleItemBlock(block);
         }
 

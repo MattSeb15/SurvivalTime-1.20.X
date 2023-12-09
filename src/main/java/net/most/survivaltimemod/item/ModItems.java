@@ -1,6 +1,7 @@
 package net.most.survivaltimemod.item;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -8,10 +9,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.item.custom.FuelItem;
 import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
-
-import java.util.List;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -93,6 +93,10 @@ public class ModItems {
             ITEMS.register("flux_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LOOP_INGOT =
             ITEMS.register("loop_ingot", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> TEMPORAL_TUBER_SEEDS =
+            ITEMS.register("temporal_tuber_seeds",
+                    () -> new ItemNameBlockItem(ModBlocks.TEMPORAL_TUBER_CROP.get(), new Item.Properties()));
     //shard swords modify pAttackDamage by 1 and attackSpeed by 0.5
     public static final RegistryObject<Item> CHRONA_SWORD =
             ITEMS.register("chrona_sword",
@@ -159,8 +163,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> LOOP_STICK =
             ITEMS.register("loop_stick", () -> new Item(new Item.Properties()));
-
-
 
 
     public static void register(IEventBus eventBus) {

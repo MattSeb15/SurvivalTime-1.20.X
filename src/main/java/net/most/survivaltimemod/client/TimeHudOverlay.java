@@ -47,6 +47,7 @@ public class TimeHudOverlay {
         int x = screenWidth / 2;
         int y = screenHeight;
 
+
         if (!gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements()) {
 
 
@@ -64,7 +65,7 @@ public class TimeHudOverlay {
                 if(playerTimeData==null){
                     return;
                 }
-                float totalSeconds = playerTimeData.getTime();
+                float totalSeconds = playerTimeData.getTime();///-1.0f
 
                 int fullHours = (int) (totalSeconds / 3600); // 3600 seconds = 1 hour
 

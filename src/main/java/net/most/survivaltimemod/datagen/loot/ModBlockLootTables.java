@@ -3,6 +3,7 @@ package net.most.survivaltimemod.datagen.loot;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -14,11 +15,14 @@ import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.EntryGroup;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.data.CropBlockSeedItem;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ShardOptions;
 import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
@@ -36,15 +40,22 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         for (RegistryObject<Block> block : SurvivalTimeUtilGenerator.DROP_SELF_BLOCKS_LOOT_TABLE_LIST) {
             this.dropSelf(block.get());
         }
-        for (Map.Entry<RegistryObject<Block>, ShardOptions> entry : SurvivalTimeUtilGenerator.OPAL_ORE_LOOT_TABLE_MAP.entrySet()) {
+        for (Map.Entry<RegistryObject<Block>, ShardOptions> entry :
+                SurvivalTimeUtilGenerator.OPAL_ORE_LOOT_TABLE_MAP.entrySet()) {
             RegistryObject<Block> blockRegistryObject = entry.getKey();
             ShardOptions shardOptions = entry.getValue();
             this.add(blockRegistryObject.get(), block -> createOpalOreDrops(blockRegistryObject.get(), shardOptions));
         }
 
+        for (CropBlockSeedItem cropBlockSeedItem : SurvivalTimeUtilGenerator.CROP_BLOCK_SEED_ITEM_LIST) {
+            LootItemCondition.Builder lootitemcondition$builder1 =
+                    LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlockSeedItem.getCropBlock())
+                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(cropBlockSeedItem.getAgeProperty(), cropBlockSeedItem.getMaxAge()));
+            this.add(cropBlockSeedItem.getCropBlock(), this.createCropDrops(cropBlockSeedItem.getCropBlock(),
+                    cropBlockSeedItem.getResultItem(), cropBlockSeedItem.getSeeds(), lootitemcondition$builder1));
+        }
+
         this.add(ModBlocks.FIERY_TIME_BLOCK.get(), block -> createFieryTimeBlock(block, ModItems.FIERY_TIME.get()));
-
-
 
 
     }
