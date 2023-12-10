@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
@@ -20,25 +21,34 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        for(RegistryObject<Item> item : SurvivalTimeUtilGenerator.ITEM_REGISTER_MODEL_LIST) {
+        for (RegistryObject<Item> item : SurvivalTimeUtilGenerator.ITEM_REGISTER_MODEL_LIST) {
             simpleItem(item);
         }
 
 
-        for(RegistryObject<Block> block : SurvivalTimeUtilGenerator.BLOCK_REGISTER_MODEL_LIST) {
+        for (RegistryObject<Block> block : SurvivalTimeUtilGenerator.BLOCK_REGISTER_MODEL_LIST) {
             simpleItemBlock(block);
         }
 
+        complexBlock(ModBlocks.HOURGLASS_HUB_STATION.get());
 
+
+    }
+
+    private ItemModelBuilder complexBlock(Block block) {
+        return withExistingParent(ForgeRegistries.BLOCKS.getKey(block).getPath(),
+                new ResourceLocation(SurvivalTimeMod.MOD_ID,
+                "block/" + ForgeRegistries.BLOCKS.getKey(block).getPath()));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(SurvivalTimeMod.MOD_ID,"item/" + item.getId().getPath()));
+                new ResourceLocation(SurvivalTimeMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     private ItemModelBuilder simpleItemBlock(RegistryObject<Block> block) {
         return withExistingParent(block.getId().getPath(),
-                new ResourceLocation(SurvivalTimeMod.MOD_ID,"block/" + block.getId().getPath()));
+                new ResourceLocation(SurvivalTimeMod.MOD_ID, "block/" + block.getId().getPath()));
     }
 }

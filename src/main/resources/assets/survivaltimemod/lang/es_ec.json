@@ -32,6 +32,7 @@
   "item.survivaltimemod.epoch_stick": "Palo de Epoch",
   "item.survivaltimemod.flux_stick": "Palo de Flux",
   "item.survivaltimemod.loop_stick": "Palo de Loop",
+
   "block.survivaltimemod.fiery_time_block": "Bloque de Tiempo Ardiente",
   "block.survivaltimemod.opal_block": "Bloque de Opal",
   "block.survivaltimemod.chrona_block": "Bloque de Chrona",
@@ -49,5 +50,7 @@
   "block.survivaltimemod.deepslate_opal_ore": "Mineral de Opal de Pizarra",
   "block.survivaltimemod.nether_opal_ore": "Mineral de Opal del Nether",
   "block.survivaltimemod.end_stone_opal_ore": "Mineral de Opal de End",
+  "block.survivaltimemod.hourglass_hub_station": "Estación Central de Reloj de Arena",
+
   "creativetab.survivaltimemod_tab": "Survival Time Mod"
 }

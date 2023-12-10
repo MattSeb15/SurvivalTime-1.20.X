@@ -14,6 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.block.custom.HourglassHubStationBlock;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.item.custom.FuelItemBlock;
 import net.most.survivaltimemod.block.custom.TemporalTuberCropBlock;
@@ -115,6 +116,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> TEMPORAL_TUBER_CROP = BLOCKS.register("temporal_tuber_crop",
             () -> new TemporalTuberCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+
+    public static final RegistryObject<Block> HOURGLASS_HUB_STATION = registerBlock("hourglass_hub_station",
+            () -> new HourglassHubStationBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

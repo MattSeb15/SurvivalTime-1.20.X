@@ -32,6 +32,7 @@
   "item.survivaltimemod.epoch_stick": "Epoch Stick",
   "item.survivaltimemod.flux_stick": "Flux Stick",
   "item.survivaltimemod.loop_stick": "Loop Stick",
+
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
   "block.survivaltimemod.opal_block": "Block of Opal",
   "block.survivaltimemod.chrona_block": "Block of Chrona",
@@ -49,5 +50,7 @@
   "block.survivaltimemod.deepslate_opal_ore": "Deepslate Opal Ore",
   "block.survivaltimemod.nether_opal_ore": "Nether Opal Ore",
   "block.survivaltimemod.end_stone_opal_ore": "End Stone Opal Ore",
+  "block.survivaltimemod.hourglass_hub_station": "Hourglass Hub Station",
+
   "creativetab.survivaltimemod_tab": "Survival Time Mod"
 }

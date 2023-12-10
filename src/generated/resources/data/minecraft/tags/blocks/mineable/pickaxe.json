@@ -17,6 +17,7 @@
     "survivaltimemod:epoch_block",
     "survivaltimemod:flux_block",
     "survivaltimemod:loop_block",
-    "survivaltimemod:temporal_tuber_crop"
+    "survivaltimemod:temporal_tuber_crop",
+    "survivaltimemod:hourglass_hub_station"
   ]
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
@@ -31,6 +32,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         for (RegistryObject<Block> blockRegistryObject : SurvivalTimeUtilGenerator.BLOCK_REGISTER_MODEL_LIST) {
             blockWithItem(blockRegistryObject);
         }
+        horizontalBlock(ModBlocks.HOURGLASS_HUB_STATION.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/hourglass_hub_station")));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
@@ -58,7 +61,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private static int getResult(int currentAge, int maxTextures, int maxAge) {
-        if(maxTextures == maxAge){
+        if (maxTextures == maxAge) {
             return currentAge;
         }
         if (currentAge == maxAge) {
