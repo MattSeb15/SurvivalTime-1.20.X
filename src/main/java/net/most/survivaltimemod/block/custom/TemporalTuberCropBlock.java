@@ -59,8 +59,6 @@ public class TemporalTuberCropBlock extends CropBlock {
             if(pHand.equals(InteractionHand.MAIN_HAND)) {
                 return InteractionResult.SUCCESS;
             }
-
-            //SOLO PASAR SI EL ITEM ES UN RELOJ
             //TODO: reloj custom (aun no añadido) utilizar el reloj de mc en su lugar
 
             if(pPlayer.getMainHandItem().getItem() == Items.BONE_MEAL) {
@@ -71,11 +69,9 @@ public class TemporalTuberCropBlock extends CropBlock {
             }
             int currentAge = pState.getValue(AGE);
             if(currentAge == MAX_AGE) {
-                pPlayer.displayClientMessage(Component.literal("HARVESTED").withStyle(ChatFormatting.AQUA), false);
                 return InteractionResult.PASS;
             }
             pLevel.setBlockAndUpdate(pPos, pState.setValue(AGE, Math.min(currentAge+1, MAX_AGE)));
-            pPlayer.displayClientMessage(Component.literal("INTERACTED"), false);
             pPlayer.getMainHandItem().shrink(1); // Consume el item
             return InteractionResult.SUCCESS;
 

@@ -99,7 +99,7 @@ public class SurvivalTimeUtilGenerator {
     public final static List<CropBlockSeedItemModel> CROP_REGISTER_MODEL_LIST = List.of(
             new CropBlockSeedItemModel((TemporalTuberCropBlock) ModBlocks.TEMPORAL_TUBER_CROP.get(),
                     "temporal_tuber_stage",
-                    "temporal_tuber_stage", 6)
+                    "temporal_tuber_stage", 7)
     );
     ////----->>> ITEM REGISTER MODEL <<<-----\\\\----------------------->>> ITEM REGISTER MODEL <<<-----\\\\
     public final static List<RegistryObject<Item>> ITEM_REGISTER_MODEL_LIST = List.of(
@@ -221,7 +221,8 @@ public class SurvivalTimeUtilGenerator {
 
     public final static List<CropBlockSeedItem> CROP_BLOCK_SEED_ITEM_LIST = List.of(
             new CropBlockSeedItem(ModBlocks.TEMPORAL_TUBER_CROP.get(), ModItems.TEMPORAL_TUBER_SEEDS.get(),
-                    ModItems.TEMPORAL_TUBER.get(), TemporalTuberCropBlock.AGE, TemporalTuberCropBlock.MAX_AGE)
+                    ModItems.TEMPORAL_TUBER_ROTTEN.get(), ModItems.TEMPORAL_TUBER.get(), TemporalTuberCropBlock.AGE,
+                    TemporalTuberCropBlock.MAX_AGE)
     );
     public final static Map<RegistryObject<Block>, ShardOptions> OPAL_ORE_LOOT_TABLE_MAP = Map.of(
             ModBlocks.OPAL_ORE, new ShardOptions(

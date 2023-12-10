@@ -58,6 +58,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private static int getResult(int currentAge, int maxTextures, int maxAge) {
+        if(maxTextures == maxAge){
+            return currentAge;
+        }
         if (currentAge == maxAge) {
             return maxTextures;
         }

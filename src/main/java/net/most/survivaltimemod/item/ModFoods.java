@@ -9,25 +9,25 @@ public class ModFoods {
     public static final FoodProperties TEMPORAL_TUBER = (new FoodProperties.Builder())
             .nutrition(1)
             .saturationMod(0.2F)
+            .alwaysEat()
             .build();
 
 
     public static final FoodProperties TEMPORAL_TUBER_COOKED = (new FoodProperties.Builder())
-            .nutrition(6)
-            .saturationMod(0.6F)
-//            .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 100), 1.0F)
-            .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100,2), 1.0F)
-            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100,2), 1.0F)
-            .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 20,2), 0.5F)
+            .nutrition(4)
+            .saturationMod(0.4F)
+            .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 20*5), 0.2F)
+            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20*5, 1), 1.0F)
+            .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 20, 2), 0.5F)
             .alwaysEat()
             .build();
 
     public static final FoodProperties TEMPORAL_TUBER_ROTTEN = (new FoodProperties.Builder())
             .nutrition(1)
             .saturationMod(0.1F)
-            .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 200,2), 1.0F)
-            .effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 200,2), 1.0F)
-            .effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 250,2), 0.8F)
+            .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 20*10, 2), 1.0F)
+            .effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 20*10, 2), 1.0F)
+            .effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 20*12, 2), 0.8F)
             .fast()
             .alwaysEat()
             .build();

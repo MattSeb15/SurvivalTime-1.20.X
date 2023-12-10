@@ -100,14 +100,33 @@ public class ModEvents {
 
                 if (time >= 0) {
                     float timeToDecrement = (damage * 20);
-
                     playerTime.decrementTime(timeToDecrement, player);
                     player.displayClientMessage(
-                            Component.literal("Has recibido " + damage + " y perdido " +
-                                    FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED,
-                                            timeToDecrement) + " segundos" +
-                                    " de " +
-                                    "tiempo." + "Time: " + playerTime.getFormattedTime()).withStyle(ChatFormatting.DARK_RED),
+                            Component.empty().append(
+                                    Component.literal("PosTime: " + FormatTimeType.getFormattedStringByType(
+                                                    FormatTimeType.DEPENDS_NAMED, time
+                                            ))
+                                            .withStyle(ChatFormatting.GOLD)
+                            ).append(
+                                    Component.literal(" | ")
+                                            .withStyle(ChatFormatting.DARK_GRAY)
+                            ).append(
+                                    Component.literal("Daño: " + damage)
+                                            .withStyle(ChatFormatting.DARK_PURPLE)
+                            ).append(
+                                    Component.literal(" | ")
+                                            .withStyle(ChatFormatting.DARK_GRAY)
+                            ).append(
+                                    Component.literal("Perdida: " + FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED,
+                                                    timeToDecrement))
+                                            .withStyle(ChatFormatting.RED)
+                            ).append(
+                                    Component.literal(" | ")
+                                            .withStyle(ChatFormatting.DARK_GRAY)
+                            ).append(
+                                    Component.literal("PreTime: " + playerTime.getFormattedTime())
+                                            .withStyle(ChatFormatting.DARK_RED)
+                            ),
                             false);
 
 

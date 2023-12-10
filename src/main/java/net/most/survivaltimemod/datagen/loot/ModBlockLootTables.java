@@ -9,14 +9,17 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.EntryGroup;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -44,15 +47,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 SurvivalTimeUtilGenerator.OPAL_ORE_LOOT_TABLE_MAP.entrySet()) {
             RegistryObject<Block> blockRegistryObject = entry.getKey();
             ShardOptions shardOptions = entry.getValue();
-            this.add(blockRegistryObject.get(), block -> createOpalOreDrops(blockRegistryObject.get(), shardOptions));
+            this.add(blockRegistryObject.get(), block -> createOpalOreDrops(block, shardOptions));
+
         }
 
         for (CropBlockSeedItem cropBlockSeedItem : SurvivalTimeUtilGenerator.CROP_BLOCK_SEED_ITEM_LIST) {
-            LootItemCondition.Builder lootitemcondition$builder1 =
-                    LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlockSeedItem.getCropBlock())
-                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(cropBlockSeedItem.getAgeProperty(), cropBlockSeedItem.getMaxAge()));
-            this.add(cropBlockSeedItem.getCropBlock(), this.createCropDrops(cropBlockSeedItem.getCropBlock(),
-                    cropBlockSeedItem.getResultItem(), cropBlockSeedItem.getSeeds(), lootitemcondition$builder1));
+            this.add(cropBlockSeedItem.getCropBlock(), this.createCustomCropDrop(cropBlockSeedItem));
         }
 
         this.add(ModBlocks.FIERY_TIME_BLOCK.get(), block -> createFieryTimeBlock(block, ModItems.FIERY_TIME.get()));
@@ -107,6 +107,54 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 )
 
                         ))
+        );
+    }
+
+    protected LootTable.Builder createCustomCropDrop(CropBlockSeedItem pCropBlockSeedItem) {
+
+        Block pCropBlock = pCropBlockSeedItem.getCropBlock();
+        Item pGrownCropItem = pCropBlockSeedItem.getResultItem();
+        Item pRottenCropItem = pCropBlockSeedItem.getRottenItem();
+        Item pSeedsItem = pCropBlockSeedItem.getSeeds();
+        IntegerProperty pAgeProperty = pCropBlockSeedItem.getAgeProperty();
+        int pMaxAge = pCropBlockSeedItem.getMaxAge();
+
+        LootItemCondition.Builder pDropGrownCropConditionRotten =
+                LootItemBlockStatePropertyCondition.hasBlockStateProperties(pCropBlock)
+                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(pAgeProperty,
+                                pMaxAge));
+        LootItemCondition.Builder pDropGrownCropCondition =
+                LootItemBlockStatePropertyCondition.hasBlockStateProperties(pCropBlock)
+                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(pAgeProperty,
+                                pMaxAge - 1));
+
+        return this.applyExplosionDecay(pCropBlock,
+                LootTable.lootTable()
+                        .withPool(
+                                LootPool.lootPool()
+                                        .add(LootItem.lootTableItem(pRottenCropItem)
+                                                .when(pDropGrownCropConditionRotten)
+                                                .when(LootItemRandomChanceCondition.randomChance(0.3f))
+                                                .otherwise(
+                                                        LootItem.lootTableItem(pGrownCropItem)
+                                                                .when(pDropGrownCropCondition)
+                                                ).otherwise(LootItem.lootTableItem(pSeedsItem).when(
+                                                        LootItemRandomChanceCondition.randomChance(0.05f)
+                                                ))
+                                        )
+                        ).withPool(
+                                LootPool.lootPool()
+                                        .when(pDropGrownCropCondition)
+                                        .add(LootItem.lootTableItem(pSeedsItem)
+                                                .apply(ApplyBonusCount
+                                                        .addBonusBinomialDistributionCount(
+                                                                Enchantments.BLOCK_FORTUNE,
+                                                                0.5714286F,
+                                                                1
+                                                        )
+                                                )
+                                        )
+                        )
         );
     }
 

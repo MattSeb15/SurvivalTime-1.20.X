@@ -1,5 +1,6 @@
 package net.most.survivaltimemod.item;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
@@ -10,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.item.custom.ConsumableActionItem;
 import net.most.survivaltimemod.item.custom.FuelItem;
 import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 
@@ -44,23 +46,34 @@ public class ModItems {
 
     public static final RegistryObject<Item> TEMPORAL_TUBER =
             ITEMS.register("temporal_tuber",
-                    () -> new Item(new
+                    () -> new ConsumableActionItem(new
                             Item.Properties()
-                            .food(ModFoods.TEMPORAL_TUBER)
+                            .food(ModFoods.TEMPORAL_TUBER),
+                            (finishUsingItemData) -> {
+                                finishUsingItemData.getPlayerTime().incrementTime(5.0f,
+                                        finishUsingItemData.getServerPlayer());
+                            }
                     ));
 
     public static final RegistryObject<Item> TEMPORAL_TUBER_COOKED =
             ITEMS.register("temporal_tuber_cooked",
-                    () -> new Item(new
-                            Item.Properties()
-                            .food(ModFoods.TEMPORAL_TUBER_COOKED)
+                    () -> new ConsumableActionItem(new
+                            Item.Properties().food(ModFoods.TEMPORAL_TUBER_COOKED),
+                            (finishUsingItemData) -> {
+                                finishUsingItemData.getPlayerTime().incrementTime(90.0f,
+                                        finishUsingItemData.getServerPlayer());
+                            }
                     ));
 
     public static final RegistryObject<Item> TEMPORAL_TUBER_ROTTEN =
             ITEMS.register("temporal_tuber_rotten",
-                    () -> new Item(new
+                    () -> new ConsumableActionItem(new
                             Item.Properties()
-                            .food(ModFoods.TEMPORAL_TUBER_ROTTEN)
+                            .food(ModFoods.TEMPORAL_TUBER_ROTTEN),
+                            (finishUsingItemData) -> {
+                                finishUsingItemData.getPlayerTime().decrementTime(60.0f * 2.0f,
+                                        finishUsingItemData.getServerPlayer());
+                            }
                     ));
     public static final RegistryObject<Item> FIERY_TIME =
             ITEMS.register("fiery_time", () -> new FuelItem(new Item.Properties()
