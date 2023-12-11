@@ -1,0 +1,18 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "key": {
+    "#": {
+      "item": "survivaltimemod:chrona_ingot"
+    }
+  },
+  "pattern": [
+    "#####",
+    "#####",
+    "#####",
+    "#####",
+    "#####"
+  ],
+  "result": {
+    "item": "survivaltimemod:chrona_block"
+  }
+}

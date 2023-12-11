@@ -9,6 +9,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.datagen.custom.HourglassHubShapedRecipeBuilder;
+import net.most.survivaltimemod.datagen.custom.HourglassHubShapelessRecipeBuilder;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
 import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
@@ -68,6 +70,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .requires(block)
                     .unlockedBy(getHasName(block), has(block))
                     .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "_from_block");
+
+            HourglassHubShapedRecipeBuilder.shaped(block)
+                    .pattern("#####")
+                    .pattern("#####")
+                    .pattern("#####")
+                    .pattern("#####")
+                    .pattern("#####")
+                    .define('#', item)
+                    .unlockedBy(getHasName(item), has(item))
+                    .save(pWriter);
+
+            HourglassHubShapelessRecipeBuilder.recipe(item, 25)
+                    .requires(block)
+                    .unlockedBy(getHasName(block), has(block))
+                    .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "hgh_from_block");
         }
         for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.STICKS_FROM_SHARDS_RECIPE_MAP.entrySet()) {
             ItemLike result = entry.getKey();
@@ -116,6 +133,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(Items.DIAMOND, 4)
                 .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
                 .save(pWriter);
+
+//        HourglassHubShapelessRecipeBuilder.recipe(ModItems.OPAL_RAW.get(), 2)
+//                .requires(ModItems.OPAL_SHARD_CHRONA.get())
+//                .requires(ModItems.OPAL_SHARD_TEMPORA.get())
+//                .requires(ModItems.OPAL_SHARD_EPOCH.get())
+//                .requires(ModItems.OPAL_SHARD_FLUX.get())
+//                .requires(ModItems.OPAL_SHARD_LOOP.get())
+//                .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
+//                .save(pWriter);
+
 
 
     }

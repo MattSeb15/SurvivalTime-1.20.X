@@ -1,0 +1,18 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "key": {
+    "#": {
+      "item": "survivaltimemod:loop_ingot"
+    }
+  },
+  "pattern": [
+    "#####",
+    "#####",
+    "#####",
+    "#####",
+    "#####"
+  ],
+  "result": {
+    "item": "survivaltimemod:loop_block"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "key": {
+    "#": {
+      "item": "survivaltimemod:flux_ingot"
+    }
+  },
+  "pattern": [
+    "#####",
+    "#####",
+    "#####",
+    "#####",
+    "#####"
+  ],
+  "result": {
+    "item": "survivaltimemod:flux_block"
+  }
+}

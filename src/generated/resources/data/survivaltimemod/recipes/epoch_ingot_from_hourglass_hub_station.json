@@ -1,0 +1,12 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shapeless",
+  "ingredients": [
+    {
+      "item": "survivaltimemod:epoch_block"
+    }
+  ],
+  "result": {
+    "count": 25,
+    "item": "survivaltimemod:epoch_ingot"
+  }
+}
