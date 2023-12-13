@@ -88,6 +88,8 @@ public class HourglassHubStationBlock extends BaseEntityBlock {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof HourglassHubStationBlockEntity) {
                 NetworkHooks.openScreen((ServerPlayer) pPlayer, (HourglassHubStationBlockEntity) blockEntity, pPos);
+
+                return InteractionResult.SUCCESS;
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
@@ -112,6 +114,6 @@ public class HourglassHubStationBlock extends BaseEntityBlock {
         }
 
         return createTickerHelper(pBlockEntityType, ModBlockEntities.HOURGLASS_HUB_STATION.get(),
-                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
+                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1, pBlockEntity));
     }
 }

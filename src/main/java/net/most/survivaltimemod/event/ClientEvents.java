@@ -2,6 +2,7 @@ package net.most.survivaltimemod.event;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
@@ -9,6 +10,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.block.entity.ModBlockEntities;
+import net.most.survivaltimemod.block.entity.renderer.HourglassHubStationBlockRenderer;
 import net.most.survivaltimemod.client.TimeHudOverlay;
 import net.most.survivaltimemod.screen.HourglassHubStationScreen;
 import net.most.survivaltimemod.screen.ModMenuTypes;
@@ -38,6 +41,13 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onRegisterOverlay(RegisterGuiOverlaysEvent event) {
             event.registerBelowAll("survivaltimemod_time", TimeHudOverlay.HUD_TIME);
+
+        }
+
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.HOURGLASS_HUB_STATION.get(),
+                    HourglassHubStationBlockRenderer::new);
 
         }
 

@@ -1,6 +1,5 @@
 package net.most.survivaltimemod.block.entity;
 
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +18,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,6 +36,8 @@ import net.most.survivaltimemod.util.ModEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class HourglassHubStationBlockEntity extends BlockEntity implements MenuProvider {
@@ -45,6 +47,10 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
             setChanged();
+
+            if (level != null && !level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
         }
 
         @Override
@@ -56,6 +62,9 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
             };
         }
     };
+
+
+
 
 
     //output slot = 26
@@ -85,10 +94,34 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                if (level != null && !level.isClientSide()) {
+                    level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                }
+
             }
         };
     }
+
+
+
+    public List<ItemStack> getItemStacks() {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            itemStacks.add(itemHandler.getStackInSlot(i));
+        }
+        return itemStacks;
+    }
+
+    public ItemStack getItemResultStack() {
+        return itemHandler.getStackInSlot(OUTPUT_SLOT);
+    }
+
+
+
+    public int getProgress() {
+        return this.progress;
+    }
+
     public IEnergyStorage getEnergyStorage() {
         return ENERGY_TIME_STORAGE;
     }
@@ -189,7 +222,7 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         ENERGY_TIME_STORAGE.setEnergy(pTag.getInt("hourglass_hub_energy"));
     }
 
-    public void tick(Level level, BlockPos pPos, BlockState pState) {
+    public void tick(Level level, BlockPos pPos, BlockState pState, HourglassHubStationBlockEntity blockEntity) {
         fillUpOnEnergyThenConsumeItem();
 
 
