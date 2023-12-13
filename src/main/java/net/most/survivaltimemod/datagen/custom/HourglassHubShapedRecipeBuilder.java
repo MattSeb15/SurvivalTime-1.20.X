@@ -9,11 +9,8 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -23,8 +20,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
-import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
-import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -38,6 +33,10 @@ public class HourglassHubShapedRecipeBuilder implements RecipeBuilder {
     private final List<String> rows = com.google.common.collect.Lists.newArrayList();
     private final Map<Character, Ingredient> key = Maps.newLinkedHashMap();
     private final int count;
+    private static final int DEFAULT_CRAFT_TIME = 20*10;
+    private static final int DEFAULT_ENERGY_COST = 60*10;
+    private int craftTime = DEFAULT_CRAFT_TIME;
+    private int energyCost = DEFAULT_ENERGY_COST;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
     public HourglassHubShapedRecipeBuilder(ItemLike pResult, int pCount) {
@@ -55,7 +54,15 @@ public class HourglassHubShapedRecipeBuilder implements RecipeBuilder {
     public static HourglassHubShapedRecipeBuilder shaped(ItemLike pResult, int pCount) {
         return new HourglassHubShapedRecipeBuilder(pResult, pCount);
     }
+    public HourglassHubShapedRecipeBuilder craftTime(int craftTime) {
+        this.craftTime = craftTime;
+        return this;
+    }
 
+    public HourglassHubShapedRecipeBuilder energyCost(int energyCost) {
+        this.energyCost = energyCost;
+        return this;
+    }
     /**
      * Adds a key to the recipe pattern.
      */
@@ -121,7 +128,7 @@ public class HourglassHubShapedRecipeBuilder implements RecipeBuilder {
 
         pFinishedRecipeConsumer.accept(new Result(pRecipeId, this.result, this.count, this.rows,
                 this.key,
-                this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
+                craftTime, energyCost, this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
                 + pRecipeId.getPath())));
 
     }
@@ -160,19 +167,23 @@ public class HourglassHubShapedRecipeBuilder implements RecipeBuilder {
         private final List<String> pattern;
         private final Map<Character, Ingredient> key;
         private final int count;
+        private final int craftTime;
+        private final int energyCost;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
 
 
         public Result(ResourceLocation pId, Item pResult, int pCount, List<String> pPattern,
-                      Map<Character, Ingredient> pKey, Advancement.Builder pAdvancementBuilder,
+                      Map<Character, Ingredient> pKey, int craftTime, int energyCost, Advancement.Builder pAdvancementBuilder,
                       ResourceLocation pAdvancementId) {
             this.id = pId;
             this.result = pResult;
             this.count = pCount;
             this.pattern = pPattern;
             this.key = pKey;
+            this.craftTime = craftTime;
+            this.energyCost = energyCost;
             this.advancement = pAdvancementBuilder;
             this.advancementId = pAdvancementId;
         }
@@ -198,6 +209,8 @@ public class HourglassHubShapedRecipeBuilder implements RecipeBuilder {
             if (this.count > 1) {
                 jsonobject1.addProperty("count", this.count);
             }
+            pJson.addProperty("craftTime", this.craftTime);
+            pJson.addProperty("energyCost", this.energyCost);
 
             pJson.add("result", jsonobject1);
 

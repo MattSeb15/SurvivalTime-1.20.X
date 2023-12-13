@@ -52,5 +52,7 @@
   "block.survivaltimemod.end_stone_opal_ore": "Mineral de Opal de End",
   "block.survivaltimemod.hourglass_hub_station": "Estación Central de Reloj de Arena",
 
+  "container.survival_time_mod.hhs_craft_button_text": "Crear",
+
   "creativetab.survivaltimemod_tab": "Survival Time Mod"
 }

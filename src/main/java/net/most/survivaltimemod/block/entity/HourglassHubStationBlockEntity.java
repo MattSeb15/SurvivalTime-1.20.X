@@ -1,18 +1,21 @@
 package net.most.survivaltimemod.block.entity;
 
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,20 +25,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
 import net.most.survivaltimemod.screen.HourglassHubStationMenu;
+import net.most.survivaltimemod.util.ModEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public class HourglassHubStationBlockEntity extends BlockEntity implements MenuProvider {
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(26) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(27) {
         @Override
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
@@ -44,22 +49,49 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return slot != OUTPUT_SLOT;
+            return switch (slot) {
+                case OUTPUT_SLOT -> false;
+                case ENERGY_TIME_SLOT -> stack.getItem() == ModItems.FIERY_TIME.get();
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
 
     //output slot = 26
     private static final int OUTPUT_SLOT = 25;
+    private static final int ENERGY_TIME_SLOT = 26;
     //grid input slots = 0-25
     private static final int GRID_INPUT_SLOT_START = 0;
     private static final int GRID_INPUT_SLOT_END = 24;
+
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
+
+    private final int DEFAULT_MAX_PROGRESS = 100;
+    private int energyCost = 0;
+    private final int DEFAULT_ENERGY_COST = 1000;
+
+
     private AbstractContainerMenu menu;
+    private final ModEnergyStorage ENERGY_TIME_STORAGE = createEnergyStorage();
+
+    private ModEnergyStorage createEnergyStorage() {
+        return new ModEnergyStorage(36000, 300) {
+            @Override
+            public void onEnergyChanged() {
+                setChanged();
+                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        };
+    }
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_TIME_STORAGE;
+    }
 
     public HourglassHubStationBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.HOURGLASS_HUB_STATION.get(), pPos, pBlockState);
@@ -106,6 +138,9 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == ForgeCapabilities.ENERGY) {
+            return lazyEnergyHandler.cast();
+        }
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
@@ -116,12 +151,14 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        lazyEnergyHandler = LazyOptional.of(() -> ENERGY_TIME_STORAGE);
     }
 
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
+        lazyEnergyHandler.invalidate();
     }
 
     public void drops() {
@@ -135,6 +172,10 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inv", itemHandler.serializeNBT());
+        pTag.putInt("hourglass_hub_progress", progress);
+        pTag.putInt("hourglass_hub_max_progress", maxProgress);
+        pTag.putInt("hourglass_hub_energy_cost", energyCost);
+        pTag.putInt("hourglass_hub_energy", ENERGY_TIME_STORAGE.getEnergyStored());
         super.saveAdditional(pTag);
     }
 
@@ -142,22 +183,60 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inv"));
+        progress = pTag.getInt("hourglass_hub_progress");
+        maxProgress = pTag.getInt("hourglass_hub_max_progress");
+        energyCost = pTag.getInt("hourglass_hub_energy_cost");
+        ENERGY_TIME_STORAGE.setEnergy(pTag.getInt("hourglass_hub_energy"));
     }
 
     public void tick(Level level, BlockPos pPos, BlockState pState) {
+        fillUpOnEnergyThenConsumeItem();
 
-        if (isOutputSlotEmptyOrReceivable() && hasRecipe()) {
+
+        if (isOutputSlotEmptyOrReceivable() && hasRecipe() && hasEnoughEnergyToCraft()) {
             increaseCraftingProgress();
+
             setChanged(level, pPos, pState);
 
             if (hasProgressFinished()) {
                 craftItem();
                 resetProgress();
+                extractEnergy();
+
+
             }
         } else {
             resetProgress();
+
+
         }
 
+
+    }
+
+
+    private void extractEnergy() {
+//        this.ENERGY_TIME_STORAGE.extractEnergy(1000, false);
+        this.ENERGY_TIME_STORAGE.setEnergy(this.ENERGY_TIME_STORAGE.getEnergyStored() - energyCost);
+    }
+
+    private void fillUpOnEnergyThenConsumeItem() {
+        if (hasEnergyItemInSlot()) {
+            this.ENERGY_TIME_STORAGE.receiveEnergy(60, false);
+        }
+
+
+//        if(ENERGY_TIME_STORAGE.getEnergyStored() < ENERGY_TIME_STORAGE.getMaxEnergyStored()) {
+//            if(!itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty()) {
+//                ENERGY_TIME_STORAGE.addEnergy(100);
+//                itemHandler.extractItem(OUTPUT_SLOT, 1, false);
+//            }
+//        }
+    }
+
+    private boolean hasEnergyItemInSlot() {
+        return !this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT).isEmpty()
+                && this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT).getItem() == ModItems.FIERY_TIME.get();
 
     }
 
@@ -172,7 +251,6 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         if (shapelessRecipe.isPresent()) {
             craftShapelessItem(shapelessRecipe);
         }
-
 
 
     }
@@ -203,7 +281,7 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
     private Optional<HourglassHubStationShapedRecipe> getCurrentShapedRecipe() {
         int slots = this.itemHandler.getSlots();
-        if(menu== null){
+        if (menu == null) {
             return Optional.empty();
         }
 //        SimpleContainer inventory = new SimpleContainer(slots);
@@ -243,11 +321,9 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         Optional<HourglassHubStationShapelessRecipe> recipe = getCurrentShapelessRecipe();
         Optional<HourglassHubStationShapedRecipe> recipe2 = getCurrentShapedRecipe();
 
-        if(recipe.isPresent() && recipe2.isPresent()) {
-            return true;
-        }
-
         if (recipe.isPresent()) {
+            maxProgress = recipe.get().getCraftTime();
+            energyCost = recipe.get().getEnergyCost();
             ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
             return canInsertAmountIntoOutputSlot(resultItem.getCount())
                     && canInsertItemIntoOutputSlot(resultItem.getItem());
@@ -255,6 +331,8 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         }
 
         if (recipe2.isPresent()) {
+            maxProgress = recipe2.get().getCraftTime();
+            energyCost = recipe2.get().getEnergyCost();
             ItemStack resultItem = recipe2.get().getResultItem(getLevel().registryAccess());
             return canInsertAmountIntoOutputSlot(resultItem.getCount())
                     && canInsertItemIntoOutputSlot(resultItem.getItem());
@@ -263,7 +341,10 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         return false;
 
 
+    }
 
+    private boolean hasEnoughEnergyToCraft() {
+        return ENERGY_TIME_STORAGE.getEnergyStored() >= energyCost; //* maxProgress
     }
 
 
@@ -280,5 +361,19 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
     }
 
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
 
+    @Override
+    public CompoundTag getUpdateTag() {
+        return saveWithFullMetadata();
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+    }
 }

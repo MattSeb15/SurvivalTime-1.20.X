@@ -1,5 +1,7 @@
 {
   "type": "survivaltimemod:hourglass_hub_shapeless",
+  "craftTime": 1200,
+  "energyCost": 300,
   "ingredients": [
     {
       "item": "survivaltimemod:epoch_block"

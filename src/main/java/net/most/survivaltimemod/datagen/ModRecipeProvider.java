@@ -78,11 +78,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .pattern("#####")
                     .pattern("#####")
                     .define('#', item)
+                    .craftTime(20*120)
+                    .energyCost(60*10)
                     .unlockedBy(getHasName(item), has(item))
                     .save(pWriter);
 
             HourglassHubShapelessRecipeBuilder.recipe(item, 25)
                     .requires(block)
+                    .craftTime(20*60)
+                    .energyCost(60*5)
                     .unlockedBy(getHasName(block), has(block))
                     .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "hgh_from_block");
         }

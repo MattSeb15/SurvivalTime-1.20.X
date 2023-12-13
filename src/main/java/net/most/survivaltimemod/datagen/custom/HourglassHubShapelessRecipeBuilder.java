@@ -29,6 +29,11 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
     private final Item result;
     private final List<Ingredient> ingredients = Lists.newArrayList();
     private final int count;
+    private static final int DEFAULT_CRAFT_TIME = 20*10;
+    private static final int DEFAULT_ENERGY_COST = 60*10;
+    private int craftTime = DEFAULT_CRAFT_TIME;
+    private int energyCost = DEFAULT_ENERGY_COST;
+
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
     public HourglassHubShapelessRecipeBuilder(ItemLike pResult, int pCount) {
@@ -43,18 +48,39 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
     public static HourglassHubShapelessRecipeBuilder recipe(ItemLike pResult, int pCount) {
         return new HourglassHubShapelessRecipeBuilder(pResult, pCount);
     }
+    public static HourglassHubShapelessRecipeBuilder recipe(ItemLike pResult, int pCount, int craftTime) {
+        return new HourglassHubShapelessRecipeBuilder(pResult, pCount);
+    }
+    public static HourglassHubShapelessRecipeBuilder recipe(ItemLike pResult, int pCount, int craftTime, int energyCost) {
+        return new HourglassHubShapelessRecipeBuilder(pResult, pCount);
+    }
+
+    public HourglassHubShapelessRecipeBuilder craftTime(int craftTime) {
+        this.craftTime = craftTime;
+        return this;
+    }
+
+    public HourglassHubShapelessRecipeBuilder energyCost(int energyCost) {
+        this.energyCost = energyCost;
+        return this;
+    }
+
+
 
     public HourglassHubShapelessRecipeBuilder requires(TagKey<Item> pTag) {
         return this.requires(Ingredient.of(pTag));
     }
+
     public HourglassHubShapelessRecipeBuilder requires(ItemLike pItem) {
         return this.requires(pItem, 1);
     }
+
     public HourglassHubShapelessRecipeBuilder requires(Ingredient pIngredient) {
         return this.requires(pIngredient, 1);
     }
+
     public HourglassHubShapelessRecipeBuilder requires(Ingredient pIngredient, int pQuantity) {
-        for(int i = 0; i < pQuantity; ++i) {
+        for (int i = 0; i < pQuantity; ++i) {
             this.ingredients.add(pIngredient);
         }
 
@@ -62,8 +88,9 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
     }
 
     public HourglassHubShapelessRecipeBuilder requires(ItemLike pItem, int pQuantity) {
-        for(int i = 0; i < pQuantity; ++i) {
+        for (int i = 0; i < pQuantity; ++i) {
             this.requires(Ingredient.of(pItem));
+
         }
 
         return this;
@@ -92,7 +119,7 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
                 .rewards(AdvancementRewards.Builder.recipe(pRecipeId)).requirements(RequirementsStrategy.OR);
 
         pFinishedRecipeConsumer.accept(new Result(pRecipeId, this.result, this.count, this.ingredients,
-                this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
+                craftTime, energyCost, this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
                 + pRecipeId.getPath())));
 
     }
@@ -102,15 +129,19 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
         private final Item result;
         private final List<Ingredient> ingredients;
         private final int count;
+        private final int craftTime;
+        private final int energyCost;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
         public Result(ResourceLocation pId, Item pResult, int pCount, List<Ingredient> pIngredients,
-                      Advancement.Builder pAdvancementBuilder, ResourceLocation pAdvancementId) {
+                      int craftTime, int energyCost, Advancement.Builder pAdvancementBuilder, ResourceLocation pAdvancementId) {
             this.id = pId;
             this.result = pResult;
             this.ingredients = pIngredients;
             this.count = pCount;
+            this.craftTime = craftTime;
+            this.energyCost = energyCost;
             this.advancement = pAdvancementBuilder;
             this.advancementId = pAdvancementId;
         }
@@ -129,6 +160,8 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
             }
+            pJson.addProperty("craftTime", this.craftTime);
+            pJson.addProperty("energyCost", this.energyCost);
 
             pJson.add("result", jsonobject);
 //            JsonArray jsonarray = new JsonArray();

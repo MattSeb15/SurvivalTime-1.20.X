@@ -8,13 +8,11 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.IShapedRecipe;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,16 +29,27 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
     private final ResourceLocation id;
     private final ItemStack resultItem;
     private final NonNullList<Ingredient> recipeItems;
+    private final int craftTime;
+    private final int energyCost;
 
     public HourglassHubStationShapedRecipe(ResourceLocation id, int width, int height, ItemStack resultItem,
-                                           NonNullList<Ingredient> recipeItems) {
+                                           NonNullList<Ingredient> recipeItems, int craftTime, int energyCost) {
         this.width = width;
         this.height = height;
         this.recipeItems = recipeItems;
         this.resultItem = resultItem;
         this.id = id;
+        this.craftTime = craftTime;
+        this.energyCost = energyCost;
     }
 
+    public int getCraftTime() {
+        return craftTime;
+    }
+
+    public int getEnergyCost() {
+        return energyCost;
+    }
     @Override
     public boolean matches(CraftingContainer pInv, @NotNull Level pLevel) {
         for (int i = 0; i <= pInv.getWidth() - this.width; ++i) {
@@ -258,6 +267,8 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
         public @NotNull HourglassHubStationShapedRecipe fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pJson) {
 
             Map<String, Ingredient> map = HourglassHubStationShapedRecipe.keyFromJson(GsonHelper.getAsJsonObject(pJson, "key"));
+            int craftTime = GsonHelper.getAsInt(pJson, "craftTime");
+            int energyCost = GsonHelper.getAsInt(pJson, "energyCost");
             String[] astring =
                     HourglassHubStationShapedRecipe.shrink(HourglassHubStationShapedRecipe.patternFromJson(GsonHelper.getAsJsonArray(pJson,
                             "pattern")));
@@ -266,7 +277,7 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
             NonNullList<Ingredient> nonnulllist = HourglassHubStationShapedRecipe.dissolvePattern(astring, map, i, j);
             ItemStack itemstack = HourglassHubStationShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
 
-            return new HourglassHubStationShapedRecipe(pRecipeId, i, j, itemstack, nonnulllist);
+            return new HourglassHubStationShapedRecipe(pRecipeId, i, j, itemstack, nonnulllist, craftTime, energyCost);
         }
 
         @Override
@@ -279,9 +290,12 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
                 nonnulllist.set(k, Ingredient.fromNetwork(pBuffer));
             }
 
+            int craftTime = pBuffer.readVarInt();
+            int energyCost = pBuffer.readVarInt();
+
             ItemStack itemstack = pBuffer.readItem();
 
-            return new HourglassHubStationShapedRecipe(pRecipeId, i, j, itemstack, nonnulllist);
+            return new HourglassHubStationShapedRecipe(pRecipeId, i, j, itemstack, nonnulllist, craftTime, energyCost);
         }
 
         @Override
@@ -293,6 +307,9 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
             for (Ingredient ingredient : pRecipe.recipeItems) {
                 ingredient.toNetwork(pBuffer);
             }
+
+            pBuffer.writeVarInt(pRecipe.craftTime);
+            pBuffer.writeVarInt(pRecipe.energyCost);
 
             pBuffer.writeItem(pRecipe.resultItem);
         }

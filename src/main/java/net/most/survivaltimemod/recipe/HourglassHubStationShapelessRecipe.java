@@ -29,11 +29,18 @@ public class HourglassHubStationShapelessRecipe implements Recipe<SimpleContaine
     private final NonNullList<Ingredient> ingredients;
     private final boolean isSimple;
 
-    public HourglassHubStationShapelessRecipe(ResourceLocation id, ItemStack resultItem, NonNullList<Ingredient> ingredients) {
+    private final int craftTime;
+    private final int energyCost;
+
+
+    public HourglassHubStationShapelessRecipe(ResourceLocation id, ItemStack resultItem, NonNullList<Ingredient> ingredients, int craftTime,
+                                              int energyCost) {
         this.ingredients = ingredients;
         this.resultItem = resultItem;
         this.id = id;
         this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
+        this.craftTime = craftTime;
+        this.energyCost = energyCost;
     }
 
     @Override
@@ -69,6 +76,14 @@ public class HourglassHubStationShapelessRecipe implements Recipe<SimpleContaine
     @Override
     public @NotNull ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         return resultItem.copy();
+    }
+
+    public int getCraftTime() {
+        return craftTime;
+    }
+
+    public int getEnergyCost() {
+        return energyCost;
     }
 
     @Override
@@ -112,13 +127,15 @@ public class HourglassHubStationShapelessRecipe implements Recipe<SimpleContaine
         public @NotNull HourglassHubStationShapelessRecipe fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pJson) {
 
             NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
+            int craftTime = GsonHelper.getAsInt(pJson, "craftTime");
+            int energyCost = GsonHelper.getAsInt(pJson, "energyCost");
             if (nonnulllist.isEmpty()) {
                 throw new JsonParseException("No ingredients for shapeless recipe");
             } else if (nonnulllist.size() > HourglassHubStationShapelessRecipe.MAX_WIDTH * HourglassHubStationShapelessRecipe.MAX_HEIGHT) {
                 throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is " + (HourglassHubStationShapelessRecipe.MAX_WIDTH * HourglassHubStationShapelessRecipe.MAX_HEIGHT));
             } else {
                 ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-                return new HourglassHubStationShapelessRecipe(pRecipeId, itemstack, nonnulllist);
+                return new HourglassHubStationShapelessRecipe(pRecipeId, itemstack, nonnulllist, craftTime, energyCost);
             }
         }
 
@@ -141,12 +158,16 @@ public class HourglassHubStationShapelessRecipe implements Recipe<SimpleContaine
             int i = pBuffer.readVarInt();
             NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
 
+
             for (int j = 0; j < nonnulllist.size(); ++j) {
                 nonnulllist.set(j, Ingredient.fromNetwork(pBuffer));
             }
 
+            int craftTime = pBuffer.readVarInt();
+            int energyCost = pBuffer.readVarInt();
+
             ItemStack itemstack = pBuffer.readItem();
-            return new HourglassHubStationShapelessRecipe(pRecipeId, itemstack, nonnulllist);
+            return new HourglassHubStationShapelessRecipe(pRecipeId, itemstack, nonnulllist, craftTime, energyCost);
         }
 
         @Override
@@ -157,7 +178,10 @@ public class HourglassHubStationShapelessRecipe implements Recipe<SimpleContaine
                 ingredient.toNetwork(pBuffer);
             }
 
-            pBuffer.writeItem(pRecipe.resultItem);
+            pBuffer.writeVarInt(pRecipe.craftTime);
+            pBuffer.writeVarInt(pRecipe.energyCost);
+
+            pBuffer.writeItemStack(pRecipe.resultItem, false);
         }
     }
 

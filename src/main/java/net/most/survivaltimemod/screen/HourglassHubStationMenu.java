@@ -1,6 +1,7 @@
 package net.most.survivaltimemod.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -21,17 +22,12 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public HourglassHubStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
-    }
-
-    @Override
-    public void clicked(int pSlotId, int pButton, @NotNull ClickType pClickType, Player pPlayer) {
-        super.clicked(pSlotId, pButton, pClickType, pPlayer);
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     public HourglassHubStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.HOURGLASS_HUB_STATION_MENU.get(), pContainerId);
-        checkContainerSize(inv, 26);
+        checkContainerSize(inv, 27);
         blockEntity = ((HourglassHubStationBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
@@ -46,6 +42,12 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
 
             int outputX = 149;
             int outputY = 29;
+
+            int energyInputX = 149;
+            int energyInputY = 65;
+
+            int buttonX = 149;
+            int buttonY = 101;
             //5x5 grid slots
             //index 0-24
             for (int i = 0; i < 5; i++) {
@@ -58,6 +60,9 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
             //output slot
             //index 25
             this.addSlot(new SlotItemHandler(iItemHandler, 25, outputX, outputY));
+            this.addSlot(new SlotItemHandler(iItemHandler, 26, energyInputX, energyInputY));
+
+
 
         });
 
@@ -68,7 +73,6 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
-
     public int getScaledProgress() {
 
         int progress = data.get(0);
@@ -94,7 +98,7 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 26;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 27;  // must be the number of slots you have!
 
     @Override
     public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int pIndex) {
