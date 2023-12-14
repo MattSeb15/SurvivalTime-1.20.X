@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.command.ConfigCommand;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.command.*;
+import net.most.survivaltimemod.command.dmultiplier.SetDamageMultiplierCommand;
+import net.most.survivaltimemod.command.dmultiplier.SetDefaultDamageMultiplierCommand;
 import net.most.survivaltimemod.data.FormatTimeType;
 import net.most.survivaltimemod.time.PlayerTime;
 import net.most.survivaltimemod.time.PlayerTimeProvider;
@@ -45,7 +47,7 @@ public class ModEvents {
             player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
                 ScheduledExecutorService playerScheduler = Executors.newScheduledThreadPool(1);
                 playerScheduler.scheduleAtFixedRate(() -> {
-                    if (playerTime.isTimeStopped()) {
+                    if (playerTime.isTimeStopped() || player.gameMode.getGameModeForPlayer() == GameType.CREATIVE) {
                         return;
                     }
                     if (playerTime.getTime() <= 0) {
@@ -97,9 +99,10 @@ public class ModEvents {
 
             player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
                 float time = playerTime.getTime();
+                float damageMultiplier = playerTime.getDamageMultiplier();
 
                 if (time >= 0) {
-                    float timeToDecrement = (damage * 20);
+                    float timeToDecrement = (damage * damageMultiplier);
                     playerTime.decrementTime(timeToDecrement, player);
                     player.displayClientMessage(
                             Component.empty().append(
@@ -113,6 +116,12 @@ public class ModEvents {
                             ).append(
                                     Component.literal("Daño: " + damage)
                                             .withStyle(ChatFormatting.DARK_PURPLE)
+                            ).append(
+                                    Component.literal(" | ")
+                                            .withStyle(ChatFormatting.DARK_GRAY)
+                            ).append(
+                                    Component.literal("Damage mult " + damageMultiplier)
+                                            .withStyle(ChatFormatting.YELLOW)
                             ).append(
                                     Component.literal(" | ")
                                             .withStyle(ChatFormatting.DARK_GRAY)
@@ -188,6 +197,9 @@ public class ModEvents {
         new StopTimeCommand(event.getDispatcher());
         new SubtractTimeCommand(event.getDispatcher());
         new ToggleTimeStatusCommand(event.getDispatcher());
+        new AddNbtToItem(event.getDispatcher(), event.getBuildContext());
+        new SetDamageMultiplierCommand(event.getDispatcher());
+        new SetDefaultDamageMultiplierCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

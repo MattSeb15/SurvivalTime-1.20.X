@@ -29,6 +29,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.most.survivaltimemod.item.ModItems;
+import net.most.survivaltimemod.item.custom.LostTimeSphereData;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
 import net.most.survivaltimemod.screen.HourglassHubStationMenu;
@@ -57,7 +58,7 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
                 case OUTPUT_SLOT -> false;
-                case ENERGY_TIME_SLOT -> stack.getItem() == ModItems.FIERY_TIME.get();
+                case ENERGY_TIME_SLOT -> stack.getItem() == ModItems.LOST_TIME_SPHERE.get();
                 default -> super.isItemValid(slot, stack);
             };
         }
@@ -67,8 +68,9 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
 
 
-    //output slot = 26
+    //output slot = 25
     private static final int OUTPUT_SLOT = 25;
+    //energy input slot = 26
     private static final int ENERGY_TIME_SLOT = 26;
     //grid input slots = 0-25
     private static final int GRID_INPUT_SLOT_START = 0;
@@ -255,7 +257,24 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
     private void fillUpOnEnergyThenConsumeItem() {
         if (hasEnergyItemInSlot()) {
-            this.ENERGY_TIME_STORAGE.receiveEnergy(60, false);
+            ItemStack energyItem = this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT);
+            if (energyItem.hasTag()) {
+                CompoundTag tag = energyItem.getTag();
+                if (tag != null) {
+                    if (tag.contains(LostTimeSphereData.TIME_VALUE_TAG)) {
+                        int timeEnergyValue = tag.getInt(LostTimeSphereData.TIME_VALUE_TAG);
+                        if (timeEnergyValue > 0) {
+                            int toReceiveEnergy = Math.min(60, timeEnergyValue);
+                            this.ENERGY_TIME_STORAGE.receiveEnergy(toReceiveEnergy, false);
+                            tag.putInt(LostTimeSphereData.TIME_VALUE_TAG, timeEnergyValue - toReceiveEnergy);
+
+                        }else{
+                            energyItem.setTag(null);
+                        }
+
+                    }
+                }
+            }
         }
 
 
@@ -269,7 +288,8 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
     private boolean hasEnergyItemInSlot() {
         return !this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT).isEmpty()
-                && this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT).getItem() == ModItems.FIERY_TIME.get();
+                && this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT).getItem() == ModItems.LOST_TIME_SPHERE.get()
+                && this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT).hasTag();
 
     }
 

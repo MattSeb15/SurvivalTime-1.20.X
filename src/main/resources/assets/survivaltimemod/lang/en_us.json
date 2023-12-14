@@ -54,5 +54,8 @@
 
   "container.survival_time_mod.hhs_craft_button_text": "Craft",
 
+  "itranslatable.lost_time_sphere.consume_time": "Rick click to consume time",
+  "itranslatable.lost_time_sphere.on_success_consume_time": "You have consumed %s from the Lost Time Sphere!",
+
   "creativetab.survivaltimemod_tab": "Survival Time Mod"
 }

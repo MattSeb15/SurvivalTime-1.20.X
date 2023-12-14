@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.command;
+package net.most.survivaltimemod.command.dmultiplier;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,16 +11,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.most.survivaltimemod.time.PlayerTimeProvider;
 
-
 import java.util.Collection;
 
-public class SetDefaultTimeMultiplierCommand {
+public class SetDefaultDamageMultiplierCommand {
 
-    public SetDefaultTimeMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+    public SetDefaultDamageMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("sut").requires(
                                 (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
                         )
-                        .then(Commands.literal("multipliers").then(Commands.literal("time").then(Commands.literal("default").then(
+                        .then(Commands.literal("multipliers").then(Commands.literal("damage").then(Commands.literal("default").then(
                                 Commands.argument("player", EntityArgument.players()).executes(this::execute)
                         ))))
         );
@@ -34,7 +33,7 @@ public class SetDefaultTimeMultiplierCommand {
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    playerTime.setDefaultTimeMultiplier(player);
+                    playerTime.setDefaultDamageMultiplier(player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");
                     } else {
@@ -42,14 +41,14 @@ public class SetDefaultTimeMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your time multiplier has been set to default").withStyle(ChatFormatting.AQUA),
+                            Component.literal("Your damage multiplier has been set to default").withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set default time multiplier to ")
+                    () -> Component.literal("Set default damage multiplier to ")
                             .append(playerNames.toString())
                             .withStyle(ChatFormatting.GREEN),
                     false

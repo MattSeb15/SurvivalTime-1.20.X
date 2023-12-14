@@ -1,6 +1,7 @@
-package net.most.survivaltimemod.command;
+package net.most.survivaltimemod.command.dmultiplier;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.ChatFormatting;
@@ -11,18 +12,22 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.most.survivaltimemod.time.PlayerTimeProvider;
 
-
 import java.util.Collection;
 
-public class SetDefaultTimeMultiplierCommand {
+public class SetDamageMultiplierCommand {
 
-    public SetDefaultTimeMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("sut").requires(
-                                (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
+    public SetDamageMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(Commands.literal("sut")
+                .requires(
+                        (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
+
+                )
+                .then(Commands.literal("multipliers").then(Commands.literal("damage").then(Commands.literal("set").then(
+                        Commands.argument("player", EntityArgument.players()).then(
+                                Commands.argument("amount",
+                                        FloatArgumentType.floatArg(-100.0f, 100.0f)).executes(this::execute)
                         )
-                        .then(Commands.literal("multipliers").then(Commands.literal("time").then(Commands.literal("default").then(
-                                Commands.argument("player", EntityArgument.players()).executes(this::execute)
-                        ))))
+                ))))
         );
     }
 
@@ -31,10 +36,11 @@ public class SetDefaultTimeMultiplierCommand {
         try {
 
             Collection<ServerPlayer> players = EntityArgument.getPlayers(context, "player");
+            float multiplier = FloatArgumentType.getFloat(context, "amount");
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    playerTime.setDefaultTimeMultiplier(player);
+                    playerTime.setDamageMultiplier(multiplier, player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");
                     } else {
@@ -42,16 +48,18 @@ public class SetDefaultTimeMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your time multiplier has been set to default").withStyle(ChatFormatting.AQUA),
+                            Component.literal("Your damage multiplier has been set to " + multiplier).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set default time multiplier to ")
-                            .append(playerNames.toString())
-                            .withStyle(ChatFormatting.GREEN),
+                    () -> Component.literal("Set ").append(
+                            "x(" + multiplier + ") damage multiplier"
+                    ).append(
+                            "to "
+                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 

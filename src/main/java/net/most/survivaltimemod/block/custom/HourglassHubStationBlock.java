@@ -89,7 +89,7 @@ public class HourglassHubStationBlock extends BaseEntityBlock {
             if (blockEntity instanceof HourglassHubStationBlockEntity) {
                 NetworkHooks.openScreen((ServerPlayer) pPlayer, (HourglassHubStationBlockEntity) blockEntity, pPos);
 
-                return InteractionResult.SUCCESS;
+                return InteractionResult.sidedSuccess(false);
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }

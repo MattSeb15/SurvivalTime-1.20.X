@@ -13,11 +13,17 @@ public class PlayerTime {
 
     private static final float DEFAULT_TIME = 36000.0F;
     private static final float MIN_TIME = 0.0F;
+
+    private static final boolean DEFAULT_IS_TIME_STOPPED = false;
+    private static final float DEFAULT_TIME_MULTIPLIER = 1.0F;
+    private static final float DEFAULT_DAMAGE_MULTIPLIER = 20.0F;
+
     private PlayerTimeData playerTimeData = new PlayerTimeData(
             DEFAULT_TIME,
             DEFAULT_TIME,
-            false,
-            1.0f
+            DEFAULT_IS_TIME_STOPPED,
+            DEFAULT_TIME_MULTIPLIER,
+            DEFAULT_DAMAGE_MULTIPLIER
     );
     public static final String COMPOUND_TAG_KEY = "player_time_data";
 
@@ -34,7 +40,7 @@ public class PlayerTime {
     }
 
     public void setPlayerTimeData(PlayerTimeData playerTimeData, ServerPlayer player) {
-        this.playerTimeData = playerTimeData;
+        this.setPlayerTimeData(playerTimeData);
         syncServerToClientData(player);
     }
 
@@ -43,7 +49,7 @@ public class PlayerTime {
     }
 
     public void setTime(float time, ServerPlayer player) {
-        this.playerTimeData.setTime(time);
+        this.setTime(time);
         syncServerToClientData(player);
     }
 
@@ -52,7 +58,7 @@ public class PlayerTime {
     }
 
     public void setMaxTime(float maxTime, ServerPlayer player) {
-        this.playerTimeData.setMaxTime(maxTime);
+        this.setMaxTime(maxTime);
         syncServerToClientData(player);
     }
 
@@ -61,7 +67,7 @@ public class PlayerTime {
     }
 
     public void setIsTimeStopped(boolean isTimeStopped, ServerPlayer player) {
-        this.playerTimeData.setIsTimeStopped(isTimeStopped);
+        this.setIsTimeStopped(isTimeStopped);
         syncServerToClientData(player);
     }
 
@@ -70,8 +76,16 @@ public class PlayerTime {
     }
 
     public void setTimeMultiplier(float timeMultiplier, ServerPlayer player) {
-        this.playerTimeData.setTimeMultiplier(timeMultiplier);
+        this.setTimeMultiplier(timeMultiplier);
         syncServerToClientData(player);
+    }
+
+    public void setDefaultTimeMultiplier(ServerPlayer player) {
+        this.setTimeMultiplier(DEFAULT_TIME_MULTIPLIER, player);
+    }
+
+    public void setDamageMultiplier(float damageMultiplier) {
+        this.playerTimeData.setDamageMultiplier(damageMultiplier);
     }
 
     public float getTime() {
@@ -90,6 +104,10 @@ public class PlayerTime {
         return this.playerTimeData.getTimeMultiplier();
     }
 
+    public float getDamageMultiplier() {
+        return this.playerTimeData.getDamageMultiplier();
+    }
+
     public void incrementTime(float increment) {
         float currentTime = this.playerTimeData.getTime();
         float multiplier = this.playerTimeData.getTimeMultiplier();
@@ -99,11 +117,7 @@ public class PlayerTime {
     }
 
     public void incrementTime(float increment, ServerPlayer player) {
-        float currentTime = this.playerTimeData.getTime();
-        float multiplier = this.playerTimeData.getTimeMultiplier();
-        float maxTime = this.playerTimeData.getMaxTime();
-        float newTime = Math.min(currentTime + (increment * multiplier), maxTime);
-        this.playerTimeData.setTime(newTime);
+        this.incrementTime(increment);
         syncServerToClientData(player);
     }
 
@@ -115,10 +129,7 @@ public class PlayerTime {
     }
 
     public void decrementTime(float decrement, ServerPlayer player) {
-        float currentTime = this.playerTimeData.getTime();
-        float multiplier = this.playerTimeData.getTimeMultiplier();
-        float newTime = Math.max(currentTime - (decrement * multiplier), MIN_TIME);
-        this.playerTimeData.setTime(newTime);
+        this.decrementTime(decrement);
         syncServerToClientData(player);
     }
 
@@ -127,7 +138,7 @@ public class PlayerTime {
     }
 
     public void resetTime(ServerPlayer player) {
-        this.playerTimeData.setTime(DEFAULT_TIME);
+        this.resetTime();
         syncServerToClientData(player);
     }
 
@@ -136,34 +147,40 @@ public class PlayerTime {
     }
 
     public void toggleTimeStatus(ServerPlayer player) {
-        this.playerTimeData.setIsTimeStopped(!this.playerTimeData.isTimeStopped());
+        this.toggleTimeStatus();
         syncServerToClientData(player);
     }
 
     public void stopTimeStatus() {
-        if (!this.playerTimeData.isTimeStopped() && this.playerTimeData.getTime() > 0) {
-            this.playerTimeData.setIsTimeStopped(true);
-        }
+        this.playerTimeData.setIsTimeStopped(true);
     }
 
     public void stopTimeStatus(ServerPlayer player) {
         if (!this.playerTimeData.isTimeStopped() && this.playerTimeData.getTime() > 0) {
-            this.playerTimeData.setIsTimeStopped(true);
+            this.stopTimeStatus();
             syncServerToClientData(player);
         }
     }
 
     public void startTimeStatus() {
-        if (this.playerTimeData.isTimeStopped()) {
-            this.playerTimeData.setIsTimeStopped(false);
-        }
+        this.playerTimeData.setIsTimeStopped(false);
     }
 
     public void startTimeStatus(ServerPlayer player) {
         if (this.playerTimeData.isTimeStopped()) {
-            this.playerTimeData.setIsTimeStopped(false);
+            this.startTimeStatus();
             syncServerToClientData(player);
         }
+    }
+
+
+    public void setDamageMultiplier(float damageMultiplier, ServerPlayer player) {
+        this.setDamageMultiplier(damageMultiplier);
+        syncServerToClientData(player);
+    }
+
+    public void setDefaultDamageMultiplier(ServerPlayer player) {
+        this.setDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER, player);
     }
 
     public void copyFrom(PlayerTime playerTime) {
@@ -176,6 +193,7 @@ public class PlayerTime {
         playerTimeDataTag.putFloat("time", playerTimeData.getTime());
         playerTimeDataTag.putBoolean("is_time_stopped", playerTimeData.isTimeStopped());
         playerTimeDataTag.putFloat("time_multiplier", playerTimeData.getTimeMultiplier());
+        playerTimeDataTag.putFloat("damage_multiplier", playerTimeData.getDamageMultiplier());
         compoundTag.put(COMPOUND_TAG_KEY, playerTimeDataTag);
     }
 
@@ -185,7 +203,9 @@ public class PlayerTime {
         playerTimeData.setTime(playerTimeDataTag.getFloat("time"));
         playerTimeData.setIsTimeStopped(playerTimeDataTag.getBoolean("is_time_stopped"));
         playerTimeData.setTimeMultiplier(playerTimeDataTag.getFloat("time_multiplier"));
+        playerTimeData.setDamageMultiplier(playerTimeDataTag.getFloat("damage_multiplier"));
     }
+
     public String getFormattedTime() {
 
         float hours = this.playerTimeData.getTime() / 3600;
@@ -195,7 +215,9 @@ public class PlayerTime {
         return String.format("%02d:%02d:%02d", (int) hours, (int) minutes, (int) seconds);
     }
 
-    public String getFormattedTime( FormatTimeType type) {
+    public String getFormattedTime(FormatTimeType type) {
         return FormatTimeType.getFormattedStringByType(type, this.playerTimeData.getTime());
     }
+
+
 }

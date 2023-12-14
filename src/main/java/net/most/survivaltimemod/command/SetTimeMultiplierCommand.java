@@ -25,12 +25,12 @@ public class SetTimeMultiplierCommand {
                         (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
 
                 )
-                .then(Commands.literal("multiplier").then(Commands.literal("set").then(
+                .then(Commands.literal("multipliers").then(Commands.literal("time").then(Commands.literal("set").then(
                         Commands.argument("player", EntityArgument.players()).then(
                                 Commands.argument("amount",
                                         FloatArgumentType.floatArg(-5.0f, 5.0f)).executes(this::execute)
                         )
-                )))
+                ))))
         );
     }
 
@@ -59,7 +59,7 @@ public class SetTimeMultiplierCommand {
             }
             context.getSource().sendSuccess(
                     () -> Component.literal("Set ").append(
-                            "x(" + multiplier + ") multiplier"
+                            "x(" + multiplier + ") time multiplier"
                     ).append(
                             "to "
                     ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),

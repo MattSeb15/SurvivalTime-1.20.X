@@ -12,6 +12,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.block.entity.HourglassHubStationBlockEntity;
+import net.most.survivaltimemod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -109,6 +110,12 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
 
         // Check if the slot clicked is one of the vanilla container slots
         if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+            if(sourceStack.is(ModItems.LOST_TIME_SPHERE.get())){
+                if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX + 26, TE_INVENTORY_FIRST_SLOT_INDEX
+                        + TE_INVENTORY_SLOT_COUNT, false)) {
+                    return ItemStack.EMPTY;  // EMPTY_ITEM
+                }
+            }
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
                     + TE_INVENTORY_SLOT_COUNT, false)) {

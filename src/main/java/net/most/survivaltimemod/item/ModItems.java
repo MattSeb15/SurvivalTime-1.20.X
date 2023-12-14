@@ -1,6 +1,5 @@
 package net.most.survivaltimemod.item;
 
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
@@ -12,8 +11,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.item.custom.ConsumableActionItem;
+import net.most.survivaltimemod.item.custom.LostTimeSphereData;
 import net.most.survivaltimemod.item.custom.FuelItem;
-import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -37,7 +36,7 @@ public class ModItems {
     // craftear algo.
     public static final RegistryObject<Item> LOST_TIME_SPHERE =
             ITEMS.register("lost_time_sphere",
-                    () -> new LostTimeSphereItem(new
+                    () -> new LostTimeSphereData(new
                             Item.Properties()
                             .fireResistant()
                             .rarity(Rarity.EPIC)

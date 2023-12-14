@@ -20,7 +20,8 @@ public class TimeDataSyncS2CPacket {
         float maxTime = buf.readFloat();
         boolean isTimeStopped = buf.readBoolean();
         float timeMultiplier = buf.readFloat();
-        playerTimeData = new PlayerTimeData(maxTime, time, isTimeStopped, timeMultiplier);
+        float damageMultiplier = buf.readFloat();
+        playerTimeData = new PlayerTimeData(maxTime, time, isTimeStopped, timeMultiplier, damageMultiplier);
     }
 
     public void toBytes(FriendlyByteBuf buf) {
@@ -28,6 +29,7 @@ public class TimeDataSyncS2CPacket {
         buf.writeFloat(playerTimeData.getMaxTime());
         buf.writeBoolean(playerTimeData.isTimeStopped());
         buf.writeFloat(playerTimeData.getTimeMultiplier());
+        buf.writeFloat(playerTimeData.getDamageMultiplier());
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {

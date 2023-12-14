@@ -7,11 +7,14 @@ public class PlayerTimeData {
     public boolean IS_TIME_STOPPED;
     public float TIME_MULTIPLIER;
 
-    public PlayerTimeData(float maxTime, float time, boolean isTimeStopped, float timeMultiplier) {
+    public float DAMAGE_MULTIPLIER;
+
+    public PlayerTimeData(float maxTime, float time, boolean isTimeStopped, float timeMultiplier, float damageMultiplier) {
         this.MAX_TIME = maxTime;
         this.TIME = time;
         this.IS_TIME_STOPPED = isTimeStopped;
         this.TIME_MULTIPLIER = timeMultiplier;
+        this.DAMAGE_MULTIPLIER = damageMultiplier;
     }
 
     public float getMaxTime() {
@@ -46,5 +49,11 @@ public class PlayerTimeData {
         this.TIME_MULTIPLIER = timeMultiplier;
     }
 
+    public float getDamageMultiplier() {
+        return this.DAMAGE_MULTIPLIER;
+    }
 
+    public void setDamageMultiplier(float damageMultiplier) {
+        this.DAMAGE_MULTIPLIER = damageMultiplier;
+    }
 }

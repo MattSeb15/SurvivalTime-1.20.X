@@ -54,5 +54,8 @@
 
   "container.survival_time_mod.hhs_craft_button_text": "Crear",
 
+  "itranslatable.lost_time_sphere.consume_time": "Click Derecho para Consumir Tiempo",
+  "itranslatable.lost_time_sphere.on_success_consume_time": "¡Has consumido %s de la Esfera del Tiempo Perdido!",
+
   "creativetab.survivaltimemod_tab": "Survival Time Mod"
 }
