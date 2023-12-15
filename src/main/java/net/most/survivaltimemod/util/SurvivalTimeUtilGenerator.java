@@ -137,7 +137,9 @@ public class SurvivalTimeUtilGenerator {
             ModItems.FLUX_STICK,
             ModItems.LOOP_STICK,
             //seeds
-            ModItems.TEMPORAL_TUBER_SEEDS
+            ModItems.TEMPORAL_TUBER_SEEDS,
+            //lapisloopium
+            ModItems.LAPISLOOPIUM
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\

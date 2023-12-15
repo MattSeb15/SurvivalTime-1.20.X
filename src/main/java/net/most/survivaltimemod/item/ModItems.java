@@ -40,7 +40,6 @@ public class ModItems {
                             Item.Properties()
                             .fireResistant()
                             .rarity(Rarity.EPIC)
-                            .stacksTo(1)
                     ));
 
     public static final RegistryObject<Item> TEMPORAL_TUBER =
@@ -79,6 +78,9 @@ public class ModItems {
                     .stacksTo(60),
                     2400)
             );
+
+    public static final RegistryObject<Item> LAPISLOOPIUM =
+            ITEMS.register("lapisloopium", () -> new Item(new Item.Properties()));
 
     //raw shards
 

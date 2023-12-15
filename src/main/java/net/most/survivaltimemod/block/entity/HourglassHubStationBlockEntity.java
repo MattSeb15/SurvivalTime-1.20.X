@@ -257,6 +257,7 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
     private void fillUpOnEnergyThenConsumeItem() {
         if (hasEnergyItemInSlot()) {
+            if(ENERGY_TIME_STORAGE.getEnergyStored() >= ENERGY_TIME_STORAGE.getMaxEnergyStored()) return;
             ItemStack energyItem = this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT);
             if (energyItem.hasTag()) {
                 CompoundTag tag = energyItem.getTag();
@@ -271,7 +272,6 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
                         }else{
                             energyItem.setTag(null);
                         }
-
                     }
                 }
             }

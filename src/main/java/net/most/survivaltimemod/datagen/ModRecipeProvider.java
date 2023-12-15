@@ -78,15 +78,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .pattern("#####")
                     .pattern("#####")
                     .define('#', item)
-                    .craftTime(20*120)
-                    .energyCost(60*10)
+                    .craftTime(20 * 120)
+                    .energyCost(60 * 10)
                     .unlockedBy(getHasName(item), has(item))
                     .save(pWriter);
 
             HourglassHubShapelessRecipeBuilder.recipe(item, 25)
                     .requires(block)
-                    .craftTime(20*60)
-                    .energyCost(60*5)
+                    .craftTime(20 * 60)
+                    .energyCost(60 * 5)
                     .unlockedBy(getHasName(block), has(block))
                     .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "hgh_from_block");
         }
@@ -137,7 +137,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(Items.DIAMOND, 4)
                 .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
                 .save(pWriter);
+        HourglassHubShapelessRecipeBuilder.recipe(ModItems.LAPISLOOPIUM.get(), 4)
+                .requires(Items.LAPIS_LAZULI)
+                .requires(ModItems.OPAL_SHARD_LOOP.get())
+                .craftTime(20 * 30)
+                .energyCost(60 * 5)
+                .unlockedBy(getHasName(ModItems.OPAL_SHARD_LOOP.get()), has(ModItems.OPAL_SHARD_LOOP.get()))
+                .save(pWriter);
 
+//        HourglassHubShapelessRecipeBuilder.recipe(item, 25)
+//                .requires(block)
+//                .craftTime(20*60)
+//                .energyCost(60*5)
+//                .unlockedBy(getHasName(block), has(block))
 //        HourglassHubShapelessRecipeBuilder.recipe(ModItems.OPAL_RAW.get(), 2)
 //                .requires(ModItems.OPAL_SHARD_CHRONA.get())
 //                .requires(ModItems.OPAL_SHARD_TEMPORA.get())
@@ -146,7 +158,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 //                .requires(ModItems.OPAL_SHARD_LOOP.get())
 //                .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
 //                .save(pWriter);
-
 
 
     }
