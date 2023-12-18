@@ -24,10 +24,6 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(SurvivalTimeMod.MOD_ID, "textures/gui/hourglass_hub_station.png");
     private EnergyDisplayTooltipArea energyDisplayTooltipArea;
-
-    private static final Component CRAFT_BUTTON_TEXT = Component.translatable("container.survival_time_mod.hhs_craft_button_text");
-
-    private Button button;
     private int leftPos, topPos;
 
 
@@ -45,35 +41,8 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
         this.titleLabelY = 10000;
         assignEnergyDisplayTooltipArea();
 
-//        this.button = addRenderableWidget(
-//                Button.builder(CRAFT_BUTTON_TEXT,
-//                                this::handleCraftButtonPress
-//                        ).bounds(this.leftPos + 140, this.topPos + 48, 30, 12)
-//                        .tooltip(Tooltip.create(CRAFT_BUTTON_TEXT))
-//                        .build()
-//        );
-//        ForgeSlider
     }
 
-
-//    private void handleCraftButtonPress(Button btn) {
-//        //            menu.stopCrafting();
-//        //            menu.startCrafting();
-//        this.menu.blockEntity.setButtonCraftingPressed(!this.menu.blockEntity.isButtonCraftingPressed());
-//        System.out.println(this.menu.blockEntity.isButtonCraftingPressed());
-//
-//
-//
-////        if (btn.isActive()) {
-////            btn.active = false;
-////
-////        } else {
-////            btn.active = true;
-////
-////        }
-//
-//
-//    }
 
     private void assignEnergyDisplayTooltipArea() {
         this.energyDisplayTooltipArea = new EnergyDisplayTooltipArea(

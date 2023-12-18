@@ -137,13 +137,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(Items.DIAMOND, 4)
                 .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
                 .save(pWriter);
-        HourglassHubShapelessRecipeBuilder.recipe(ModItems.LAPISLOOPIUM.get(), 4)
+        HourglassHubShapelessRecipeBuilder.recipe(ModItems.LAPISLOOPIUM.get(), 10)
                 .requires(Items.LAPIS_LAZULI)
                 .requires(ModItems.OPAL_SHARD_LOOP.get())
                 .craftTime(20 * 30)
                 .energyCost(60 * 5)
                 .unlockedBy(getHasName(ModItems.OPAL_SHARD_LOOP.get()), has(ModItems.OPAL_SHARD_LOOP.get()))
                 .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.LAPISLOOPIUM.get(), 1)
+                .requires(Items.LAPIS_LAZULI)
+                .requires(ModItems.OPAL_SHARD_LOOP.get())
+                .unlockedBy(getHasName(ModItems.OPAL_SHARD_LOOP.get()), has(ModItems.OPAL_SHARD_LOOP.get()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.LAPISLOOPIUM.get()) + "_from_crafting_table");
 
 //        HourglassHubShapelessRecipeBuilder.recipe(item, 25)
 //                .requires(block)

@@ -120,6 +120,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> HOURGLASS_HUB_STATION = registerBlock("hourglass_hub_station",
             () -> new HourglassHubStationBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
+//    public static final RegistryObject<Block> TIME_STATION = registerBlock("time_station",
+//            () -> new TimeStationBlock(BlockBehaviour.Properties.copy(Blocks.ANVIL).noOcclusion()));
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);

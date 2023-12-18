@@ -13,6 +13,8 @@ import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
 
+import java.util.Map;
+
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, SurvivalTimeMod.MOD_ID, existingFileHelper);
@@ -30,7 +32,12 @@ public class ModItemModelProvider extends ItemModelProvider {
             simpleItemBlock(block);
         }
 
-        complexBlock(ModBlocks.HOURGLASS_HUB_STATION.get());
+        for (Map.Entry<String, Block> entry : SurvivalTimeUtilGenerator.BLOCK_ENTITY_REGISTER_BLOCK.entrySet()) {
+            Block block = entry.getValue();
+            complexBlock(block);
+        }
+
+//        complexBlock(ModBlocks.HOURGLASS_HUB_STATION.get());
 
 
     }

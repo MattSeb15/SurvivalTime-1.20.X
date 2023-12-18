@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.item.custom.ConsumableActionItem;
-import net.most.survivaltimemod.item.custom.LostTimeSphereData;
+import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 import net.most.survivaltimemod.item.custom.FuelItem;
 
 public class ModItems {
@@ -36,7 +36,7 @@ public class ModItems {
     // craftear algo.
     public static final RegistryObject<Item> LOST_TIME_SPHERE =
             ITEMS.register("lost_time_sphere",
-                    () -> new LostTimeSphereData(new
+                    () -> new LostTimeSphereItem(new
                             Item.Properties()
                             .fireResistant()
                             .rarity(Rarity.EPIC)

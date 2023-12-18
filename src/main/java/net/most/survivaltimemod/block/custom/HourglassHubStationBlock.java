@@ -63,7 +63,7 @@ public class HourglassHubStationBlock extends BaseEntityBlock {
     /*BlockEntity*/
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public @NotNull RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 

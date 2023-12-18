@@ -17,6 +17,11 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(HourglassHubStationBlockEntity::new,
                             ModBlocks.HOURGLASS_HUB_STATION.get()).build(null));
 
+//    public static final RegistryObject<BlockEntityType<TimeStationBlockEntity>> TIME_STATION =
+//            BLOCK_ENTITIES.register("time_station",
+//                    () -> BlockEntityType.Builder.of(TimeStationBlockEntity::new,
+//                            ModBlocks.TIME_STATION.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

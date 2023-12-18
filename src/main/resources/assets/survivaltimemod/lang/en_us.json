@@ -52,11 +52,24 @@
   "block.survivaltimemod.nether_opal_ore": "Nether Opal Ore",
   "block.survivaltimemod.end_stone_opal_ore": "End Stone Opal Ore",
   "block.survivaltimemod.hourglass_hub_station": "Hourglass Hub Station",
+  "block.survivaltimemod.time_station": "Time Station",
 
   "container.survival_time_mod.hhs_craft_button_text": "Craft",
 
-  "itranslatable.lost_time_sphere.consume_time": "Rick click to consume time",
+  "itranslatable.lost_time_sphere.tooltip_right_click": "Right click to consume time stored.",
+  "itranslatable.lost_time_sphere.tooltip_shift_right_click": "Shift + Right Click to add time.",
   "itranslatable.lost_time_sphere.on_success_consume_time": "You have consumed %s from the Lost Time Sphere!",
+  "itranslatable.lost_time_sphere.on_fail_consume_time_not_lapisloopium": "You must have coal in your inventory to use this item.",
+  "itranslatable.lost_time_sphere.on_success_consume_lapisloopium": "You have fed the Sphere of Lost Time with Lapisloopium! %s",
+  "itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_lapisloopium": "You must have at least 10 Lapisloopium in your inventory to use this item. (10/hour)",
+  "itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_time": "You must have at least 1 hour of time in your inventory to use this item.",
 
-  "creativetab.survivaltimemod_tab": "Survival Time Mod"
+  "creativetab.survivaltimemod_tab": "Survival Time Mod",
+
+
+  "gui.time_station_gui.slider_suffix": "/%s TE",
+  "gui.time_station_gui.confirm_button": "Confirm"
+
+
+
 }

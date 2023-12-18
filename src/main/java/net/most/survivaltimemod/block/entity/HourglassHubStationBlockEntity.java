@@ -18,7 +18,6 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,7 +28,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.most.survivaltimemod.item.ModItems;
-import net.most.survivaltimemod.item.custom.LostTimeSphereData;
+import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
 import net.most.survivaltimemod.screen.HourglassHubStationMenu;
@@ -63,9 +62,6 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
             };
         }
     };
-
-
-
 
 
     //output slot = 25
@@ -105,7 +101,6 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
     }
 
 
-
     public List<ItemStack> getItemStacks() {
         List<ItemStack> itemStacks = new ArrayList<>();
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -117,7 +112,6 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
     public ItemStack getItemResultStack() {
         return itemHandler.getStackInSlot(OUTPUT_SLOT);
     }
-
 
 
     public int getProgress() {
@@ -201,7 +195,9 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+        if (this.level != null) {
+            Containers.dropContents(this.level, this.worldPosition, inventory);
+        }
     }
 
     @Override
@@ -238,7 +234,6 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
                 resetProgress();
                 extractEnergy();
 
-
             }
         } else {
             resetProgress();
@@ -257,19 +252,19 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
     private void fillUpOnEnergyThenConsumeItem() {
         if (hasEnergyItemInSlot()) {
-            if(ENERGY_TIME_STORAGE.getEnergyStored() >= ENERGY_TIME_STORAGE.getMaxEnergyStored()) return;
+            if (ENERGY_TIME_STORAGE.getEnergyStored() >= ENERGY_TIME_STORAGE.getMaxEnergyStored()) return;
             ItemStack energyItem = this.itemHandler.getStackInSlot(ENERGY_TIME_SLOT);
             if (energyItem.hasTag()) {
                 CompoundTag tag = energyItem.getTag();
                 if (tag != null) {
-                    if (tag.contains(LostTimeSphereData.TIME_VALUE_TAG)) {
-                        int timeEnergyValue = tag.getInt(LostTimeSphereData.TIME_VALUE_TAG);
+                    if (tag.contains(LostTimeSphereItem.TIME_VALUE_TAG)) {
+                        int timeEnergyValue = tag.getInt(LostTimeSphereItem.TIME_VALUE_TAG);
                         if (timeEnergyValue > 0) {
                             int toReceiveEnergy = Math.min(60, timeEnergyValue);
                             this.ENERGY_TIME_STORAGE.receiveEnergy(toReceiveEnergy, false);
-                            tag.putInt(LostTimeSphereData.TIME_VALUE_TAG, timeEnergyValue - toReceiveEnergy);
+                            tag.putInt(LostTimeSphereItem.TIME_VALUE_TAG, timeEnergyValue - toReceiveEnergy);
 
-                        }else{
+                        } else {
                             energyItem.setTag(null);
                         }
                     }
@@ -421,7 +416,7 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         return saveWithFullMetadata();
     }
 

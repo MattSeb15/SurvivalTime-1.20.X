@@ -97,6 +97,10 @@ public class SurvivalTimeUtilGenerator {
             ModBlocks.LOOP_BLOCK
     );
 
+    public final static Map<String, Block> BLOCK_ENTITY_REGISTER_BLOCK = Map.of(
+            "hourglass_hub_station", ModBlocks.HOURGLASS_HUB_STATION.get()
+    );
+
     public final static List<CropBlockSeedItemModel> CROP_REGISTER_MODEL_LIST = List.of(
             new CropBlockSeedItemModel((TemporalTuberCropBlock) ModBlocks.TEMPORAL_TUBER_CROP.get(),
                     "temporal_tuber_stage",

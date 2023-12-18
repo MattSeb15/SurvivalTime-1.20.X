@@ -3,21 +3,14 @@ package net.most.survivaltimemod.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.arguments.item.ItemArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.most.survivaltimemod.data.FormatTimeType;
 import net.most.survivaltimemod.item.ModItems;
-import net.most.survivaltimemod.item.custom.LostTimeSphereData;
-import net.most.survivaltimemod.time.PlayerTimeProvider;
-
-import java.util.Collection;
+import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 
 public class AddNbtToItem {
     public AddNbtToItem(CommandDispatcher<CommandSourceStack> pDispatcher, CommandBuildContext pContext) {
@@ -45,7 +38,7 @@ public class AddNbtToItem {
             return 0;
         }
 
-        executor.getMainHandItem().getOrCreateTag().putInt(LostTimeSphereData.TIME_VALUE_TAG, timeToPutOnItemTag);
+        executor.getMainHandItem().getOrCreateTag().putInt(LostTimeSphereItem.TIME_VALUE_TAG, timeToPutOnItemTag);
 
 
         context.getSource().sendSuccess(
