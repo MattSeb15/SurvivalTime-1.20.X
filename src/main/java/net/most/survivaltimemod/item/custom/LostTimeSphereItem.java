@@ -44,103 +44,35 @@ public class LostTimeSphereItem extends Item {
         if (pLevel.isClientSide()) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
         CompoundTag tag = itemStack.getTag();
         int lapisloopiumCost = 10;
+        if(pPlayer.isCrouching()) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
+
+        if (itemStack.hasTag()) {
+            if (tag == null) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
+            if (!tag.contains(TIME_VALUE_TAG)) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
+            int timeValue = tag.getInt(TIME_VALUE_TAG);
+            if (timeValue == 0) return super.use(pLevel, pPlayer, pUsedHand);
+
+            pPlayer.getCooldowns().addCooldown(this, 100);
+            pPlayer.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
+                ServerPlayer player = (ServerPlayer) pPlayer;
+                playerTime.incrementTime(timeValue, player);
+                itemStack.setTag(null);
+            });
 
 
-        if (pPlayer.isCrouching()) {
-            int lapisloopiumIndex = getPlayerLapisloopiumIndex(pPlayer);
-            if (lapisloopiumIndex == -1) {
-                pPlayer.sendSystemMessage(Component.translatable("itranslatable.lost_time_sphere.on_fail_consume_time_not_lapisloopium").withStyle(ChatFormatting.RED));
-                return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
-            }
-            if (!itemStack.hasTag()) {
-                ItemStack lapisloopiumStack = pPlayer.getInventory().getItem(lapisloopiumIndex);
-                if (lapisloopiumStack.getCount() < lapisloopiumCost) {
-                    pPlayer.sendSystemMessage(Component.translatable("itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_lapisloopium").withStyle(ChatFormatting.RED));
-                    return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
-                }
-                if (lapisloopiumStack.getCount() == lapisloopiumCost) {
-                    pPlayer.getInventory().setItem(lapisloopiumIndex, ItemStack.EMPTY);
-                } else {
-                    lapisloopiumStack.setCount(lapisloopiumStack.getCount() - lapisloopiumCost);
-                }
-                itemStack.getOrCreateTag().putInt(TIME_VALUE_TAG, 3600);
-                consumePlayerTime((ServerPlayer) pPlayer, itemStack);
+            String timeString = FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, timeValue);
+            pPlayer.sendSystemMessage(Component.translatable("itranslatable.lost_time_sphere.on_success_consume_time", timeString).withStyle(ChatFormatting.GOLD));
 
 
-            } else {
-                ItemStack lapisloopiumStack = pPlayer.getInventory().getItem(lapisloopiumIndex);
-                if (lapisloopiumStack.getCount() < lapisloopiumCost) {
-                    pPlayer.sendSystemMessage(Component.translatable("itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_lapisloopium").withStyle(ChatFormatting.RED));
-                    return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
-                }
-                if (lapisloopiumStack.getCount() == lapisloopiumCost) {
-                    pPlayer.getInventory().setItem(lapisloopiumIndex, ItemStack.EMPTY);
-                } else {
-                    lapisloopiumStack.setCount(lapisloopiumStack.getCount() - lapisloopiumCost);
-                }
-                if (tag != null && tag.contains(TIME_VALUE_TAG)) {
-                    int currentTimeValue = itemStack.getOrCreateTag().getInt(TIME_VALUE_TAG);
-                    itemStack.getOrCreateTag().putInt(TIME_VALUE_TAG, currentTimeValue + 3600);
-                    consumePlayerTime((ServerPlayer) pPlayer, itemStack);
-                }
-            }
             return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
 
-        } else {
-            if (itemStack.hasTag()) {
-                if (tag == null) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
-                if (!tag.contains(TIME_VALUE_TAG)) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
-                int timeValue = tag.getInt(TIME_VALUE_TAG);
-                if (timeValue == 0) return super.use(pLevel, pPlayer, pUsedHand);
-
-                pPlayer.getCooldowns().addCooldown(this, 100);
-                pPlayer.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    ServerPlayer player = (ServerPlayer) pPlayer;
-                    playerTime.incrementTime(timeValue, player);
-                    itemStack.setTag(null);
-                });
-
-
-                String timeString = FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, timeValue);
-                pPlayer.sendSystemMessage(Component.translatable("itranslatable.lost_time_sphere.on_success_consume_time", timeString).withStyle(ChatFormatting.GOLD));
-
-
-                return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
-
-            }
         }
 
 
         return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
     }
 
-    private void consumePlayerTime(ServerPlayer pPlayer, ItemStack itemStack) {
 
-        pPlayer.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-            float currentTime = playerTime.getTime();
-            if (currentTime < 3600) {
-                pPlayer.sendSystemMessage(Component.translatable("itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_time").withStyle(ChatFormatting.RED));
-                return;
-            }
-            ;
-            playerTime.decrementTime(3600, pPlayer);
-            pPlayer.getCooldowns().addCooldown(this, 40);
-            pPlayer.sendSystemMessage(Component.translatable("itranslatable.lost_time_sphere.on_success_consume_lapisloopium", "TE: " +
-                    FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, itemStack.getOrCreateTag().getInt(TIME_VALUE_TAG))).withStyle(ChatFormatting.GREEN));
-
-        });
-    }
-
-    private int getPlayerLapisloopiumIndex(Player pPlayer) {
-        Inventory inventory = pPlayer.getInventory();
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
-            ItemStack itemStack = inventory.getItem(i);
-            if (itemStack.is(ModItems.LAPISLOOPIUM.get()) && itemStack.getCount() >= 10) {
-                return i;
-            }
-        }
-        return -1;
-    }
 
 
     @Override
@@ -175,12 +107,10 @@ public class LostTimeSphereItem extends Item {
             pTooltipComponents.add(tooltipComponent);
             pTooltipComponents.add(Component.empty());
             pTooltipComponents.add(Component.translatable("itranslatable.lost_time_sphere.tooltip_right_click").withStyle(ChatFormatting.DARK_BLUE));
-            pTooltipComponents.add(Component.translatable("itranslatable.lost_time_sphere.tooltip_shift_right_click").withStyle(ChatFormatting.BLUE));
+//            pTooltipComponents.add(Component.translatable("itranslatable.lost_time_sphere.tooltip_shift_right_click").withStyle(ChatFormatting.BLUE));
             super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
             return;
         }
-        pTooltipComponents.add(Component.empty());
-        pTooltipComponents.add(Component.translatable("itranslatable.lost_time_sphere.tooltip_shift_right_click").withStyle(ChatFormatting.BLUE));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

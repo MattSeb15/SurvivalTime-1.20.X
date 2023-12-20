@@ -11,6 +11,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -79,12 +80,19 @@ public class TimeStationBlock extends Block {
         return 5;
     }
 
+
+
+
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer,
                                  InteractionHand pHand, BlockHitResult pHit) {
 
+        //if player has a block in his hand fail place block
+
+
         if (!pLevel.isClientSide) {
             if (pPlayer instanceof ServerPlayer _ent) {
+
                 BlockPos _bpos = BlockPos.containing(pPos.getX(), pPos.getY(), pPos.getZ());
                 NetworkHooks.openScreen((ServerPlayer) _ent, new MenuProvider() {
                     @Override
@@ -99,9 +107,11 @@ public class TimeStationBlock extends Block {
                 }, _bpos);
             }
         }
+        if (pPlayer.getItemInHand(pHand).getItem() instanceof BlockItem) {
+            return InteractionResult.SUCCESS;
+        }
 
-
-        return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        return InteractionResult.PASS;
     }
 
 }

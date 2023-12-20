@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -81,6 +82,11 @@ public class HourglassHubStationBlock extends BaseEntityBlock {
     }
 
     @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return 3;
+    }
+
+    @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer,
                                  InteractionHand pHand, BlockHitResult pHit) {
 
@@ -94,9 +100,13 @@ public class HourglassHubStationBlock extends BaseEntityBlock {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
         }
+        if (pPlayer.getItemInHand(pHand).getItem() instanceof BlockItem) {
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
 
 
-        return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
     @Nullable
