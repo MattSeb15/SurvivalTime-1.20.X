@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "survivaltimemod:block/temporal_tuber_stage0"
+    },
+    "age=1": {
+      "model": "survivaltimemod:block/temporal_tuber_stage1"
+    },
+    "age=2": {
+      "model": "survivaltimemod:block/temporal_tuber_stage2"
+    },
+    "age=3": {
+      "model": "survivaltimemod:block/temporal_tuber_stage3"
+    },
+    "age=4": {
+      "model": "survivaltimemod:block/temporal_tuber_stage4"
+    },
+    "age=5": {
+      "model": "survivaltimemod:block/temporal_tuber_stage5"
+    },
+    "age=6": {
+      "model": "survivaltimemod:block/temporal_tuber_stage6"
+    },
+    "age=7": {
+      "model": "survivaltimemod:block/temporal_tuber_stage7"
+    }
+  }
+}

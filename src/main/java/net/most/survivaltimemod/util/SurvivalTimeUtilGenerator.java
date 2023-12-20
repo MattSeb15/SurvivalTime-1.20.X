@@ -17,7 +17,8 @@ public class SurvivalTimeUtilGenerator {
 
     ////----->>> NEEDS_X_TOOL <<<-----\\\\
     public final static List<RegistryObject<Block>> NEEDS_STONE_TOOL_LIST = List.of(
-            ModBlocks.HOURGLASS_HUB_STATION
+            ModBlocks.HOURGLASS_HUB_STATION,
+            ModBlocks.TIME_STATION
     );
     public final static List<RegistryObject<Block>> NEEDS_IRON_TOOL_LIST = List.of(
             ModBlocks.OPAL_BLOCK,
@@ -98,7 +99,8 @@ public class SurvivalTimeUtilGenerator {
     );
 
     public final static Map<String, Block> BLOCK_ENTITY_REGISTER_BLOCK = Map.of(
-            "hourglass_hub_station", ModBlocks.HOURGLASS_HUB_STATION.get()
+            "hourglass_hub_station", ModBlocks.HOURGLASS_HUB_STATION.get(),
+            "time_station", ModBlocks.TIME_STATION.get()
     );
 
     public final static List<CropBlockSeedItemModel> CROP_REGISTER_MODEL_LIST = List.of(
@@ -224,7 +226,8 @@ public class SurvivalTimeUtilGenerator {
             ModBlocks.EPOCH_BLOCK,
             ModBlocks.FLUX_BLOCK,
             ModBlocks.LOOP_BLOCK,
-            ModBlocks.HOURGLASS_HUB_STATION
+            ModBlocks.HOURGLASS_HUB_STATION,
+            ModBlocks.TIME_STATION
     );
 
     public final static List<CropBlockSeedItem> CROP_BLOCK_SEED_ITEM_LIST = List.of(

@@ -13,6 +13,7 @@ import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.entity.ModBlockEntities;
 import net.most.survivaltimemod.block.entity.renderer.HourglassHubStationBlockRenderer;
 import net.most.survivaltimemod.client.TimeHudOverlay;
+import net.most.survivaltimemod.client.gui.TimeStationScreen;
 import net.most.survivaltimemod.screen.HourglassHubStationScreen;
 import net.most.survivaltimemod.screen.ModMenuTypes;
 
@@ -34,6 +35,7 @@ public class ClientEvents {
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenuTypes.HOURGLASS_HUB_STATION_MENU.get(), HourglassHubStationScreen::new);
+                MenuScreens.register(ModMenuTypes.TIME_STATION_MENU.get(), TimeStationScreen::new);
             });
 
         }
