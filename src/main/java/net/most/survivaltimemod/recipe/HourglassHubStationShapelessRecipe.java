@@ -44,6 +44,12 @@ public class HourglassHubStationShapelessRecipe implements Recipe<SimpleContaine
     }
 
     @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
+
+    @Override
     public boolean matches(@NotNull SimpleContainer pContainer, @NotNull Level pLevel) {
         StackedContents stackedcontents = new StackedContents();
         List<ItemStack> inputs = new java.util.ArrayList<>();
@@ -97,12 +103,12 @@ public class HourglassHubStationShapelessRecipe implements Recipe<SimpleContaine
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
-        return null;
+    public @NotNull RecipeSerializer<?> getSerializer() {
+        return ModRecipes.HOURGLASS_HUB_SHAPELESS_SERIALIZER.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public @NotNull RecipeType<?> getType() {
         return Type.INSTANCE;
     }
 

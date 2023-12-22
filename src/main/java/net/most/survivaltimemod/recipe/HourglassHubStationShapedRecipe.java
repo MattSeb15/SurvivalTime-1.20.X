@@ -43,6 +43,11 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
         this.energyCost = energyCost;
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public int getCraftTime() {
         return craftTime;
     }
@@ -50,6 +55,7 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
     public int getEnergyCost() {
         return energyCost;
     }
+
     @Override
     public boolean matches(CraftingContainer pInv, @NotNull Level pLevel) {
         for (int i = 0; i <= pInv.getWidth() - this.width; ++i) {
@@ -186,8 +192,8 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
-        return null;
+    public @NotNull RecipeSerializer<?> getSerializer() {
+        return ModRecipes.HOURGLASS_HUB_SHAPED_SERIALIZER.get();
     }
 
     @Override
