@@ -11,10 +11,9 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
-import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.block.custom.TemporalTuberCropBlock;
 import net.most.survivaltimemod.data.CropBlockSeedItemModel;
-import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
+import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -33,16 +32,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
         for (RegistryObject<Block> blockRegistryObject : SurvivalTimeUtilGenerator.BLOCK_REGISTER_MODEL_LIST) {
             blockWithItem(blockRegistryObject);
         }
-        for (Map.Entry<String, Block> entry : SurvivalTimeUtilGenerator.BLOCK_ENTITY_REGISTER_BLOCK.entrySet()) {
+        for (Map.Entry<String, Block> entry : SurvivalTimeUtilGenerator.WITH_MODEL_REGISTER_BLOCK_ENTITY_REGISTER_BLOCK.entrySet()) {
             Block block = entry.getValue();
             String name = entry.getKey();
             horizontalBlock(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name)));
         }
 
-//        horizontalBlock(ModBlocks.HOURGLASS_HUB_STATION.get(),
-//                new ModelFile.UncheckedModelFile(modLoc("block/hourglass_hub_station")));
-//        horizontalBlock(ModBlocks.TIME_STATION.get(),
-//                new ModelFile.UncheckedModelFile(modLoc("block/time_station")));
+        for (Map.Entry<String, Block> entry : SurvivalTimeUtilGenerator.WITH_MODEL_REGISTER_SIMPLE_BLOCK_WITH_ITEM.entrySet()) {
+            Block block = entry.getValue();
+            String name = entry.getKey();
+            simpleBlockWithItem(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name)));
+        }
+
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

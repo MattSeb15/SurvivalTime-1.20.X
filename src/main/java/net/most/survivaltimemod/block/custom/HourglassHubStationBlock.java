@@ -19,7 +19,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import net.most.survivaltimemod.block.entity.HourglassHubStationBlockEntity;
@@ -34,8 +36,24 @@ public class HourglassHubStationBlock extends BaseEntityBlock {
         super(pProperties);
     }
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 13, 16);
+    public static final VoxelShape SHAPE = makeShape();
+//    Block.box(0, 0, 0, 16, 13, 16);
 
+    public static VoxelShape makeShape() {
+
+        VoxelShape shape = Shapes.empty();
+        shape = Shapes.join(shape,
+                Shapes.box(
+                        0.014062500000000006,
+                        0.01953125,
+                        0.04375000000000007,
+                        0.9828125, 0.83203125,
+                        0.9562500000000003
+                ),
+                BooleanOp.OR);
+
+        return shape;
+    }
 
     public BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));

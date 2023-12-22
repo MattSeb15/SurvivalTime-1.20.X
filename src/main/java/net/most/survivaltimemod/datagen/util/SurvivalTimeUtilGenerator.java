@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.util;
+package net.most.survivaltimemod.datagen.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -9,6 +9,9 @@ import net.most.survivaltimemod.block.custom.TemporalTuberCropBlock;
 import net.most.survivaltimemod.data.CropBlockSeedItem;
 import net.most.survivaltimemod.data.CropBlockSeedItemModel;
 import net.most.survivaltimemod.item.ModItems;
+import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
+import net.most.survivaltimemod.util.ShardOptions;
+import net.most.survivaltimemod.util.WeightMinMax;
 
 import java.util.List;
 import java.util.Map;
@@ -98,8 +101,11 @@ public class SurvivalTimeUtilGenerator {
             ModBlocks.LOOP_BLOCK
     );
 
-    public final static Map<String, Block> BLOCK_ENTITY_REGISTER_BLOCK = Map.of(
-            "hourglass_hub_station", ModBlocks.HOURGLASS_HUB_STATION.get(),
+    public final static Map<String, Block> WITH_MODEL_REGISTER_BLOCK_ENTITY_REGISTER_BLOCK = Map.of(
+            "hourglass_hub_station", ModBlocks.HOURGLASS_HUB_STATION.get()
+    );
+
+    public final static Map<String, Block> WITH_MODEL_REGISTER_SIMPLE_BLOCK_WITH_ITEM = Map.of(
             "time_station", ModBlocks.TIME_STATION.get()
     );
 

@@ -28,7 +28,7 @@ import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.data.CropBlockSeedItem;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ShardOptions;
-import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
+import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 
 import java.util.Map;
 import java.util.Set;

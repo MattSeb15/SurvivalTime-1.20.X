@@ -11,9 +11,9 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.datagen.custom.HourglassHubShapedRecipeBuilder;
 import net.most.survivaltimemod.datagen.custom.HourglassHubShapelessRecipeBuilder;
+import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
-import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
 
 import java.util.List;
 import java.util.Map;

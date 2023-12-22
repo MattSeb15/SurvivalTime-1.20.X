@@ -40,7 +40,7 @@ public class TimeStationBlock extends Block {
         super(pProperties);
     }
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
+    public static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
 
 
     public BlockState rotate(BlockState pState, Rotation pRot) {

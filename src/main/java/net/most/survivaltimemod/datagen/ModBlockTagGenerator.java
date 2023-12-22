@@ -10,8 +10,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 import net.most.survivaltimemod.util.ModTags;
-import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;

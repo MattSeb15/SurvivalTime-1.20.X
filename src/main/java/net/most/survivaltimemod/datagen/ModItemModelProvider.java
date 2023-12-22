@@ -10,8 +10,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
-import net.most.survivaltimemod.block.ModBlocks;
-import net.most.survivaltimemod.util.SurvivalTimeUtilGenerator;
+import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             simpleItemBlock(block);
         }
 
-        for (Map.Entry<String, Block> entry : SurvivalTimeUtilGenerator.BLOCK_ENTITY_REGISTER_BLOCK.entrySet()) {
+        for (Map.Entry<String, Block> entry : SurvivalTimeUtilGenerator.WITH_MODEL_REGISTER_BLOCK_ENTITY_REGISTER_BLOCK.entrySet()) {
             Block block = entry.getValue();
             complexBlock(block);
         }
