@@ -33,6 +33,9 @@
   "item.survivaltimemod.flux_stick": "Flux Stick",
   "item.survivaltimemod.loop_stick": "Loop Stick",
   "item.survivaltimemod.lapisloopium": "Lapisloopium",
+  "item.survivaltimemod.oracle_is_hourglass": "The Oracle's Hourglass",
+  "item.survivaltimemod.iflux": "iFlux",
+
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
   "block.survivaltimemod.opal_block": "Block of Opal",
@@ -55,6 +58,7 @@
   "block.survivaltimemod.time_station": "Time Station",
 
   "container.survival_time_mod.hhs_craft_button_text": "Craft",
+  "container.oracle_is_hourglass": "The Oracle's Hourglass",
 
   "itranslatable.lost_time_sphere.tooltip_right_click": "Right click to consume time stored.",
   "itranslatable.lost_time_sphere.tooltip_shift_right_click": "Shift + Right Click to add time.",
@@ -63,6 +67,14 @@
   "itranslatable.lost_time_sphere.on_success_consume_lapisloopium": "You have fed the Sphere of Lost Time with Lapisloopium! %s",
   "itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_lapisloopium": "You must have at least 10 Lapisloopium in your inventory to use this item. (10/hour)",
   "itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_time": "You must have at least 1 hour of time in your inventory to use this item.",
+  "itranslatable.oracle_is_hourglass.tooltip_right_click": "Right click to open the GUI.",
+  "itranslatable.oracle_is_hourglass.tooltip_right_click_target": "Right click on another player to view their time.",
+
+
+  "action.item.oracle_is_hourglass.right_click": "Current Time: %s",
+  "action.item.oracle_is_hourglass.no_iflux_item": "You must have an iFlux in the Oracle's Hourglass to use this item.",
+  "action.item.oracle_is_hourglass.right_click_target": "%s's Time %s",
+  "action.item.oracle_is_hourglass.no_iflux_item_target": "You must have 5 iFlux in the Oracle's Hourglass to use this item on another player.",
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 

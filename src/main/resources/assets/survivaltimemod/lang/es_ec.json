@@ -33,6 +33,8 @@
   "item.survivaltimemod.flux_stick": "Palo de Flux",
   "item.survivaltimemod.loop_stick": "Palo de Loop",
   "item.survivaltimemod.lapisloopium": "Lapisloopium",
+  "item.survivaltimemod.oracle_is_hourglass": "Cronómetro de los Destinos",
+  "item.survivaltimemod.iflux": "iFlux",
 
   "block.survivaltimemod.fiery_time_block": "Bloque de Tiempo Ardiente",
   "block.survivaltimemod.opal_block": "Bloque de Opal",
@@ -55,6 +57,7 @@
   "block.survivaltimemod.time_station": "Time Station",
 
   "container.survival_time_mod.hhs_craft_button_text": "Crear",
+  "container.oracle_is_hourglass": "Cronómetro de los Destinos",
 
   "itranslatable.lost_time_sphere.tooltip_right_click": "Click Derecho para consumir tiempo almacenado.",
   "itranslatable.lost_time_sphere.tooltip_shift_right_click": "Shift + Click Derecho para añadir tiempo.",
@@ -63,10 +66,19 @@
   "itranslatable.lost_time_sphere.on_success_consume_lapisloopium": "Has alimentado la Esfera del Tiempo Perdido con Lapisloopium %s",
   "itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_lapisloopium": "¡No tienes suficiente Lapisloopium para alimentar la Esfera del Tiempo Perdido! (10/hora)",
   "itranslatable.lost_time_sphere.on_fail_consume_time_not_enough_time": "¡No tienes suficiente Tiempo para alimentar la Esfera del Tiempo Perdido!",
+  "itranslatable.oracle_is_hourglass.tooltip_right_click": "Clic Derecho para abrir la GUI.",
+  "itranslatable.oracle_is_hourglass.tooltip_right_click_target": "Clic derecho en otro jugador para ver su tiempo.",
+
+  "action.item.oracle_is_hourglass.right_click": "Tiempo Actual: %s",
+  "action.item.oracle_is_hourglass.no_iflux_item": "Debes tener un iFlux en el Cronómetro de los Destinos para usar este artículo.",
+  "action.item.oracle_is_hourglass.right_click_target": "Tiempo de %s: %s",
+  "action.item.oracle_is_hourglass.no_iflux_item_target": "Debes tener al menos 5 de iFlux en el Cronómetro de los Destinos para usar este artículo.",
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 
   "gui.time_station_gui.confirm_button": "Confirmar"
+
+
 
 
 

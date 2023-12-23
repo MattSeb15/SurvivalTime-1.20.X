@@ -151,7 +151,8 @@ public class SurvivalTimeUtilGenerator {
             //seeds
             ModItems.TEMPORAL_TUBER_SEEDS,
             //lapisloopium
-            ModItems.LAPISLOOPIUM
+            ModItems.LAPISLOOPIUM,
+            ModItems.I_FLUX
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\

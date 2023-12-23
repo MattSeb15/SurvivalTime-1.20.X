@@ -1,0 +1,115 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"5": "survivaltimemod:item/oracle_is_hourglass"
+	},
+	"elements": [
+		{
+			"name": "main",
+			"from": [6.05, 9.75, 6.5],
+			"to": [9.95, 10.5, 9.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 7, 7]},
+			"faces": {
+				"north": {"uv": [6, 9, 9.875, 9.75], "texture": "#5"},
+				"east": {"uv": [10, 0, 13, 0.75], "texture": "#5"},
+				"south": {"uv": [0, 10, 3.875, 10.75], "texture": "#5"},
+				"west": {"uv": [10, 1, 13, 1.75], "texture": "#5"},
+				"up": {"uv": [3.875, 3, 0, 0], "texture": "#5"},
+				"down": {"uv": [3.875, 3, 0, 6], "texture": "#5"}
+			}
+		},
+		{
+			"name": "main_decoration",
+			"from": [7.75, 9.875, 6.25],
+			"to": [8.25, 10.375, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 7, 7]},
+			"faces": {
+				"north": {"uv": [10, 10, 10.5, 10.5], "texture": "#5"},
+				"east": {"uv": [8, 7, 8.75, 7.5], "texture": "#5"},
+				"south": {"uv": [0, 11, 0.5, 11.5], "texture": "#5"},
+				"west": {"uv": [10, 8, 10.75, 8.5], "texture": "#5"},
+				"up": {"uv": [9.5, 10.75, 9, 10], "texture": "#5"},
+				"down": {"uv": [10.5, 9, 10, 9.75], "texture": "#5"}
+			}
+		},
+		{
+			"from": [5.7503, 6.2503, 7.0003],
+			"to": [6.4997, 10.2497, 8.9997],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1.75, 1.75, 7]},
+			"faces": {
+				"north": {"uv": [9, 0, 9.75, 4], "texture": "#5"},
+				"east": {"uv": [4, 4, 6, 8], "texture": "#5"},
+				"south": {"uv": [4, 9, 4.75, 13], "texture": "#5"},
+				"west": {"uv": [0, 6, 2, 10], "texture": "#5"},
+				"up": {"uv": [8.75, 7, 8, 5], "texture": "#5"},
+				"down": {"uv": [10.75, 2, 10, 4], "texture": "#5"}
+			}
+		},
+		{
+			"from": [9.5003, 6.2503, 7.0003],
+			"to": [10.2497, 10.2497, 8.9997],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14.25, 1.75, 7]},
+			"faces": {
+				"north": {"uv": [5, 9, 5.75, 13], "texture": "#5"},
+				"east": {"uv": [2, 6, 4, 10], "texture": "#5"},
+				"south": {"uv": [9, 5, 9.75, 9], "texture": "#5"},
+				"west": {"uv": [6, 4, 8, 8], "texture": "#5"},
+				"up": {"uv": [10.75, 7, 10, 5], "texture": "#5"},
+				"down": {"uv": [6.75, 10, 6, 12], "texture": "#5"}
+			}
+		},
+		{
+			"from": [5.75, 5.625, 7],
+			"to": [10.25, 6.375, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.25, 8, 8]},
+			"faces": {
+				"north": {"uv": [4, 8, 8.5, 8.75], "texture": "#5"},
+				"east": {"uv": [7, 10, 9, 10.75], "texture": "#5"},
+				"south": {"uv": [8, 4, 12.5, 4.75], "texture": "#5"},
+				"west": {"uv": [10, 7, 12, 7.75], "texture": "#5"},
+				"up": {"uv": [8.5, 2, 4, 0], "texture": "#5"},
+				"down": {"uv": [8.5, 2, 4, 4], "texture": "#5"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, -2, 2.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, -2, 2.5]
+		},
+		"firstperson_righthand": {
+			"translation": [0, -1, 0]
+		},
+		"firstperson_lefthand": {
+			"translation": [0, -1, 0]
+		},
+		"gui": {
+			"rotation": [45, 45, 0],
+			"scale": [1.5, 1.5, 1.5]
+		},
+		"head": {
+			"rotation": [-90, 0, 0],
+			"translation": [0, 4.75, -4],
+			"scale": [1.5, 1.5, 1.5]
+		}
+	},
+	"groups": [
+		{
+			"name": "oracle_is_hourglass",
+			"origin": [9, 7, 7],
+			"color": 0,
+			"children": [
+				0,
+				1,
+				{
+					"name": "cuerda",
+					"origin": [6.25, 8, 8],
+					"color": 0,
+					"children": [2, 3, 4]
+				}
+			]
+		}
+	]
+}

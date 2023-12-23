@@ -12,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.world.inventory.OracleIsHourglassMenu;
 import net.most.survivaltimemod.world.inventory.TimeStationMenu;
 
 public class ModMenuTypes {
@@ -24,6 +25,9 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<TimeStationMenu>> TIME_STATION_MENU =
             registerMenuType(TimeStationMenu::new,"time_station_menu");
+
+    public static final RegistryObject<MenuType<OracleIsHourglassMenu>> ORACLE_IS_HOURGLASS_MENU =
+            registerMenuType(OracleIsHourglassMenu::new,"oracle_is_hourglass_menu");
 
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {

@@ -10,9 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
-import net.most.survivaltimemod.item.custom.ConsumableActionItem;
-import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
-import net.most.survivaltimemod.item.custom.FuelItem;
+import net.most.survivaltimemod.item.custom.*;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -161,6 +159,15 @@ public class ModItems {
                             new Item.Properties().fireResistant()
                     )
             );
+
+    public static final RegistryObject<Item> ORACLE_IS_HOURGLASS =
+            ITEMS.register("oracle_is_hourglass", () -> new OracleIsHourglassItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> I_FLUX =
+            ITEMS.register("iflux", () -> new Item(new Item.Properties()));
+
+///    public static final RegistryObject<Item> TIMEKEEPER_IS_EMBLEM =
+//            ITEMS.register("timekeeper_is_emblem", () -> new TimekeeperIsEmblem(new Item.Properties()));
 
     ////shards sticks
     public static final RegistryObject<Item> CHRONA_STICK =
