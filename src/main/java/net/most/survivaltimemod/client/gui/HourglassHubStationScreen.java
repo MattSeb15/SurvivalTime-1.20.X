@@ -1,8 +1,7 @@
-package net.most.survivaltimemod.screen;
+package net.most.survivaltimemod.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -13,6 +12,8 @@ import net.minecraft.world.entity.player.Inventory;
 
 import net.most.survivaltimemod.SurvivalTimeMod;
 
+import net.most.survivaltimemod.screen.renderer.ProgressDisplayTooltipArea;
+import net.most.survivaltimemod.world.inventory.HourglassHubStationMenu;
 import net.most.survivaltimemod.screen.renderer.EnergyDisplayTooltipArea;
 import net.most.survivaltimemod.util.MouseUtil;
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +25,7 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(SurvivalTimeMod.MOD_ID, "textures/gui/hourglass_hub_station.png");
     private EnergyDisplayTooltipArea energyDisplayTooltipArea;
+    private ProgressDisplayTooltipArea progressDisplayTooltipArea;
     private int leftPos, topPos;
 
 
@@ -40,7 +42,14 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
         assignEnergyDisplayTooltipArea();
+        assignProgressDisplayTooltipArea();
 
+    }
+
+    private void assignProgressDisplayTooltipArea() {
+        this.progressDisplayTooltipArea = new ProgressDisplayTooltipArea(
+                menu.getProgress(),
+                menu.getMaxProgress());
     }
 
 
@@ -57,12 +66,23 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
     protected void renderLabels(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
 
         renderEnergyAreaToolTip(pGuiGraphics, pMouseX, pMouseY);
+        renderProgressTooltip(pGuiGraphics, pMouseX, pMouseY);
 
     }
 
     private void renderEnergyAreaToolTip(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         if (isMouseAboveArea(pMouseX, pMouseY, leftPos, topPos, 13, 11 - 18, 9, 88)) {
             pGuiGraphics.renderTooltip(this.font, energyDisplayTooltipArea.getTooltips(),
+                    Optional.empty(),
+                    pMouseX - leftPos,
+                    pMouseY - topPos);
+        }
+
+    }
+
+    private void renderProgressTooltip(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        if (isMouseAboveArea(pMouseX, pMouseY, leftPos, topPos, 120, 54-18, 26, 3) && menu.isCrafting()) {
+            pGuiGraphics.renderTooltip(this.font, progressDisplayTooltipArea.getTooltips(),
                     Optional.empty(),
                     pMouseX - leftPos,
                     pMouseY - topPos);
@@ -79,10 +99,11 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
         int y = (height - 202) / 2;
 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, 202);
+        progressDisplayTooltipArea.setValues(menu.getProgress(), menu.getMaxProgress());
 
         renderProgressArrow(guiGraphics, x, y);
         energyDisplayTooltipArea.render(guiGraphics);
-//        guiGraphics.drawWordWrap(this.font, FormattedText.of("true"), leftPos + 128, topPos + 1, 100, 0x000000);
+
 
     }
 

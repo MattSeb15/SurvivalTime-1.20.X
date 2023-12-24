@@ -1,8 +1,5 @@
 package net.most.survivaltimemod.screen;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -12,6 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.world.inventory.HourglassHubStationMenu;
 import net.most.survivaltimemod.world.inventory.OracleIsHourglassMenu;
 import net.most.survivaltimemod.world.inventory.TimeStationMenu;
 

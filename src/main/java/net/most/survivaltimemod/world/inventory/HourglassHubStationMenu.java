@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.screen;
+package net.most.survivaltimemod.world.inventory;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -13,6 +13,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.block.entity.HourglassHubStationBlockEntity;
 import net.most.survivaltimemod.item.ModItems;
+import net.most.survivaltimemod.screen.ModMenuTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,7 +65,6 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(iItemHandler, 26, energyInputX, energyInputY));
 
 
-
         });
 
 
@@ -74,6 +74,7 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
+
     public int getScaledProgress() {
 
         int progress = data.get(0);
@@ -81,6 +82,14 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
         int progressArrowSize = 26;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getProgress() {
+        return data.get(0);
+    }
+
+    public int getMaxProgress() {
+        return data.get(1);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -110,7 +119,7 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
 
         // Check if the slot clicked is one of the vanilla container slots
         if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            if(sourceStack.is(ModItems.LOST_TIME_SPHERE.get())){
+            if (sourceStack.is(ModItems.LOST_TIME_SPHERE.get())) {
                 if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX + 26, TE_INVENTORY_FIRST_SLOT_INDEX
                         + TE_INVENTORY_SLOT_COUNT, false)) {
                     return ItemStack.EMPTY;  // EMPTY_ITEM

@@ -31,7 +31,7 @@ import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
-import net.most.survivaltimemod.screen.HourglassHubStationMenu;
+import net.most.survivaltimemod.world.inventory.HourglassHubStationMenu;
 import net.most.survivaltimemod.util.ModEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

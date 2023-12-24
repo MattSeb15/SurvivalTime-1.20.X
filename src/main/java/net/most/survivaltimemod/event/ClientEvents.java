@@ -15,7 +15,7 @@ import net.most.survivaltimemod.block.entity.renderer.HourglassHubStationBlockRe
 import net.most.survivaltimemod.client.TimeHudOverlay;
 import net.most.survivaltimemod.client.gui.OracleIsHourglassScreen;
 import net.most.survivaltimemod.client.gui.TimeStationScreen;
-import net.most.survivaltimemod.screen.HourglassHubStationScreen;
+import net.most.survivaltimemod.client.gui.HourglassHubStationScreen;
 import net.most.survivaltimemod.screen.ModMenuTypes;
 
 public class ClientEvents {
