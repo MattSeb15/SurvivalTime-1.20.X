@@ -14,6 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.block.entity.ModBlockEntities;
+import net.most.survivaltimemod.effect.ModEffects;
 import net.most.survivaltimemod.item.ModCreativeModTabs;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.loot.ModLootModifiers;
@@ -40,6 +41,7 @@ public class SurvivalTimeMod {
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModEffects.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);

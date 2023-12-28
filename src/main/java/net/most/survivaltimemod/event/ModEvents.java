@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
@@ -21,6 +22,7 @@ import net.most.survivaltimemod.command.*;
 import net.most.survivaltimemod.command.dmultiplier.SetDamageMultiplierCommand;
 import net.most.survivaltimemod.command.dmultiplier.SetDefaultDamageMultiplierCommand;
 import net.most.survivaltimemod.data.FormatTimeType;
+import net.most.survivaltimemod.effect.ModEffects;
 import net.most.survivaltimemod.time.PlayerTime;
 import net.most.survivaltimemod.time.PlayerTimeProvider;
 import net.most.survivaltimemod.util.ComponentHelper;
@@ -98,6 +100,7 @@ public class ModEvents {
             float damage = event.getAmount();
             event.setCanceled(true);
 
+
             player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
                 float time = playerTime.getTime();
                 float damageMultiplier = playerTime.getDamageMultiplier();
@@ -110,6 +113,9 @@ public class ModEvents {
 
                 }
             });
+
+            player.addEffect(new MobEffectInstance(ModEffects.DAMAGE_TRIGGER.get(), 8,
+                    1, false, false));
 
         }
 

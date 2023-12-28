@@ -74,9 +74,13 @@
   "action.item.oracle_is_hourglass.right_click_target": "Tiempo de %s: %s",
   "action.item.oracle_is_hourglass.no_iflux_item_target": "Debes tener al menos 5 de iFlux en el Cronómetro de los Destinos para usar este artículo.",
 
+  "effect.survivaltimemod.damage_time_trigger_effect": "Daño Temporal",
+  "effect.survivaltimemod.heal_time_trigger_effect": "Curación Temporal",
+
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 
   "gui.time_station_gui.confirm_button": "Confirmar"
+
 
 
 

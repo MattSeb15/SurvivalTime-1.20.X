@@ -76,6 +76,9 @@
   "action.item.oracle_is_hourglass.right_click_target": "%s's Time %s",
   "action.item.oracle_is_hourglass.no_iflux_item_target": "You must have 5 iFlux in the Oracle's Hourglass to use this item on another player.",
 
+  "effect.survivaltimemod.damage_time_trigger_effect": "Time Damage",
+  "effect.survivaltimemod.heal_time_trigger_effect": "Heal Damage",
+
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 
   "gui.time_station_gui.confirm_button": "Confirm"

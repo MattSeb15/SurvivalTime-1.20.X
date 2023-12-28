@@ -2,7 +2,9 @@ package net.most.survivaltimemod.time;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.most.survivaltimemod.data.FormatTimeType;
+import net.most.survivaltimemod.effect.ModEffects;
 import net.most.survivaltimemod.networking.ModMessages;
 import net.most.survivaltimemod.networking.packet.TimeDataSyncS2CPacket;
 
@@ -119,6 +121,8 @@ public class PlayerTime {
     public void incrementTime(float increment, ServerPlayer player) {
         this.incrementTime(increment);
         syncServerToClientData(player);
+        player.addEffect(new MobEffectInstance(ModEffects.HEAL_TRIGGER.get(), 8,
+                1, false, false));
     }
 
     public void decrementTime(float decrement) {

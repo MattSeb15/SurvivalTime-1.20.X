@@ -21,19 +21,28 @@ public class BtnProcedure {
 
             if (lost_sphere_slot_stack.getCount() >= 1 && lapisloopium_slot_stack.getCount() >= 10) {
                 int increment = 3600;
+                int maxTime = 36000;
                 //10 lapisloopium = 1 hour
                 int lapisloopiumCost = Math.floorDiv(lapisloopium_slot_stack.getCount(), 10);
+                int pToIncrementValue = increment * lapisloopiumCost;
+                int pToShrinkValue = lapisloopiumCost * 10;
 
 
                 if (lost_sphere_slot_stack.getTag() != null && lost_sphere_slot_stack.getTag().contains(LostTimeSphereItem.TIME_VALUE_TAG)) {
                     int time_value = lost_sphere_slot_stack.getOrCreateTag().getInt(LostTimeSphereItem.TIME_VALUE_TAG);
-                    time_value += increment * lapisloopiumCost;
-                    lost_sphere_slot_stack.getOrCreateTag().putInt(LostTimeSphereItem.TIME_VALUE_TAG, time_value);
+                    int toAddTime = time_value + pToIncrementValue;
+
+                    if (toAddTime > maxTime) {
+                        pToShrinkValue = Math.floorDiv(maxTime - time_value, increment) * 10;
+                        toAddTime = maxTime;
+
+                    }
+                    lost_sphere_slot_stack.getOrCreateTag().putInt(LostTimeSphereItem.TIME_VALUE_TAG, toAddTime);
 
                 } else {
-                    lost_sphere_slot_stack.getOrCreateTag().putInt(LostTimeSphereItem.TIME_VALUE_TAG, increment * lapisloopiumCost);
+                    lost_sphere_slot_stack.getOrCreateTag().putInt(LostTimeSphereItem.TIME_VALUE_TAG, pToIncrementValue);
                 }
-                lapisloopium_slot_stack.shrink(lapisloopiumCost * 10);
+                lapisloopium_slot_stack.shrink(pToShrinkValue);
                 ((Slot) _slots.get(0)).set(lost_sphere_slot_stack);
                 ((Slot) _slots.get(1)).set(lapisloopium_slot_stack);
                 player.playSound(SoundEvents.ANVIL_USE, 1.0f, 1.0f);

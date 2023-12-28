@@ -92,7 +92,6 @@ public class TimeStationScreen extends AbstractContainerScreen<TimeStationMenu> 
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
     }
 
-    private int toAddTime = 0;
 
     @Override
     protected void containerTick() {
@@ -102,33 +101,42 @@ public class TimeStationScreen extends AbstractContainerScreen<TimeStationMenu> 
         if (player.containerMenu instanceof Supplier<?> _current && _current.get() instanceof Map<?, ?> _slots) {
             ItemStack lost_sphere_slot_stack = ((Slot) _slots.get(0)).getItem();
             ItemStack lapisloopium_slot = ((Slot) _slots.get(1)).getItem();
+
+
+            int toAddTimeFlag = 0;
             if (!lost_sphere_slot_stack.isEmpty()) {
                 if (!lost_sphere_slot_stack.hasTag()) {
-                    toAddTime = 1;
+                    toAddTimeFlag = 1;
                     infoCurrentTimeValueSlot = 0;
                 } else {
                     infoCurrentTimeValueSlot = secondsToHours(lost_sphere_slot_stack.getOrCreateTag().getInt(LostTimeSphereItem.TIME_VALUE_TAG));
-                    toAddTime = 0;
                 }
 
             } else {
                 infoCurrentTimeValueSlot = 0;
-                toAddTime = 0;
+            }
+            if (!button.isActive()) {
+                return;
             }
 
             if (!lapisloopium_slot.isEmpty() && lapisloopium_slot.getCount() >= 10) {
-                infoCurrentLapisloopiumCost = Math.floorDiv(lapisloopium_slot.getCount(), 10) * 10;
+                int maxTimeHours = 10;
+
+
+                infoCurrentLapisloopiumCost = Math.min(lapisloopium_slot.getCount() / 10, maxTimeHours) * 10;
+
             } else {
                 infoCurrentLapisloopiumCost = 0;
             }
 
             if (infoCurrentLapisloopiumCost > 0) {
+
                 infoDecrementTime = Math.floorDiv(lapisloopium_slot.getCount(), 10);
             } else {
                 infoDecrementTime = 0;
             }
 
-            if (infoCurrentLapisloopiumCost > 0 || toAddTime > 0) {
+            if (infoCurrentLapisloopiumCost > 0 || toAddTimeFlag > 0) {
                 int toInfoResultItemTime = infoCurrentTimeValueSlot + infoDecrementTime;
                 infoResultItemTime = Math.min(toInfoResultItemTime, 10);
 

@@ -1,68 +1,59 @@
 package net.most.survivaltimemod.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.effect.ModEffects;
 import net.most.survivaltimemod.time.PlayerTimeData;
+import net.most.survivaltimemod.util.textures.PositionIconTexture;
+import net.most.survivaltimemod.util.textures.TimeIcon;
+import net.most.survivaltimemod.util.textures.TimeTexture;
+import net.most.survivaltimemod.util.textures.TimeType;
+
+import java.util.Random;
 
 public class TimeHudOverlay {
 
-    private static final ResourceLocation FILLED_TIME = new ResourceLocation(SurvivalTimeMod.MOD_ID,
-            "textures/time/filled_time.png"); //60 mins 1h
-    private static final ResourceLocation SUB_FILLED_TIME = new ResourceLocation(SurvivalTimeMod.MOD_ID,
-            "textures/time/subfilled_time.png"); //45-59 mins
-
-    private static final ResourceLocation HALF_TIME = new ResourceLocation(SurvivalTimeMod.MOD_ID,
-            "textures/time/half_time.png"); //30-44 mins
-
-    private static final ResourceLocation SUB_HALF_TIME = new ResourceLocation(SurvivalTimeMod.MOD_ID,
-            "textures/time/subhalf_time.png"); //1-29 mins
-
-    private static final ResourceLocation EMPTY_TIME = new ResourceLocation(SurvivalTimeMod.MOD_ID,
-            "textures/time/empty_time.png"); //0 mins
+    private static final int padding = 5;
 
     private static int pX(int x, int i) {
-        return x - 94 + (i * 9);
+        return x + padding + (i * (TimeTexture.ICONS_BORDER_WIDTH + 1));
     }
 
-    ;
 
-    private static int pY(int y) {
-        return y - 39;
+    private static int pY(int y, int tickCount, PlayerTimeData playerTimeData) {
+        boolean isPlayerTimeStopped = playerTimeData.isTimeStopped();
+        Random random = new Random();
+        boolean randomBool = random.nextBoolean();
+
+        if (tickCount % (20) == 0 && !isPlayerTimeStopped && randomBool) {
+            return y + padding + (random.nextInt(4) - 1);
+        }
+
+        return y + padding;
     }
 
-    ;
-    private static final float pUOffset = 0.0f;
-    private static final float pVOffset = 0.0f;
-    private static final int pWidth = 9;
-    private static final int pHeight = 9;
-    private static final int pTextureWidth = 9;
-    private static final int pTextureHeight = 9;
+
+    private static final ResourceLocation TIME_HUD_ICONS = TimeTexture.TIME_HUD_ICONS;
 
 
     public static IGuiOverlay HUD_TIME = ((gui, guiGraphics, partialTick, screenWidth, screenHeight) -> {
 
-        int x = screenWidth / 2;
-        int y = screenHeight;
-
 
         if (!gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements()) {
-
+//            int x = screenWidth / 2;
+//            int y = screenHeight;
 
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-//            for (int i = 0; i < 10; i++) {
-//
-//                guiGraphics.blit(FILLED_TIME, pX(x,i), pY(y), pUOffset, pVOffset, pWidth, pHeight, pTextureWidth,
-//                pTextureHeight);
-//
-//            }
+            RenderSystem.enableBlend();
             LocalPlayer player = gui.getMinecraft().player;
 
             if (player != null) {
                 PlayerTimeData playerTimeData = ClientPlayerTimeData.get();
-                if(playerTimeData==null){
+                if (playerTimeData == null) {
                     return;
                 }
                 float totalSeconds = playerTimeData.getTime();///-1.0f
@@ -70,43 +61,45 @@ public class TimeHudOverlay {
                 int fullHours = (int) (totalSeconds / 3600); // 3600 seconds = 1 hour
 
                 int remainingSeconds = (int) (totalSeconds % 3600);
-                //45-59 mins
+                int remainingMinutes = remainingSeconds / 60;
+                //45-59 min
                 int subFullHours = remainingSeconds >= 2700.0f ? 1 : 0;
-                //30-44 mins
+                //30-44 min
                 int halfHours = remainingSeconds >= 1800.0f ? 1 : 0;
-                //1-29 mins
+                //1-29 min
                 int subHalfHours = remainingSeconds >= 600.0f ? 1 : 0;
 
 
+                int y = 0;
+                int x = 0;
 
+                boolean isPlayerTimeStopped = playerTimeData.isTimeStopped();
+
+                TimeType timeType = isPlayerTimeStopped ? TimeType.PAUSED : TimeType.NORMAL;
+                if (player.hasEffect(ModEffects.DAMAGE_TRIGGER.get())) {
+                    timeType = TimeType.DAMAGE;
+                }
+                if (player.hasEffect(ModEffects.HEAL_TRIGGER.get())) {
+                    timeType = TimeType.REGEN;
+                }
+
+                TimeIcon timeIcon = TimeTexture.getTimeIcon(timeType);
+                TimeIcon timeIconRemaining = TimeTexture.getTimeIcon(timeType, remainingMinutes);
+                TimeIcon timeIconEmpty = TimeTexture.getTimeIcon(timeType, 0);
 
 
                 for (int i = 0; i < 10; i++) {
+                    if (i < fullHours) {
+                        drawIcon(guiGraphics, timeIcon, x, y, i, gui.getGuiTicks(), playerTimeData);
+                    } else if (i == fullHours) {
+                        drawIcon(guiGraphics, timeIconRemaining, x, y, i, gui.getGuiTicks(), playerTimeData);
 
-                    if(i<fullHours){
-                        guiGraphics.blit(FILLED_TIME, pX(x,i), pY(y), pUOffset, pVOffset, pWidth, pHeight, pTextureWidth,
-                                pTextureHeight);
-                    }else if(i==fullHours){
+                    } else {
+                        drawIcon(guiGraphics, timeIconEmpty, x, y, i, gui.getGuiTicks(), playerTimeData);
 
-                        if(subFullHours==1){
-                            guiGraphics.blit(SUB_FILLED_TIME, pX(x,i), pY(y), pUOffset, pVOffset, pWidth, pHeight, pTextureWidth,
-                                    pTextureHeight);
-                        }else if(halfHours==1){
-                            guiGraphics.blit(HALF_TIME, pX(x,i), pY(y), pUOffset, pVOffset, pWidth, pHeight, pTextureWidth,
-                                    pTextureHeight);
-                        }else if(subHalfHours==1){
-                            guiGraphics.blit(SUB_HALF_TIME, pX(x,i), pY(y), pUOffset, pVOffset, pWidth, pHeight, pTextureWidth,
-                                    pTextureHeight);
-                        }else{
-                            guiGraphics.blit(EMPTY_TIME, pX(x,i), pY(y), pUOffset, pVOffset, pWidth, pHeight, pTextureWidth,
-                                    pTextureHeight);
-                        }
-                    }
-                    else{
-                        guiGraphics.blit(EMPTY_TIME, pX(x,i), pY(y), pUOffset, pVOffset, pWidth, pHeight, pTextureWidth,
-                                pTextureHeight);
                     }
                 }
+                RenderSystem.disableBlend();
             }
 
 
@@ -114,6 +107,55 @@ public class TimeHudOverlay {
 
 
     });
+
+    private static void drawIcon(GuiGraphics guiGraphics,
+                                 TimeIcon timeIcon,
+                                 int x,
+                                 int y,
+                                 int i,
+                                 int tickCount,
+                                 PlayerTimeData playerTimeData
+    ) {
+        PositionIconTexture border = timeIcon.border();
+        PositionIconTexture fill = timeIcon.fill();
+        PositionIconTexture background = timeIcon.background();
+        int bgFillX = 3;
+        int bgFillY = 2;
+
+        int pX = pX(x, i);
+        int pY = pY(y, tickCount, playerTimeData);
+
+
+        drawIcon(guiGraphics, border, pX, pY);
+        drawIcon(guiGraphics, background, pX + bgFillX, pY + bgFillY);
+        drawFillIcon(guiGraphics, fill, pX + bgFillX, pY + bgFillY);
+
+    }
+
+    private static void drawIcon(GuiGraphics guiGraphics, PositionIconTexture icon, int x, int y) {
+
+        guiGraphics.blit(TIME_HUD_ICONS, x, y,
+                icon.getOffsetU(),
+                icon.getOffsetV(),
+                icon.getWidth(),
+                icon.getHeight());
+    }
+
+    private static void drawFillIcon(GuiGraphics guiGraphics, PositionIconTexture icon, int x, int y) {
+        int progress = icon.getHeight();
+        int iconHeight = TimeTexture.ICONS_FILL_HEIGHT;
+        float fillPercentage = (float) progress / iconHeight;
+
+        int adjustedY = y + (int) (iconHeight * (1 - fillPercentage)); // Calcula la posición Y ajustada
+        int adjustedHeight = (int) (iconHeight * fillPercentage); // Calcula la nueva altura de la textura
+
+        guiGraphics.blit(TIME_HUD_ICONS, x, adjustedY,
+                icon.getOffsetU(),
+                icon.getOffsetV() + iconHeight - adjustedHeight,
+                icon.getWidth(),
+                adjustedHeight);
+
+    }
 
 
 }
