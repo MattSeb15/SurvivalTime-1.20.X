@@ -1,7 +1,6 @@
 package net.most.survivaltimemod.world.inventory;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -15,13 +14,20 @@ import net.most.survivaltimemod.block.entity.HourglassHubStationBlockEntity;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.screen.ModMenuTypes;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class HourglassHubStationMenu extends AbstractContainerMenu {
 
     public final HourglassHubStationBlockEntity blockEntity;
     private Level level;
     private final ContainerData data;
+
+    public static int initialPositionGridX = 29;
+    public static int initialPositionGridY = -7;
+    public static int gridIncrement = 18;
+    public static int outputX = 149;
+    public static int outputY = 29;
+    public static int energyInputX = 149;
+    public static int energyInputY = 65;
 
     public HourglassHubStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
@@ -38,24 +44,14 @@ public class HourglassHubStationMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            int initialPositionGridX = 29;
-            int initialPositionGridY = -7;
-            int increment = 18;
 
-            int outputX = 149;
-            int outputY = 29;
 
-            int energyInputX = 149;
-            int energyInputY = 65;
-
-            int buttonX = 149;
-            int buttonY = 101;
             //5x5 grid slots
             //index 0-24
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    this.addSlot(new SlotItemHandler(iItemHandler, i * 5 + j, initialPositionGridX + j * increment,
-                            initialPositionGridY + i * increment));
+                    this.addSlot(new SlotItemHandler(iItemHandler, i * 5 + j, initialPositionGridX + j * gridIncrement,
+                            initialPositionGridY + i * gridIncrement));
 
                 }
             }

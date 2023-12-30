@@ -115,9 +115,7 @@ public class TimeStationScreen extends AbstractContainerScreen<TimeStationMenu> 
             } else {
                 infoCurrentTimeValueSlot = 0;
             }
-            if (!button.isActive()) {
-                return;
-            }
+
 
             if (!lapisloopium_slot.isEmpty() && lapisloopium_slot.getCount() >= 10) {
                 int maxTimeHours = 10;

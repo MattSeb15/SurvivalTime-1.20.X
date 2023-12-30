@@ -65,12 +65,12 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
 
 
     //output slot = 25
-    private static final int OUTPUT_SLOT = 25;
+    public static final int OUTPUT_SLOT = 25;
     //energy input slot = 26
-    private static final int ENERGY_TIME_SLOT = 26;
+    public static final int ENERGY_TIME_SLOT = 26;
     //grid input slots = 0-25
-    private static final int GRID_INPUT_SLOT_START = 0;
-    private static final int GRID_INPUT_SLOT_END = 24;
+    public static final int GRID_INPUT_SLOT_START = 0;
+    public static final int GRID_INPUT_SLOT_END = 24;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();

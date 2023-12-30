@@ -14,6 +14,7 @@ import net.most.survivaltimemod.datagen.custom.HourglassHubShapelessRecipeBuilde
 import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> pWriter) {
 
         for (Map.Entry<ItemLike, ExpCookTimeGroupItem> entry : SurvivalTimeUtilGenerator.SMELTING_RECIPE_MAP.entrySet()) {
             ItemLike item = entry.getKey();

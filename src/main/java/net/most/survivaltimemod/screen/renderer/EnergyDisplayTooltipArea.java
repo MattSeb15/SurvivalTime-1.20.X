@@ -43,8 +43,19 @@ public class EnergyDisplayTooltipArea {
                         + " TE"));
     }
 
+    public static List<Component> getTooltips(int energyCost) {
+        return List.of(Component.literal(
+                FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, energyCost) + " TE"));
+    }
+
     public void render(GuiGraphics guiGraphics) {
         int stored = (int) (height * (energy.getEnergyStored() / (float) energy.getMaxEnergyStored()));
+        guiGraphics.fillGradient(xPos, yPos + (height - stored), xPos + width,
+                yPos + height, 0xfff2ef8e, 0xffcb8e24);
+    }
+
+    public static void render(GuiGraphics guiGraphics, int energyCost, int maxEnergy, int xPos, int yPos, int width, int height) {
+        int stored = (int) (height * (energyCost / (float) maxEnergy));
         guiGraphics.fillGradient(xPos, yPos + (height - stored), xPos + width,
                 yPos + height, 0xfff2ef8e, 0xffcb8e24);
     }
