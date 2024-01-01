@@ -40,6 +40,10 @@ public enum FormatTimeType {
         int hours = parseHours(time);
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
+        if(hours == 0) return String.format("%02d:%02d", minutes, seconds);
+        if(minutes == 0) return String.format("%02d:%02d", hours, seconds);
+        if(seconds == 0) return String.format("%02d:%02d", hours, minutes);
+
 
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
@@ -48,6 +52,9 @@ public enum FormatTimeType {
         int hours = parseHours(time);
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
+        if(hours == 0) return String.format("%02dm %02ds", minutes, seconds);
+        if(minutes == 0) return String.format("%02dh %02ds", hours, seconds);
+        if(seconds == 0) return String.format("%02dh %02dm", hours, minutes);
 
         return String.format("%02dh %02dm %02ds", hours, minutes, seconds);
     }
@@ -56,6 +63,9 @@ public enum FormatTimeType {
         int hours = parseHours(time);
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
+        if(hours == 0) return String.format("%02d, %02d", minutes, seconds);
+        if(minutes == 0) return String.format("%02d, %02d", hours, seconds);
+        if(seconds == 0) return String.format("%02d, %02d", hours, minutes);
 
         return String.format("%02d, %02d, %02d", hours, minutes, seconds);
     }
@@ -64,6 +74,9 @@ public enum FormatTimeType {
         int hours = parseHours(time);
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
+        if(hours == 0) return String.format("%02dm, %02ds", minutes, seconds);
+        if(minutes == 0) return String.format("%02dh, %02ds", hours, seconds);
+        if(seconds == 0) return String.format("%02dh, %02dm", hours, minutes);
 
         return String.format("%02dh, %02dm, %02ds", hours, minutes, seconds);
     }
@@ -71,6 +84,8 @@ public enum FormatTimeType {
     private static String getHH_SSFormat(float time) {
         int hours = parseHours(time);
         int seconds = parseSeconds(time);
+        if(hours == 0) return String.format("%02d", seconds);
+        if(seconds == 0) return String.format("%02d", hours);
 
         return String.format("%02d:%02d", hours, seconds);
     }
@@ -78,6 +93,8 @@ public enum FormatTimeType {
     private static String getHH_SSNamedFormat(float time) {
         int hours = parseHours(time);
         int seconds = parseSeconds(time);
+        if(hours == 0) return String.format("%02ds", seconds);
+        if(seconds == 0) return String.format("%02dh", hours);
 
         return String.format("%02dh %02ds", hours, seconds);
     }
@@ -85,6 +102,8 @@ public enum FormatTimeType {
     private static String getHH_SSCommasFormat(float time) {
         int hours = parseHours(time);
         int seconds = parseSeconds(time);
+        if(hours == 0) return String.format("%02d", seconds);
+        if(seconds == 0) return String.format("%02d", hours);
 
         return String.format("%02d, %02d", hours, seconds);
     }
@@ -129,13 +148,16 @@ public enum FormatTimeType {
     private static String getMM_SSFormat(float time) {
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
-
+        if(minutes == 0) return String.format("%02d", seconds);
+        if(seconds == 0) return String.format("%02d", minutes);
         return String.format("%02d:%02d", minutes, seconds);
     }
 
     private static String getMM_SSNamedFormat(float time) {
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
+        if(minutes == 0) return String.format("%02ds", seconds);
+        if(seconds == 0) return String.format("%02dm", minutes);
 
         return String.format("%02dm %02ds", minutes, seconds);
     }
@@ -143,6 +165,8 @@ public enum FormatTimeType {
     private static String getMM_SSCommasFormat(float time) {
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
+        if(minutes == 0) return String.format("%02d", seconds);
+        if(seconds == 0) return String.format("%02d", minutes);
 
         return String.format("%02d, %02d", minutes, seconds);
     }
@@ -150,6 +174,8 @@ public enum FormatTimeType {
     private static String getMM_SSCommasNamedFormat(float time) {
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
+        if(minutes == 0) return String.format("%02d", seconds);
+        if(seconds == 0) return String.format("%02d", minutes);
 
         return String.format("%02dm, %02ds", minutes, seconds);
     }

@@ -2,16 +2,18 @@ package net.most.survivaltimemod.compat;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.client.gui.HourglassHubStationScreen;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
+import net.most.survivaltimemod.screen.ModMenuTypes;
+import net.most.survivaltimemod.world.inventory.HourglassHubStationMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -40,9 +42,25 @@ public class JEISurvivalTimePlugin implements IModPlugin {
         registration.addRecipes(HourglassHubStationShapelessRecipeCategory.RECIPE_TYPE, shapelessRecipes);
     }
 
-//    @Override
-//    public void registerGuiHandlers(@NotNull IGuiHandlerRegistration registration) {
-//        registration.addRecipeClickArea(HourglassHubStationScreen.class, 88, 32, 28, 23,Hourglass);
-//
-//    }
+    @Override
+    public void registerGuiHandlers(@NotNull IGuiHandlerRegistration registration) {
+
+        registration.addRecipeClickArea(HourglassHubStationScreen.class, 144, 6 - 18, 10, 10, HourglassHubStationShapedRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeClickArea(HourglassHubStationScreen.class, 159, 6 - 18, 10, 10, HourglassHubStationShapelessRecipeCategory.RECIPE_TYPE);
+
+    }
+
+    @Override
+    public void registerRecipeTransferHandlers(@NotNull IRecipeTransferRegistration registration) {
+        registration.addRecipeTransferHandler(HourglassHubStationMenu.class, ModMenuTypes.HOURGLASS_HUB_STATION_MENU.get(),
+                HourglassHubStationShapedRecipeCategory.RECIPE_TYPE, 36, 25, 0, 36);
+        registration.addRecipeTransferHandler(HourglassHubStationMenu.class, ModMenuTypes.HOURGLASS_HUB_STATION_MENU.get(),
+                HourglassHubStationShapelessRecipeCategory.RECIPE_TYPE, 36, 25, 0, 36);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.HOURGLASS_HUB_STATION.get()), HourglassHubStationShapedRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.HOURGLASS_HUB_STATION.get()), HourglassHubStationShapelessRecipeCategory.RECIPE_TYPE);
+    }
 }

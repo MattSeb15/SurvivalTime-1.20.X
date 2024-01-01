@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,14 +13,20 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 import net.most.survivaltimemod.networking.ModMessages;
 import net.most.survivaltimemod.networking.packet.TimeStationButtonC2SPacket;
+import net.most.survivaltimemod.util.MouseUtil;
+import net.most.survivaltimemod.util.textures.IconTexture;
+import net.most.survivaltimemod.util.textures.IconType;
 import net.most.survivaltimemod.world.inventory.TimeStationMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class TimeStationScreen extends AbstractContainerScreen<TimeStationMenu> {
@@ -67,11 +74,61 @@ public class TimeStationScreen extends AbstractContainerScreen<TimeStationMenu> 
                 this.imageHeight
         );
 
-        pGuiGraphics.drawCenteredString(this.font, "" + infoCurrentTimeValueSlot, this.leftPos + 85, this.topPos + 18, 0xFFC96400);
-        pGuiGraphics.drawCenteredString(this.font, "" + infoCurrentLapisloopiumCost, this.leftPos + 85, this.topPos + 53, 0xFF521CAC);
-        pGuiGraphics.drawCenteredString(this.font, "" + infoDecrementTime, this.leftPos + 110, this.topPos + 33, 0xFFdee58c);
-        pGuiGraphics.drawCenteredString(this.font, "" + infoResultItemTime, this.leftPos + 151, this.topPos + 42, 0xFF741a65);
+        pGuiGraphics.renderItem(new ItemStack(ModItems.LOST_TIME_SPHERE.get()), this.leftPos + 84, this.topPos + 14);
+        pGuiGraphics.renderItem(new ItemStack(ModItems.LAPISLOOPIUM.get()), this.leftPos + 84, this.topPos + 40);
+        IconTexture.drawIcon(pGuiGraphics, IconType.FILLED_TIME, this.leftPos + 116, this.topPos + 25);
+        ItemStack resultItem = new ItemStack(ModItems.LOST_TIME_SPHERE.get());
+        resultItem.getOrCreateTag().putInt(LostTimeSphereItem.TIME_VALUE_TAG, 1);
+        pGuiGraphics.renderItem(resultItem, this.leftPos + 141, this.topPos + 24);
+
+        pGuiGraphics.drawCenteredString(this.font, "" + infoCurrentTimeValueSlot, this.leftPos + 92, this.topPos + 33 - 4, 0xFFC96400);
+        pGuiGraphics.drawCenteredString(this.font, "" + infoCurrentLapisloopiumCost, this.leftPos + 92, this.topPos + 60 - 4, 0xFF521CAC);
+        pGuiGraphics.drawCenteredString(this.font, "" + infoDecrementTime, this.leftPos + 122, this.topPos + 45 - 4, 0xFFdee58c);
+        pGuiGraphics.drawCenteredString(this.font, "" + infoResultItemTime, this.leftPos + 149, this.topPos + 45 - 4, 0xFF741a65);
         RenderSystem.disableBlend();
+    }
+
+    @Override
+    protected void renderLabels(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        if (MouseUtil.isMouseAboveArea(pMouseX, pMouseY, leftPos, topPos, 83, 13, 18, 24)) {
+            List<Component> tooltips = List.of(
+                    Component.translatable("gui.time_station_gui.current_info_time")
+            );
+            pGuiGraphics.renderTooltip(this.font, tooltips,
+                    Optional.empty(),
+                    pMouseX - leftPos,
+                    pMouseY - topPos);
+        }
+
+        if (MouseUtil.isMouseAboveArea(pMouseX, pMouseY, leftPos, topPos, 83, 40, 18, 24)) {
+            List<Component> tooltips = List.of(
+                    Component.translatable("gui.time_station_gui.current_lapisloopium_cost")
+            );
+            pGuiGraphics.renderTooltip(this.font, tooltips,
+                    Optional.empty(),
+                    pMouseX - leftPos,
+                    pMouseY - topPos);
+        }
+
+        if (MouseUtil.isMouseAboveArea(pMouseX, pMouseY, leftPos, topPos, 112, 23, 20, 28)) {
+            List<Component> tooltips = List.of(
+                    Component.translatable("gui.time_station_gui.decrement_info_time")
+            );
+            pGuiGraphics.renderTooltip(this.font, tooltips,
+                    Optional.empty(),
+                    pMouseX - leftPos,
+                    pMouseY - topPos);
+        }
+
+        if (MouseUtil.isMouseAboveArea(pMouseX, pMouseY, leftPos, topPos, 139, 22, 18, 30)) {
+            List<Component> tooltips = List.of(
+                    Component.translatable("gui.time_station_gui.result_info_time")
+            );
+            pGuiGraphics.renderTooltip(this.font, tooltips,
+                    Optional.empty(),
+                    pMouseX - leftPos,
+                    pMouseY - topPos);
+        }
     }
 
     private int secondsToHours(int seconds) {

@@ -1,0 +1,27 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 2400,
+  "energyCost": 300,
+  "key": {
+    "A": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "B": {
+      "item": "minecraft:pumpkin_seeds"
+    },
+    "C": {
+      "item": "minecraft:melon_seeds"
+    }
+  },
+  "pattern": [
+    "AAAAA",
+    "ABBBA",
+    "ABCBA",
+    "ABBBA",
+    "AAAAA"
+  ],
+  "result": {
+    "count": 5,
+    "item": "survivaltimemod:temporal_tuber_seeds"
+  }
+}

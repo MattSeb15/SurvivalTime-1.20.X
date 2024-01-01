@@ -1,0 +1,28 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 200,
+  "energyCost": 600,
+  "key": {
+    "#": {
+      "item": "survivaltimemod:opal_shard_epoch"
+    },
+    "E": [
+      {
+        "item": "minecraft:coal"
+      },
+      {
+        "item": "minecraft:charcoal"
+      }
+    ]
+  },
+  "pattern": [
+    "     ",
+    "  #  ",
+    " #E# ",
+    "  #  ",
+    "     "
+  ],
+  "result": {
+    "item": "survivaltimemod:fiery_time"
+  }
+}

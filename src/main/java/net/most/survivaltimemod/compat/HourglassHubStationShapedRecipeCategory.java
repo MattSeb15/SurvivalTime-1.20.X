@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
@@ -94,11 +95,32 @@ public class HourglassHubStationShapedRecipeCategory implements IRecipeCategory<
         int gridIncrement = HourglassHubStationMenu.gridIncrement;
         //grid is 5x5
         //index 0-24
+//        recipe.getIngredients().forEach(ingredient -> {
+//            if(ingredient == Ingredient.EMPTY)
+//                return;
+//            builder.addSlot(RecipeIngredientRole.INPUT,
+//                    initialPositionGridX + (recipe.getIngredients().indexOf(ingredient) % 5) * gridIncrement,
+//                    initialPositionGridY + (recipe.getIngredients().indexOf(ingredient) / 5) * gridIncrement).addIngredients(ingredient);
+//        });
+         System.out.println("###### RECIPE SIZE::::::: "+ recipe.getIngredients().size());
+
+//
+//         for(int i = 0; i < recipe.getIngredients().size(); i++) {
+//        	 Ingredient ingredient = recipe.getIngredients().get(i);
+//        	 if(ingredient == Ingredient.EMPTY)
+//        		 continue;
+//        	 builder.addSlot(RecipeIngredientRole.INPUT,
+//                     initialPositionGridX + (i % 5) * gridIncrement,
+//                     initialPositionGridY + (i / 5) * gridIncrement).addIngredients(ingredient);
+//         }
+
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
+                Ingredient ingredient = recipe.getIngredients().get(i * 5 + j);
                 builder.addSlot(RecipeIngredientRole.INPUT,
                         initialPositionGridX + j * gridIncrement,
-                        initialPositionGridY + i * gridIncrement).addIngredients(recipe.getIngredients().get(i * 5 + j));
+                        initialPositionGridY + i * gridIncrement).addIngredients(ingredient);
             }
         }
 

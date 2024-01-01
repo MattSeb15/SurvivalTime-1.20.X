@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tempora_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "survivaltimemod:tempora_stick"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "survivaltimemod:tempora_stick_center_pattern"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_tempora_stick",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "survivaltimemod:tempora_stick_center_pattern"
+    ]
+  },
+  "sends_telemetry_event": true
+}

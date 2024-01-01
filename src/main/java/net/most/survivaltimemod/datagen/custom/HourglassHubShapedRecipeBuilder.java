@@ -217,13 +217,13 @@ public class HourglassHubShapedRecipeBuilder implements RecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getId() {
+        public @NotNull ResourceLocation getId() {
             return new ResourceLocation(SurvivalTimeMod.MOD_ID,
-                    ForgeRegistries.ITEMS.getKey(this.result).getPath() + "_from_hourglass_hub_station");
+                    id.getPath() + "_from_hourglass_hub_station");
         }
 
         @Override
-        public RecipeSerializer<?> getType() {
+        public @NotNull RecipeSerializer<?> getType() {
             return HourglassHubStationShapedRecipe.Serializer.INSTANCE;
         }
 

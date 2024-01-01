@@ -101,9 +101,8 @@ public class LostTimeSphereItem extends Item {
             CompoundTag tag = pStack.getTag();
             if (tag == null) return;
             int timeValue = pStack.getTag().getInt(TIME_VALUE_TAG);
-            String timeString = FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, timeValue);
             Component tooltipComponent =
-                    Component.empty().append(Component.literal("TE: ")).append(Component.literal(timeString).withStyle(ChatFormatting.GOLD));
+                    Component.empty().append(Component.literal("TE: ")).append(Component.literal(String.valueOf(timeValue)).withStyle(ChatFormatting.GREEN));
             pTooltipComponents.add(tooltipComponent);
             pTooltipComponents.add(Component.empty());
             pTooltipComponents.add(Component.translatable("itranslatable.lost_time_sphere.tooltip_right_click").withStyle(ChatFormatting.DARK_BLUE));

@@ -169,7 +169,7 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
                 throw new JsonSyntaxException("Invalid key entry: ' ' is a reserved symbol.");
             }
 
-            map.put(entry.getKey(), Ingredient.fromJson(entry.getValue(), false));
+            map.put(entry.getKey(), Ingredient.fromJson(entry.getValue(), true));
         }
 
         map.put(" ", Ingredient.EMPTY);
@@ -275,9 +275,8 @@ public class HourglassHubStationShapedRecipe implements Recipe<CraftingContainer
             Map<String, Ingredient> map = HourglassHubStationShapedRecipe.keyFromJson(GsonHelper.getAsJsonObject(pJson, "key"));
             int craftTime = GsonHelper.getAsInt(pJson, "craftTime");
             int energyCost = GsonHelper.getAsInt(pJson, "energyCost");
-            String[] astring =
-                    HourglassHubStationShapedRecipe.shrink(HourglassHubStationShapedRecipe.patternFromJson(GsonHelper.getAsJsonArray(pJson,
-                            "pattern")));
+            String[] astring = HourglassHubStationShapedRecipe.patternFromJson(GsonHelper.getAsJsonArray(pJson,
+                    "pattern"));
             int i = astring[0].length();
             int j = astring.length;
             NonNullList<Ingredient> nonnulllist = HourglassHubStationShapedRecipe.dissolvePattern(astring, map, i, j);

@@ -1,5 +1,6 @@
 package net.most.survivaltimemod.screen.renderer;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -36,16 +37,16 @@ public class EnergyDisplayTooltipArea {
     }
 
     public List<Component> getTooltips() {
-        return List.of(Component.literal(
-                FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, energy.getEnergyStored()) +
-                        " / " +
-                        FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, energy.getMaxEnergyStored())
-                        + " TE"));
+        Component energyStored = Component.literal("TE: " + energy.getEnergyStored()).withStyle(energy.getEnergyStored() > 0 ?
+                ChatFormatting.GREEN : ChatFormatting.DARK_RED);
+        Component maxEnergyStored = Component.literal("MAX: " + energy.getMaxEnergyStored()).withStyle(ChatFormatting.GRAY);
+
+        return List.of(energyStored, maxEnergyStored);
     }
 
     public static List<Component> getTooltips(int energyCost) {
         return List.of(Component.literal(
-                FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, energyCost) + " TE"));
+                energyCost + " TE").withStyle(ChatFormatting.GREEN));
     }
 
     public void render(GuiGraphics guiGraphics) {

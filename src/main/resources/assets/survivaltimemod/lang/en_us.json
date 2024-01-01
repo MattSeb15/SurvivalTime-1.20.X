@@ -81,9 +81,15 @@
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 
-  "gui.time_station_gui.confirm_button": "Confirm"
+  "gui.time_station_gui.confirm_button": "Confirm",
+  "gui.time_station_gui.current_info_time": "Stored current time",
+  "gui.time_station_gui.current_lapisloopium_cost": "Lapisloopium Cost",
+  "gui.time_station_gui.decrement_info_time": "Time to be subtracted",
+  "gui.time_station_gui.result_info_time": "Resulting item",
 
+  "gui.survivaltimemod.hourglass_hub_station.remaining_time": "Remaining time: %s",
 
+  "jei.tooltip.recipe.shapeless": "Shapeless Recipe",
 
-
+  "commands.sut.time.info": "%s. Username: %s | Current Time: %s"
 }

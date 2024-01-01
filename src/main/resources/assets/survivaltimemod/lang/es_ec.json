@@ -36,6 +36,7 @@
   "item.survivaltimemod.oracle_is_hourglass": "Cronómetro de los Destinos",
   "item.survivaltimemod.iflux": "iFlux",
 
+
   "block.survivaltimemod.fiery_time_block": "Bloque de Tiempo Ardiente",
   "block.survivaltimemod.opal_block": "Bloque de Opal",
   "block.survivaltimemod.chrona_block": "Bloque de Chrona",
@@ -69,6 +70,7 @@
   "itranslatable.oracle_is_hourglass.tooltip_right_click": "Clic Derecho para abrir la GUI.",
   "itranslatable.oracle_is_hourglass.tooltip_right_click_target": "Clic derecho en otro jugador para ver su tiempo.",
 
+
   "action.item.oracle_is_hourglass.right_click": "Tiempo Actual: %s",
   "action.item.oracle_is_hourglass.no_iflux_item": "Debes tener un iFlux en el Cronómetro de los Destinos para usar este artículo.",
   "action.item.oracle_is_hourglass.right_click_target": "Tiempo de %s: %s",
@@ -79,11 +81,15 @@
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 
-  "gui.time_station_gui.confirm_button": "Confirmar"
+  "gui.time_station_gui.confirm_button": "Confirmar",
+  "gui.time_station_gui.current_info_time": "Tiempo Actual",
+  "gui.time_station_gui.current_lapisloopium_cost": "Coste de Lapisloopium",
+  "gui.time_station_gui.decrement_info_time": "Tiempo a Restar",
+  "gui.time_station_gui.result_info_time": "Tiempo Resultante",
 
+  "gui.survivaltimemod.hourglass_hub_station.remaining_time": "Tiempo Restante: %s",
 
+  "jei.tooltip.recipe.shapeless": "Forma Libre",
 
-
-
-
+  "commands.sut.time.info": "%s. Username: %s | Tiempo Actual: %s"
 }

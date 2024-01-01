@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fiery_time_base": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "survivaltimemod:fiery_time"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "survivaltimemod:fiery_time_base"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_fiery_time_base",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "survivaltimemod:fiery_time_base"
+    ]
+  },
+  "sends_telemetry_event": true
+}

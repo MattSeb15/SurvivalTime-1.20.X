@@ -34,7 +34,16 @@ public class ProgressDisplayTooltipArea {
     }
 
     public List<Component> getTooltips() {
-        return List.of(Component.literal(this.progress + "/" + this.maxProgress));
+        int progressInTicks = this.progress;
+        int maxProgressInTicks = this.maxProgress;
+        int remainingProgressInTicks = maxProgressInTicks - progressInTicks;
+        ///20 ticks = 1 second
+
+        int remainingProgressInSeconds = remainingProgressInTicks / 20;
+        FormatTimeType formatTimeType = FormatTimeType.DEPENDS_NAMED;
+        String formattedRemainingProgress = FormatTimeType.getFormattedStringByType(formatTimeType, remainingProgressInSeconds);
+
+        return List.of(Component.translatable("gui.survivaltimemod.hourglass_hub_station.remaining_time", formattedRemainingProgress));
     }
 
 

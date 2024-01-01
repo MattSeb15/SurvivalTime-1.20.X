@@ -4,11 +4,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.most.survivaltimemod.effect.ModEffects;
 import net.most.survivaltimemod.time.PlayerTimeData;
-import net.most.survivaltimemod.util.textures.PositionIconTexture;
+import net.most.survivaltimemod.util.textures.ExtraPositionIconTexture;
 import net.most.survivaltimemod.util.textures.TimeIcon;
 import net.most.survivaltimemod.util.textures.TimeTexture;
 import net.most.survivaltimemod.util.textures.TimeType;
@@ -116,9 +115,9 @@ public class TimeHudOverlay {
                                  int tickCount,
                                  PlayerTimeData playerTimeData
     ) {
-        PositionIconTexture border = timeIcon.border();
-        PositionIconTexture fill = timeIcon.fill();
-        PositionIconTexture background = timeIcon.background();
+        ExtraPositionIconTexture border = timeIcon.border();
+        ExtraPositionIconTexture fill = timeIcon.fill();
+        ExtraPositionIconTexture background = timeIcon.background();
         int bgFillX = 3;
         int bgFillY = 2;
 
@@ -132,7 +131,7 @@ public class TimeHudOverlay {
 
     }
 
-    private static void drawIcon(GuiGraphics guiGraphics, PositionIconTexture icon, int x, int y) {
+    private static void drawIcon(GuiGraphics guiGraphics, ExtraPositionIconTexture icon, int x, int y) {
 
         guiGraphics.blit(TIME_HUD_ICONS, x, y,
                 icon.getOffsetU(),
@@ -141,7 +140,7 @@ public class TimeHudOverlay {
                 icon.getHeight());
     }
 
-    private static void drawFillIcon(GuiGraphics guiGraphics, PositionIconTexture icon, int x, int y) {
+    private static void drawFillIcon(GuiGraphics guiGraphics, ExtraPositionIconTexture icon, int x, int y) {
         int progress = icon.getHeight();
         int iconHeight = TimeTexture.ICONS_FILL_HEIGHT;
         float fillPercentage = (float) progress / iconHeight;

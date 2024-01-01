@@ -1,6 +1,7 @@
 package net.most.survivaltimemod.datagen.util;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
@@ -12,6 +13,9 @@ import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
 import net.most.survivaltimemod.util.ShardOptions;
 import net.most.survivaltimemod.util.WeightMinMax;
+import net.most.survivaltimemod.util.records.FullBorderPattern;
+import net.most.survivaltimemod.util.records.MediumBorderPattern;
+import net.most.survivaltimemod.util.records.StarCenterPattern;
 
 import java.util.List;
 import java.util.Map;
@@ -188,11 +192,27 @@ public class SurvivalTimeUtilGenerator {
     );
 
     public final static Map<ItemLike, ItemLike> RAW_SHARDS_RECIPE_MAP = Map.of(
-            ModItems.RAW_CHRONA.get(), ModItems.OPAL_SHARD_CHRONA.get(),
-            ModItems.RAW_TEMPORA.get(), ModItems.OPAL_SHARD_TEMPORA.get(),
-            ModItems.RAW_EPOCH.get(), ModItems.OPAL_SHARD_EPOCH.get(),
+            ModItems.RAW_LOOP.get(), ModItems.OPAL_SHARD_LOOP.get(),
             ModItems.RAW_FLUX.get(), ModItems.OPAL_SHARD_FLUX.get(),
-            ModItems.RAW_LOOP.get(), ModItems.OPAL_SHARD_LOOP.get()
+            ModItems.RAW_EPOCH.get(), ModItems.OPAL_SHARD_EPOCH.get(),
+            ModItems.RAW_TEMPORA.get(), ModItems.OPAL_SHARD_TEMPORA.get(),
+            ModItems.RAW_CHRONA.get(), ModItems.OPAL_SHARD_CHRONA.get()
+
+    );
+
+    public final static List<FullBorderPattern> FULL_BORDER_PATTERN_LIST = List.of(
+            new FullBorderPattern(ModItems.TEMPORAL_TUBER_SEEDS.get(), 5, 20 * 60 * 2, 60 * 5,
+                    Items.WHEAT_SEEDS,
+                    Items.PUMPKIN_SEEDS,
+                    Items.MELON_SEEDS)
+    );
+    public final static List<MediumBorderPattern> MEDIUM_BORDER_PATTERN_LIST = List.of(
+
+    );
+
+    public final static List<StarCenterPattern> STAR_CENTER_PATTERN_LIST = List.of(
+
+
     );
 
     public final static Map<ItemLike, ItemLike> BLOCK_FROM_ITEM_RECIPE_MAP = Map.ofEntries(
@@ -212,11 +232,11 @@ public class SurvivalTimeUtilGenerator {
     );
 
     public final static Map<ItemLike, ItemLike> STICKS_FROM_SHARDS_RECIPE_MAP = Map.ofEntries(
-            Map.entry(ModItems.CHRONA_STICK.get(), ModItems.OPAL_SHARD_CHRONA.get()),
-            Map.entry(ModItems.TEMPORA_STICK.get(), ModItems.OPAL_SHARD_TEMPORA.get()),
-            Map.entry(ModItems.EPOCH_STICK.get(), ModItems.OPAL_SHARD_EPOCH.get()),
+            Map.entry(ModItems.LOOP_STICK.get(), ModItems.OPAL_SHARD_LOOP.get()),
             Map.entry(ModItems.FLUX_STICK.get(), ModItems.OPAL_SHARD_FLUX.get()),
-            Map.entry(ModItems.LOOP_STICK.get(), ModItems.OPAL_SHARD_LOOP.get())
+            Map.entry(ModItems.EPOCH_STICK.get(), ModItems.OPAL_SHARD_EPOCH.get()),
+            Map.entry(ModItems.TEMPORA_STICK.get(), ModItems.OPAL_SHARD_TEMPORA.get()),
+            Map.entry(ModItems.CHRONA_STICK.get(), ModItems.OPAL_SHARD_CHRONA.get())
     );
 
     ////----->>> LOOT TABLES <<<-----\\\\----------------------->>> LOOT TABLES <<<-----\\\\

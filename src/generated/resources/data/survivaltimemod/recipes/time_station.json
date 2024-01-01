@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:anvil"
+    },
+    "L": {
+      "item": "survivaltimemod:lapisloopium"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "LAL",
+    "LLL"
+  ],
+  "result": {
+    "item": "survivaltimemod:time_station"
+  },
+  "show_notification": true
+}

@@ -18,8 +18,14 @@ import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
 import net.most.survivaltimemod.screen.renderer.EnergyDisplayTooltipArea;
+import net.most.survivaltimemod.util.MouseUtil;
+import net.most.survivaltimemod.util.textures.IconTexture;
+import net.most.survivaltimemod.util.textures.IconType;
+import net.most.survivaltimemod.util.textures.TimeTexture;
 import net.most.survivaltimemod.world.inventory.HourglassHubStationMenu;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class HourglassHubStationShapelessRecipeCategory implements IRecipeCategory<HourglassHubStationShapelessRecipe> {
 
@@ -47,9 +53,24 @@ public class HourglassHubStationShapelessRecipeCategory implements IRecipeCatego
         int yPos = 29;
         int width = 9;
         int height = 88;
+
+        IconTexture.drawIcon(guiGraphics, IconType.SHAPELESS, 143, 21);
+
         if (energyCost > 0) {
             EnergyDisplayTooltipArea.render(guiGraphics, energyCost, maxEnergyCost, xPos, yPos, width, height);
         }
+    }
+
+    @Override
+    public @NotNull List<Component> getTooltipStrings(@NotNull HourglassHubStationShapelessRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView
+            , double mouseX, double mouseY) {
+        if(MouseUtil.isMouseOver(mouseX, mouseY, 143, 21, 23,22)){
+            return List.of(Component.translatable("jei.tooltip.recipe.shapeless"));
+        }
+        if (MouseUtil.isMouseOver(mouseX, mouseY, 12, 11, 9, 88) && recipe.getEnergyCost() > 0) {
+            return EnergyDisplayTooltipArea.getTooltips(recipe.getEnergyCost());
+        }
+        return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }
 
     @Override
@@ -82,12 +103,10 @@ public class HourglassHubStationShapelessRecipeCategory implements IRecipeCatego
         int gridIncrement = HourglassHubStationMenu.gridIncrement;
         //grid is 5x5
         //index 0-24
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                builder.addSlot(RecipeIngredientRole.INPUT,
-                        initialPositionGridX + j * gridIncrement,
-                        initialPositionGridY + i * gridIncrement).addIngredients(recipe.getIngredients().get(i * 5 + j));
-            }
+        for (int i = 0; i < recipe.getIngredients().size(); i++) {
+            builder.addSlot(RecipeIngredientRole.INPUT,
+                    initialPositionGridX + (i % 5) * gridIncrement,
+                    initialPositionGridY + (i / 5) * gridIncrement).addIngredients(recipe.getIngredients().get(i));
         }
 
         builder.addSlot(RecipeIngredientRole.OUTPUT,

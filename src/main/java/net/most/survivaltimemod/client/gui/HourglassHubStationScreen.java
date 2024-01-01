@@ -122,6 +122,5 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int pX, int pY, int offsetX, int offsetY, int pWidth, int pHeight) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, pX + offsetX, pY + offsetY, pWidth, pHeight);
-
     }
 }

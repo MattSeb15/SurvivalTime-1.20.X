@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:crafting_table"
+    },
+    "C": {
+      "item": "survivaltimemod:opal_shard_chrona"
+    },
+    "E": {
+      "item": "survivaltimemod:opal_shard_epoch"
+    },
+    "F": {
+      "item": "survivaltimemod:opal_shard_flux"
+    },
+    "L": {
+      "item": "survivaltimemod:opal_shard_loop"
+    },
+    "T": {
+      "item": "survivaltimemod:opal_shard_tempora"
+    }
+  },
+  "pattern": [
+    "LCL",
+    "E#F",
+    "LTL"
+  ],
+  "result": {
+    "item": "survivaltimemod:hourglass_hub_station"
+  },
+  "show_notification": true
+}

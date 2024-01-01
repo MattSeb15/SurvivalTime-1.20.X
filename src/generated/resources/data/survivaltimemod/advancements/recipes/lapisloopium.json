@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_opal_shard_loop": {
+    "has_lapisloopium": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:opal_shard_loop"
+              "survivaltimemod:lapisloopium"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_opal_shard_loop",
+      "has_lapisloopium",
       "has_the_recipe"
     ]
   ],

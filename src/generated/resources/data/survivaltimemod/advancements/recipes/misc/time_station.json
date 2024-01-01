@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "survivaltimemod:time_station"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_time_station": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "survivaltimemod:lapisloopium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_time_station",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "survivaltimemod:time_station"
+    ]
+  },
+  "sends_telemetry_event": false
+}

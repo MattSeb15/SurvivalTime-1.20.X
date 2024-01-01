@@ -7,13 +7,18 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.datagen.custom.HourglassHubShapedRecipeBuilder;
 import net.most.survivaltimemod.datagen.custom.HourglassHubShapelessRecipeBuilder;
 import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
+import net.most.survivaltimemod.util.records.FullBorderPattern;
+import net.most.survivaltimemod.util.records.MediumBorderPattern;
+import net.most.survivaltimemod.util.records.StarCenterPattern;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -27,6 +32,34 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> pWriter) {
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.HOURGLASS_HUB_STATION.get())
+                .pattern("LCL")
+                .pattern("E#F")
+                .pattern("LTL")
+                .define('L', ModItems.OPAL_SHARD_LOOP.get())
+                .define('F', ModItems.OPAL_SHARD_FLUX.get())
+                .define('E', ModItems.OPAL_SHARD_EPOCH.get())
+                .define('T', ModItems.OPAL_SHARD_TEMPORA.get())
+                .define('C', ModItems.OPAL_SHARD_CHRONA.get())
+                .define('#', Blocks.CRAFTING_TABLE)
+                .unlockedBy(getHasName(ModBlocks.HOURGLASS_HUB_STATION.get()), has(Blocks.CRAFTING_TABLE))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.TIME_STATION.get())
+                .pattern("LLL")
+                .pattern("LAL")
+                .pattern("LLL")
+                .define('L', ModItems.LAPISLOOPIUM.get())
+                .define('A', Blocks.ANVIL)
+                .unlockedBy(getHasName(ModBlocks.TIME_STATION.get()), has(ModItems.LAPISLOOPIUM.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.LAPISLOOPIUM.get(), 1)
+                .requires(Items.LAPIS_LAZULI, 4)
+                .requires(ModItems.OPAL_SHARD_LOOP.get())
+                .unlockedBy(getHasName(ModItems.OPAL_SHARD_LOOP.get()), has(ModItems.OPAL_SHARD_LOOP.get()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.LAPISLOOPIUM.get()) + "_from_crafting_table");
 
         for (Map.Entry<ItemLike, ExpCookTimeGroupItem> entry : SurvivalTimeUtilGenerator.SMELTING_RECIPE_MAP.entrySet()) {
             ItemLike item = entry.getKey();
@@ -55,79 +88,36 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         }
 
-        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.BLOCK_FROM_ITEM_RECIPE_MAP.entrySet()) {
-            ItemLike block = entry.getKey();
-            ItemLike item = entry.getValue();
-
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, block)
-                    .pattern("###")
-                    .pattern("###")
-                    .pattern("###")
-                    .define('#', item)
-                    .unlockedBy(getHasName(item), has(item))
-                    .save(pWriter);
-
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item, 9)
-                    .requires(block)
-                    .unlockedBy(getHasName(block), has(block))
-                    .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "_from_block");
-
-            HourglassHubShapedRecipeBuilder.shaped(block)
-                    .pattern("#####")
-                    .pattern("#####")
-                    .pattern("#####")
-                    .pattern("#####")
-                    .pattern("#####")
-                    .define('#', item)
-                    .craftTime(20 * 120)
-                    .energyCost(60 * 10)
-                    .unlockedBy(getHasName(item), has(item))
-                    .save(pWriter);
-
-            HourglassHubShapelessRecipeBuilder.recipe(item, 25)
-                    .requires(block)
-                    .craftTime(20 * 60)
-                    .energyCost(60 * 5)
-                    .unlockedBy(getHasName(block), has(block))
-                    .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "hgh_from_block");
-        }
-        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.STICKS_FROM_SHARDS_RECIPE_MAP.entrySet()) {
-            ItemLike result = entry.getKey();
-            ItemLike shard_item = entry.getValue();
-
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result, 1)
-                    .pattern(" # ")
-                    .pattern("#P#")
-                    .pattern(" # ")
-                    .define('#', shard_item)
-                    .define('P', Items.STICK)
-                    .unlockedBy(getHasName(shard_item), has(shard_item))
-                    .save(pWriter);
-        }
-
-        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.RAW_SHARDS_RECIPE_MAP.entrySet()) {
-            ItemLike raw_item = entry.getKey();
-            ItemLike shard_item = entry.getValue();
-
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, raw_item, 2)
-                    .pattern(" # ")
-                    .pattern("#R#")
-                    .pattern(" # ")
-                    .define('#', shard_item)
-                    .define('R', Items.CLOCK)
-                    .unlockedBy(getHasName(shard_item), has(shard_item))
-                    .save(pWriter);
-        }
 
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.FIERY_TIME.get())
-                .pattern(" # ")
-                .pattern("#E#")
-                .pattern(" # ")
+
+
+
+        HourglassHubShapedRecipeBuilder.shaped(ModItems.FIERY_TIME.get())
+                .pattern("     ")
+                .pattern("  #  ")
+                .pattern(" #E# ")
+                .pattern("  #  ")
+                .pattern("     ")
                 .define('#', ModItems.OPAL_SHARD_EPOCH.get())
                 .define('E', Ingredient.of(Items.COAL, Items.CHARCOAL))
-                .unlockedBy(getHasName(ModItems.FIERY_TIME.get()), has(ModItems.FIERY_TIME.get()))
-                .save(pWriter);
+                .unlockedBy(getHasName(ModItems.FIERY_TIME.get()) + "_base", has(ModItems.FIERY_TIME.get()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.FIERY_TIME.get()) + "_base");
+
+        HourglassHubShapedRecipeBuilder.shaped(ModItems.OPAL_RAW.get(),2)
+                .pattern("     ")
+                .pattern(" DLD ")
+                .pattern(" TCF ")
+                .pattern(" DED ")
+                .pattern("     ")
+                .define('L', ModItems.OPAL_SHARD_LOOP.get())
+                .define('F', ModItems.OPAL_SHARD_FLUX.get())
+                .define('E', ModItems.OPAL_SHARD_EPOCH.get())
+                .define('T', ModItems.OPAL_SHARD_TEMPORA.get())
+                .define('C', ModItems.OPAL_SHARD_CHRONA.get())
+                .define('D', Items.DIAMOND)
+                .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.OPAL_RAW.get()) + "_from_shards");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.OPAL_RAW.get(), 2)
                 .requires(ModItems.OPAL_SHARD_CHRONA.get())
@@ -143,13 +133,46 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(ModItems.OPAL_SHARD_LOOP.get())
                 .craftTime(20 * 30)
                 .energyCost(60 * 5)
-                .unlockedBy(getHasName(ModItems.OPAL_SHARD_LOOP.get()), has(ModItems.OPAL_SHARD_LOOP.get()))
+                .unlockedBy(getHasName(ModItems.LAPISLOOPIUM.get()), has(ModItems.LAPISLOOPIUM.get()))
                 .save(pWriter);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.LAPISLOOPIUM.get(), 1)
-                .requires(Items.LAPIS_LAZULI)
-                .requires(ModItems.OPAL_SHARD_LOOP.get())
-                .unlockedBy(getHasName(ModItems.OPAL_SHARD_LOOP.get()), has(ModItems.OPAL_SHARD_LOOP.get()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.LAPISLOOPIUM.get()) + "_from_crafting_table");
+
+        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.BLOCK_FROM_ITEM_RECIPE_MAP.entrySet()) {
+            ItemLike block = entry.getKey();
+            ItemLike item = entry.getValue();
+
+            blockItemPattern(pWriter, block, item);
+        }
+
+        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.STICKS_FROM_SHARDS_RECIPE_MAP.entrySet()) {
+            ItemLike result = entry.getKey();
+            ItemLike shard_item = entry.getValue();
+            int entryIndex = SurvivalTimeUtilGenerator.STICKS_FROM_SHARDS_RECIPE_MAP.entrySet().stream().toList().indexOf(entry);
+            int craftTime = 20 * 10 * (entryIndex + 1);
+            int energyCost = 60 * (entryIndex + 1);
+            starCenterPattern(pWriter, new StarCenterPattern(result, 1, craftTime, energyCost, shard_item, Items.STICK));
+        }
+
+        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.RAW_SHARDS_RECIPE_MAP.entrySet()) {
+            ItemLike raw_item = entry.getKey();
+            ItemLike shard_item = entry.getValue();
+            int entryIndex = SurvivalTimeUtilGenerator.RAW_SHARDS_RECIPE_MAP.entrySet().stream().toList().indexOf(entry);
+            int craftTime = 20 * 30 * (entryIndex + 1);
+            int energyCost = 60 * 2 * (entryIndex + 1);
+
+            starCenterPattern(pWriter, new StarCenterPattern(raw_item, 2, craftTime, energyCost, shard_item, Items.CLOCK));
+        }
+
+        for (FullBorderPattern fullBorderPattern : SurvivalTimeUtilGenerator.FULL_BORDER_PATTERN_LIST) {
+            fullBorderPattern(pWriter, fullBorderPattern);
+        }
+
+        for (MediumBorderPattern mediumBorderPattern : SurvivalTimeUtilGenerator.MEDIUM_BORDER_PATTERN_LIST) {
+            mediumBorderPattern(pWriter, mediumBorderPattern);
+        }
+
+        for (StarCenterPattern starCenterPattern : SurvivalTimeUtilGenerator.STAR_CENTER_PATTERN_LIST) {
+            starCenterPattern(pWriter, starCenterPattern);
+        }
 
 //        HourglassHubShapelessRecipeBuilder.recipe(item, 25)
 //                .requires(block)
@@ -168,9 +191,82 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     }
 
-    protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients,
-                                      RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme
-            , String pGroup) {
+    private void blockItemPattern(Consumer<FinishedRecipe> pWriter, ItemLike block, ItemLike item) {
+        HourglassHubShapedRecipeBuilder.shaped(block)
+                .pattern("     ")
+                .pattern(" ### ")
+                .pattern(" ### ")
+                .pattern(" ### ")
+                .pattern("     ")
+                .define('#', item)
+                .craftTime(20 * 120)
+                .energyCost(60 * 10)
+                .unlockedBy(getHasName(item), has(item))
+                .save(pWriter);
+
+        HourglassHubShapelessRecipeBuilder.recipe(item, 9)
+                .requires(block)
+                .craftTime(20 * 60)
+                .energyCost(60 * 5)
+                .unlockedBy(getHasName(block), has(block))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "from_block");
+
+    }
+
+
+    protected static void fullBorderPattern(Consumer<FinishedRecipe> pWriter, FullBorderPattern pFullBorderPattern) {
+        ItemLike ingredientA = pFullBorderPattern.getIngredientA();
+
+        HourglassHubShapedRecipeBuilder.shaped(pFullBorderPattern.getResult(), pFullBorderPattern.getResultCount())
+                .pattern("AAAAA")
+                .pattern("ABBBA")
+                .pattern("ABCBA")
+                .pattern("ABBBA")
+                .pattern("AAAAA")
+                .define('A', ingredientA)
+                .define('B', pFullBorderPattern.getIngredientB())
+                .define('C', pFullBorderPattern.getIngredientC())
+                .craftTime(pFullBorderPattern.getCraftTime())
+                .energyCost(pFullBorderPattern.getEnergyCost())
+                .unlockedBy(getHasName(ingredientA), has(ingredientA))
+                .save(pWriter);
+    }
+
+    protected static void mediumBorderPattern(Consumer<FinishedRecipe> pWriter, MediumBorderPattern pFullBorderPattern) {
+        ItemLike ingredientB = pFullBorderPattern.getIngredientB();
+
+        HourglassHubShapedRecipeBuilder.shaped(pFullBorderPattern.getResult(), pFullBorderPattern.getResultCount())
+                .pattern("     ")
+                .pattern(" BBB ")
+                .pattern(" BCB ")
+                .pattern(" BBB ")
+                .pattern("     ")
+                .define('B', pFullBorderPattern.getIngredientB())
+                .define('C', pFullBorderPattern.getIngredientC())
+                .craftTime(pFullBorderPattern.getCraftTime())
+                .energyCost(pFullBorderPattern.getEnergyCost())
+                .unlockedBy(getHasName(ingredientB), has(ingredientB))
+                .save(pWriter);
+    }
+
+    protected static void starCenterPattern(Consumer<FinishedRecipe> pWriter, StarCenterPattern starCenterPattern) {
+        HourglassHubShapedRecipeBuilder.shaped(starCenterPattern.getResult(), starCenterPattern.getResultCount())
+                .pattern("     ")
+                .pattern("  B  ")
+                .pattern(" BCB ")
+                .pattern("  B  ")
+                .pattern("     ")
+                .define('B', starCenterPattern.getIngredientBorder())
+                .define('C', starCenterPattern.getIngredientCenter())
+                .craftTime(starCenterPattern.getCraftTime())
+                .energyCost(starCenterPattern.getEnergyCost())
+                .unlockedBy(getHasName(starCenterPattern.getResult()), has(starCenterPattern.getResult()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(starCenterPattern.getResult()) + "_center_pattern");
+    }
+
+    protected static void oreSmelting(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients,
+                                      @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult, float pExperience, int pCookingTIme
+            , @NotNull String pGroup) {
         oreCooking(pFinishedRecipeConsumer, RecipeSerializer.SMELTING_RECIPE, pIngredients, pCategory, pResult,
                 pExperience, pCookingTIme, pGroup, "_from_smelting");
     }
@@ -182,7 +278,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 pExperience, pCookingTIme, pGroup, "_from_smelting");
     }
 
-    protected static void oreBlasting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients,
+    protected static void oreBlasting(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients,
                                       RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime
             , String pGroup) {
         oreCooking(pFinishedRecipeConsumer, RecipeSerializer.BLASTING_RECIPE, pIngredients, pCategory, pResult,

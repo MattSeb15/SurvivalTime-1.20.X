@@ -1,15 +1,12 @@
 package net.most.survivaltimemod.util.textures;
 
 import net.minecraft.resources.ResourceLocation;
-import net.most.survivaltimemod.SurvivalTimeMod;
 
 import java.util.List;
-import java.util.Map;
 
 public class TimeTexture {
 
-    public static final ResourceLocation TIME_HUD_ICONS = new ResourceLocation(SurvivalTimeMod.MOD_ID,
-            "textures/gui/mod_icons.png");
+    public static final ResourceLocation TIME_HUD_ICONS = IconTexture.TIME_HUD_ICONS;
 
     public static final int ICONS_BORDER_HEIGHT = 14;
     public static final int ICONS_BORDER_WIDTH = 12;
@@ -49,6 +46,7 @@ public class TimeTexture {
     public static TimeIcon getTimeIcon(TimeType timeType, int fill_height) {
         return getTimeIconList(getHeight(fill_height)).get(timeType.getIndex());
     }
+
     public static float getHeightPercent(int progress) {
         return (float) Math.ceil((progress / 100.0) * ICONS_FILL_HEIGHT);
     }
@@ -62,6 +60,7 @@ public class TimeTexture {
     public static TimeIcon getNormalTimeIcon(int fill_height) {
         return getTimeIcon(TimeType.NORMAL, fill_height);
     }
+
     public static TimeIcon getPausedTimeIcon(int fill_height) {
         return getTimeIcon(TimeType.PAUSED, fill_height);
     }
@@ -91,23 +90,23 @@ public class TimeTexture {
                 createBackgroundTexture(i));
     }
 
-    public static PositionIconTexture createTexture(int offsetX, int offsetY, int i, int width, int height) {
-        return new PositionIconTexture(offsetX + (width * i), offsetY, width, height);
+    private static ExtraPositionIconTexture createTexture(int offsetX, int offsetY, int i, int width, int height) {
+        return IconTexture.createTextureWithIndex(offsetX, offsetY, i, width, height);
     }
 
-    public static PositionIconTexture createBorderTexture(int i) {
+    public static ExtraPositionIconTexture createBorderTexture(int i) {
         return createTexture(ICONS_BORDER_OFFSET_X, ICONS_BORDER_OFFSET_Y, i, ICONS_BORDER_WIDTH, ICONS_BORDER_HEIGHT);
     }
 
-    public static PositionIconTexture createFillTexture(int i) {
+    public static ExtraPositionIconTexture createFillTexture(int i) {
         return createTexture(ICONS_FILL_OFFSET_X, ICONS_FILL_OFFSET_Y, i, ICONS_FILL_WIDTH, ICONS_FILL_HEIGHT);
     }
 
-    public static PositionIconTexture createFillTexture(int i, int fill_height) {
+    public static ExtraPositionIconTexture createFillTexture(int i, int fill_height) {
         return createTexture(ICONS_FILL_OFFSET_X, ICONS_FILL_OFFSET_Y, i, ICONS_FILL_WIDTH, fill_height);
     }
 
-    public static PositionIconTexture createBackgroundTexture(int i) {
+    public static ExtraPositionIconTexture createBackgroundTexture(int i) {
         return createTexture(ICONS_BG_OFFSET_X, ICONS_BG_OFFSET_Y, i, ICONS_BG_WIDTH, ICONS_BG_HEIGHT);
     }
 

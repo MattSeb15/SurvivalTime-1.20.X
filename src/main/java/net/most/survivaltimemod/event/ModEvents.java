@@ -165,6 +165,7 @@ public class ModEvents {
     public static void onCommandRegister(RegisterCommandsEvent event) {
         new AddTimeCommand(event.getDispatcher());
         new PlayTimeCommand(event.getDispatcher());
+        new InfoTimeCommand(event.getDispatcher());
         new ResetTimeCommand(event.getDispatcher());
         new SetDefaultTimeMultiplierCommand(event.getDispatcher());
         new SetTimeCommand(event.getDispatcher());
