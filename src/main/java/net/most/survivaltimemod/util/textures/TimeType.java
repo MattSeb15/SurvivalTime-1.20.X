@@ -5,7 +5,8 @@ public enum TimeType {
     PAUSED(1),
     DAMAGE(2),
     REGEN(3),
-    TAIR(4);
+    TEAR(4),
+    GOLDEN(5);
 
     private final int index;
 

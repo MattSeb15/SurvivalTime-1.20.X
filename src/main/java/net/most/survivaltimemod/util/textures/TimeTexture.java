@@ -26,7 +26,8 @@ public class TimeTexture {
             createTimeIcon(TimeType.PAUSED.getIndex()),
             createTimeIcon(TimeType.DAMAGE.getIndex()),
             createTimeIcon(TimeType.REGEN.getIndex()),
-            createTimeIcon(TimeType.TAIR.getIndex())
+            createTimeIcon(TimeType.TEAR.getIndex()),
+            createTimeIcon(TimeType.GOLDEN.getIndex())
     );
 
     public static List<TimeIcon> getTimeIconList(int fill_height) {
@@ -35,7 +36,8 @@ public class TimeTexture {
                 createTimeIcon(TimeType.PAUSED.getIndex(), fill_height),
                 createTimeIcon(TimeType.DAMAGE.getIndex(), fill_height),
                 createTimeIcon(TimeType.REGEN.getIndex(), fill_height),
-                createTimeIcon(TimeType.TAIR.getIndex(), fill_height)
+                createTimeIcon(TimeType.TEAR.getIndex(), fill_height),
+                createTimeIcon(TimeType.GOLDEN.getIndex(), fill_height)
         );
     }
 
@@ -74,7 +76,7 @@ public class TimeTexture {
     }
 
     public static TimeIcon getTairTimeIcon(int fill_height) {
-        return getTimeIcon(TimeType.TAIR, fill_height);
+        return getTimeIcon(TimeType.TEAR, fill_height);
     }
 
 

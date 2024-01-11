@@ -1,5 +1,6 @@
 package net.most.survivaltimemod.event;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -65,10 +66,10 @@ public class ModEvents {
                         player.setGameMode(GameType.SURVIVAL);
                     }
                     playerTime.decrementTime(1, player);
-//                    player.displayClientMessage(
-//                            Component.literal("Time: " + playerTime.getFormattedTime() + " (x" +
-//                                    playerTime.getTimeMultiplier() + ")"),
-//                            true);
+                    player.displayClientMessage(
+                            Component.literal("T: " + playerTime.getFormattedTime() +" | MT: " + playerTime.getFormattedMaxTime() + " (x" +
+                                    playerTime.getTimeMultiplier() + ")"),
+                            true);
                 }, 0, 1, TimeUnit.SECONDS);
                 playerSchedulers.put(player.getUUID(), playerScheduler);
 

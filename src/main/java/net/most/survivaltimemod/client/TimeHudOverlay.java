@@ -66,12 +66,20 @@ public class TimeHudOverlay {
                 boolean isPlayerTimeStopped = playerTimeData.isTimeStopped();
 
                 TimeType timeType = isPlayerTimeStopped ? TimeType.PAUSED : TimeType.NORMAL;
-                if (player.hasEffect(ModEffects.DAMAGE_TRIGGER.get())) {
-                    timeType = TimeType.DAMAGE;
-                }
+
                 if (player.hasEffect(ModEffects.HEAL_TRIGGER.get())) {
                     timeType = TimeType.REGEN;
                 }
+                if (player.hasEffect(ModEffects.GOLDEN_TIME.get())) {
+                    timeType = TimeType.GOLDEN;
+                }
+                if (player.hasEffect(ModEffects.DAMAGE_TRIGGER.get())) {
+                    timeType = TimeType.DAMAGE;
+                }
+                if (player.hasEffect(ModEffects.TIME_TEAR.get())) {
+                    timeType = TimeType.TEAR;
+                }
+
 
                 TimeIcon timeIcon = TimeTexture.getTimeIcon(timeType);
                 TimeIcon timeIconRemaining = TimeTexture.getTimeIcon(timeType, remainingMinutes);
@@ -85,9 +93,9 @@ public class TimeHudOverlay {
                 int finalY;
                 int columns = 10;
                 for (int j = 0; j < maxHours; j++) {
-                    if (j % columns == 0 && j != 0)i++;
+                    if (j % columns == 0 && j != 0) i++;
 
-                    finalX = pX(x, j-i*columns, i);
+                    finalX = pX(x, j - i * columns, i);
                     finalY = pY(y, i, gui.getGuiTicks(), playerTimeData);
 
                     if (j < fullHours) {

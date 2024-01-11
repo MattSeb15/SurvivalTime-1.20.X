@@ -78,6 +78,28 @@
 
   "effect.survivaltimemod.damage_time_trigger_effect": "Time Damage",
   "effect.survivaltimemod.heal_time_trigger_effect": "Heal Damage",
+  "effect.survivaltimemod.golden_time": "Golden Time",
+  "effect.survivaltimemod.time_tear": "Time Tear",
+  "effect.survivaltimemod.instant_time_damage": "Instant Time Damage",
+  "effect.survivaltimemod.instant_time_regen": "Instant Time Regeneration",
+
+  "item.minecraft.potion.effect.golden_time_potion": "Golden Time Potion",
+  "item.minecraft.splash_potion.effect.golden_time_potion": "Golden Time Splash Potion",
+  "item.minecraft.lingering_potion.effect.golden_time_potion": "Golden Time Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.golden_time_potion": "Golden Time Tipped Arrow",
+  "item.minecraft.potion.effect.time_tear_potion": "Time Tear Potion",
+  "item.minecraft.splash_potion.effect.time_tear_potion": "Time Tear Splash Potion",
+  "item.minecraft.lingering_potion.effect.time_tear_potion": "Time Tear Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.time_tear_potion": "Time Tear Tipped Arrow",
+  "item.minecraft.potion.effect.instant_time_damage_potion": "Instant Time Damage Potion",
+  "item.minecraft.splash_potion.effect.instant_time_damage_potion": "Instant Time Damage Splash Potion",
+  "item.minecraft.lingering_potion.effect.instant_time_damage_potion": "Instant Time Damage Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.instant_time_damage_potion": "Instant Time Damage Tipped Arrow",
+  "item.minecraft.potion.effect.instant_time_regen_potion": "Instant Time Regen Potion",
+  "item.minecraft.splash_potion.effect.instant_time_regen_potion": "Instant Time Regen Splash Potion",
+  "item.minecraft.lingering_potion.effect.instant_time_regen_potion": "Instant Time Regen Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.instant_time_regen_potion": "Instant Time Regen Tipped Arrow",
+
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 

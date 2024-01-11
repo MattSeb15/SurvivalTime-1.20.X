@@ -19,6 +19,7 @@ import net.most.survivaltimemod.item.ModCreativeModTabs;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.loot.ModLootModifiers;
 import net.most.survivaltimemod.networking.ModMessages;
+import net.most.survivaltimemod.potion.ModPotions;
 import net.most.survivaltimemod.recipe.ModRecipes;
 import net.most.survivaltimemod.screen.ModMenuTypes;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ public class SurvivalTimeMod {
     public SurvivalTimeMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModCreativeModTabs.register(modEventBus);
+        ModEffects.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModLootModifiers.register(modEventBus);
@@ -41,7 +43,8 @@ public class SurvivalTimeMod {
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
-        ModEffects.register(modEventBus);
+
+        ModPotions.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);

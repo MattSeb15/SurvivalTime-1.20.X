@@ -64,6 +64,28 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
+    public void incrementMaxTime(float increment) {
+        float currentMaxTime = this.playerTimeData.getMaxTime();
+        float newMaxTime = currentMaxTime + increment;
+        this.playerTimeData.setMaxTime(newMaxTime);
+    }
+
+    public void incrementMaxTime(float increment, ServerPlayer player) {
+        this.incrementMaxTime(increment);
+        syncServerToClientData(player);
+    }
+
+    public void decrementMaxTime(float decrement) {
+        float currentMaxTime = this.playerTimeData.getMaxTime();
+        float newMaxTime = Math.max(currentMaxTime - decrement, MIN_TIME);
+        this.playerTimeData.setMaxTime(newMaxTime);
+    }
+
+    public void decrementMaxTime(float decrement, ServerPlayer player) {
+        this.decrementMaxTime(decrement);
+        syncServerToClientData(player);
+    }
+
     public void setIsTimeStopped(boolean isTimeStopped) {
         this.playerTimeData.setIsTimeStopped(isTimeStopped);
     }
@@ -118,12 +140,19 @@ public class PlayerTime {
         this.playerTimeData.setTime(newTime);
     }
 
-    public void incrementTime(float increment, ServerPlayer player) {
+    public void incrementTime(float increment, ServerPlayer player, boolean withEffect) {
         this.incrementTime(increment);
         syncServerToClientData(player);
-        player.addEffect(new MobEffectInstance(ModEffects.HEAL_TRIGGER.get(), 8,
-                1, false, false));
+        if (withEffect) {
+            player.addEffect(new MobEffectInstance(ModEffects.HEAL_TRIGGER.get(), 8,
+                    1, false, false));
+        }
     }
+
+    public void incrementTime(float increment, ServerPlayer player) {
+        this.incrementTime(increment, player, true);
+    }
+
 
     public void decrementTime(float decrement) {
         float currentTime = this.playerTimeData.getTime();
@@ -132,10 +161,19 @@ public class PlayerTime {
         this.playerTimeData.setTime(newTime);
     }
 
-    public void decrementTime(float decrement, ServerPlayer player) {
+    public void decrementTime(float decrement, ServerPlayer player, boolean withEffect) {
         this.decrementTime(decrement);
         syncServerToClientData(player);
+        if (withEffect) {
+            player.addEffect(new MobEffectInstance(ModEffects.DAMAGE_TRIGGER.get(), 8,
+                    1, false, false));
+        }
     }
+
+    public void decrementTime(float decrement, ServerPlayer player) {
+        this.decrementTime(decrement, player, false);
+    }
+
 
     public void resetTime() {
         this.playerTimeData.setTime(DEFAULT_TIME);
@@ -210,13 +248,17 @@ public class PlayerTime {
         playerTimeData.setDamageMultiplier(playerTimeDataTag.getFloat("damage_multiplier"));
     }
 
-    public String getFormattedTime() {
-
-        float hours = this.playerTimeData.getTime() / 3600;
-        float minutes = (this.playerTimeData.getTime() % 3600) / 60;
-        float seconds = this.playerTimeData.getTime() % 60;
+    private String getFormattedTime(float time) {
+        float hours = time / 3600;
+        float minutes = (time % 3600) / 60;
+        float seconds = time % 60;
 
         return String.format("%02d:%02d:%02d", (int) hours, (int) minutes, (int) seconds);
+    }
+
+    public String getFormattedTime() {
+        return getFormattedTime(this.playerTimeData.getTime());
+
     }
 
     public String getFormattedTime(FormatTimeType type) {
@@ -224,4 +266,7 @@ public class PlayerTime {
     }
 
 
+    public String getFormattedMaxTime() {
+        return getFormattedTime(this.playerTimeData.getMaxTime());
+    }
 }
