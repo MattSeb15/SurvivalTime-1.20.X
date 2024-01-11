@@ -91,5 +91,7 @@
 
   "jei.tooltip.recipe.shapeless": "Shapeless Recipe",
 
-  "commands.sut.time.info": "%s. Username: %s | Current Time: %s"
+  "commands.sut.time.info": "%s. Username: %s | Current Time: %s",
+  "commands.sut.maxtime.set": "Your max time has been set to: %s",
+  "commands.sut.maxtime.info": "%s. Username: %s | Current MaxTime: %s"
 }

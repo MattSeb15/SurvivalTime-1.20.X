@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.command;
+package net.most.survivaltimemod.command.tmultiplier;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;

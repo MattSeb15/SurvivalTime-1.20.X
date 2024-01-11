@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.command;
+package net.most.survivaltimemod.command.time;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;

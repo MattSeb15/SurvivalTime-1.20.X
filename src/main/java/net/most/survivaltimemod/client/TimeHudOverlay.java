@@ -18,21 +18,23 @@ public class TimeHudOverlay {
 
     private static final int padding = 5;
 
-    private static int pX(int x, int i) {
-        return x + padding + (i * (TimeTexture.ICONS_BORDER_WIDTH + 1));
+    private static int pX(int x, int j, int i) {
+        return x + padding + (j * (TimeTexture.ICONS_BORDER_WIDTH + 1));
     }
 
 
-    private static int pY(int y, int tickCount, PlayerTimeData playerTimeData) {
+    private static int pY(int y, int i, int tickCount, PlayerTimeData playerTimeData) {
         boolean isPlayerTimeStopped = playerTimeData.isTimeStopped();
+
         Random random = new Random();
         boolean randomBool = random.nextBoolean();
-
+        int py = y + padding + (i * (TimeTexture.ICONS_BORDER_HEIGHT + 1));
         if (tickCount % (20) == 0 && !isPlayerTimeStopped && randomBool) {
-            return y + padding + (random.nextInt(4) - 1);
+            return py + (random.nextInt(4) - 1);
         }
 
-        return y + padding;
+
+        return py;
     }
 
 
@@ -43,8 +45,6 @@ public class TimeHudOverlay {
 
 
         if (!gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements()) {
-//            int x = screenWidth / 2;
-//            int y = screenHeight;
 
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.enableBlend();
@@ -56,21 +56,12 @@ public class TimeHudOverlay {
                     return;
                 }
                 float totalSeconds = playerTimeData.getTime();///-1.0f
+                float maxSeconds = playerTimeData.getMaxTime();
+                int maxHours = Math.round(maxSeconds / 3600);
 
-                int fullHours = (int) (totalSeconds / 3600); // 3600 seconds = 1 hour
-
+                int fullHours = (int) (totalSeconds / 3600);
                 int remainingSeconds = (int) (totalSeconds % 3600);
                 int remainingMinutes = remainingSeconds / 60;
-                //45-59 min
-                int subFullHours = remainingSeconds >= 2700.0f ? 1 : 0;
-                //30-44 min
-                int halfHours = remainingSeconds >= 1800.0f ? 1 : 0;
-                //1-29 min
-                int subHalfHours = remainingSeconds >= 600.0f ? 1 : 0;
-
-
-                int y = 0;
-                int x = 0;
 
                 boolean isPlayerTimeStopped = playerTimeData.isTimeStopped();
 
@@ -86,18 +77,29 @@ public class TimeHudOverlay {
                 TimeIcon timeIconRemaining = TimeTexture.getTimeIcon(timeType, remainingMinutes);
                 TimeIcon timeIconEmpty = TimeTexture.getTimeIcon(timeType, 0);
 
+//                for (int i = 0; i < rows; i++)
+                int i = 0;
+                int y = 0;
+                int x = 0;
+                int finalX;
+                int finalY;
+                int columns = 10;
+                for (int j = 0; j < maxHours; j++) {
+                    if (j % columns == 0 && j != 0)i++;
 
-                for (int i = 0; i < 10; i++) {
-                    if (i < fullHours) {
-                        drawIcon(guiGraphics, timeIcon, x, y, i, gui.getGuiTicks(), playerTimeData);
-                    } else if (i == fullHours) {
-                        drawIcon(guiGraphics, timeIconRemaining, x, y, i, gui.getGuiTicks(), playerTimeData);
+                    finalX = pX(x, j-i*columns, i);
+                    finalY = pY(y, i, gui.getGuiTicks(), playerTimeData);
+
+                    if (j < fullHours) {
+                        drawIcon(guiGraphics, timeIcon, finalX, finalY);
+                    } else if (j == fullHours) {
+                        drawIcon(guiGraphics, timeIconRemaining, finalX, finalY);
 
                     } else {
-                        drawIcon(guiGraphics, timeIconEmpty, x, y, i, gui.getGuiTicks(), playerTimeData);
-
+                        drawIcon(guiGraphics, timeIconEmpty, finalX, finalY);
                     }
                 }
+
                 RenderSystem.disableBlend();
             }
 
@@ -109,20 +111,14 @@ public class TimeHudOverlay {
 
     private static void drawIcon(GuiGraphics guiGraphics,
                                  TimeIcon timeIcon,
-                                 int x,
-                                 int y,
-                                 int i,
-                                 int tickCount,
-                                 PlayerTimeData playerTimeData
+                                 int pX,
+                                 int pY
     ) {
         ExtraPositionIconTexture border = timeIcon.border();
         ExtraPositionIconTexture fill = timeIcon.fill();
         ExtraPositionIconTexture background = timeIcon.background();
         int bgFillX = 3;
         int bgFillY = 2;
-
-        int pX = pX(x, i);
-        int pY = pY(y, tickCount, playerTimeData);
 
 
         drawIcon(guiGraphics, border, pX, pY);

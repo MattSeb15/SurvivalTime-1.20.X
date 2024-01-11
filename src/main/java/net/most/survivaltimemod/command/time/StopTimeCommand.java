@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.command;
+package net.most.survivaltimemod.command.time;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,18 +11,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.most.survivaltimemod.time.PlayerTimeProvider;
 
-
 import java.util.Collection;
 
-public class PlayTimeCommand {
+public class StopTimeCommand {
+    public StopTimeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(Commands.literal("sut")
+                .requires(
+                        (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
 
-    public PlayTimeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("sut").requires(
-                                (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
-                        )
-                        .then(Commands.literal("time").then(Commands.literal("play").then(
-                                Commands.argument("player", EntityArgument.players()).executes(this::execute)
-                        )))
+                )
+                .then(Commands.literal("time").then(Commands.literal("pause").then(
+                        Commands.argument("player", EntityArgument.players()).executes(this::execute)
+                )))
         );
     }
 
@@ -39,27 +39,27 @@ public class PlayTimeCommand {
                     if (player == players.toArray()[players.size() - 1]) {
 
                         playerNames.append(player.getName().getString()).append(
-                                isTimeStopped ? " (resumed)" : " (x)"
+                                !isTimeStopped ? " (stopped)" : " (x)"
                         ).append("]");
                     } else {
                         playerNames.append(player.getName().getString()).append(
-                                isTimeStopped ? " (resumed)" : " (x)"
+                                !isTimeStopped ? " (stopped)" : " (x)"
                         ).append(", ");
                     }
 
-                    if (isTimeStopped) {
+                    if (!isTimeStopped) {
                         player.displayClientMessage(
-                                Component.literal("Time resumed").withStyle(ChatFormatting.GREEN),
+                                Component.literal("Time stopped").withStyle(ChatFormatting.GREEN),
                                 false
                         );
                     }
-                    playerTime.startTimeStatus(player);
+                    playerTime.stopTimeStatus(player);
                 });
 
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Time resumed for ").append(
+                    () -> Component.literal("Time stopped for ").append(
                             playerNames.toString()
                     ).withStyle(ChatFormatting.GREEN),
                     true
@@ -71,6 +71,4 @@ public class PlayTimeCommand {
 
         return 1;
     }
-
-
 }

@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.command;
+package net.most.survivaltimemod.command.maxtime;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -15,17 +15,17 @@ import net.most.survivaltimemod.time.PlayerTimeProvider;
 
 import java.util.Collection;
 
-public class SetTimeCommand {
-    public SetTimeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+public class SetMaxTimeCommand {
+    public SetMaxTimeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("sut")
                 .requires(
                         (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
 
                 )
-                .then(Commands.literal("time").then(Commands.literal("set").then(
+                .then(Commands.literal("maxtime").then(Commands.literal("set").then(
                         Commands.argument("player", EntityArgument.players()).then(
                                 Commands.argument("time",
-                                        IntegerArgumentType.integer(0, 24 * 3600)).executes(this::execute)
+                                        IntegerArgumentType.integer(0, 50 * 3600)).executes(this::execute)
                         )
                 )))
         );
@@ -41,16 +41,16 @@ public class SetTimeCommand {
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    playerTime.setTime(timeToSet, player);
+                    playerTime.setMaxTime(timeToSet, player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");
                     } else {
                         playerNames.append(player.getName().getString()).append(", ");
                     }
 
-                    //set time message your time has been set to x seconds
+
                     player.displayClientMessage(
-                            Component.literal("Your time has been set to " + formattedTime).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("commands.sut.maxtime.set", formattedTime).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });

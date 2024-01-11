@@ -1,7 +1,5 @@
 package net.most.survivaltimemod.event;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,10 +16,14 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.command.ConfigCommand;
 import net.most.survivaltimemod.SurvivalTimeMod;
-import net.most.survivaltimemod.command.*;
 import net.most.survivaltimemod.command.dmultiplier.SetDamageMultiplierCommand;
 import net.most.survivaltimemod.command.dmultiplier.SetDefaultDamageMultiplierCommand;
-import net.most.survivaltimemod.data.FormatTimeType;
+import net.most.survivaltimemod.command.item.AddNbtToItem;
+import net.most.survivaltimemod.command.maxtime.InfoMaxTimeCommand;
+import net.most.survivaltimemod.command.maxtime.SetMaxTimeCommand;
+import net.most.survivaltimemod.command.time.*;
+import net.most.survivaltimemod.command.tmultiplier.SetDefaultTimeMultiplierCommand;
+import net.most.survivaltimemod.command.tmultiplier.SetTimeMultiplierCommand;
 import net.most.survivaltimemod.effect.ModEffects;
 import net.most.survivaltimemod.time.PlayerTime;
 import net.most.survivaltimemod.time.PlayerTimeProvider;
@@ -100,7 +102,6 @@ public class ModEvents {
             float damage = event.getAmount();
             event.setCanceled(true);
 
-
             player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
                 float time = playerTime.getTime();
                 float damageMultiplier = playerTime.getDamageMultiplier();
@@ -116,6 +117,8 @@ public class ModEvents {
 
             player.addEffect(new MobEffectInstance(ModEffects.DAMAGE_TRIGGER.get(), 8,
                     1, false, false));
+
+//            player.drop(new ItemStack(Items.BEEF), true, true); //TODO: REFACTOR CODE
 
         }
 
@@ -176,6 +179,8 @@ public class ModEvents {
         new AddNbtToItem(event.getDispatcher(), event.getBuildContext());
         new SetDamageMultiplierCommand(event.getDispatcher());
         new SetDefaultDamageMultiplierCommand(event.getDispatcher());
+        new InfoMaxTimeCommand(event.getDispatcher());
+        new SetMaxTimeCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
