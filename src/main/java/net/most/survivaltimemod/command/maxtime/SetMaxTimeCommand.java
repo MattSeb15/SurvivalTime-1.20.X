@@ -41,6 +41,9 @@ public class SetMaxTimeCommand {
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
+                    if(playerTime.getTime() > timeToSet){
+                        playerTime.setTime(timeToSet, player);
+                    }
                     playerTime.setMaxTime(timeToSet, player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");

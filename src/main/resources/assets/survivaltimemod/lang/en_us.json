@@ -82,6 +82,8 @@
   "effect.survivaltimemod.time_tear": "Time Tear",
   "effect.survivaltimemod.instant_time_damage": "Instant Time Damage",
   "effect.survivaltimemod.instant_time_regen": "Instant Time Regeneration",
+  "effect.survivaltimemod.time_extinguisher": "Time Extinguisher",
+  "effect.survivaltimemod.time_ignite": "Time Ignite",
 
   "item.minecraft.potion.effect.golden_time_potion": "Golden Time Potion",
   "item.minecraft.splash_potion.effect.golden_time_potion": "Golden Time Splash Potion",
@@ -99,6 +101,14 @@
   "item.minecraft.splash_potion.effect.instant_time_regen_potion": "Instant Time Regen Splash Potion",
   "item.minecraft.lingering_potion.effect.instant_time_regen_potion": "Instant Time Regen Lingering Potion",
   "item.minecraft.tipped_arrow.effect.instant_time_regen_potion": "Instant Time Regen Tipped Arrow",
+  "item.minecraft.potion.effect.time_extinguisher_potion": "Time Extinguisher Potion",
+  "item.minecraft.splash_potion.effect.time_extinguisher_potion": "Time Extinguisher Splash Potion",
+  "item.minecraft.lingering_potion.effect.time_extinguisher_potion": "Time Extinguisher Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.time_extinguisher_potion": "Time Extinguisher Tipped Arrow",
+  "item.minecraft.potion.effect.time_ignite_potion": "Time Ignite Potion",
+  "item.minecraft.splash_potion.effect.time_ignite_potion": "Time Ignite Splash Potion",
+  "item.minecraft.lingering_potion.effect.time_ignite_potion": "Time Ignite Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.time_ignite_potion": "Time Ignite Tipped Arrow",
 
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",

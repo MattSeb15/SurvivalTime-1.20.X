@@ -1,5 +1,7 @@
 package net.most.survivaltimemod.time;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,17 +17,18 @@ public class PlayerTime {
 
     private static final float DEFAULT_TIME = 36000.0F;
     private static final float MIN_TIME = 0.0F;
-
     private static final boolean DEFAULT_IS_TIME_STOPPED = false;
     private static final float DEFAULT_TIME_MULTIPLIER = 1.0F;
     private static final float DEFAULT_DAMAGE_MULTIPLIER = 20.0F;
+    private static final int[] DEFAULT_EFFECT_INSTANCES = new int[]{0, 0, 0, 0};
 
     private PlayerTimeData playerTimeData = new PlayerTimeData(
             DEFAULT_TIME,
             DEFAULT_TIME,
             DEFAULT_IS_TIME_STOPPED,
             DEFAULT_TIME_MULTIPLIER,
-            DEFAULT_DAMAGE_MULTIPLIER
+            DEFAULT_DAMAGE_MULTIPLIER,
+            DEFAULT_EFFECT_INSTANCES
     );
     public static final String COMPOUND_TAG_KEY = "player_time_data";
 
@@ -112,6 +115,58 @@ public class PlayerTime {
         this.playerTimeData.setDamageMultiplier(damageMultiplier);
     }
 
+    public void setEffectInstancesDuration(int[] effectInstancesDuration) {
+        this.playerTimeData.setEffectInstancesDuration(effectInstancesDuration);
+    }
+
+    public static int timeExtinguisherEffectIndex = 0;
+    public static int timeExtinguisherTickCountIndex = timeExtinguisherEffectIndex + 1;
+    public static int timeIgniteEffectIndex = 2;
+    public static int timeIgniteTickCountIndex = timeIgniteEffectIndex + 1;
+
+    public void setTimeExtinguisherEffectDuration(int duration) {
+        this.playerTimeData.getEffectInstancesDuration()[timeExtinguisherEffectIndex] = duration;
+    }
+
+    public void setTimeExtinguisherTickCount(int tickCount) {
+        this.playerTimeData.getEffectInstancesDuration()[timeExtinguisherTickCountIndex] = tickCount;
+    }
+
+    public void setTimeIgniteEffectDuration(int duration) {
+        this.playerTimeData.getEffectInstancesDuration()[timeIgniteEffectIndex] = duration;
+    }
+
+    public void setTimeIgniteTickCount(int tickCount) {
+        this.playerTimeData.getEffectInstancesDuration()[timeIgniteTickCountIndex] = tickCount;
+    }
+
+
+
+
+
+
+
+
+    public void setTimeExtinguisherEffectDuration(int duration, ServerPlayer player) {
+        this.setTimeExtinguisherEffectDuration(duration);
+        syncServerToClientData(player);
+    }
+
+    public void setTimeExtinguisherTickCount(int tickCount, ServerPlayer player) {
+        this.setTimeExtinguisherTickCount(tickCount);
+        syncServerToClientData(player);
+    }
+
+    public void setTimeIgniteEffectDuration(int duration, ServerPlayer player) {
+        this.setTimeIgniteEffectDuration(duration);
+        syncServerToClientData(player);
+    }
+
+    public void setTimeIgniteTickCount(int tickCount, ServerPlayer player) {
+        this.setTimeIgniteTickCount(tickCount);
+        syncServerToClientData(player);
+    }
+
     public float getTime() {
         return this.playerTimeData.getTime();
     }
@@ -130,6 +185,26 @@ public class PlayerTime {
 
     public float getDamageMultiplier() {
         return this.playerTimeData.getDamageMultiplier();
+    }
+
+    public int[] getEffectInstancesDuration() {
+        return this.playerTimeData.getEffectInstancesDuration();
+    }
+
+    public int getTimeExtinguisherEffectDuration() {
+        return this.getEffectInstancesDuration()[0];
+    }
+
+    public int getTimeExtinguisherEffectTickCount() {
+        return this.getEffectInstancesDuration()[1];
+    }
+
+    public int getTimeIgniteEffectDuration() {
+        return this.getEffectInstancesDuration()[2];
+    }
+
+    public int getTimeIgniteEffectTickCount() {
+        return this.getEffectInstancesDuration()[3];
     }
 
     public void incrementTime(float increment) {
@@ -236,6 +311,7 @@ public class PlayerTime {
         playerTimeDataTag.putBoolean("is_time_stopped", playerTimeData.isTimeStopped());
         playerTimeDataTag.putFloat("time_multiplier", playerTimeData.getTimeMultiplier());
         playerTimeDataTag.putFloat("damage_multiplier", playerTimeData.getDamageMultiplier());
+        playerTimeDataTag.putIntArray("effect_instances_duration", playerTimeData.getEffectInstancesDuration());
         compoundTag.put(COMPOUND_TAG_KEY, playerTimeDataTag);
     }
 
@@ -246,6 +322,8 @@ public class PlayerTime {
         playerTimeData.setIsTimeStopped(playerTimeDataTag.getBoolean("is_time_stopped"));
         playerTimeData.setTimeMultiplier(playerTimeDataTag.getFloat("time_multiplier"));
         playerTimeData.setDamageMultiplier(playerTimeDataTag.getFloat("damage_multiplier"));
+        playerTimeData.setEffectInstancesDuration(playerTimeDataTag.getIntArray("effect_instances_duration"));
+
     }
 
     private String getFormattedTime(float time) {

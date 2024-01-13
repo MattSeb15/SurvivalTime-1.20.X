@@ -21,6 +21,12 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> TIME_TEAR = MOB_EFFECTS.register("time_tear",
             () -> new TimeTearEffect(MobEffectCategory.HARMFUL, 0xff2c2222));
 
+    public static final RegistryObject<MobEffect> TIME_EXTINGUISHER = MOB_EFFECTS.register("time_extinguisher",
+            () -> new TimeExtinguisher(MobEffectCategory.HARMFUL, 0xff0f0303));
+
+    public static final RegistryObject<MobEffect> TIME_IGNITE = MOB_EFFECTS.register("time_ignite",
+            () -> new TimeIgnite(MobEffectCategory.BENEFICIAL, 0xffa55f22));
+
     public static final RegistryObject<MobEffect> INSTANT_TIME_DAMAGE = MOB_EFFECTS.register("instant_time_damage",
             () -> new InstantTimeDamage(MobEffectCategory.HARMFUL, 0xff4e1610));
     public static final RegistryObject<MobEffect> INSTANT_TIME_REGEN = MOB_EFFECTS.register("instant_time_regen",

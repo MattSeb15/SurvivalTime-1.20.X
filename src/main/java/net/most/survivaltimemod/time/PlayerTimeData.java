@@ -6,15 +6,16 @@ public class PlayerTimeData {
     public float TIME;
     public boolean IS_TIME_STOPPED;
     public float TIME_MULTIPLIER;
-
     public float DAMAGE_MULTIPLIER;
+    public int[] EFFECT_INSTANCES_DURATION;
 
-    public PlayerTimeData(float maxTime, float time, boolean isTimeStopped, float timeMultiplier, float damageMultiplier) {
+    public PlayerTimeData(float maxTime, float time, boolean isTimeStopped, float timeMultiplier, float damageMultiplier, int[] effectInstancesDuration) {
         this.MAX_TIME = maxTime;
         this.TIME = time;
         this.IS_TIME_STOPPED = isTimeStopped;
         this.TIME_MULTIPLIER = timeMultiplier;
         this.DAMAGE_MULTIPLIER = damageMultiplier;
+        this.EFFECT_INSTANCES_DURATION = effectInstancesDuration;
     }
 
     public float getMaxTime() {
@@ -31,6 +32,10 @@ public class PlayerTimeData {
 
     public float getTimeMultiplier() {
         return this.TIME_MULTIPLIER;
+    }
+
+    public int[] getEffectInstancesDuration() {
+        return this.EFFECT_INSTANCES_DURATION;
     }
 
     public void setMaxTime(float maxTime) {
@@ -55,5 +60,9 @@ public class PlayerTimeData {
 
     public void setDamageMultiplier(float damageMultiplier) {
         this.DAMAGE_MULTIPLIER = damageMultiplier;
+    }
+
+    public void setEffectInstancesDuration(int[] effectInstancesDuration) {
+        this.EFFECT_INSTANCES_DURATION = effectInstancesDuration;
     }
 }
