@@ -1,0 +1,23 @@
+{
+  "timekeeper.ambient": {
+    "subtitles": "sounds.survivaltimemod.timekeeper.ambient",
+    "sounds": [
+      "survivaltimemod:timekeeper_ambient_1"
+    ]
+  },
+  "timekeeper.bad": {
+    "subtitles": "sounds.survivaltimemod.timekeeper.bad",
+    "sounds": [
+      "survivaltimemod:timekeeper_bad_1"
+    ]
+  },
+  "timekeeper.good": {
+    "subtitles": "sounds.survivaltimemod.timekeeper.good",
+    "sounds": [
+      "survivaltimemod:timekeeper_good_1",
+      "survivaltimemod:timekeeper_good_2",
+      "survivaltimemod:timekeeper_good_3",
+      "survivaltimemod:timekeeper_good_4"
+    ]
+  }
+}

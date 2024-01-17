@@ -46,7 +46,7 @@ public class OracleIsHourglassMenu extends AbstractContainerMenu implements Supp
         this.internal = new ItemStackHandler(1) {
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return stack.getItem() == ModItems.I_FLUX.get();
+                return stack.getItem() == ModItems.IFLUX.get();
             }
         };
         BlockPos pos = null;

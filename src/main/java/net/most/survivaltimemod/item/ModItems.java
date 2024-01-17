@@ -4,12 +4,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SwordItem;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.entity.ModEntities;
 import net.most.survivaltimemod.item.custom.*;
 
 public class ModItems {
@@ -163,7 +165,7 @@ public class ModItems {
     public static final RegistryObject<Item> ORACLE_IS_HOURGLASS =
             ITEMS.register("oracle_is_hourglass", () -> new OracleIsHourglassItem(new Item.Properties()));
 
-    public static final RegistryObject<Item> I_FLUX =
+    public static final RegistryObject<Item> IFLUX =
             ITEMS.register("iflux", () -> new Item(new Item.Properties()));
 
 ///    public static final RegistryObject<Item> TIMEKEEPER_IS_EMBLEM =
@@ -184,6 +186,15 @@ public class ModItems {
 
     public static final RegistryObject<Item> LOOP_STICK =
             ITEMS.register("loop_stick", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> CLOCK_FRAGMENT =
+            ITEMS.register("clock_fragment", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> TIMEKEEPER_SPAWN_EGG =
+            ITEMS.register("timekeeper_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.TIMEKEEPER,
+                    0xff5c2c5e,
+                    0xff44a25f,
+                    new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {

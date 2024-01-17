@@ -15,6 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.block.entity.ModBlockEntities;
 import net.most.survivaltimemod.effect.ModEffects;
+import net.most.survivaltimemod.entity.ModEntities;
 import net.most.survivaltimemod.item.ModCreativeModTabs;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.loot.ModLootModifiers;
@@ -22,6 +23,7 @@ import net.most.survivaltimemod.networking.ModMessages;
 import net.most.survivaltimemod.potion.ModPotions;
 import net.most.survivaltimemod.recipe.ModRecipes;
 import net.most.survivaltimemod.screen.ModMenuTypes;
+import net.most.survivaltimemod.sound.ModSounds;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -43,6 +45,8 @@ public class SurvivalTimeMod {
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModSounds.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         ModPotions.register(modEventBus);
 

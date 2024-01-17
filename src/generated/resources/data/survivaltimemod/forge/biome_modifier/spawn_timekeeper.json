@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#forge:is_desert",
+  "spawners": {
+    "type": "survivaltimemod:timekeeper",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 15
+  }
+}

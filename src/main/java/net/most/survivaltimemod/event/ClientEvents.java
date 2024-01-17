@@ -1,6 +1,7 @@
 package net.most.survivaltimemod.event;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -16,6 +17,8 @@ import net.most.survivaltimemod.client.TimeHudOverlay;
 import net.most.survivaltimemod.client.gui.OracleIsHourglassScreen;
 import net.most.survivaltimemod.client.gui.TimeStationScreen;
 import net.most.survivaltimemod.client.gui.HourglassHubStationScreen;
+import net.most.survivaltimemod.entity.ModEntities;
+import net.most.survivaltimemod.entity.client.TimekeeperRenderer;
 import net.most.survivaltimemod.screen.ModMenuTypes;
 
 public class ClientEvents {
@@ -34,6 +37,7 @@ public class ClientEvents {
     public static class ClientModBusEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            EntityRenderers.register(ModEntities.TIMEKEEPER.get(), TimekeeperRenderer::new);
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenuTypes.HOURGLASS_HUB_STATION_MENU.get(), HourglassHubStationScreen::new);
                 MenuScreens.register(ModMenuTypes.TIME_STATION_MENU.get(), TimeStationScreen::new);

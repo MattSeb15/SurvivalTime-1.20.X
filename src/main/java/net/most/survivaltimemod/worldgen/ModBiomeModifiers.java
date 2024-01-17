@@ -7,11 +7,16 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.entity.ModEntities;
+
+import java.util.List;
 
 public class ModBiomeModifiers {
 
@@ -19,6 +24,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_OPAL_ORE = registerKey("add_opal_ore");
     public static final ResourceKey<BiomeModifier> ADD_NETHER_OPAL_ORE = registerKey("add_nether_opal_ore");
     public static final ResourceKey<BiomeModifier> ADD_END_OPAL_ORE = registerKey("add_end_opal_ore");
+    public static final ResourceKey<BiomeModifier> SPAWN_TIMEKEEPER = registerKey("spawn_timekeeper");
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -38,6 +44,11 @@ public class ModBiomeModifiers {
                 biomes.getOrThrow(BiomeTags.IS_END),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.END_OPAL_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
+
+        context.register(SPAWN_TIMEKEEPER, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                biomes.getOrThrow(Tags.Biomes.IS_DESERT),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.TIMEKEEPER.get(), 15, 1, 1))
+        ));
 
     }
 

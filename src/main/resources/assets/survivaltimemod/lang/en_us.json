@@ -35,6 +35,8 @@
   "item.survivaltimemod.lapisloopium": "Lapisloopium",
   "item.survivaltimemod.oracle_is_hourglass": "The Oracle's Hourglass",
   "item.survivaltimemod.iflux": "iFlux",
+  "item.survivaltimemod.timekeeper_spawn_egg": "Timekeeper Spawn Egg",
+  "item.survivaltimemod.clock_fragment": "Clock Fragment",
 
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
@@ -110,6 +112,9 @@
   "item.minecraft.lingering_potion.effect.time_ignite_potion": "Time Ignite Lingering Potion",
   "item.minecraft.tipped_arrow.effect.time_ignite_potion": "Time Ignite Tipped Arrow",
 
+  "sounds.survivaltimemod.timekeeper.ambient": "Timekeeper Ambient",
+  "sounds.survivaltimemod.timekeeper.bad": "Timekeeper Bad",
+  "sounds.survivaltimemod.timekeeper.good": "Timekeeper Good",
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 

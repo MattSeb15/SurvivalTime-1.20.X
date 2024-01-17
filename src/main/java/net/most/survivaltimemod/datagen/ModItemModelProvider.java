@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
+import net.most.survivaltimemod.item.ModItems;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-
+        withExistingParent(ModItems.TIMEKEEPER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         for (RegistryObject<Item> item : SurvivalTimeUtilGenerator.ITEM_REGISTER_MODEL_LIST) {
             simpleItem(item);
         }
@@ -35,6 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             Block block = entry.getValue();
             complexBlock(block);
         }
+
 
 //        complexBlock(ModBlocks.HOURGLASS_HUB_STATION.get());
 
