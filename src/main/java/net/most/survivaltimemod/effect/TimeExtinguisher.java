@@ -46,12 +46,12 @@ public class TimeExtinguisher extends MobEffect {
                     }
 
                 }
-                player.displayClientMessage(Component.literal("DEBUG TC" + playerTime.getTimeExtinguisherEffectTickCount() + "IDUR: " + playerTime.getTimeExtinguisherEffectDuration()), false);
+//                player.displayClientMessage(Component.literal("DEBUG TC" + playerTime.getTimeExtinguisherEffectTickCount() + "IDUR: " + playerTime.getTimeExtinguisherEffectDuration()), false);
 
                 if (tickCount >= playerTime.getTimeExtinguisherEffectDuration() && playerTime.getTimeExtinguisherEffectDuration() != 0) {
                     int decrement = tickCount * (pAmplifier + 1);
                     playerTime.decrementTime(decrement, player, true);
-                    player.displayClientMessage(Component.literal("DEBUG DECREMENT: " + decrement), false);
+//                    player.displayClientMessage(Component.literal("DEBUG DECREMENT: " + decrement), false);
 
                     player.level().playSound(null, player.blockPosition(), SoundEvents.BLAZE_DEATH,
                             SoundSource.PLAYERS, 1.0f, 1.0f);

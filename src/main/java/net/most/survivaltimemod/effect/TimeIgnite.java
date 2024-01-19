@@ -46,12 +46,12 @@ public class TimeIgnite extends MobEffect {
                     }
 
                 }
-                player.displayClientMessage(Component.literal("DEBUG TC" + playerTime.getTimeIgniteEffectTickCount() + "IDUR: " + playerTime.getTimeIgniteEffectDuration()), false);
+//                player.displayClientMessage(Component.literal("DEBUG TC" + playerTime.getTimeIgniteEffectTickCount() + "IDUR: " + playerTime.getTimeIgniteEffectDuration()), false);
 
                 if (tickCount >= playerTime.getTimeIgniteEffectDuration() && playerTime.getTimeIgniteEffectDuration() != 0) {
                     int increment = tickCount * (pAmplifier + 1);
                     playerTime.incrementTime(increment, player, true);
-                    player.displayClientMessage(Component.literal("DEBUG INCREMENT: " + increment), false);
+//                    player.displayClientMessage(Component.literal("DEBUG INCREMENT: " + increment), false);
 
                     player.level().playSound(null, player.blockPosition(), SoundEvents.FIRE_EXTINGUISH,
                             SoundSource.PLAYERS, 1.0f, 1.0f);

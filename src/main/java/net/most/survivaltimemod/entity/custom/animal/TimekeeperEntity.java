@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.entity.custom;
+package net.most.survivaltimemod.entity.custom.animal;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;

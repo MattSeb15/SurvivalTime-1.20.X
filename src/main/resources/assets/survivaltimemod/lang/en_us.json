@@ -37,6 +37,7 @@
   "item.survivaltimemod.iflux": "iFlux",
   "item.survivaltimemod.timekeeper_spawn_egg": "Timekeeper Spawn Egg",
   "item.survivaltimemod.clock_fragment": "Clock Fragment",
+  "item.survivaltimemod.time_devourer_spawn_egg": "Time Devourer Spawn Egg",
 
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
@@ -115,6 +116,7 @@
   "sounds.survivaltimemod.timekeeper.ambient": "Timekeeper Ambient",
   "sounds.survivaltimemod.timekeeper.bad": "Timekeeper Bad",
   "sounds.survivaltimemod.timekeeper.good": "Timekeeper Good",
+  "sounds.survivaltimemod.time_devourer.ambient": "Time Devourer Ambient",
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 

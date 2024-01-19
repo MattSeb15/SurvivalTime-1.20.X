@@ -16,6 +16,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> TIMEKEEPER_BAD = registerSoundEvents("timekeeper.bad");
     public static final RegistryObject<SoundEvent> TIMEKEEPER_GOOD = registerSoundEvents("timekeeper.good");
 
+    public static final RegistryObject<SoundEvent> TIME_DEVOURER_AMBIENT = registerSoundEvents("time_devourer.ambient");
+    public static final RegistryObject<SoundEvent> TIME_DEVOURER_HURT = registerSoundEvents("time_devourer.hurt");
+
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(SurvivalTimeMod.MOD_ID, name)));
     }

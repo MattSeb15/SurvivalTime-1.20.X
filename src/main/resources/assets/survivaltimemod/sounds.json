@@ -19,5 +19,17 @@
       "survivaltimemod:timekeeper_good_3",
       "survivaltimemod:timekeeper_good_4"
     ]
+  },
+  "time_devourer.ambient": {
+    "subtitles": "sounds.survivaltimemod.time_devourer.ambient",
+    "sounds": [
+      "survivaltimemod:time_devourer_ambient_1"
+    ]
+  },
+  "time_devourer.hurt": {
+    "subtitles": "sounds.survivaltimemod.time_devourer.hurt",
+    "sounds": [
+      "survivaltimemod:time_devourer_hurt_1"
+    ]
   }
 }

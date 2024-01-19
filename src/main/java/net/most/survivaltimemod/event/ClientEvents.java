@@ -18,7 +18,9 @@ import net.most.survivaltimemod.client.gui.OracleIsHourglassScreen;
 import net.most.survivaltimemod.client.gui.TimeStationScreen;
 import net.most.survivaltimemod.client.gui.HourglassHubStationScreen;
 import net.most.survivaltimemod.entity.ModEntities;
-import net.most.survivaltimemod.entity.client.TimekeeperRenderer;
+import net.most.survivaltimemod.entity.client.animal.timekeeper.TimekeeperRenderer;
+import net.most.survivaltimemod.entity.client.monster.timedevourer.TimeDevourerRenderer;
+import net.most.survivaltimemod.entity.custom.monster.TimeDevourerEntity;
 import net.most.survivaltimemod.screen.ModMenuTypes;
 
 public class ClientEvents {
@@ -38,6 +40,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntities.TIMEKEEPER.get(), TimekeeperRenderer::new);
+            EntityRenderers.register(ModEntities.TIME_DEVOURER.get(), TimeDevourerRenderer::new);
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenuTypes.HOURGLASS_HUB_STATION_MENU.get(), HourglassHubStationScreen::new);
                 MenuScreens.register(ModMenuTypes.TIME_STATION_MENU.get(), TimeStationScreen::new);

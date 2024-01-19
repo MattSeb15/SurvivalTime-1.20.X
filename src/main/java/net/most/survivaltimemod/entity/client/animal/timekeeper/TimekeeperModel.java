@@ -1,9 +1,9 @@
-package net.most.survivaltimemod.entity.client;
+package net.most.survivaltimemod.entity.client.animal.timekeeper;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.most.survivaltimemod.SurvivalTimeMod;
-import net.most.survivaltimemod.entity.custom.TimekeeperEntity;
+import net.most.survivaltimemod.entity.custom.animal.TimekeeperEntity;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;

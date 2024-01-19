@@ -3,8 +3,8 @@
   "biomes": "#forge:is_desert",
   "spawners": {
     "type": "survivaltimemod:timekeeper",
-    "maxCount": 1,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 15
+    "weight": 100
   }
 }

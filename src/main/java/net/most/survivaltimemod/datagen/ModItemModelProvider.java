@@ -22,7 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(ModItems.TIMEKEEPER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         for (RegistryObject<Item> item : SurvivalTimeUtilGenerator.ITEM_REGISTER_MODEL_LIST) {
             simpleItem(item);
         }
@@ -36,6 +36,9 @@ public class ModItemModelProvider extends ItemModelProvider {
             Block block = entry.getValue();
             complexBlock(block);
         }
+
+        withExistingParent(ModItems.TIMEKEEPER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.TIME_DEVOURER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 //        complexBlock(ModBlocks.HOURGLASS_HUB_STATION.get());

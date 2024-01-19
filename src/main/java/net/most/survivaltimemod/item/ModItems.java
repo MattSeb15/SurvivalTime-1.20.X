@@ -196,6 +196,12 @@ public class ModItems {
                     0xff44a25f,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> TIME_DEVOURER_SPAWN_EGG =
+            ITEMS.register("time_devourer_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.TIME_DEVOURER,
+                    0x000000,
+                    0xffffff,
+                    new Item.Properties()));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
