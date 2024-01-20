@@ -2,11 +2,16 @@ package net.most.survivaltimemod.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
+
+import java.util.Iterator;
 
 public class ModEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, SurvivalTimeMod.MOD_ID);
@@ -31,6 +36,38 @@ public class ModEffects {
             () -> new InstantTimeDamage(MobEffectCategory.HARMFUL, 0xff4e1610));
     public static final RegistryObject<MobEffect> INSTANT_TIME_REGEN = MOB_EFFECTS.register("instant_time_regen",
             () -> new InstantTimeRegen(MobEffectCategory.BENEFICIAL, 0xff6bff7c));
+
+
+
+    public static boolean removeEffectByCategory(Entity entity, MobEffectCategory category) {
+        if (entity instanceof LivingEntity pEntity) {
+            if (pEntity.level().isClientSide) {
+                return false;
+            } else {
+                var list = pEntity.getActiveEffects()
+                        .stream()
+                        .filter(mobEffectInstance -> mobEffectInstance.getEffect().getCategory() == category)
+                        .toList();
+
+
+                if (list.isEmpty())
+                    return false;
+                for (MobEffectInstance eff : list) {
+                    pEntity.removeEffect(eff.getEffect());
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean removeHarmfulEffects(Entity entity) {
+        return removeEffectByCategory(entity, MobEffectCategory.HARMFUL);
+    }
+
+    public static boolean removeBeneficialEffects(Entity entity) {
+        return removeEffectByCategory(entity, MobEffectCategory.BENEFICIAL);
+    }
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

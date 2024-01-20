@@ -31,5 +31,33 @@
     "sounds": [
       "survivaltimemod:time_devourer_hurt_1"
     ]
+  },
+  "purifier.impact": {
+    "subtitles": "sounds.survivaltimemod.purifier.impact",
+    "sounds": [
+      "survivaltimemod:purifier_impact_1"
+    ]
+  },
+  "prosperity.impact": {
+    "subtitles": "sounds.survivaltimemod.prosperity.impact",
+    "sounds": [
+      "survivaltimemod:prosperity_impact_1",
+      "survivaltimemod:prosperity_impact_2",
+      "survivaltimemod:prosperity_impact_3"
+    ]
+  },
+  "curse.impact": {
+    "subtitles": "sounds.survivaltimemod.curse.impact",
+    "sounds": [
+      "survivaltimemod:curse_impact_1",
+      "survivaltimemod:curse_impact_2",
+      "survivaltimemod:curse_impact_3"
+    ]
+  },
+  "no_result.impact": {
+    "subtitles": "sounds.survivaltimemod.no_result.impact",
+    "sounds": [
+      "survivaltimemod:no_result_impact_1"
+    ]
   }
 }

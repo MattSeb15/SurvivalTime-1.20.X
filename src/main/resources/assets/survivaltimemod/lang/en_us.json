@@ -38,6 +38,9 @@
   "item.survivaltimemod.timekeeper_spawn_egg": "Timekeeper Spawn Egg",
   "item.survivaltimemod.clock_fragment": "Clock Fragment",
   "item.survivaltimemod.time_devourer_spawn_egg": "Time Devourer Spawn Egg",
+  "item.survivaltimemod.purifier_item": "Purifier",
+  "item.survivaltimemod.prosperity_item": "Prosperity",
+  "item.survivaltimemod.curse_item": "Curse",
 
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
@@ -117,6 +120,9 @@
   "sounds.survivaltimemod.timekeeper.bad": "Timekeeper Bad",
   "sounds.survivaltimemod.timekeeper.good": "Timekeeper Good",
   "sounds.survivaltimemod.time_devourer.ambient": "Time Devourer Ambient",
+  "sounds.survivaltimemod.prosperity.impact": "Prosperity Impact",
+  "sounds.survivaltimemod.curse.impact": "Curse Impact",
+  "sounds.survivaltimemod.no_result.impact": "No Result Impact",
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 

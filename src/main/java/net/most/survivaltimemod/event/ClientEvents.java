@@ -2,6 +2,7 @@ package net.most.survivaltimemod.event;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -39,12 +40,16 @@ public class ClientEvents {
     public static class ClientModBusEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            EntityRenderers.register(ModEntities.TIMEKEEPER.get(), TimekeeperRenderer::new);
-            EntityRenderers.register(ModEntities.TIME_DEVOURER.get(), TimeDevourerRenderer::new);
+
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenuTypes.HOURGLASS_HUB_STATION_MENU.get(), HourglassHubStationScreen::new);
                 MenuScreens.register(ModMenuTypes.TIME_STATION_MENU.get(), TimeStationScreen::new);
                 MenuScreens.register(ModMenuTypes.ORACLE_IS_HOURGLASS_MENU.get(), OracleIsHourglassScreen::new);
+                EntityRenderers.register(ModEntities.TIMEKEEPER.get(), TimekeeperRenderer::new);
+                EntityRenderers.register(ModEntities.TIME_DEVOURER.get(), TimeDevourerRenderer::new);
+                EntityRenderers.register(ModEntities.PURIFIER_PROJECTILE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(ModEntities.PROSPERITY_PROJECTILE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(ModEntities.CURSE_PROJECTILE.get(), ThrownItemRenderer::new);
             });
 
         }

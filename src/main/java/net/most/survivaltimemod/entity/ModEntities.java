@@ -10,6 +10,9 @@ import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.entity.custom.monster.TimeDevourerEntity;
 import net.most.survivaltimemod.entity.custom.animal.TimekeeperEntity;
+import net.most.survivaltimemod.entity.custom.throwable.CurseEntity;
+import net.most.survivaltimemod.entity.custom.throwable.ProsperityEntity;
+import net.most.survivaltimemod.entity.custom.throwable.PurifierEntity;
 
 public class ModEntities {
 
@@ -25,6 +28,34 @@ public class ModEntities {
             () -> EntityType.Builder.of(TimeDevourerEntity::new, MobCategory.MONSTER)
                     .sized(0.6f, 1.8f)
                     .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "time_devourer").toString())
+    );
+
+    public static final RegistryObject<EntityType<PurifierEntity>> PURIFIER_PROJECTILE = ENTITY_TYPES.register("purifier_projectile",
+            () -> EntityType.Builder.<PurifierEntity>of(PurifierEntity::new, MobCategory.MISC)
+                    .sized(0.8F, 0.8F)
+                    .clientTrackingRange(5)
+                    .updateInterval(20)
+                    .setCustomClientFactory((spawnEntity, level) -> new PurifierEntity(level))
+                    .fireImmune()
+                    .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "purifier_projectile").toString())
+    );
+    public static final RegistryObject<EntityType<ProsperityEntity>> PROSPERITY_PROJECTILE = ENTITY_TYPES.register("prosperity_projectile",
+            () -> EntityType.Builder.<ProsperityEntity>of(ProsperityEntity::new, MobCategory.MISC)
+                    .sized(0.8F, 0.8F)
+                    .clientTrackingRange(5)
+                    .updateInterval(20)
+                    .setCustomClientFactory((spawnEntity, level) -> new ProsperityEntity(level))
+                    .fireImmune()
+                    .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "prosperity_projectile").toString())
+    );
+    public static final RegistryObject<EntityType<CurseEntity>> CURSE_PROJECTILE = ENTITY_TYPES.register("curse_projectile",
+            () -> EntityType.Builder.<CurseEntity>of(CurseEntity::new, MobCategory.MISC)
+                    .sized(0.8F, 0.8F)
+                    .clientTrackingRange(5)
+                    .updateInterval(20)
+                    .setCustomClientFactory((spawnEntity, level) -> new CurseEntity(level))
+                    .fireImmune()
+                    .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "purifier_projectile").toString())
     );
 
     public static void register(IEventBus eventBus) {

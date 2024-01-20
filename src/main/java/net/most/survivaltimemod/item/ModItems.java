@@ -202,6 +202,13 @@ public class ModItems {
                     0xffffff,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> PURIFIER_ITEM =
+            ITEMS.register("purifier_item", () -> new PurifierItem(new Item.Properties().stacksTo(8)));
+    public static final RegistryObject<Item> PROSPERITY_ITEM =
+            ITEMS.register("prosperity_item", () -> new ProsperityItem(new Item.Properties().stacksTo(8)));
+    public static final RegistryObject<Item> CURSE_ITEM =
+            ITEMS.register("curse_item", () -> new CurseItem(new Item.Properties().stacksTo(8)));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
