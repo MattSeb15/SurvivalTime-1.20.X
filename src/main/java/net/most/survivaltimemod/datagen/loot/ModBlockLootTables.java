@@ -29,6 +29,7 @@ import net.most.survivaltimemod.data.CropBlockSeedItem;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ShardOptions;
 import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Set;
@@ -167,7 +168,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     }
 
     @Override
-    protected Iterable<Block> getKnownBlocks() {
+    protected @NotNull Iterable<Block> getKnownBlocks() {
         return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 }
