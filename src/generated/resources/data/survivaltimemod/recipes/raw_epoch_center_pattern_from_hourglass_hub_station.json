@@ -1,7 +1,7 @@
 {
   "type": "survivaltimemod:hourglass_hub_shaped",
-  "craftTime": 1200,
-  "energyCost": 240,
+  "craftTime": 3000,
+  "energyCost": 600,
   "key": {
     "B": {
       "item": "survivaltimemod:opal_shard_epoch"
