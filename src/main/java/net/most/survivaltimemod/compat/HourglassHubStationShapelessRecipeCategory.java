@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.data.FormatTimeType;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
 import net.most.survivaltimemod.screen.renderer.EnergyDisplayTooltipArea;
@@ -64,11 +65,16 @@ public class HourglassHubStationShapelessRecipeCategory implements IRecipeCatego
     @Override
     public @NotNull List<Component> getTooltipStrings(@NotNull HourglassHubStationShapelessRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView
             , double mouseX, double mouseY) {
-        if(MouseUtil.isMouseOver(mouseX, mouseY, 143, 21, 23,22)){
+        if (MouseUtil.isMouseOver(mouseX, mouseY, 143, 21, 23, 22)) {
             return List.of(Component.translatable("jei.tooltip.recipe.shapeless"));
         }
-        if (MouseUtil.isMouseOver(mouseX, mouseY, 12, 11, 9, 88) && recipe.getEnergyCost() > 0) {
+        if (MouseUtil.isMouseOver(mouseX, mouseY, 12, 11, 9, 88) && recipe.getEnergyCost() >= 0) {
             return EnergyDisplayTooltipArea.getTooltips(recipe.getEnergyCost());
+        }
+
+        if (MouseUtil.isMouseOver(mouseX, mouseY, 120, 51, 26, 9) && recipe.getCraftTime() >= 0) {
+            return List.of(Component.translatable("gui.survivaltimemod.hourglass_hub_station.craft_time_text",
+                    FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, (float) recipe.getCraftTime() / 20)));
         }
         return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }

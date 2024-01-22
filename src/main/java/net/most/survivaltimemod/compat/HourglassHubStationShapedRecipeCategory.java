@@ -9,6 +9,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
+import net.most.survivaltimemod.data.FormatTimeType;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
 import net.most.survivaltimemod.screen.renderer.EnergyDisplayTooltipArea;
@@ -79,11 +81,16 @@ public class HourglassHubStationShapedRecipeCategory implements IRecipeCategory<
     @Override
     public @NotNull List<Component> getTooltipStrings(@NotNull HourglassHubStationShapedRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView,
                                                       double mouseX, double mouseY) {
-        if (MouseUtil.isMouseOver(mouseX, mouseY, 12, 11, 9, 88) && recipe.getEnergyCost() > 0) {
+        if (MouseUtil.isMouseOver(mouseX, mouseY, 12, 11, 9, 88) && recipe.getEnergyCost() >= 0) {
             return EnergyDisplayTooltipArea.getTooltips(recipe.getEnergyCost());
 
         }
-        return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
+
+        if (MouseUtil.isMouseOver(mouseX, mouseY, 120, 51, 26, 9) && recipe.getCraftTime() >= 0){
+            return List.of(Component.translatable("gui.survivaltimemod.hourglass_hub_station.craft_time_text",
+                    FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, (float) recipe.getCraftTime() / 20)));
+        }
+            return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }
 
     @Override
@@ -102,7 +109,7 @@ public class HourglassHubStationShapedRecipeCategory implements IRecipeCategory<
 //                    initialPositionGridX + (recipe.getIngredients().indexOf(ingredient) % 5) * gridIncrement,
 //                    initialPositionGridY + (recipe.getIngredients().indexOf(ingredient) / 5) * gridIncrement).addIngredients(ingredient);
 //        });
-         System.out.println("###### RECIPE SIZE::::::: "+ recipe.getIngredients().size());
+        System.out.println("###### RECIPE SIZE::::::: " + recipe.getIngredients().size());
 
 //
 //         for(int i = 0; i < recipe.getIngredients().size(); i++) {

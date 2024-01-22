@@ -136,7 +136,7 @@
   "gui.time_station_gui.result_info_time": "Resulting item",
 
   "gui.survivaltimemod.hourglass_hub_station.remaining_time": "Remaining time: %s",
-
+  "gui.survivaltimemod.hourglass_hub_station.craft_time_text": "Craft Time: %s",
   "jei.tooltip.recipe.shapeless": "Shapeless Recipe",
 
   "commands.sut.time.info": "%s. Username: %s | Current Time: %s",
