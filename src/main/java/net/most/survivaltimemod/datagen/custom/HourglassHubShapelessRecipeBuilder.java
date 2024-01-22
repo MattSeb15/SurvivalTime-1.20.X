@@ -29,8 +29,8 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
     private final Item result;
     private final List<Ingredient> ingredients = Lists.newArrayList();
     private final int count;
-    private static final int DEFAULT_CRAFT_TIME = 20*10;
-    private static final int DEFAULT_ENERGY_COST = 60*10;
+    private static final int DEFAULT_CRAFT_TIME = 20 * 10;
+    private static final int DEFAULT_ENERGY_COST = 60 * 10;
     private int craftTime = DEFAULT_CRAFT_TIME;
     private int energyCost = DEFAULT_ENERGY_COST;
 
@@ -48,9 +48,11 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
     public static HourglassHubShapelessRecipeBuilder recipe(ItemLike pResult, int pCount) {
         return new HourglassHubShapelessRecipeBuilder(pResult, pCount);
     }
+
     public static HourglassHubShapelessRecipeBuilder recipe(ItemLike pResult, int pCount, int craftTime) {
         return new HourglassHubShapelessRecipeBuilder(pResult, pCount);
     }
+
     public static HourglassHubShapelessRecipeBuilder recipe(ItemLike pResult, int pCount, int craftTime, int energyCost) {
         return new HourglassHubShapelessRecipeBuilder(pResult, pCount);
     }
@@ -64,7 +66,6 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
         this.energyCost = energyCost;
         return this;
     }
-
 
 
     public HourglassHubShapelessRecipeBuilder requires(TagKey<Item> pTag) {
@@ -82,6 +83,14 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
     public HourglassHubShapelessRecipeBuilder requires(Ingredient pIngredient, int pQuantity) {
         for (int i = 0; i < pQuantity; ++i) {
             this.ingredients.add(pIngredient);
+        }
+
+        return this;
+    }
+
+    public HourglassHubShapelessRecipeBuilder requires(ItemLike... pIngredients) {
+        for (ItemLike itemlike : pIngredients) {
+            this.requires(itemlike, 1);
         }
 
         return this;
@@ -164,23 +173,12 @@ public class HourglassHubShapelessRecipeBuilder implements RecipeBuilder {
             pJson.addProperty("energyCost", this.energyCost);
 
             pJson.add("result", jsonobject);
-//            JsonArray jsonarray = new JsonArray();
-//            jsonarray.add(ingredient.toJson());
-//
-//            pJson.add("ingredients", jsonarray);
-//            JsonObject jsonobject = new JsonObject();
-//            jsonobject.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
-//            if (this.count > 1) {
-//                jsonobject.addProperty("count", this.count);
-//            }
-//
-//            pJson.add("result", jsonobject);
         }
 
         @Override
-        public ResourceLocation getId() {
+        public @NotNull ResourceLocation getId() {
             return new ResourceLocation(SurvivalTimeMod.MOD_ID,
-                    ForgeRegistries.ITEMS.getKey(this.result).getPath() + "_from_hourglass_hub_station");
+                    id.getPath() + "_from_shapeless_hourglass_hub_station");
         }
 
         @Override

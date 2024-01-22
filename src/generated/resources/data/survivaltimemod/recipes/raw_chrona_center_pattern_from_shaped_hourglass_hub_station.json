@@ -1,0 +1,24 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 1200,
+  "energyCost": 240,
+  "key": {
+    "B": {
+      "item": "survivaltimemod:opal_shard_chrona"
+    },
+    "C": {
+      "item": "minecraft:clock"
+    }
+  },
+  "pattern": [
+    "     ",
+    "  B  ",
+    " BCB ",
+    "  B  ",
+    "     "
+  ],
+  "result": {
+    "count": 2,
+    "item": "survivaltimemod:raw_chrona"
+  }
+}

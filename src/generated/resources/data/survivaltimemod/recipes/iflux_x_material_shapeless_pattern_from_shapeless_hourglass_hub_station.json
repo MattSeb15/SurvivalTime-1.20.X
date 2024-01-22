@@ -1,0 +1,17 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shapeless",
+  "craftTime": 1200,
+  "energyCost": 180,
+  "ingredients": [
+    {
+      "item": "survivaltimemod:opal_shard_flux"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "survivaltimemod:iflux"
+  }
+}

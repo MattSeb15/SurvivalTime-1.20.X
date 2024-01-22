@@ -16,10 +16,7 @@ import net.most.survivaltimemod.datagen.custom.HourglassHubShapelessRecipeBuilde
 import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
-import net.most.survivaltimemod.util.records.FullBorderPattern;
-import net.most.survivaltimemod.util.records.MediumBorderPattern;
-import net.most.survivaltimemod.util.records.StarCenterPattern;
-import net.most.survivaltimemod.util.records.SwordPattern;
+import net.most.survivaltimemod.util.records.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -48,46 +45,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.TIME_STATION.get())
-                .pattern("LLL")
-                .pattern("LAL")
-                .pattern("LLL")
-                .define('L', ModItems.LAPISLOOPIUM.get())
+                .pattern("LPL")
+                .pattern("PAP")
+                .pattern("LPL")
+                .define('L', Items.LAPIS_BLOCK)
+                .define('P', ModItems.OPAL_SHARD_LOOP.get())
                 .define('A', Blocks.ANVIL)
                 .unlockedBy(getHasName(ModBlocks.TIME_STATION.get()), has(ModItems.LAPISLOOPIUM.get()))
                 .save(pWriter);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.LAPISLOOPIUM.get(), 1)
-                .requires(Items.LAPIS_LAZULI, 4)
-                .requires(ModItems.OPAL_SHARD_LOOP.get())
-                .unlockedBy(getHasName(ModItems.OPAL_SHARD_LOOP.get()), has(ModItems.OPAL_SHARD_LOOP.get()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.LAPISLOOPIUM.get()) + "_from_crafting_table");
-
-        for (Map.Entry<ItemLike, ExpCookTimeGroupItem> entry : SurvivalTimeUtilGenerator.SMELTING_RECIPE_MAP.entrySet()) {
-            ItemLike item = entry.getKey();
-            ExpCookTimeGroupItem expCookTimeGroup = entry.getValue();
-            oreSmelting(pWriter,
-                    item,
-                    RecipeCategory.MISC,
-                    expCookTimeGroup.getResult(),
-                    expCookTimeGroup.getExp(),
-                    expCookTimeGroup.getCookTime(),
-                    expCookTimeGroup.getGroup());
-
-
-        }
-        for (Map.Entry<ItemLike, ExpCookTimeGroupItem> entry : SurvivalTimeUtilGenerator.BLASTING_RECIPE_MAP.entrySet()) {
-            ItemLike item = entry.getKey();
-            ExpCookTimeGroupItem expCookTimeGroup = entry.getValue();
-            oreBlasting(pWriter,
-                    item,
-                    RecipeCategory.MISC,
-                    expCookTimeGroup.getResult(),
-                    expCookTimeGroup.getExp(),
-                    expCookTimeGroup.getCookTime(),
-                    expCookTimeGroup.getGroup());
-
-
-        }
 
 
         HourglassHubShapedRecipeBuilder.shaped(ModItems.FIERY_TIME.get())
@@ -115,23 +80,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('D', Items.DIAMOND)
                 .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
                 .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.OPAL_RAW.get()) + "_from_shards");
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.OPAL_RAW.get(), 2)
-                .requires(ModItems.OPAL_SHARD_CHRONA.get())
-                .requires(ModItems.OPAL_SHARD_TEMPORA.get())
-                .requires(ModItems.OPAL_SHARD_EPOCH.get())
-                .requires(ModItems.OPAL_SHARD_FLUX.get())
-                .requires(ModItems.OPAL_SHARD_LOOP.get())
-                .requires(Items.DIAMOND, 4)
-                .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
-                .save(pWriter);
-        HourglassHubShapelessRecipeBuilder.recipe(ModItems.LAPISLOOPIUM.get(), 10)
-                .requires(Items.LAPIS_LAZULI)
-                .requires(ModItems.OPAL_SHARD_LOOP.get())
-                .craftTime(20 * 30)
-                .energyCost(60 * 5)
-                .unlockedBy(getHasName(ModItems.LAPISLOOPIUM.get()), has(ModItems.LAPISLOOPIUM.get()))
-                .save(pWriter);
 
         for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.BLOCK_FROM_ITEM_RECIPE_MAP.entrySet()) {
             ItemLike block = entry.getKey();
@@ -173,13 +121,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         for (StarCenterPattern starCenterPattern : SurvivalTimeUtilGenerator.STAR_CENTER_PATTERN_LIST) {
             starCenterPattern(pWriter, starCenterPattern);
         }
+        for (MonoMaterialPattern monoMaterialPattern : SurvivalTimeUtilGenerator.MONO_MATERIAL_PATTERN_LIST) {
+            monoMaterialPattern(pWriter, monoMaterialPattern);
+        }
 
-        HourglassHubShapelessRecipeBuilder.recipe(ModItems.COMPACTED_MILK.get(), 1)
-                .requires(Items.MILK_BUCKET, 4)
-                .craftTime(20 * 60)
-                .energyCost(60 * 4)
-                .unlockedBy(getHasName(ModItems.COMPACTED_MILK.get()), has(ModItems.COMPACTED_MILK.get()))
-                .save(pWriter);
+        for (XMaterialShapelessPattern xMaterialShapelessPattern : SurvivalTimeUtilGenerator.X_MATERIALS_PATTERN_LIST) {
+            xMaterialShapelessPattern(pWriter, xMaterialShapelessPattern);
+        }
+
+
+//        HourglassHubShapelessRecipeBuilder.recipe(ModItems.COMPACTED_MILK.get(), 1)
+//                .requires(Items.MILK_BUCKET, 4)
+//                .craftTime(20 * 60)
+//                .energyCost(60 * 4)
+//                .unlockedBy(getHasName(ModItems.COMPACTED_MILK.get()), has(ModItems.COMPACTED_MILK.get()))
+//                .save(pWriter);
 
 
 //        HourglassHubShapelessRecipeBuilder.recipe(item, 25)
@@ -199,6 +155,29 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     }
 
+    private void monoMaterialPattern(Consumer<FinishedRecipe> pWriter, MonoMaterialPattern pattern) {
+
+        if (pattern.getIngredientCount() >= 1 && pattern.getIngredientCount() <= 25) {
+            HourglassHubShapelessRecipeBuilder.recipe(pattern.getResult(), pattern.getResultCount())
+                    .requires(pattern.getIngredient(), pattern.getIngredientCount())
+                    .energyCost(pattern.getEnergyCost())
+                    .craftTime(pattern.getCraftTime())
+                    .unlockedBy(getHasName(pattern.getIngredient()), has(pattern.getIngredient()))
+                    .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pattern.getResult()) + "_mono_material_pattern");
+        }
+
+    }
+
+    private void xMaterialShapelessPattern(Consumer<FinishedRecipe> pWriter, XMaterialShapelessPattern pattern) {
+        HourglassHubShapelessRecipeBuilder.recipe(pattern.getResult(), pattern.getResultCount())
+                .requires(pattern.getIngredients())
+                .craftTime(pattern.getCraftTime())
+                .energyCost(pattern.getEnergyCost())
+                .unlockedBy(getHasName(pattern.getIngredients()[0]), has(pattern.getIngredients()[0]))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pattern.getResult()) + "_x_material_shapeless_pattern");
+
+    }
+
     private void swordPattern(Consumer<FinishedRecipe> pWriter, SwordPattern swordPattern) {
         HourglassHubShapedRecipeBuilder.shaped(swordPattern.getResult(), swordPattern.getResultCount())
                 .pattern("  M  ")
@@ -212,7 +191,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .craftTime(swordPattern.getCraftTime())
                 .energyCost(swordPattern.getEnergyCost())
                 .unlockedBy(getHasName(swordPattern.getBladeIngredient()), has(swordPattern.getBladeIngredient()))
-                .save(pWriter);
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(swordPattern.getResult()) + "_sword_pattern");
     }
 
     private void blockItemPattern(Consumer<FinishedRecipe> pWriter, ItemLike block, ItemLike item) {
@@ -233,7 +212,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .craftTime(20 * 60)
                 .energyCost(60 * 5)
                 .unlockedBy(getHasName(block), has(block))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "from_block");
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "_from_block");
 
     }
 
@@ -253,7 +232,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .craftTime(pFullBorderPattern.getCraftTime())
                 .energyCost(pFullBorderPattern.getEnergyCost())
                 .unlockedBy(getHasName(ingredientA), has(ingredientA))
-                .save(pWriter);
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pFullBorderPattern.getResult()) + "_full_border_pattern");
     }
 
     protected static void mediumBorderPattern(Consumer<FinishedRecipe> pWriter, MediumBorderPattern pFullBorderPattern) {
@@ -270,7 +249,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .craftTime(pFullBorderPattern.getCraftTime())
                 .energyCost(pFullBorderPattern.getEnergyCost())
                 .unlockedBy(getHasName(ingredientB), has(ingredientB))
-                .save(pWriter);
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pFullBorderPattern.getResult()) + "_medium_border_pattern");
     }
 
     protected static void starCenterPattern(Consumer<FinishedRecipe> pWriter, StarCenterPattern starCenterPattern) {

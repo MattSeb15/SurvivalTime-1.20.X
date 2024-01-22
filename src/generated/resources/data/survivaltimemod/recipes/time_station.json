@@ -6,13 +6,16 @@
       "item": "minecraft:anvil"
     },
     "L": {
-      "item": "survivaltimemod:lapisloopium"
+      "item": "minecraft:lapis_block"
+    },
+    "P": {
+      "item": "survivaltimemod:opal_shard_loop"
     }
   },
   "pattern": [
-    "LLL",
-    "LAL",
-    "LLL"
+    "LPL",
+    "PAP",
+    "LPL"
   ],
   "result": {
     "item": "survivaltimemod:time_station"

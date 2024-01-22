@@ -219,7 +219,7 @@ public class HourglassHubShapedRecipeBuilder implements RecipeBuilder {
         @Override
         public @NotNull ResourceLocation getId() {
             return new ResourceLocation(SurvivalTimeMod.MOD_ID,
-                    id.getPath() + "_from_hourglass_hub_station");
+                    id.getPath() + "_from_shaped_hourglass_hub_station");
         }
 
         @Override

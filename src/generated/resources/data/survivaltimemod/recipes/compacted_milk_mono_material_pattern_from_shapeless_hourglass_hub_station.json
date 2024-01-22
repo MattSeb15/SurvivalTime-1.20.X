@@ -1,0 +1,22 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shapeless",
+  "craftTime": 6000,
+  "energyCost": 900,
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": {
+    "item": "survivaltimemod:compacted_milk"
+  }
+}

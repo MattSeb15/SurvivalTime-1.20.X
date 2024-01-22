@@ -51,7 +51,7 @@ public class HourglassHubStationShapelessRecipeCategory implements IRecipeCatego
         int energyCost = recipe.getEnergyCost();
         int maxEnergyCost = 3600 * 10;
         int xPos = 13;
-        int yPos = 29;
+        int yPos = 11;
         int width = 9;
         int height = 88;
 

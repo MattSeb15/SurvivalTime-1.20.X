@@ -1,0 +1,13 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shapeless",
+  "craftTime": 3600,
+  "energyCost": 180,
+  "ingredients": [
+    {
+      "item": "survivaltimemod:raw_epoch"
+    }
+  ],
+  "result": {
+    "item": "survivaltimemod:epoch_ingot"
+  }
+}

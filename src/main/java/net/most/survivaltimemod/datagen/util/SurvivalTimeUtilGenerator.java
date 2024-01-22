@@ -2,6 +2,7 @@ package net.most.survivaltimemod.datagen.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
@@ -13,10 +14,7 @@ import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
 import net.most.survivaltimemod.util.ShardOptions;
 import net.most.survivaltimemod.util.WeightMinMax;
-import net.most.survivaltimemod.util.records.FullBorderPattern;
-import net.most.survivaltimemod.util.records.MediumBorderPattern;
-import net.most.survivaltimemod.util.records.StarCenterPattern;
-import net.most.survivaltimemod.util.records.SwordPattern;
+import net.most.survivaltimemod.util.records.*;
 
 import java.util.List;
 import java.util.Map;
@@ -164,37 +162,6 @@ public class SurvivalTimeUtilGenerator {
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\
-    public final static Map<ItemLike, ExpCookTimeGroupItem> SMELTING_RECIPE_MAP = Map.of(
-            ModItems.OPAL_RAW.get(), new ExpCookTimeGroupItem(4.0f, 1200, "survivaltimemod_ingot",
-                    ModItems.OPAL_INGOT.get()),
-            ModItems.RAW_CHRONA.get(), new ExpCookTimeGroupItem(3.5f, 800, "survivaltimemod_ingot",
-                    ModItems.CHRONA_INGOT.get()),
-            ModItems.RAW_TEMPORA.get(), new ExpCookTimeGroupItem(3.2f, 700, "survivaltimemod_ingot",
-                    ModItems.TEMPORA_INGOT.get()),
-            ModItems.RAW_EPOCH.get(), new ExpCookTimeGroupItem(3.0f, 600, "survivaltimemod_ingot",
-                    ModItems.EPOCH_INGOT.get()),
-            ModItems.RAW_FLUX.get(), new ExpCookTimeGroupItem(2.5f, 400, "survivaltimemod_ingot",
-                    ModItems.FLUX_INGOT.get()),
-            ModItems.RAW_LOOP.get(), new ExpCookTimeGroupItem(2.2f, 300, "survivaltimemod_ingot",
-                    ModItems.LOOP_INGOT.get())
-
-    );
-
-    public final static Map<ItemLike, ExpCookTimeGroupItem> BLASTING_RECIPE_MAP = Map.of(
-            ModItems.OPAL_RAW.get(), new ExpCookTimeGroupItem(2.7f, 600, "survivaltimemod_ingot",
-                    ModItems.OPAL_INGOT.get()),
-            ModItems.RAW_CHRONA.get(), new ExpCookTimeGroupItem(1.75f, 400, "survivaltimemod_ingot",
-                    ModItems.CHRONA_INGOT.get()),
-            ModItems.RAW_TEMPORA.get(), new ExpCookTimeGroupItem(1.6f, 350, "survivaltimemod_ingot",
-                    ModItems.TEMPORA_INGOT.get()),
-            ModItems.RAW_EPOCH.get(), new ExpCookTimeGroupItem(1.5f, 300, "survivaltimemod_ingot",
-                    ModItems.EPOCH_INGOT.get()),
-            ModItems.RAW_FLUX.get(), new ExpCookTimeGroupItem(1.25f, 200, "survivaltimemod_ingot",
-                    ModItems.FLUX_INGOT.get()),
-            ModItems.RAW_LOOP.get(), new ExpCookTimeGroupItem(1.1f, 150, "survivaltimemod_ingot",
-                    ModItems.LOOP_INGOT.get())
-    );
-
     public final static Map<ItemLike, ItemLike> RAW_SHARDS_RECIPE_MAP = Map.of(
             ModItems.RAW_LOOP.get(), ModItems.OPAL_SHARD_LOOP.get(),
             ModItems.RAW_FLUX.get(), ModItems.OPAL_SHARD_FLUX.get(),
@@ -212,6 +179,69 @@ public class SurvivalTimeUtilGenerator {
     );
     public final static List<MediumBorderPattern> MEDIUM_BORDER_PATTERN_LIST = List.of(
 
+    );
+
+    public final static List<MonoMaterialPattern> MONO_MATERIAL_PATTERN_LIST = List.of(
+            new MonoMaterialPattern(ModItems.COMPACTED_MILK.get(),
+                    1,
+                    20 * 60 * 5,
+                    60 * 15,
+                    Items.MILK_BUCKET,
+                    4),
+            new MonoMaterialPattern(ModItems.LOOP_INGOT.get(),
+                    1,
+                    20 * 60,
+                    60,
+                    ModItems.RAW_LOOP.get(),
+                    1),
+            new MonoMaterialPattern(ModItems.FLUX_INGOT.get(),
+                    1,
+                    20 * 60 * 2,
+                    60 * 2,
+                    ModItems.RAW_FLUX.get(),
+                    1),
+            new MonoMaterialPattern(ModItems.EPOCH_INGOT.get(),
+                    1,
+                    20 * 60 * 3,
+                    60 * 3,
+                    ModItems.RAW_EPOCH.get(),
+                    1),
+            new MonoMaterialPattern(ModItems.TEMPORA_INGOT.get(),
+                    1,
+                    20 * 60 * 4,
+                    60 * 4,
+                    ModItems.RAW_TEMPORA.get(),
+                    1),
+            new MonoMaterialPattern(ModItems.CHRONA_INGOT.get(),
+                    1,
+                    20 * 60 * 5,
+                    60 * 5,
+                    ModItems.RAW_CHRONA.get(),
+                    1),
+            new MonoMaterialPattern(ModItems.OPAL_INGOT.get(),
+                    1,
+                    20 * 60 * 10,
+                    60 * 10,
+                    ModItems.OPAL_RAW.get(),
+                    1)
+
+    );
+
+    public final static List<XMaterialShapelessPattern> X_MATERIALS_PATTERN_LIST = List.of(
+            new XMaterialShapelessPattern(ModItems.IFLUX.get(),
+                    3,
+                    20 * 60,
+                    60 * 3,
+                    ModItems.OPAL_SHARD_FLUX.get(),
+                    Items.IRON_INGOT
+            ),
+            new XMaterialShapelessPattern(ModItems.LAPISLOOPIUM.get(),
+                    3,
+                    20 * 60 + 20 * 30,
+                    60 * 3,
+                    ModItems.OPAL_SHARD_LOOP.get(),
+                    Items.LAPIS_LAZULI
+            )
     );
 
     public final static List<SwordPattern> SWORD_PATTERN_LIST = List.of(
