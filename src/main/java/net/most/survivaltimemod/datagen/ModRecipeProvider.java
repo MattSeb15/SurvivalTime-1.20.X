@@ -89,10 +89,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         }
 
 
-
-
-
-
         HourglassHubShapedRecipeBuilder.shaped(ModItems.FIERY_TIME.get())
                 .pattern("     ")
                 .pattern("  #  ")
@@ -104,7 +100,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.FIERY_TIME.get()) + "_base", has(ModItems.FIERY_TIME.get()))
                 .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.FIERY_TIME.get()) + "_base");
 
-        HourglassHubShapedRecipeBuilder.shaped(ModItems.OPAL_RAW.get(),2)
+        HourglassHubShapedRecipeBuilder.shaped(ModItems.OPAL_RAW.get(), 2)
                 .pattern("     ")
                 .pattern(" DLD ")
                 .pattern(" TCF ")
@@ -173,6 +169,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         for (StarCenterPattern starCenterPattern : SurvivalTimeUtilGenerator.STAR_CENTER_PATTERN_LIST) {
             starCenterPattern(pWriter, starCenterPattern);
         }
+
+        HourglassHubShapelessRecipeBuilder.recipe(ModItems.COMPACTED_MILK.get(), 1)
+                .requires(Items.MILK_BUCKET, 4)
+                .craftTime(20 * 60)
+                .energyCost(60 * 4)
+                .unlockedBy(getHasName(ModItems.COMPACTED_MILK.get()), has(ModItems.COMPACTED_MILK.get()))
+                .save(pWriter);
+
 
 //        HourglassHubShapelessRecipeBuilder.recipe(item, 25)
 //                .requires(block)

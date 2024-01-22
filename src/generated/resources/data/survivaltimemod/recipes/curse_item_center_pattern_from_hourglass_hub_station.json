@@ -1,0 +1,23 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 6000,
+  "energyCost": 900,
+  "key": {
+    "B": {
+      "item": "survivaltimemod:pile_of_meat"
+    },
+    "C": {
+      "item": "survivaltimemod:compacted_milk"
+    }
+  },
+  "pattern": [
+    "     ",
+    "  B  ",
+    " BCB ",
+    "  B  ",
+    "     "
+  ],
+  "result": {
+    "item": "survivaltimemod:curse_item"
+  }
+}
