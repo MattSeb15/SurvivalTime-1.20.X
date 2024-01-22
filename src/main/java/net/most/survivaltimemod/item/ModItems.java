@@ -209,6 +209,9 @@ public class ModItems {
     public static final RegistryObject<Item> CURSE_ITEM =
             ITEMS.register("curse_item", () -> new CurseItem(new Item.Properties().stacksTo(8)));
 
+    public static final RegistryObject<Item> PILE_OF_MEAT =
+            ITEMS.register("pile_of_meat", () -> new Item(new Item.Properties()));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
