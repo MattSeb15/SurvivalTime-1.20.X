@@ -41,6 +41,8 @@
   "item.survivaltimemod.purifier_item": "Purifier",
   "item.survivaltimemod.prosperity_item": "Prosperity",
   "item.survivaltimemod.curse_item": "Curse",
+  "item.survivaltimemod.pile_of_meat": "Pile of meat",
+  "item.survivaltimemod.compacted_milk": "Compacted Milk",
 
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
@@ -123,6 +125,7 @@
   "sounds.survivaltimemod.prosperity.impact": "Prosperity Impact",
   "sounds.survivaltimemod.curse.impact": "Curse Impact",
   "sounds.survivaltimemod.no_result.impact": "No Result Impact",
+  "sounds.survivaltimemod.hourglass_hub.success": "Hourglass Hub Success",
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 

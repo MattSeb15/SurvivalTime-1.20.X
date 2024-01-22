@@ -157,7 +157,9 @@ public class SurvivalTimeUtilGenerator {
             //lapisloopium
             ModItems.LAPISLOOPIUM,
             ModItems.IFLUX,
-            ModItems.CLOCK_FRAGMENT
+            ModItems.CLOCK_FRAGMENT,
+            ModItems.PILE_OF_MEAT,
+            ModItems.COMPACTED_MILK
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\
@@ -212,7 +214,13 @@ public class SurvivalTimeUtilGenerator {
     );
 
     public final static List<StarCenterPattern> STAR_CENTER_PATTERN_LIST = List.of(
-
+            new StarCenterPattern(ModItems.CURSE_ITEM.get(),
+                    1,
+                    20 * 60 * 5,
+                    60 * 15,
+                    ModItems.PILE_OF_MEAT.get(),
+                    ModItems.COMPACTED_MILK.get()
+            )
 
     );
 

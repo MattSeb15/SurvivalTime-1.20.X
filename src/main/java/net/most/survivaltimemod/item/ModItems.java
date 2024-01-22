@@ -4,6 +4,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -211,6 +212,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> PILE_OF_MEAT =
             ITEMS.register("pile_of_meat", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> COMPACTED_MILK =
+            ITEMS.register("compacted_milk", () -> new Item(new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
