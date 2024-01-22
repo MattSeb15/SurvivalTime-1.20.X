@@ -27,6 +27,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<TimeDevourerEntity>> TIME_DEVOURER = ENTITY_TYPES.register("time_devourer",
             () -> EntityType.Builder.of(TimeDevourerEntity::new, MobCategory.MONSTER)
                     .sized(0.6f, 1.8f)
+                    .setTrackingRange(25)
                     .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "time_devourer").toString())
     );
 
