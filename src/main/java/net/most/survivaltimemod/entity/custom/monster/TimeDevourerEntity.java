@@ -212,6 +212,7 @@ public class TimeDevourerEntity extends Monster implements GeoEntity {
     protected void registerGoals() {
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 10.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.addBehaviourGoals();
     }
 
