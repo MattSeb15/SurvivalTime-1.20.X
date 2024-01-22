@@ -59,5 +59,11 @@
     "sounds": [
       "survivaltimemod:no_result_impact_1"
     ]
+  },
+  "hourglass_hub.success": {
+    "subtitles": "sounds.survivaltimemod.hourglass_hub.success",
+    "sounds": [
+      "survivaltimemod:hourglass_hub_success_1"
+    ]
   }
 }

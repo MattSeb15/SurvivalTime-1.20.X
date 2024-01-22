@@ -8,6 +8,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -31,6 +34,7 @@ import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.item.custom.LostTimeSphereItem;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapedRecipe;
 import net.most.survivaltimemod.recipe.HourglassHubStationShapelessRecipe;
+import net.most.survivaltimemod.sound.ModSounds;
 import net.most.survivaltimemod.world.inventory.HourglassHubStationMenu;
 import net.most.survivaltimemod.util.ModEnergyStorage;
 import org.jetbrains.annotations.NotNull;
@@ -233,12 +237,21 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
                 craftItem();
                 resetProgress();
                 extractEnergy();
+                makeSound();
 
             }
         } else {
             resetProgress();
 
 
+        }
+
+
+    }
+
+    private void makeSound() {
+        if (this.getLevel() != null && !this.getLevel().isClientSide()) {
+            this.getLevel().playSound(null, this.getBlockPos(), ModSounds.HOURGLASS_HUB_SUCCESS.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         }
 
 
