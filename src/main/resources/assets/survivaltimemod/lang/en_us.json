@@ -126,6 +126,7 @@
   "sounds.survivaltimemod.curse.impact": "Curse Impact",
   "sounds.survivaltimemod.no_result.impact": "No Result Impact",
   "sounds.survivaltimemod.hourglass_hub.success": "Hourglass Hub Success",
+  "sounds.survivaltimemod.time_steal.impact": "Time Steal Impact",
 
   "creativetab.survivaltimemod_tab": "Survival Time Mod",
 
@@ -141,5 +142,8 @@
 
   "commands.sut.time.info": "%s. Username: %s | Current Time: %s",
   "commands.sut.maxtime.set": "Your max time has been set to: %s",
-  "commands.sut.maxtime.info": "%s. Username: %s | Current MaxTime: %s"
+  "commands.sut.maxtime.info": "%s. Username: %s | Current MaxTime: %s",
+  "item.survival_time_mod.opal_sword.tooltip.time_steal_multiplier": "Timesteal mult.: %s",
+  "item.survival_time_mod.opal_sword.tooltip.probability": "Probability: %s"
+
 }

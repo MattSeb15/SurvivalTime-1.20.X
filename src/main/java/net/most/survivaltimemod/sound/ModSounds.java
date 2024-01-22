@@ -23,6 +23,7 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> CURSE_IMPACT = registerSoundEvents("curse.impact");
     public static final RegistryObject<SoundEvent> NO_RESULT_IMPACT = registerSoundEvents("no_result.impact");
     public static final RegistryObject<SoundEvent> HOURGLASS_HUB_SUCCESS = registerSoundEvents("hourglass_hub.success");
+    public static final RegistryObject<SoundEvent> TIME_STEAL_IMPACT = registerSoundEvents("time_steal.impact");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(SurvivalTimeMod.MOD_ID, name)));

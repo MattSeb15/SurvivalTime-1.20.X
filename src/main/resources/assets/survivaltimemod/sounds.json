@@ -65,5 +65,12 @@
     "sounds": [
       "survivaltimemod:hourglass_hub_success_1"
     ]
+  },
+  "time_steal.impact": {
+    "subtitles": "sounds.survivaltimemod.time_steal.impact",
+    "sounds": [
+      "survivaltimemod:time_steal_impact_1",
+      "survivaltimemod:time_steal_impact_2"
+    ]
   }
 }

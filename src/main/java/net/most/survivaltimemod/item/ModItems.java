@@ -115,50 +115,60 @@ public class ModItems {
     //shard swords modify pAttackDamage by 1 and attackSpeed by 0.5
     public static final RegistryObject<Item> CHRONA_SWORD =
             ITEMS.register("chrona_sword",
-                    () -> new SwordItem(
+                    () -> new OpalSword(
                             ModToolTiers.CHRONA,
                             4,
                             -2.2f,
+                            5.0f,
+                            0.75f,
                             new Item.Properties().fireResistant()
                     )
             );
 
     public static final RegistryObject<Item> TEMPORA_SWORD =
             ITEMS.register("tempora_sword",
-                    () -> new SwordItem(
+                    () -> new OpalSword(
                             ModToolTiers.TEMPORA,
                             4,
                             -2.2f,
+                            3.2f,
+                            0.62f,
                             new Item.Properties().fireResistant()
                     )
             );
 
     public static final RegistryObject<Item> EPOCH_SWORD =
             ITEMS.register("epoch_sword",
-                    () -> new SwordItem(
+                    () -> new OpalSword(
                             ModToolTiers.EPOCH,
                             3,
                             -2.2f,
+                            2.3f,
+                            0.51f,
                             new Item.Properties().fireResistant()
                     )
             );
 
     public static final RegistryObject<Item> FLUX_SWORD =
             ITEMS.register("flux_sword",
-                    () -> new SwordItem(
+                    () -> new OpalSword(
                             ModToolTiers.FLUX,
                             2,
                             -2.2f,
+                            1.5f,
+                            0.46f,
                             new Item.Properties().fireResistant()
                     )
             );
 
     public static final RegistryObject<Item> LOOP_SWORD =
             ITEMS.register("loop_sword",
-                    () -> new SwordItem(
+                    () -> new OpalSword(
                             ModToolTiers.LOOP,
                             2,
                             -2.3f,
+                            1.2f,
+                            0.3333f,
                             new Item.Properties().fireResistant()
                     )
             );
