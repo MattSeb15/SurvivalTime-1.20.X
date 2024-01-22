@@ -19,6 +19,7 @@ import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
 import net.most.survivaltimemod.util.records.FullBorderPattern;
 import net.most.survivaltimemod.util.records.MediumBorderPattern;
 import net.most.survivaltimemod.util.records.StarCenterPattern;
+import net.most.survivaltimemod.util.records.SwordPattern;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -165,6 +166,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         for (MediumBorderPattern mediumBorderPattern : SurvivalTimeUtilGenerator.MEDIUM_BORDER_PATTERN_LIST) {
             mediumBorderPattern(pWriter, mediumBorderPattern);
         }
+        for (SwordPattern swordPattern : SurvivalTimeUtilGenerator.SWORD_PATTERN_LIST) {
+            swordPattern(pWriter, swordPattern);
+        }
 
         for (StarCenterPattern starCenterPattern : SurvivalTimeUtilGenerator.STAR_CENTER_PATTERN_LIST) {
             starCenterPattern(pWriter, starCenterPattern);
@@ -193,6 +197,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 //                .save(pWriter);
 
 
+    }
+
+    private void swordPattern(Consumer<FinishedRecipe> pWriter, SwordPattern swordPattern) {
+        HourglassHubShapedRecipeBuilder.shaped(swordPattern.getResult(), swordPattern.getResultCount())
+                .pattern("  M  ")
+                .pattern("  M  ")
+                .pattern("  M  ")
+                .pattern(" DSD ")
+                .pattern("  S  ")
+                .define('M', swordPattern.getBladeIngredient())
+                .define('D', swordPattern.getShardIngredient())
+                .define('S', swordPattern.getStickIngredient())
+                .craftTime(swordPattern.getCraftTime())
+                .energyCost(swordPattern.getEnergyCost())
+                .unlockedBy(getHasName(swordPattern.getBladeIngredient()), has(swordPattern.getBladeIngredient()))
+                .save(pWriter);
     }
 
     private void blockItemPattern(Consumer<FinishedRecipe> pWriter, ItemLike block, ItemLike item) {

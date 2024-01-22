@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 36000,
+  "energyCost": 3600,
+  "key": {
+    "D": {
+      "item": "survivaltimemod:loop_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:loop_block"
+    },
+    "S": {
+      "item": "survivaltimemod:loop_stick"
+    }
+  },
+  "pattern": [
+    "  M  ",
+    "  M  ",
+    "  M  ",
+    " DSD ",
+    "  S  "
+  ],
+  "result": {
+    "item": "survivaltimemod:loop_sword"
+  }
+}

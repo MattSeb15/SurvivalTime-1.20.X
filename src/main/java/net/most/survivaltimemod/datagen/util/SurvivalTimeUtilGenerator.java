@@ -16,6 +16,7 @@ import net.most.survivaltimemod.util.WeightMinMax;
 import net.most.survivaltimemod.util.records.FullBorderPattern;
 import net.most.survivaltimemod.util.records.MediumBorderPattern;
 import net.most.survivaltimemod.util.records.StarCenterPattern;
+import net.most.survivaltimemod.util.records.SwordPattern;
 
 import java.util.List;
 import java.util.Map;
@@ -210,6 +211,45 @@ public class SurvivalTimeUtilGenerator {
                     Items.MELON_SEEDS)
     );
     public final static List<MediumBorderPattern> MEDIUM_BORDER_PATTERN_LIST = List.of(
+
+    );
+
+    public final static List<SwordPattern> SWORD_PATTERN_LIST = List.of(
+            new SwordPattern(ModItems.LOOP_SWORD.get(),
+                    20 * 60 * 30,
+                    60 * 60,
+                    ModItems.LOOP_STICK.get(),
+                    ModBlocks.LOOP_BLOCK.get(),
+                    ModItems.LOOP_INGOT.get()
+            ),
+            new SwordPattern(ModItems.FLUX_SWORD.get(),
+                    20 * 60 * 40,
+                    60 * 60 * 2,
+                    ModItems.FLUX_STICK.get(),
+                    ModBlocks.FLUX_BLOCK.get(),
+                    ModItems.FLUX_INGOT.get()
+            ),
+            new SwordPattern(ModItems.EPOCH_SWORD.get(),
+                    20 * 60 * 50,
+                    60 * 60 * 3,
+                    ModItems.EPOCH_STICK.get(),
+                    ModBlocks.EPOCH_BLOCK.get(),
+                    ModItems.EPOCH_INGOT.get()
+            ),
+            new SwordPattern(ModItems.TEMPORA_SWORD.get(),
+                    20 * 60 * 60,
+                    60 * 60 * 4,
+                    ModItems.TEMPORA_STICK.get(),
+                    ModBlocks.TEMPORA_BLOCK.get(),
+                    ModItems.TEMPORA_INGOT.get()
+            ),
+            new SwordPattern(ModItems.CHRONA_SWORD.get(),
+                    20 * 60 * 80,
+                    60 * 60 * 5,
+                    ModItems.CHRONA_STICK.get(),
+                    ModBlocks.CHRONA_BLOCK.get(),
+                    ModItems.CHRONA_INGOT.get()
+            )
 
     );
 
