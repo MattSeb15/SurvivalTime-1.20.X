@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 78000,
+  "energyCost": 11700,
+  "key": {
+    "D": {
+      "item": "survivaltimemod:epoch_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:epoch_block"
+    },
+    "S": {
+      "item": "survivaltimemod:epoch_stick"
+    }
+  },
+  "pattern": [
+    " DMD ",
+    "M S M",
+    "  S  ",
+    "  S  ",
+    "  S  "
+  ],
+  "result": {
+    "item": "survivaltimemod:epoch_pickaxe"
+  }
+}

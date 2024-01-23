@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 90000,
+  "energyCost": 15300,
+  "key": {
+    "D": {
+      "item": "survivaltimemod:tempora_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:tempora_block"
+    },
+    "S": {
+      "item": "survivaltimemod:tempora_stick"
+    }
+  },
+  "pattern": [
+    " DMD ",
+    "M S M",
+    "  S  ",
+    "  S  ",
+    "  S  "
+  ],
+  "result": {
+    "item": "survivaltimemod:tempora_pickaxe"
+  }
+}

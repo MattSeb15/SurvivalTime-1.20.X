@@ -43,6 +43,28 @@
   "item.survivaltimemod.curse_item": "Curse",
   "item.survivaltimemod.pile_of_meat": "Pile of meat",
   "item.survivaltimemod.compacted_milk": "Compacted Milk",
+  "item.survivaltimemod.chrona_pickaxe": "Chrona Pickaxe",
+  "item.survivaltimemod.tempora_pickaxe": "Tempora Pickaxe",
+  "item.survivaltimemod.epoch_pickaxe": "Epoch Pickaxe",
+  "item.survivaltimemod.flux_pickaxe": "Flux Pickaxe",
+  "item.survivaltimemod.loop_pickaxe": "Loop Pickaxe",
+  "item.survivaltimemod.chrona_axe": "Chrona Axe",
+  "item.survivaltimemod.tempora_axe": "Tempora Axe",
+  "item.survivaltimemod.epoch_axe": "Epoch Axe",
+  "item.survivaltimemod.flux_axe": "Flux Axe",
+  "item.survivaltimemod.loop_axe": "Loop Axe",
+  "item.survivaltimemod.chrona_shovel": "Chrona Shovel",
+  "item.survivaltimemod.tempora_shovel": "Tempora Shovel",
+  "item.survivaltimemod.epoch_shovel": "Epoch Shovel",
+  "item.survivaltimemod.flux_shovel": "Flux Shovel",
+  "item.survivaltimemod.loop_shovel": "Loop Shovel",
+  "item.survivaltimemod.chrona_hoe": "Chrona Hoe",
+  "item.survivaltimemod.tempora_hoe": "Tempora Hoe",
+  "item.survivaltimemod.epoch_hoe": "Epoch Hoe",
+  "item.survivaltimemod.flux_hoe": "Flux Hoe",
+  "item.survivaltimemod.loop_hoe": "Loop Hoe",
+
+
 
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
@@ -143,7 +165,13 @@
   "commands.sut.time.info": "%s. Username: %s | Current Time: %s",
   "commands.sut.maxtime.set": "Your max time has been set to: %s",
   "commands.sut.maxtime.info": "%s. Username: %s | Current MaxTime: %s",
-  "item.survival_time_mod.opal_sword.tooltip.time_steal_multiplier": "Timesteal mult.: %s",
-  "item.survival_time_mod.opal_sword.tooltip.probability": "Probability: %s"
+
+  "item.survival_time_mod.opal_tool.tooltip.time_steal_multiplier": "Timesteal mult.: %s",
+  "item.survival_time_mod.opal_tool.tooltip.probability": "Probability: %s",
+  "item.survival_time_mod.opal_sword.tooltip.info": "Steal time when attacking a target",
+  "item.survival_time_mod.opal_pickaxe.tooltip.info": "Steal time from mineable blocks",
+  "item.survival_time_mod.opal_axe.tooltip.info": "Steal time from fellable blocks",
+  "item.survival_time_mod.opal_shovel.tooltip.info": "Steal time from diggable blocks",
+  "item.survival_time_mod.opal_hoe.tooltip.info": "Steal time from hoe-removable blocks"
 
 }

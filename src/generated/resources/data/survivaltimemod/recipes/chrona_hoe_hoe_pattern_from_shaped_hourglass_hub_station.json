@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 96000,
+  "energyCost": 18000,
+  "key": {
+    "D": {
+      "item": "survivaltimemod:chrona_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:chrona_block"
+    },
+    "S": {
+      "item": "survivaltimemod:chrona_stick"
+    }
+  },
+  "pattern": [
+    "  MDM",
+    "  D  ",
+    "  S  ",
+    "  S  ",
+    "  S  "
+  ],
+  "result": {
+    "item": "survivaltimemod:chrona_hoe"
+  }
+}

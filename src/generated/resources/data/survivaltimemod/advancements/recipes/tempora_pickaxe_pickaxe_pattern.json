@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tempora_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "survivaltimemod:tempora_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "survivaltimemod:tempora_pickaxe_pickaxe_pattern"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_tempora_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "survivaltimemod:tempora_pickaxe_pickaxe_pattern"
+    ]
+  },
+  "sends_telemetry_event": true
+}
