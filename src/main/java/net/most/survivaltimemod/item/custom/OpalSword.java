@@ -79,8 +79,11 @@ public class OpalSword extends SwordItem {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents,
                                 @NotNull TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.translatable("item.survival_time_mod.opal_sword.tooltip.time_steal_multiplier", getTimeStealMultiplier()).withStyle(ChatFormatting.GOLD));
-        pTooltipComponents.add(Component.translatable("item.survival_time_mod.opal_sword.tooltip.probability", String.format("%.2f%%",
+        pTooltipComponents.add(Component.translatable("item.survival_time_mod.opal_sword.tooltip.info").withStyle(ChatFormatting.LIGHT_PURPLE));
+        pTooltipComponents.add(Component.empty());
+        pTooltipComponents.add(Component.translatable("item.survival_time_mod.opal_tool.tooltip.time_steal_multiplier",
+                getTimeStealMultiplier()).withStyle(ChatFormatting.GOLD));
+        pTooltipComponents.add(Component.translatable("item.survival_time_mod.opal_tool.tooltip.probability", String.format("%.2f%%",
                 getProbability() * 100)).withStyle(ChatFormatting.AQUA));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

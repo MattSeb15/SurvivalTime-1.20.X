@@ -283,6 +283,162 @@ public class SurvivalTimeUtilGenerator {
 
     );
 
+    public final static List<PickaxePattern> PICKAXE_PATTERN_LIST = List.of(
+            new PickaxePattern(ModItems.LOOP_PICKAXE.get(),
+                    20 * 60 * 30,
+                    60 * 60,
+                    ModItems.LOOP_STICK.get(),
+                    ModBlocks.LOOP_BLOCK.get(),
+                    ModItems.LOOP_INGOT.get()
+            ),
+            new PickaxePattern(ModItems.FLUX_PICKAXE.get(),
+                    20 * 60 * 40,
+                    60 * 60 * 2,
+                    ModItems.FLUX_STICK.get(),
+                    ModBlocks.FLUX_BLOCK.get(),
+                    ModItems.FLUX_INGOT.get()
+            ),
+            new PickaxePattern(ModItems.EPOCH_PICKAXE.get(),
+                    20 * 60 * 50,
+                    60 * 60 * 3,
+                    ModItems.EPOCH_STICK.get(),
+                    ModBlocks.EPOCH_BLOCK.get(),
+                    ModItems.EPOCH_INGOT.get()
+            ),
+            new PickaxePattern(ModItems.TEMPORA_PICKAXE.get(),
+                    20 * 60 * 60,
+                    60 * 60 * 4,
+                    ModItems.TEMPORA_STICK.get(),
+                    ModBlocks.TEMPORA_BLOCK.get(),
+                    ModItems.TEMPORA_INGOT.get()
+            ),
+            new PickaxePattern(ModItems.CHRONA_PICKAXE.get(),
+                    20 * 60 * 80,
+                    60 * 60 * 5,
+                    ModItems.CHRONA_STICK.get(),
+                    ModBlocks.CHRONA_BLOCK.get(),
+                    ModItems.CHRONA_INGOT.get()
+            )
+
+    );
+
+    public final static List<AxePattern> AXE_PATTERN_LIST = List.of(
+            new AxePattern(ModItems.LOOP_AXE.get(),
+                    20 * 60 * 30,
+                    60 * 60,
+                    ModItems.LOOP_STICK.get(),
+                    ModBlocks.LOOP_BLOCK.get(),
+                    ModItems.LOOP_INGOT.get()
+            ),
+            new AxePattern(ModItems.FLUX_AXE.get(),
+                    20 * 60 * 40,
+                    60 * 60 * 2,
+                    ModItems.FLUX_STICK.get(),
+                    ModBlocks.FLUX_BLOCK.get(),
+                    ModItems.FLUX_INGOT.get()
+            ),
+            new AxePattern(ModItems.EPOCH_AXE.get(),
+                    20 * 60 * 50,
+                    60 * 60 * 3,
+                    ModItems.EPOCH_STICK.get(),
+                    ModBlocks.EPOCH_BLOCK.get(),
+                    ModItems.EPOCH_INGOT.get()
+            ),
+            new AxePattern(ModItems.TEMPORA_AXE.get(),
+                    20 * 60 * 60,
+                    60 * 60 * 4,
+                    ModItems.TEMPORA_STICK.get(),
+                    ModBlocks.TEMPORA_BLOCK.get(),
+                    ModItems.TEMPORA_INGOT.get()
+            ),
+            new AxePattern(ModItems.CHRONA_AXE.get(),
+                    20 * 60 * 80,
+                    60 * 60 * 5,
+                    ModItems.CHRONA_STICK.get(),
+                    ModBlocks.CHRONA_BLOCK.get(),
+                    ModItems.CHRONA_INGOT.get()
+            )
+
+    );
+
+    public final static List<ShovelPattern> SHOVEL_PATTERN_LIST = List.of(
+            new ShovelPattern(ModItems.LOOP_SHOVEL.get(),
+                    20 * 60 * 30,
+                    60 * 60,
+                    ModItems.LOOP_STICK.get(),
+                    ModBlocks.LOOP_BLOCK.get(),
+                    ModItems.LOOP_INGOT.get()
+            ),
+            new ShovelPattern(ModItems.FLUX_SHOVEL.get(),
+                    20 * 60 * 40,
+                    60 * 60 * 2,
+                    ModItems.FLUX_STICK.get(),
+                    ModBlocks.FLUX_BLOCK.get(),
+                    ModItems.FLUX_INGOT.get()
+            ),
+            new ShovelPattern(ModItems.EPOCH_SHOVEL.get(),
+                    20 * 60 * 50,
+                    60 * 60 * 3,
+                    ModItems.EPOCH_STICK.get(),
+                    ModBlocks.EPOCH_BLOCK.get(),
+                    ModItems.EPOCH_INGOT.get()
+            ),
+            new ShovelPattern(ModItems.TEMPORA_SHOVEL.get(),
+                    20 * 60 * 60,
+                    60 * 60 * 4,
+                    ModItems.TEMPORA_STICK.get(),
+                    ModBlocks.TEMPORA_BLOCK.get(),
+                    ModItems.TEMPORA_INGOT.get()
+            ),
+            new ShovelPattern(ModItems.CHRONA_SHOVEL.get(),
+                    20 * 60 * 80,
+                    60 * 60 * 5,
+                    ModItems.CHRONA_STICK.get(),
+                    ModBlocks.CHRONA_BLOCK.get(),
+                    ModItems.CHRONA_INGOT.get()
+            )
+
+    );
+
+    public final static List<HoePattern> HOE_PATTERN_LIST = List.of(
+            new HoePattern(ModItems.LOOP_HOE.get(),
+                    20 * 60 * 30,
+                    60 * 60,
+                    ModItems.LOOP_STICK.get(),
+                    ModBlocks.LOOP_BLOCK.get(),
+                    ModItems.LOOP_INGOT.get()
+            ),
+            new HoePattern(ModItems.FLUX_HOE.get(),
+                    20 * 60 * 40,
+                    60 * 60 * 2,
+                    ModItems.FLUX_STICK.get(),
+                    ModBlocks.FLUX_BLOCK.get(),
+                    ModItems.FLUX_INGOT.get()
+            ),
+            new HoePattern(ModItems.EPOCH_HOE.get(),
+                    20 * 60 * 50,
+                    60 * 60 * 3,
+                    ModItems.EPOCH_STICK.get(),
+                    ModBlocks.EPOCH_BLOCK.get(),
+                    ModItems.EPOCH_INGOT.get()
+            ),
+            new HoePattern(ModItems.TEMPORA_HOE.get(),
+                    20 * 60 * 60,
+                    60 * 60 * 4,
+                    ModItems.TEMPORA_STICK.get(),
+                    ModBlocks.TEMPORA_BLOCK.get(),
+                    ModItems.TEMPORA_INGOT.get()
+            ),
+            new HoePattern(ModItems.CHRONA_HOE.get(),
+                    20 * 60 * 80,
+                    60 * 60 * 5,
+                    ModItems.CHRONA_STICK.get(),
+                    ModBlocks.CHRONA_BLOCK.get(),
+                    ModItems.CHRONA_INGOT.get()
+            )
+
+    );
+
     public final static List<StarCenterPattern> STAR_CENTER_PATTERN_LIST = List.of(
             new StarCenterPattern(ModItems.CURSE_ITEM.get(),
                     1,

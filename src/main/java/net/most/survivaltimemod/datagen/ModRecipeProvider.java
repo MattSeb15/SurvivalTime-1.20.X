@@ -117,6 +117,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         for (SwordPattern swordPattern : SurvivalTimeUtilGenerator.SWORD_PATTERN_LIST) {
             swordPattern(pWriter, swordPattern);
         }
+        for (PickaxePattern pickaxePattern : SurvivalTimeUtilGenerator.PICKAXE_PATTERN_LIST) {
+            pickaxePattern(pWriter, pickaxePattern);
+        }
+        for (AxePattern axePattern : SurvivalTimeUtilGenerator.AXE_PATTERN_LIST) {
+            axePattern(pWriter, axePattern);
+        }
+        for (ShovelPattern shovelPattern : SurvivalTimeUtilGenerator.SHOVEL_PATTERN_LIST) {
+            shovelPattern(pWriter, shovelPattern);
+        }
+        for (HoePattern hoePattern : SurvivalTimeUtilGenerator.HOE_PATTERN_LIST) {
+            hoePattern(pWriter, hoePattern);
+        }
 
         for (StarCenterPattern starCenterPattern : SurvivalTimeUtilGenerator.STAR_CENTER_PATTERN_LIST) {
             starCenterPattern(pWriter, starCenterPattern);
@@ -192,6 +204,77 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .energyCost(swordPattern.getEnergyCost())
                 .unlockedBy(getHasName(swordPattern.getBladeIngredient()), has(swordPattern.getBladeIngredient()))
                 .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(swordPattern.getResult()) + "_sword_pattern");
+    }
+
+    private void pickaxePattern(Consumer<FinishedRecipe> pWriter, PickaxePattern pickaxePattern) {
+
+        HourglassHubShapedRecipeBuilder.shaped(pickaxePattern.getResult(), pickaxePattern.getResultCount())
+                .pattern(" DMD ")
+                .pattern("M S M")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .define('M', pickaxePattern.getBladeIngredient())
+                .define('D', pickaxePattern.getShardIngredient())
+                .define('S', pickaxePattern.getStickIngredient())
+                .craftTime(pickaxePattern.getCraftTime() + 20 * 60 * 15)
+                .energyCost(pickaxePattern.getEnergyCost() + 60 * 15)
+                .unlockedBy(getHasName(pickaxePattern.getBladeIngredient()), has(pickaxePattern.getBladeIngredient()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pickaxePattern.getResult()) + "_pickaxe_pattern");
+
+    }
+
+    private void hoePattern(Consumer<FinishedRecipe> pWriter, HoePattern hoePattern) {
+        HourglassHubShapedRecipeBuilder.shaped(hoePattern.getResult(), hoePattern.getResultCount())
+                .pattern("  MDM")
+                .pattern("  D  ")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .define('M', hoePattern.getBladeIngredient())
+                .define('D', hoePattern.getShardIngredient())
+                .define('S', hoePattern.getStickIngredient())
+                .craftTime(hoePattern.getCraftTime())
+                .energyCost(hoePattern.getEnergyCost())
+                .unlockedBy(getHasName(hoePattern.getBladeIngredient()), has(hoePattern.getBladeIngredient()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(hoePattern.getResult()) + "_hoe_pattern");
+
+    }
+
+    private void shovelPattern(Consumer<FinishedRecipe> pWriter, ShovelPattern shovelPattern) {
+
+        HourglassHubShapedRecipeBuilder.shaped(shovelPattern.getResult(), shovelPattern.getResultCount())
+                .pattern("  M  ")
+                .pattern("  D  ")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .define('M', shovelPattern.getBladeIngredient())
+                .define('D', shovelPattern.getShardIngredient())
+                .define('S', shovelPattern.getStickIngredient())
+                .craftTime(shovelPattern.getCraftTime())
+                .energyCost(shovelPattern.getEnergyCost())
+                .unlockedBy(getHasName(shovelPattern.getBladeIngredient()), has(shovelPattern.getBladeIngredient()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(shovelPattern.getResult()) + "_shovel_pattern");
+
+    }
+
+    private void axePattern(Consumer<FinishedRecipe> pWriter, AxePattern axePattern) {
+        HourglassHubShapedRecipeBuilder.shaped(axePattern.getResult(), axePattern.getResultCount())
+                .pattern("D M D")
+                .pattern("DMSMD")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .pattern("  S  ")
+                .define('M', axePattern.getBladeIngredient())
+                .define('D', axePattern.getShardIngredient())
+                .define('S', axePattern.getStickIngredient())
+                .craftTime(axePattern.getCraftTime())
+                .energyCost(axePattern.getEnergyCost())
+                .unlockedBy(getHasName(axePattern.getBladeIngredient()), has(axePattern.getBladeIngredient()))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(axePattern.getResult()) + "_axe_pattern");
+
+
     }
 
     private void blockItemPattern(Consumer<FinishedRecipe> pWriter, ItemLike block, ItemLike item) {
