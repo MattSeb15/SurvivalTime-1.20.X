@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.entity.ModEntities;
 import net.most.survivaltimemod.entity.custom.animal.TimekeeperEntity;
+import net.most.survivaltimemod.entity.custom.animal.TimmyEntity;
 import net.most.survivaltimemod.entity.custom.monster.TimeDevourerEntity;
 
 @Mod.EventBusSubscriber(modid = SurvivalTimeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -19,6 +20,7 @@ public class ModEventBusEvents {
     public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
         event.put(ModEntities.TIMEKEEPER.get(), TimekeeperEntity.setAttributes());
         event.put(ModEntities.TIME_DEVOURER.get(), TimeDevourerEntity.setAttributes());
+        event.put(ModEntities.TIMMY.get(), TimmyEntity.createAttributes().build());
     }
 
     @SubscribeEvent

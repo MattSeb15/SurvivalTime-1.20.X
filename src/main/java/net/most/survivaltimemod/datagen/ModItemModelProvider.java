@@ -39,6 +39,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         withExistingParent(ModItems.TIMEKEEPER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.TIME_DEVOURER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.TIMMY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 //        complexBlock(ModBlocks.HOURGLASS_HUB_STATION.get());

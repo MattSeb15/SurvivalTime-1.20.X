@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.entity.custom.animal.TimmyEntity;
 import net.most.survivaltimemod.entity.custom.monster.TimeDevourerEntity;
 import net.most.survivaltimemod.entity.custom.animal.TimekeeperEntity;
 import net.most.survivaltimemod.entity.custom.throwable.CurseEntity;
@@ -57,6 +58,12 @@ public class ModEntities {
                     .setCustomClientFactory((spawnEntity, level) -> new CurseEntity(level))
                     .fireImmune()
                     .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "purifier_projectile").toString())
+    );
+
+    public static final RegistryObject<EntityType<TimmyEntity>> TIMMY = ENTITY_TYPES.register("timmy",
+            () -> EntityType.Builder.of(TimmyEntity::new, MobCategory.CREATURE)
+                    .sized(1.5f, 1.0f)
+                    .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "timmy").toString())
     );
 
     public static void register(IEventBus eventBus) {

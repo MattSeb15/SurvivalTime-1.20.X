@@ -166,6 +166,10 @@
   "commands.sut.maxtime.set": "Your max time has been set to: %s",
   "commands.sut.maxtime.info": "%s. Username: %s | Current MaxTime: %s",
 
+  "entity.survival_time_mod.time_devourer": "Time Devourer",
+  "entity.survival_time_mod.timmy": "Timmy",
+  "entity.survival_time_mod.timekeeper": "Timekeeper",
+
   "item.survival_time_mod.opal_tool.tooltip.time_steal_multiplier": "Timesteal mult.: %s",
   "item.survival_time_mod.opal_tool.tooltip.probability": "Probability: %s",
   "item.survival_time_mod.opal_sword.tooltip.info": "Steal time when attacking a target",

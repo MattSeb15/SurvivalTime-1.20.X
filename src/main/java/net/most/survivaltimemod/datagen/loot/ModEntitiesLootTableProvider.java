@@ -29,6 +29,7 @@ public class ModEntitiesLootTableProvider extends EntityLootSubProvider {
     public void generate() {
         add(ModEntities.TIME_DEVOURER.get(), createStandardTable(ModItems.PILE_OF_MEAT.get(), 0, 2));
         add(ModEntities.TIMEKEEPER.get(), LootTable.lootTable());
+        add(ModEntities.TIMMY.get(), LootTable.lootTable());
 
     }
 

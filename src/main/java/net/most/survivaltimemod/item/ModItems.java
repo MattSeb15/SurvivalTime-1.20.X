@@ -453,6 +453,11 @@ public class ModItems {
                     0x000000,
                     0xffffff,
                     new Item.Properties()));
+    public static final RegistryObject<Item> TIMMY_SPAWN_EGG =
+            ITEMS.register("timmy_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.TIMMY,
+                    0xffffe082,
+                    0xffffd54f,
+                    new Item.Properties()));
 
     public static final RegistryObject<Item> PURIFIER_ITEM =
             ITEMS.register("purifier_item", () -> new PurifierItem(new Item.Properties().stacksTo(8)));
