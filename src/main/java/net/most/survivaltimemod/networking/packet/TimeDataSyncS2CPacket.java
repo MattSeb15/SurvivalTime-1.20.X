@@ -22,9 +22,36 @@ public class TimeDataSyncS2CPacket {
         float timeMultiplier = buf.readFloat();
         float damageMultiplier = buf.readFloat();
         int[] effectInstancesDuration = buf.readVarIntArray();
+        float[] lastStats = readFloatArray(buf);
+        double coins = buf.readDouble();
+        float coinsMultiplier = buf.readFloat();
 
 
-        playerTimeData = new PlayerTimeData(maxTime, time, isTimeStopped, timeMultiplier, damageMultiplier, effectInstancesDuration);
+        playerTimeData = new PlayerTimeData(maxTime,
+                time,
+                isTimeStopped,
+                timeMultiplier,
+                damageMultiplier,
+                effectInstancesDuration,
+                lastStats,
+                coins,
+                coinsMultiplier);
+    }
+
+    private float[] readFloatArray(FriendlyByteBuf buf) {
+        int length = buf.readVarInt();
+        float[] array = new float[length];
+        for (int i = 0; i < length; i++) {
+            array[i] = buf.readFloat();
+        }
+        return array;
+    }
+
+    private void writeFloatArray(FriendlyByteBuf buf, float[] array) {
+        buf.writeVarInt(array.length);
+        for (float f : array) {
+            buf.writeFloat(f);
+        }
     }
 
     public void toBytes(FriendlyByteBuf buf) {
@@ -34,6 +61,10 @@ public class TimeDataSyncS2CPacket {
         buf.writeFloat(playerTimeData.getTimeMultiplier());
         buf.writeFloat(playerTimeData.getDamageMultiplier());
         buf.writeVarIntArray(playerTimeData.getEffectInstancesDuration());
+        writeFloatArray(buf, playerTimeData.getLastStats());
+        buf.writeDouble(playerTimeData.getCoins());
+        buf.writeFloat(playerTimeData.getCoinsMultiplier());
+
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {

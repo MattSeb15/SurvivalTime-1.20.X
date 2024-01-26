@@ -19,10 +19,10 @@ public class IconTexture {
                 extraPositionIconTexture.getWidth(), extraPositionIconTexture.getHeight());
     }
 
-    public static void drawIcon(GuiGraphics guiGraphics, PositionIconTexture extraPositionIconTexture) {
-        guiGraphics.blit(TIME_HUD_ICONS, extraPositionIconTexture.y(), extraPositionIconTexture.x(), extraPositionIconTexture.offsetU(),
-                extraPositionIconTexture.offsetV(),
-                extraPositionIconTexture.width(), extraPositionIconTexture.height());
+    public static void drawIcon(GuiGraphics guiGraphics, PositionIconTexture positionIconTexture) {
+        guiGraphics.blit(TIME_HUD_ICONS, positionIconTexture.y(), positionIconTexture.x(), positionIconTexture.offsetU(),
+                positionIconTexture.offsetV(),
+                positionIconTexture.width(), positionIconTexture.height());
     }
 
 

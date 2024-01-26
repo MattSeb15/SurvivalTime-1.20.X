@@ -1,7 +1,5 @@
 package net.most.survivaltimemod.time;
 
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,6 +19,11 @@ public class PlayerTime {
     private static final float DEFAULT_TIME_MULTIPLIER = 1.0F;
     private static final float DEFAULT_DAMAGE_MULTIPLIER = 20.0F;
     private static final int[] DEFAULT_EFFECT_INSTANCES = new int[]{0, 0, 0, 0};
+    private static final float[] DEFAULT_LAST_STATS = new float[]{0, 0, 0, 0};
+
+    public static final double DEFAULT_COINS = 0;
+
+    public static final float DEFAULT_COINS_MULTIPLIER = 1.0F;
 
     private PlayerTimeData playerTimeData = new PlayerTimeData(
             DEFAULT_TIME,
@@ -28,9 +31,16 @@ public class PlayerTime {
             DEFAULT_IS_TIME_STOPPED,
             DEFAULT_TIME_MULTIPLIER,
             DEFAULT_DAMAGE_MULTIPLIER,
-            DEFAULT_EFFECT_INSTANCES
+            DEFAULT_EFFECT_INSTANCES,
+            DEFAULT_LAST_STATS,
+            DEFAULT_COINS,
+            DEFAULT_COINS_MULTIPLIER
     );
     public static final String COMPOUND_TAG_KEY = "player_time_data";
+
+    public static final int LAST_INCREMENT_INDEX = 0;
+    public static final int LAST_DECREMENT_INDEX = 1;
+
 
     public void syncServerToClientData(ServerPlayer player) {
         ModMessages.sendToPlayer(new TimeDataSyncS2CPacket(this.playerTimeData), player);
@@ -39,6 +49,31 @@ public class PlayerTime {
     public PlayerTimeData getPlayerTimeData() {
         return this.playerTimeData;
     }
+    private void setLastStats(float[] lastStats) {
+        this.playerTimeData.setLastStats(lastStats);
+    }
+
+    public void setLastStats(float[] lastStats, ServerPlayer player) {
+        this.setLastStats(lastStats);
+        syncServerToClientData(player);
+    }
+
+    private void setLastIncrement(float lastTime) {
+        this.playerTimeData.getLastStats()[LAST_INCREMENT_INDEX] = lastTime;
+    }
+
+    private void setLastDecrement(float lastTime) {
+        this.playerTimeData.getLastStats()[LAST_DECREMENT_INDEX] = lastTime;
+    }
+
+    public float getLastIncrement() {
+        return this.playerTimeData.getLastStats()[LAST_INCREMENT_INDEX];
+    }
+
+    public float getLastDecrement() {
+        return this.playerTimeData.getLastStats()[LAST_DECREMENT_INDEX];
+    }
+
 
     public void setPlayerTimeData(PlayerTimeData playerTimeData) {
         this.playerTimeData = playerTimeData;
@@ -49,7 +84,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void setTime(float time) {
+    private void setTime(float time) {
         this.playerTimeData.setTime(time);
     }
 
@@ -58,7 +93,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void setMaxTime(float maxTime) {
+    private void setMaxTime(float maxTime) {
         this.playerTimeData.setMaxTime(maxTime);
     }
 
@@ -67,7 +102,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void incrementMaxTime(float increment) {
+    private void incrementMaxTime(float increment) {
         float currentMaxTime = this.playerTimeData.getMaxTime();
         float newMaxTime = currentMaxTime + increment;
         this.playerTimeData.setMaxTime(newMaxTime);
@@ -78,7 +113,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void decrementMaxTime(float decrement) {
+    private void decrementMaxTime(float decrement) {
         float currentMaxTime = this.playerTimeData.getMaxTime();
         float newMaxTime = Math.max(currentMaxTime - decrement, MIN_TIME);
         this.playerTimeData.setMaxTime(newMaxTime);
@@ -89,7 +124,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void setIsTimeStopped(boolean isTimeStopped) {
+    private void setIsTimeStopped(boolean isTimeStopped) {
         this.playerTimeData.setIsTimeStopped(isTimeStopped);
     }
 
@@ -98,7 +133,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void setTimeMultiplier(float timeMultiplier) {
+    private void setTimeMultiplier(float timeMultiplier) {
         this.playerTimeData.setTimeMultiplier(timeMultiplier);
     }
 
@@ -111,7 +146,7 @@ public class PlayerTime {
         this.setTimeMultiplier(DEFAULT_TIME_MULTIPLIER, player);
     }
 
-    public void setDamageMultiplier(float damageMultiplier) {
+    private void setDamageMultiplier(float damageMultiplier) {
         this.playerTimeData.setDamageMultiplier(damageMultiplier);
     }
 
@@ -140,13 +175,6 @@ public class PlayerTime {
         this.playerTimeData.getEffectInstancesDuration()[timeIgniteTickCountIndex] = tickCount;
     }
 
-
-
-
-
-
-
-
     public void setTimeExtinguisherEffectDuration(int duration, ServerPlayer player) {
         this.setTimeExtinguisherEffectDuration(duration);
         syncServerToClientData(player);
@@ -165,6 +193,10 @@ public class PlayerTime {
     public void setTimeIgniteTickCount(int tickCount, ServerPlayer player) {
         this.setTimeIgniteTickCount(tickCount);
         syncServerToClientData(player);
+    }
+
+    private void setCoins(double coins) {
+        this.playerTimeData.setCoins(coins);
     }
 
     public float getTime() {
@@ -207,12 +239,22 @@ public class PlayerTime {
         return this.getEffectInstancesDuration()[3];
     }
 
-    public void incrementTime(float increment) {
+    public double getCoins() {
+        return this.playerTimeData.getCoins();
+    }
+
+    public float getCoinsMultiplier() {
+        return this.playerTimeData.getCoinsMultiplier();
+    }
+
+    private void incrementTime(float increment) {
         float currentTime = this.playerTimeData.getTime();
         float multiplier = this.playerTimeData.getTimeMultiplier();
         float maxTime = this.playerTimeData.getMaxTime();
-        float newTime = Math.min(currentTime + (increment * multiplier), maxTime);
+        float v = increment * multiplier;
+        float newTime = Math.min(currentTime + v, maxTime);
         this.playerTimeData.setTime(newTime);
+        this.setLastIncrement(v);
     }
 
     public void incrementTime(float increment, ServerPlayer player, boolean withEffect) {
@@ -232,8 +274,10 @@ public class PlayerTime {
     public void decrementTime(float decrement) {
         float currentTime = this.playerTimeData.getTime();
         float multiplier = this.playerTimeData.getTimeMultiplier();
-        float newTime = Math.max(currentTime - (decrement * multiplier), MIN_TIME);
+        float d = decrement * multiplier;
+        float newTime = Math.max(currentTime - d, MIN_TIME);
         this.playerTimeData.setTime(newTime);
+        this.setLastDecrement(d);
     }
 
     public void decrementTime(float decrement, ServerPlayer player, boolean withEffect) {
@@ -250,8 +294,12 @@ public class PlayerTime {
     }
 
 
-    public void resetTime() {
-        this.playerTimeData.setTime(DEFAULT_TIME);
+    private void resetTime() {
+        float currentTime = this.playerTimeData.getTime();
+        float maxTime = this.playerTimeData.getMaxTime();
+        float multiplier = this.playerTimeData.getTimeMultiplier();
+        float difference = maxTime - currentTime * multiplier;
+        this.incrementTime(difference);
     }
 
     public void resetTime(ServerPlayer player) {
@@ -259,7 +307,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void toggleTimeStatus() {
+    private void toggleTimeStatus() {
         this.playerTimeData.setIsTimeStopped(!this.playerTimeData.isTimeStopped());
     }
 
@@ -268,7 +316,7 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
-    public void stopTimeStatus() {
+    private void stopTimeStatus() {
         this.playerTimeData.setIsTimeStopped(true);
     }
 
@@ -279,7 +327,7 @@ public class PlayerTime {
         }
     }
 
-    public void startTimeStatus() {
+    private void startTimeStatus() {
         this.playerTimeData.setIsTimeStopped(false);
     }
 
@@ -298,6 +346,36 @@ public class PlayerTime {
 
     public void setDefaultDamageMultiplier(ServerPlayer player) {
         this.setDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER, player);
+
+    }
+
+    public void setCoins(double coins, ServerPlayer player) {
+        this.setCoins(coins);
+        syncServerToClientData(player);
+    }
+
+    public void incrementCoins(long coins, ServerPlayer player) {
+        double currentCoins = this.getCoins();
+        float coinsMultiplier = this.getCoinsMultiplier();
+        double newCoins = currentCoins + coins * coinsMultiplier;
+        this.setCoins(newCoins, player);
+
+    }
+
+    public void subtractCoins(long coins, ServerPlayer player) {
+        double currentCoins = this.getCoins();
+        float coinsMultiplier = this.getCoinsMultiplier();
+        double newCoins = Math.max(currentCoins - coins * coinsMultiplier, 0);
+        this.setCoins(newCoins, player);
+    }
+
+    public void setCoinsMultiplier(float coinsMultiplier, ServerPlayer player) {
+        this.playerTimeData.setCoinsMultiplier(coinsMultiplier);
+        syncServerToClientData(player);
+    }
+
+    public void setDefaultCoinMultiplier(ServerPlayer player) {
+        this.setCoinsMultiplier(DEFAULT_COINS_MULTIPLIER, player);
     }
 
     public void copyFrom(PlayerTime playerTime) {
@@ -312,6 +390,8 @@ public class PlayerTime {
         playerTimeDataTag.putFloat("time_multiplier", playerTimeData.getTimeMultiplier());
         playerTimeDataTag.putFloat("damage_multiplier", playerTimeData.getDamageMultiplier());
         playerTimeDataTag.putIntArray("effect_instances_duration", playerTimeData.getEffectInstancesDuration());
+        playerTimeDataTag.putDouble("coins", playerTimeData.getCoins());
+        playerTimeDataTag.putFloat("coins_multiplier", playerTimeData.getCoinsMultiplier());
         compoundTag.put(COMPOUND_TAG_KEY, playerTimeDataTag);
     }
 
@@ -323,6 +403,8 @@ public class PlayerTime {
         playerTimeData.setTimeMultiplier(playerTimeDataTag.getFloat("time_multiplier"));
         playerTimeData.setDamageMultiplier(playerTimeDataTag.getFloat("damage_multiplier"));
         playerTimeData.setEffectInstancesDuration(playerTimeDataTag.getIntArray("effect_instances_duration"));
+        playerTimeData.setCoins(playerTimeDataTag.getDouble("coins"));
+        playerTimeData.setCoinsMultiplier(playerTimeDataTag.getFloat("coins_multiplier"));
 
     }
 
@@ -347,4 +429,6 @@ public class PlayerTime {
     public String getFormattedMaxTime() {
         return getFormattedTime(this.playerTimeData.getMaxTime());
     }
+
+
 }

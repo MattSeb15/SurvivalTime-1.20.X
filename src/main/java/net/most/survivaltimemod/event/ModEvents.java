@@ -17,12 +17,21 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.command.ConfigCommand;
 import net.most.survivaltimemod.SurvivalTimeMod;
+import net.most.survivaltimemod.command.coin.AddCoinCommand;
+import net.most.survivaltimemod.command.coin.InfoCoinCommand;
+import net.most.survivaltimemod.command.coin.SetCoinCommand;
+import net.most.survivaltimemod.command.coin.SubtractCoinCommand;
+import net.most.survivaltimemod.command.coinmultiplier.InfoCoinMultiplierCommand;
+import net.most.survivaltimemod.command.coinmultiplier.SetCoinMultiplierCommand;
+import net.most.survivaltimemod.command.coinmultiplier.SetDefaultCoinMultiplierCommand;
+import net.most.survivaltimemod.command.dmultiplier.InfoDamageMultiplierCommand;
 import net.most.survivaltimemod.command.dmultiplier.SetDamageMultiplierCommand;
 import net.most.survivaltimemod.command.dmultiplier.SetDefaultDamageMultiplierCommand;
 import net.most.survivaltimemod.command.item.AddNbtToItem;
 import net.most.survivaltimemod.command.maxtime.InfoMaxTimeCommand;
 import net.most.survivaltimemod.command.maxtime.SetMaxTimeCommand;
 import net.most.survivaltimemod.command.time.*;
+import net.most.survivaltimemod.command.tmultiplier.InfoTimeMultiplierCommand;
 import net.most.survivaltimemod.command.tmultiplier.SetDefaultTimeMultiplierCommand;
 import net.most.survivaltimemod.command.tmultiplier.SetTimeMultiplierCommand;
 import net.most.survivaltimemod.effect.ModEffects;
@@ -182,6 +191,15 @@ public class ModEvents {
         new SetDefaultDamageMultiplierCommand(event.getDispatcher());
         new InfoMaxTimeCommand(event.getDispatcher());
         new SetMaxTimeCommand(event.getDispatcher());
+        new AddCoinCommand(event.getDispatcher());
+        new InfoCoinCommand(event.getDispatcher());
+        new SetCoinCommand(event.getDispatcher());
+        new SubtractCoinCommand(event.getDispatcher());
+        new SetCoinMultiplierCommand(event.getDispatcher());
+        new SetDefaultCoinMultiplierCommand(event.getDispatcher());
+        new InfoCoinMultiplierCommand(event.getDispatcher());
+        new InfoDamageMultiplierCommand(event.getDispatcher());
+        new InfoTimeMultiplierCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

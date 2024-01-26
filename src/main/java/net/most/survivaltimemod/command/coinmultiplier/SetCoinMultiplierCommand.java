@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.command.dmultiplier;
+package net.most.survivaltimemod.command.coinmultiplier;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
@@ -14,18 +14,18 @@ import net.most.survivaltimemod.time.PlayerTimeProvider;
 
 import java.util.Collection;
 
-public class SetDamageMultiplierCommand {
+public class SetCoinMultiplierCommand {
 
-    public SetDamageMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+    public SetCoinMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("sut")
                 .requires(
                         (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
 
                 )
-                .then(Commands.literal("multipliers").then(Commands.literal("damage").then(Commands.literal("set").then(
+                .then(Commands.literal("multipliers").then(Commands.literal("coin").then(Commands.literal("set").then(
                         Commands.argument("player", EntityArgument.players()).then(
                                 Commands.argument("amount",
-                                        FloatArgumentType.floatArg(-1000.0f, 1000.0f)).executes(this::execute)
+                                        FloatArgumentType.floatArg(-10000.0f, 10000.0f)).executes(this::execute)
                         )
                 ))))
         );
@@ -40,7 +40,7 @@ public class SetDamageMultiplierCommand {
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    playerTime.setDamageMultiplier(multiplier, player);
+                    playerTime.setCoinsMultiplier(multiplier, player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");
                     } else {
@@ -48,7 +48,7 @@ public class SetDamageMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your damage multiplier has been set to " + multiplier).withStyle(ChatFormatting.AQUA),
+                            Component.literal("Your coin multiplier has been set to " + multiplier).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
@@ -56,7 +56,7 @@ public class SetDamageMultiplierCommand {
             }
             context.getSource().sendSuccess(
                     () -> Component.literal("Set ").append(
-                            "x(" + multiplier + ") damage multiplier"
+                            "x(" + multiplier + ") coin multiplier"
                     ).append(
                             "to "
                     ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),

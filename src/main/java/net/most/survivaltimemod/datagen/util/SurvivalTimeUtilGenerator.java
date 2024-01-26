@@ -158,7 +158,8 @@ public class SurvivalTimeUtilGenerator {
             ModItems.IFLUX,
             ModItems.CLOCK_FRAGMENT,
             ModItems.PILE_OF_MEAT,
-            ModItems.COMPACTED_MILK
+            ModItems.COMPACTED_MILK,
+            ModItems.CHRONO_COIN
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\

@@ -1,7 +1,6 @@
-package net.most.survivaltimemod.command.dmultiplier;
+package net.most.survivaltimemod.command.coinmultiplier;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.ChatFormatting;
@@ -14,20 +13,15 @@ import net.most.survivaltimemod.time.PlayerTimeProvider;
 
 import java.util.Collection;
 
-public class SetDamageMultiplierCommand {
+public class SetDefaultCoinMultiplierCommand {
 
-    public SetDamageMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("sut")
-                .requires(
-                        (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
-
-                )
-                .then(Commands.literal("multipliers").then(Commands.literal("damage").then(Commands.literal("set").then(
-                        Commands.argument("player", EntityArgument.players()).then(
-                                Commands.argument("amount",
-                                        FloatArgumentType.floatArg(-1000.0f, 1000.0f)).executes(this::execute)
+    public SetDefaultCoinMultiplierCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(Commands.literal("sut").requires(
+                                (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
                         )
-                ))))
+                        .then(Commands.literal("multipliers").then(Commands.literal("coin").then(Commands.literal("default").then(
+                                Commands.argument("player", EntityArgument.players()).executes(this::execute)
+                        ))))
         );
     }
 
@@ -36,11 +30,10 @@ public class SetDamageMultiplierCommand {
         try {
 
             Collection<ServerPlayer> players = EntityArgument.getPlayers(context, "player");
-            float multiplier = FloatArgumentType.getFloat(context, "amount");
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    playerTime.setDamageMultiplier(multiplier, player);
+                    playerTime.setDefaultCoinMultiplier(player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");
                     } else {
@@ -48,18 +41,16 @@ public class SetDamageMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your damage multiplier has been set to " + multiplier).withStyle(ChatFormatting.AQUA),
+                            Component.literal("Your coin multiplier has been set to default").withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            "x(" + multiplier + ") damage multiplier"
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.literal("Set default coin multiplier to ")
+                            .append(playerNames.toString())
+                            .withStyle(ChatFormatting.GREEN),
                     false
             );
 

@@ -471,6 +471,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> COMPACTED_MILK =
             ITEMS.register("compacted_milk", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHRONO_COIN =
+            ITEMS.register("chrono_coin", () -> new ChronoCoin(new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {

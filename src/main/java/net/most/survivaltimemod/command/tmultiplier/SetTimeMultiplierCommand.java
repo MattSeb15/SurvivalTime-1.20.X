@@ -28,7 +28,7 @@ public class SetTimeMultiplierCommand {
                 .then(Commands.literal("multipliers").then(Commands.literal("time").then(Commands.literal("set").then(
                         Commands.argument("player", EntityArgument.players()).then(
                                 Commands.argument("amount",
-                                        FloatArgumentType.floatArg(-5.0f, 5.0f)).executes(this::execute)
+                                        FloatArgumentType.floatArg(-3600.0f, 3600.0f)).executes(this::execute)
                         )
                 ))))
         );

@@ -63,6 +63,7 @@
   "item.survivaltimemod.epoch_hoe": "Epoch Hoe",
   "item.survivaltimemod.flux_hoe": "Flux Hoe",
   "item.survivaltimemod.loop_hoe": "Loop Hoe",
+  "item.survivaltimemod.chrono_coin": "Chrono Coin",
 
 
 
@@ -176,6 +177,12 @@
   "item.survival_time_mod.opal_pickaxe.tooltip.info": "Steal time from mineable blocks",
   "item.survival_time_mod.opal_axe.tooltip.info": "Steal time from fellable blocks",
   "item.survival_time_mod.opal_shovel.tooltip.info": "Steal time from diggable blocks",
-  "item.survival_time_mod.opal_hoe.tooltip.info": "Steal time from hoe-removable blocks"
+  "item.survival_time_mod.opal_hoe.tooltip.info": "Steal time from hoe-removable blocks",
+  "commands.sut.coin.info": "%s. Username: %s | Current Coins: %s",
+  "commands.sut.coin.add": "Added %s",
+  "commands.sut.coin.subtract": "Subtracted %s from your coins",
+  "commands.sut.coin_multiplier.info": "%s. Username: %s | CoinMultp: %s",
+  "commands.sut.damage_multiplier.info": "%s. Username: %s | DamageMult.: %s",
+  "commands.sut.time_multiplier.info": "%s. Username: %s | TimeMult.: %s"
 
 }
