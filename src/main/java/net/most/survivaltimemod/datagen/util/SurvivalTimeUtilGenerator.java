@@ -2,7 +2,6 @@ package net.most.survivaltimemod.datagen.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
@@ -10,11 +9,10 @@ import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.block.custom.TemporalTuberCropBlock;
 import net.most.survivaltimemod.data.CropBlockSeedItem;
 import net.most.survivaltimemod.data.CropBlockSeedItemModel;
+import net.most.survivaltimemod.datagen.pattern.*;
 import net.most.survivaltimemod.item.ModItems;
-import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
 import net.most.survivaltimemod.util.ShardOptions;
 import net.most.survivaltimemod.util.WeightMinMax;
-import net.most.survivaltimemod.util.records.*;
 
 import java.util.List;
 import java.util.Map;
@@ -159,19 +157,30 @@ public class SurvivalTimeUtilGenerator {
             ModItems.CLOCK_FRAGMENT,
             ModItems.PILE_OF_MEAT,
             ModItems.COMPACTED_MILK,
-            ModItems.CHRONO_COIN
+            ModItems.CHRONO_COIN,
+            ModItems.LOOP_HELMET,
+            ModItems.LOOP_CHESTPLATE,
+            ModItems.LOOP_LEGGINGS,
+            ModItems.LOOP_BOOTS,
+            ModItems.FLUX_HELMET,
+            ModItems.FLUX_CHESTPLATE,
+            ModItems.FLUX_LEGGINGS,
+            ModItems.FLUX_BOOTS,
+            ModItems.EPOCH_HELMET,
+            ModItems.EPOCH_CHESTPLATE,
+            ModItems.EPOCH_LEGGINGS,
+            ModItems.EPOCH_BOOTS,
+            ModItems.TEMPORA_HELMET,
+            ModItems.TEMPORA_CHESTPLATE,
+            ModItems.TEMPORA_LEGGINGS,
+            ModItems.TEMPORA_BOOTS,
+            ModItems.CHRONA_HELMET,
+            ModItems.CHRONA_CHESTPLATE,
+            ModItems.CHRONA_LEGGINGS,
+            ModItems.CHRONA_BOOTS
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\
-    public final static Map<ItemLike, ItemLike> RAW_SHARDS_RECIPE_MAP = Map.of(
-            ModItems.RAW_LOOP.get(), ModItems.OPAL_SHARD_LOOP.get(),
-            ModItems.RAW_FLUX.get(), ModItems.OPAL_SHARD_FLUX.get(),
-            ModItems.RAW_EPOCH.get(), ModItems.OPAL_SHARD_EPOCH.get(),
-            ModItems.RAW_TEMPORA.get(), ModItems.OPAL_SHARD_TEMPORA.get(),
-            ModItems.RAW_CHRONA.get(), ModItems.OPAL_SHARD_CHRONA.get()
-
-    );
-
     public final static List<FullBorderPattern> FULL_BORDER_PATTERN_LIST = List.of(
             new FullBorderPattern(ModItems.TEMPORAL_TUBER_SEEDS.get(), 5, 20 * 60 * 2, 60 * 5,
                     Items.WHEAT_SEEDS,
@@ -447,8 +456,17 @@ public class SurvivalTimeUtilGenerator {
                     60 * 15,
                     ModItems.PILE_OF_MEAT.get(),
                     ModItems.COMPACTED_MILK.get()
-            )
-
+            ),
+            new StarCenterPattern(ModItems.RAW_LOOP.get(), 1 , 20 * 30, 60 * 2, ModItems.OPAL_SHARD_LOOP.get() , Items.CLOCK),
+            new StarCenterPattern(ModItems.RAW_FLUX.get(), 1 , 20 * 30 * 2, 60 * 2 * 2, ModItems.OPAL_SHARD_FLUX.get() , Items.CLOCK),
+            new StarCenterPattern(ModItems.RAW_EPOCH.get(), 1 , 20 * 30 * 3, 60 * 2 * 3, ModItems.OPAL_SHARD_EPOCH.get() , Items.CLOCK),
+            new StarCenterPattern(ModItems.RAW_TEMPORA.get(), 1 , 20 * 30 * 4, 60 * 2 * 4, ModItems.OPAL_SHARD_TEMPORA.get() , Items.CLOCK),
+            new StarCenterPattern(ModItems.RAW_CHRONA.get(), 1 , 20 * 30 * 5, 60 * 2 * 5, ModItems.OPAL_SHARD_CHRONA.get() , Items.CLOCK),
+            new StarCenterPattern(ModItems.LOOP_STICK.get(), 1, 20 * 10, 60, ModItems.OPAL_SHARD_LOOP.get() , Items.STICK),
+            new StarCenterPattern(ModItems.FLUX_STICK.get(), 1, 20 * 10 * 2, 60 * 2, ModItems.OPAL_SHARD_FLUX.get() , Items.STICK),
+            new StarCenterPattern(ModItems.EPOCH_STICK.get(), 1, 20 * 10 * 3, 60 * 3, ModItems.OPAL_SHARD_EPOCH.get() , Items.STICK),
+            new StarCenterPattern(ModItems.TEMPORA_STICK.get(), 1, 20 * 10 * 4, 60 * 4, ModItems.OPAL_SHARD_TEMPORA.get() , Items.STICK),
+            new StarCenterPattern(ModItems.CHRONA_STICK.get(), 1, 20 * 10 * 5, 60 * 5, ModItems.OPAL_SHARD_CHRONA.get() , Items.STICK)
     );
 
     public final static Map<ItemLike, ItemLike> BLOCK_FROM_ITEM_RECIPE_MAP = Map.ofEntries(
@@ -467,12 +485,36 @@ public class SurvivalTimeUtilGenerator {
             Map.entry(ModBlocks.LOOP_BLOCK.get(), ModItems.LOOP_INGOT.get())
     );
 
-    public final static Map<ItemLike, ItemLike> STICKS_FROM_SHARDS_RECIPE_MAP = Map.ofEntries(
-            Map.entry(ModItems.LOOP_STICK.get(), ModItems.OPAL_SHARD_LOOP.get()),
-            Map.entry(ModItems.FLUX_STICK.get(), ModItems.OPAL_SHARD_FLUX.get()),
-            Map.entry(ModItems.EPOCH_STICK.get(), ModItems.OPAL_SHARD_EPOCH.get()),
-            Map.entry(ModItems.TEMPORA_STICK.get(), ModItems.OPAL_SHARD_TEMPORA.get()),
-            Map.entry(ModItems.CHRONA_STICK.get(), ModItems.OPAL_SHARD_CHRONA.get())
+    public final static List<HelmetArmorPattern> HELMET_PATTERN_LIST = List.of(
+            new HelmetArmorPattern(ModItems.LOOP_HELMET.get(), 1, 20 * 60 * 10, 60 * 30, ModBlocks.LOOP_BLOCK.get(),ModItems.LOOP_INGOT.get(), Items.NETHERITE_HELMET),
+            new HelmetArmorPattern(ModItems.FLUX_HELMET.get(), 1, 20 * 60 * 15, 60 * 35, ModBlocks.FLUX_BLOCK.get(), ModItems.FLUX_INGOT.get(), ModItems.LOOP_HELMET.get()),
+            new HelmetArmorPattern(ModItems.EPOCH_HELMET.get(), 1, 20 * 60 * 20, 60 * 40, ModBlocks.EPOCH_BLOCK.get(), ModItems.EPOCH_INGOT.get(), ModItems.FLUX_HELMET.get()),
+            new HelmetArmorPattern(ModItems.TEMPORA_HELMET.get(), 1, 20 * 60 * 25, 60 * 45, ModBlocks.TEMPORA_BLOCK.get(), ModItems.TEMPORA_INGOT.get(), ModItems.EPOCH_HELMET.get()),
+            new HelmetArmorPattern(ModItems.CHRONA_HELMET.get(), 1, 20 * 60 * 30,60 * 50,  ModBlocks.CHRONA_BLOCK.get(), ModItems.CHRONA_INGOT.get(), ModItems.TEMPORA_HELMET.get())
+    );
+
+    public final static List<ChestplateArmorPattern> CHESTPLATE_PATTERN_LIST = List.of(
+            new ChestplateArmorPattern(ModItems.LOOP_CHESTPLATE.get(), 1, 20 * 60 * 30, 60 * 60, ModBlocks.LOOP_BLOCK.get(),ModItems.LOOP_INGOT.get(), Items.NETHERITE_CHESTPLATE),
+            new ChestplateArmorPattern(ModItems.FLUX_CHESTPLATE.get(), 1, 20 * 60 * 45, 60 * 60 * 2, ModBlocks.FLUX_BLOCK.get(), ModItems.FLUX_INGOT.get(), ModItems.LOOP_CHESTPLATE.get()),
+            new ChestplateArmorPattern(ModItems.EPOCH_CHESTPLATE.get(), 1, 20 * 60 * 50, 60 * 60 * 3, ModBlocks.EPOCH_BLOCK.get(), ModItems.EPOCH_INGOT.get(), ModItems.FLUX_CHESTPLATE.get()),
+            new ChestplateArmorPattern(ModItems.TEMPORA_CHESTPLATE.get(), 1, 20 * 60 * 55, 60 * 60 * 4, ModBlocks.TEMPORA_BLOCK.get(), ModItems.TEMPORA_INGOT.get(), ModItems.EPOCH_CHESTPLATE.get()),
+            new ChestplateArmorPattern(ModItems.CHRONA_CHESTPLATE.get(), 1, 20 * 60 * 60,60 * 60 * 5,  ModBlocks.CHRONA_BLOCK.get(), ModItems.CHRONA_INGOT.get(), ModItems.TEMPORA_CHESTPLATE.get())
+    );
+
+    public final static List<LeggingsArmorPattern> LEGGINGS_PATTERN_LIST = List.of(
+            new LeggingsArmorPattern(ModItems.LOOP_LEGGINGS.get(), 1, 20 * 60 * 25, 60 * 40, ModBlocks.LOOP_BLOCK.get(),ModItems.LOOP_INGOT.get(), Items.NETHERITE_LEGGINGS),
+            new LeggingsArmorPattern(ModItems.FLUX_LEGGINGS.get(), 1, 20 * 60 * 27, 60 * 45, ModBlocks.FLUX_BLOCK.get(), ModItems.FLUX_INGOT.get(), ModItems.LOOP_LEGGINGS.get()),
+            new LeggingsArmorPattern(ModItems.EPOCH_LEGGINGS.get(), 1, 20 * 60 * 30, 60 * 50, ModBlocks.EPOCH_BLOCK.get(), ModItems.EPOCH_INGOT.get(), ModItems.FLUX_LEGGINGS.get()),
+            new LeggingsArmorPattern(ModItems.TEMPORA_LEGGINGS.get(), 1, 20 * 60 * 35, 60 * 55, ModBlocks.TEMPORA_BLOCK.get(), ModItems.TEMPORA_INGOT.get(), ModItems.EPOCH_LEGGINGS.get()),
+            new LeggingsArmorPattern(ModItems.CHRONA_LEGGINGS.get(), 1, 20 * 60 * 40,60 * 60,  ModBlocks.CHRONA_BLOCK.get(), ModItems.CHRONA_INGOT.get(), ModItems.TEMPORA_LEGGINGS.get())
+    );
+
+    public final static List<BootsArmorPattern> BOOTS_PATTERN_LIST = List.of(
+            new BootsArmorPattern(ModItems.LOOP_BOOTS.get(), 1, 20 * 60 * 10, 60 * 30, ModBlocks.LOOP_BLOCK.get(),ModItems.LOOP_INGOT.get(), Items.NETHERITE_BOOTS),
+            new BootsArmorPattern(ModItems.FLUX_BOOTS.get(), 1, 20 * 60 * 15, 60 * 35, ModBlocks.FLUX_BLOCK.get(), ModItems.FLUX_INGOT.get(), ModItems.LOOP_BOOTS.get()),
+            new BootsArmorPattern(ModItems.EPOCH_BOOTS.get(), 1, 20 * 60 * 20, 60 * 40, ModBlocks.EPOCH_BLOCK.get(), ModItems.EPOCH_INGOT.get(), ModItems.FLUX_BOOTS.get()),
+            new BootsArmorPattern(ModItems.TEMPORA_BOOTS.get(), 1, 20 * 60 * 25, 60 * 45, ModBlocks.TEMPORA_BLOCK.get(), ModItems.TEMPORA_INGOT.get(), ModItems.EPOCH_BOOTS.get()),
+            new BootsArmorPattern(ModItems.CHRONA_BOOTS.get(), 1, 20 * 60 * 30,60 * 50,  ModBlocks.CHRONA_BLOCK.get(), ModItems.CHRONA_INGOT.get(), ModItems.TEMPORA_BOOTS.get())
     );
 
     ////----->>> LOOT TABLES <<<-----\\\\----------------------->>> LOOT TABLES <<<-----\\\\

@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 24000,
+  "energyCost": 2400,
+  "key": {
+    "L": {
+      "item": "survivaltimemod:epoch_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:epoch_block"
+    },
+    "T": {
+      "item": "survivaltimemod:flux_helmet"
+    }
+  },
+  "pattern": [
+    "MLTLM",
+    "L   L",
+    " LML ",
+    "     ",
+    "     "
+  ],
+  "result": {
+    "item": "survivaltimemod:epoch_helmet"
+  }
+}

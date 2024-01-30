@@ -13,10 +13,9 @@ import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.block.ModBlocks;
 import net.most.survivaltimemod.datagen.custom.HourglassHubShapedRecipeBuilder;
 import net.most.survivaltimemod.datagen.custom.HourglassHubShapelessRecipeBuilder;
+import net.most.survivaltimemod.datagen.pattern.*;
 import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 import net.most.survivaltimemod.item.ModItems;
-import net.most.survivaltimemod.util.ExpCookTimeGroupItem;
-import net.most.survivaltimemod.util.records.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -88,25 +87,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             blockItemPattern(pWriter, block, item);
         }
 
-        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.STICKS_FROM_SHARDS_RECIPE_MAP.entrySet()) {
-            ItemLike result = entry.getKey();
-            ItemLike shard_item = entry.getValue();
-            int entryIndex = SurvivalTimeUtilGenerator.STICKS_FROM_SHARDS_RECIPE_MAP.entrySet().stream().toList().indexOf(entry);
-            int craftTime = 20 * 10 * (entryIndex + 1);
-            int energyCost = 60 * (entryIndex + 1);
-            starCenterPattern(pWriter, new StarCenterPattern(result, 1, craftTime, energyCost, shard_item, Items.STICK));
-        }
-
-        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.RAW_SHARDS_RECIPE_MAP.entrySet()) {
-            ItemLike raw_item = entry.getKey();
-            ItemLike shard_item = entry.getValue();
-            int entryIndex = SurvivalTimeUtilGenerator.RAW_SHARDS_RECIPE_MAP.entrySet().stream().toList().indexOf(entry);
-            int craftTime = 20 * 30 * (entryIndex + 1);
-            int energyCost = 60 * 2 * (entryIndex + 1);
-
-            starCenterPattern(pWriter, new StarCenterPattern(raw_item, 2, craftTime, energyCost, shard_item, Items.CLOCK));
-        }
-
         for (FullBorderPattern fullBorderPattern : SurvivalTimeUtilGenerator.FULL_BORDER_PATTERN_LIST) {
             fullBorderPattern(pWriter, fullBorderPattern);
         }
@@ -139,6 +119,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         for (XMaterialShapelessPattern xMaterialShapelessPattern : SurvivalTimeUtilGenerator.X_MATERIALS_PATTERN_LIST) {
             xMaterialShapelessPattern(pWriter, xMaterialShapelessPattern);
+        }
+
+        for (HelmetArmorPattern helmetPattern : SurvivalTimeUtilGenerator.HELMET_PATTERN_LIST) {
+            helmetPattern.create(pWriter);
+        }
+
+        for (ChestplateArmorPattern chestplatePattern : SurvivalTimeUtilGenerator.CHESTPLATE_PATTERN_LIST) {
+            chestplatePattern.create(pWriter);
+        }
+
+        for (LeggingsArmorPattern leggingsPattern : SurvivalTimeUtilGenerator.LEGGINGS_PATTERN_LIST) {
+            leggingsPattern.create(pWriter);
+        }
+
+        for (BootsArmorPattern bootsPattern : SurvivalTimeUtilGenerator.BOOTS_PATTERN_LIST) {
+            bootsPattern.create(pWriter);
         }
 
 

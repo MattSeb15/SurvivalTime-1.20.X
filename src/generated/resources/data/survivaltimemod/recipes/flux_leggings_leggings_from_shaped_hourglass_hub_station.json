@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 32400,
+  "energyCost": 2700,
+  "key": {
+    "L": {
+      "item": "survivaltimemod:flux_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:flux_block"
+    },
+    "T": {
+      "item": "survivaltimemod:loop_leggings"
+    }
+  },
+  "pattern": [
+    "MLTLM",
+    "LL LL",
+    "LL LL",
+    "LL LL",
+    "LL LL"
+  ],
+  "result": {
+    "item": "survivaltimemod:flux_leggings"
+  }
+}

@@ -1,11 +1,18 @@
 package net.most.survivaltimemod.event;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.IpBanList;
+import net.minecraft.server.players.IpBanListEntry;
+import net.minecraft.server.players.PlayerList;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -35,11 +42,13 @@ import net.most.survivaltimemod.command.tmultiplier.InfoTimeMultiplierCommand;
 import net.most.survivaltimemod.command.tmultiplier.SetDefaultTimeMultiplierCommand;
 import net.most.survivaltimemod.command.tmultiplier.SetTimeMultiplierCommand;
 import net.most.survivaltimemod.effect.ModEffects;
+import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.time.PlayerTime;
 import net.most.survivaltimemod.time.PlayerTimeProvider;
 import net.most.survivaltimemod.util.ComponentHelper;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -60,18 +69,31 @@ public class ModEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
 
             player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
+
                 ScheduledExecutorService playerScheduler = Executors.newScheduledThreadPool(1);
                 playerScheduler.scheduleAtFixedRate(() -> {
-                    if (playerTime.isTimeStopped() || player.gameMode.getGameModeForPlayer() == GameType.CREATIVE) {
+                    GameType gameType = player.gameMode.getGameModeForPlayer();
+                    if (playerTime.isTimeStopped() || gameType == GameType.CREATIVE) {
                         return;
                     }
-                    if (playerTime.getTime() <= 0) {
-                        if (player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) {
-                            player.setGameMode(GameType.SPECTATOR);
+                    if (playerTime.getTime() <= 0 && gameType != GameType.SPECTATOR) {
+                        player.setGameMode(GameType.SPECTATOR);
+                        MinecraftServer server = player.level().getServer();
+                        String playerName = player.getGameProfile().getName();
+                        if (server != null) {
+                            server.sendSystemMessage(Component.translatable("chat.notification.time_out", playerName).withStyle(ChatFormatting.RED));
+                            PlayerList playerList = server.getPlayerList();
+                            IpBanList ipBanList = playerList.getIpBans();
+                            String reason = "Time out";
+                            String source = "Server";
+                            IpBanListEntry ipBanListEntry = new IpBanListEntry(player.getIpAddress(), new Date(), source, null, reason);
+                            ipBanList.add(ipBanListEntry);
+                            player.connection.disconnect(Component.translatable("multiplayer.disconnect.timed_out"));
+
                         }
                         return;
                     }
-                    if (player.gameMode.getGameModeForPlayer() == GameType.SPECTATOR && playerTime.getTime() > 0) {
+                    if (gameType == GameType.SPECTATOR && playerTime.getTime() > 0) {
                         player.setGameMode(GameType.SURVIVAL);
                     }
                     playerTime.decrementTime(1, player);
@@ -84,8 +106,6 @@ public class ModEvents {
 
             });
         }
-
-
     }
 
     @SubscribeEvent
@@ -119,16 +139,14 @@ public class ModEvents {
                 if (time >= 0) {
                     float timeToDecrement = (damage * damageMultiplier);
                     playerTime.decrementTime(timeToDecrement, player);
-                    player.displayClientMessage(ComponentHelper.getOnPlayerHurtComponent(time, damage, damageMultiplier, timeToDecrement,
-                            playerTime.getTime()), false);
+                    player.displayClientMessage(ComponentHelper.getOnPlayerHurtComponent(time, damage, damageMultiplier, timeToDecrement, playerTime.getTime()), false);
 
                 }
             });
 
-            player.addEffect(new MobEffectInstance(ModEffects.DAMAGE_TRIGGER.get(), 8,
-                    1, false, false));
+            player.addEffect(new MobEffectInstance(ModEffects.DAMAGE_TRIGGER.get(), 8, 1, false, false));
 
-//            player.drop(new ItemStack(Items.BEEF), true, true); //TODO: REFACTOR CODE
+            //            player.drop(new ItemStack(Items.BEEF), true, true); //TODO: REFACTOR CODE
 
         }
 
@@ -138,8 +156,7 @@ public class ModEvents {
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
             if (!event.getObject().getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).isPresent()) {
-                event.addCapability(new ResourceLocation(SurvivalTimeMod.MOD_ID, "player_time"),
-                        new PlayerTimeProvider());
+                event.addCapability(new ResourceLocation(SurvivalTimeMod.MOD_ID, "player_time"), new PlayerTimeProvider());
             }
         }
     }
@@ -147,14 +164,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
-            event.getOriginal()
-                    .getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY)
-                    .ifPresent(
-                            oldStore -> event.getOriginal().getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY)
-                                    .ifPresent(
-                                            newStore -> newStore.copyFrom(oldStore)
-                                    )
-                    );
+            event.getOriginal().getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(oldStore -> event.getOriginal().getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(newStore -> newStore.copyFrom(oldStore)));
         }
     }
 
@@ -168,7 +178,7 @@ public class ModEvents {
         if (!event.getLevel().isClientSide() && event.getEntity() instanceof ServerPlayer player) {
             player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
                 playerTime.syncServerToClientData(player);
-//                ModMessages.sendToPlayer(new TimeDataSyncS2CPacket(playerTime.getPlayerTimeData()), player);
+                //                ModMessages.sendToPlayer(new TimeDataSyncS2CPacket(playerTime.getPlayerTimeData()), player);
             });
 
         }

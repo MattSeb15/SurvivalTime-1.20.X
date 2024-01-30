@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 12000,
+  "energyCost": 1800,
+  "key": {
+    "L": {
+      "item": "survivaltimemod:loop_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:loop_block"
+    },
+    "T": {
+      "item": "minecraft:netherite_boots"
+    }
+  },
+  "pattern": [
+    "     ",
+    "     ",
+    " LTL ",
+    "ML LM",
+    "LL LL"
+  ],
+  "result": {
+    "item": "survivaltimemod:loop_boots"
+  }
+}

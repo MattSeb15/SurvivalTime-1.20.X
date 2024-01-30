@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 42000,
+  "energyCost": 3300,
+  "key": {
+    "L": {
+      "item": "survivaltimemod:tempora_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:tempora_block"
+    },
+    "T": {
+      "item": "survivaltimemod:epoch_leggings"
+    }
+  },
+  "pattern": [
+    "MLTLM",
+    "LL LL",
+    "LL LL",
+    "LL LL",
+    "LL LL"
+  ],
+  "result": {
+    "item": "survivaltimemod:tempora_leggings"
+  }
+}

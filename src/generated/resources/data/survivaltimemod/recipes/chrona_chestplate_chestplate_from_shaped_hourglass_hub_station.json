@@ -1,0 +1,26 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 72000,
+  "energyCost": 18000,
+  "key": {
+    "L": {
+      "item": "survivaltimemod:chrona_ingot"
+    },
+    "M": {
+      "item": "survivaltimemod:chrona_block"
+    },
+    "T": {
+      "item": "survivaltimemod:tempora_chestplate"
+    }
+  },
+  "pattern": [
+    "L   L",
+    "ML LM",
+    "LLMLL",
+    " LTL ",
+    " LLL "
+  ],
+  "result": {
+    "item": "survivaltimemod:chrona_chestplate"
+  }
+}

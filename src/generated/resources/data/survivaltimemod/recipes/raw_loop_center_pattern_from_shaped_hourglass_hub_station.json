@@ -1,7 +1,7 @@
 {
   "type": "survivaltimemod:hourglass_hub_shaped",
-  "craftTime": 2400,
-  "energyCost": 480,
+  "craftTime": 600,
+  "energyCost": 120,
   "key": {
     "B": {
       "item": "survivaltimemod:opal_shard_loop"
@@ -18,7 +18,6 @@
     "     "
   ],
   "result": {
-    "count": 2,
     "item": "survivaltimemod:raw_loop"
   }
 }

@@ -64,9 +64,26 @@
   "item.survivaltimemod.flux_hoe": "Flux Hoe",
   "item.survivaltimemod.loop_hoe": "Loop Hoe",
   "item.survivaltimemod.chrono_coin": "Chrono Coin",
-
-
-
+  "item.survivaltimemod.loop_helmet": "Loop Helmet",
+  "item.survivaltimemod.loop_chestplate": "Loop Chestplate",
+  "item.survivaltimemod.loop_leggings": "Loop Leggings",
+  "item.survivaltimemod.loop_boots": "Loop Boots",
+  "item.survivaltimemod.flux_helmet": "Flux Helmet",
+  "item.survivaltimemod.flux_chestplate": "Flux Chestplate",
+  "item.survivaltimemod.flux_leggings": "Flux Leggings",
+  "item.survivaltimemod.flux_boots": "Flux Boots",
+  "item.survivaltimemod.epoch_helmet": "Epoch Helmet",
+  "item.survivaltimemod.epoch_chestplate": "Epoch Chestplate",
+  "item.survivaltimemod.epoch_leggings": "Epoch Leggings",
+  "item.survivaltimemod.epoch_boots": "Epoch Boots",
+  "item.survivaltimemod.tempora_helmet": "Tempora Helmet",
+  "item.survivaltimemod.tempora_chestplate": "Tempora Chestplate",
+  "item.survivaltimemod.tempora_leggings": "Tempora Leggings",
+  "item.survivaltimemod.tempora_boots": "Tempora Boots",
+  "item.survivaltimemod.chrona_helmet": "Chrona Helmet",
+  "item.survivaltimemod.chrona_chestplate": "Chrona Chestplate",
+  "item.survivaltimemod.chrona_leggings": "Chrona Leggings",
+  "item.survivaltimemod.chrona_boots": "Chrona Boots",
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
   "block.survivaltimemod.opal_block": "Block of Opal",
@@ -183,6 +200,8 @@
   "commands.sut.coin.subtract": "Subtracted %s from your coins",
   "commands.sut.coin_multiplier.info": "%s. Username: %s | CoinMultp: %s",
   "commands.sut.damage_multiplier.info": "%s. Username: %s | DamageMult.: %s",
-  "commands.sut.time_multiplier.info": "%s. Username: %s | TimeMult.: %s"
+  "commands.sut.time_multiplier.info": "%s. Username: %s | TimeMult.: %s",
+  "chat.notification.time_out": "%s's time has run out",
+  "multiplayer.disconnect.timed_out": "Thanks for playing"
 
 }
