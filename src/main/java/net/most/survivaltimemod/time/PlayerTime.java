@@ -262,7 +262,7 @@ public class PlayerTime {
         syncServerToClientData(player);
         if (withEffect) {
             player.addEffect(new MobEffectInstance(ModEffects.HEAL_TRIGGER.get(), 8,
-                    1, false, false));
+                    1, false, false, false));
         }
     }
 
@@ -285,7 +285,7 @@ public class PlayerTime {
         syncServerToClientData(player);
         if (withEffect) {
             player.addEffect(new MobEffectInstance(ModEffects.DAMAGE_TRIGGER.get(), 8,
-                    1, false, false));
+                    1, false, false, false));
         }
     }
 
