@@ -32,6 +32,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_TIMEKEEPER = registerKey("spawn_timekeeper");
     public static final ResourceKey<BiomeModifier> SPAWN_TIME_DEVOURER = registerKey("spawn_time_devourer");
     public static final ResourceKey<BiomeModifier> SPAWN_TIME_DEVOURER_NETHER = registerKey("spawn_time_devourer_nether");
+    public static final ResourceKey<BiomeModifier> SPAWN_TIMMY = registerKey("spawn_timmy");
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -69,6 +70,11 @@ public class ModBiomeModifiers {
         context.register(SPAWN_TIME_DEVOURER_NETHER, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_NETHER),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.TIME_DEVOURER.get(), 90, 2, 4))
+        ));
+
+        context.register(SPAWN_TIMMY, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_JUNGLE),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.TIMMY.get(), 60, 1, 2))
         ));
 
     }
