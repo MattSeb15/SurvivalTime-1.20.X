@@ -1,8 +1,6 @@
 package net.most.survivaltimemod.potion;
 
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -20,12 +18,16 @@ public class ModPotions {
     static int timeTearBD = 1200;
     static int timeExtinguisherBD = 6000;
     static int timeIgniteBD = 36000;
+    static int randomIncrementTimeEffectBD = 1800;
+    static int randomDecrementTimeEffectBD = 1000;
     static String goldenTimeName = "golden_time_potion";
     static String timeTearName = "time_tear_potion";
     static String instantTimeDamageName = "instant_time_damage_potion";
     static String instantTimeRegenName = "instant_time_regen_potion";
     static String timeExtinguisherName = "time_extinguisher_potion";
     static String timeIgniteName = "time_ignite_potion";
+    static String randomIncrementTimeEffectPotion = "random_increment_time_effect_potion";
+    static String randomDecrementTimeEffectPotion = "random_decrement_time_effect_potion";
 
 
     public static final RegistryObject<Potion> GOLDEN_TIME = POTIONS.register(goldenTimeName,
@@ -63,6 +65,19 @@ public class ModPotions {
             () -> new Potion(new MobEffectInstance(ModEffects.INSTANT_TIME_REGEN.get(), 1)));
     public static final RegistryObject<Potion> STRONG_INSTANT_TIME_REGEN = POTIONS.register(getStrongName(instantTimeRegenName),
             () -> new Potion(instantTimeRegenName, new MobEffectInstance(ModEffects.INSTANT_TIME_REGEN.get(), 1, 1)));
+    public static final RegistryObject<Potion> RANDOM_TIME_EFFECT = POTIONS.register(randomIncrementTimeEffectPotion,
+            () -> new Potion(new MobEffectInstance(ModEffects.RANDOM_INCREMENT_TIME_EFFECT.get(), randomIncrementTimeEffectBD)));
+    public static final RegistryObject<Potion> LONG_RANDOM_TIME_EFFECT = POTIONS.register(getLongName(randomIncrementTimeEffectPotion),
+            () -> new Potion(randomIncrementTimeEffectPotion, new MobEffectInstance(ModEffects.RANDOM_INCREMENT_TIME_EFFECT.get(), getLongDuration(randomIncrementTimeEffectBD))));
+    public static final RegistryObject<Potion> STRONG_RANDOM_TIME_EFFECT = POTIONS.register(getStrongName(randomIncrementTimeEffectPotion),
+            () -> new Potion(randomIncrementTimeEffectPotion, new MobEffectInstance(ModEffects.RANDOM_INCREMENT_TIME_EFFECT.get(), getStrongDuration(randomIncrementTimeEffectBD), 1)));
+
+    public static final RegistryObject<Potion> RANDOM_DECREMENT_TIME_EFFECT = POTIONS.register(randomDecrementTimeEffectPotion,
+            () -> new Potion(new MobEffectInstance(ModEffects.RANDOM_DECREMENT_TIME_EFFECT.get(), randomDecrementTimeEffectBD)));
+    public static final RegistryObject<Potion> LONG_RANDOM_DECREMENT_TIME_EFFECT = POTIONS.register(getLongName(randomDecrementTimeEffectPotion),
+            () -> new Potion(randomDecrementTimeEffectPotion, new MobEffectInstance(ModEffects.RANDOM_DECREMENT_TIME_EFFECT.get(), getLongDuration(randomDecrementTimeEffectBD))));
+    public static final RegistryObject<Potion> STRONG_RANDOM_DECREMENT_TIME_EFFECT = POTIONS.register(getStrongName(randomDecrementTimeEffectPotion),
+            () -> new Potion(randomDecrementTimeEffectPotion, new MobEffectInstance(ModEffects.RANDOM_DECREMENT_TIME_EFFECT.get(), getStrongDuration(randomDecrementTimeEffectBD), 1)));
 
     private static String getLongName(String name) {
         return "long_" + name;

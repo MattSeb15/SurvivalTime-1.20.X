@@ -1,10 +1,11 @@
 package net.most.survivaltimemod.util;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ArmorMaterial;
+import net.most.survivaltimemod.effect.ModEffects;
+import net.most.survivaltimemod.effect.RandomIncrementTimeEffect;
 import net.most.survivaltimemod.item.ModItems;
-
-import static net.most.survivaltimemod.item.ModArmorMaterials.*;
 
 public class ModArmorUtils {
 
@@ -44,6 +45,18 @@ public class ModArmorUtils {
     public static String textureNameByMaterial(ArmorMaterial material){
         String materialName = material.getName();
         return  materialName+"_armor";
+    }
+
+    public static MobEffectInstance mobEffectInstanceByMaterial(ArmorMaterial material){
+        String materialName = material.getName();
+        RandomIncrementTimeEffect effect = ModEffects.RANDOM_INCREMENT_TIME_EFFECT.get();
+        return switch (materialName) {
+            case "flux" -> new MobEffectInstance(effect.setMultiplier(1.5f).setProbability(0.05f), 200, 0, false, true, true);
+            case "epoch" -> new MobEffectInstance(effect.setMultiplier(2.0f).setProbability(0.08f), 200, 0, false, true, true);
+            case "tempora" -> new MobEffectInstance(effect.setMultiplier(2.5f).setProbability(0.10f), 200, 0, false, true, true);
+            case "chrona" -> new MobEffectInstance(effect.setMultiplier(4.0f).setProbability(0.20f), 200, 0, false, true, true);
+            default -> new MobEffectInstance(effect.setMultiplier(1.2f).setProbability(0.02f), 200, 0, false, true, true);
+        };
     }
 
 }

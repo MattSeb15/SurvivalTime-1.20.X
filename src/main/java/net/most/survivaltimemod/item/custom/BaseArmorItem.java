@@ -7,15 +7,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.most.survivaltimemod.item.client.armor.BaseArmorRenderer;
 import net.most.survivaltimemod.util.ModArmorUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -24,8 +22,10 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -34,52 +34,30 @@ public class BaseArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public String animationProcedure = "empty";
     public final String textureName;
-    public final ArmorMaterial pMaterial;
+
 
     public BaseArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(pMaterial, pType, pProperties);
+        super(pMaterial, pType, pProperties.fireResistant().rarity(Rarity.EPIC));
         this.textureName = ModArmorUtils.textureNameByMaterial(pMaterial);
-        this.pMaterial = pMaterial;
     }
 
     @Override
     public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private BaseArmorRenderer renderer;
+            private GeoArmorRenderer<?> renderer;
 
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack,
                                                                    EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-                if (this.renderer == null)
+                if (this.renderer == null){
                     this.renderer = new BaseArmorRenderer(textureName);
+                }
 
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
                 return this.renderer;
             }
         });
     }
-
-    @Override
-    public void onInventoryTick(ItemStack stack, Level level, Player player, int slotIndex, int selectedIndex) {
-        super.onInventoryTick(stack, level, player, slotIndex, selectedIndex);
-
-        Set<Item> wornArmor = new ObjectOpenHashSet<>();
-
-        for (ItemStack armorStack : player.getArmorSlots()) {
-            // We can stop immediately if any of the slots are empty
-            if (armorStack.isEmpty())
-                return;
-
-            wornArmor.add(armorStack.getItem());
-        }
-        // Check each of the pieces match our set
-        boolean isFullSet = ModArmorUtils.getArmorPartsListByMaterial(pMaterial).containsAll(wornArmor);
-        if(isFullSet){
-            player.displayClientMessage(Component.literal("FULL LOOP ARMOR"), false);
-        }
-    }
-
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar registrar) {
         registrar.add(new AnimationController<>(this, "controller", 5, this::predicate));
@@ -107,7 +85,7 @@ public class BaseArmorItem extends ArmorItem implements GeoItem {
                 wornArmor.add(stack.getItem());
             }
 
-            boolean isWearingAll = ModArmorUtils.getArmorPartsListByMaterial(pMaterial).containsAll(wornArmor);
+            boolean isWearingAll = ModArmorUtils.getArmorPartsListByMaterial(this.getMaterial()).containsAll(wornArmor);
 
             return isWearingAll ? PlayState.CONTINUE : PlayState.STOP;
         }
@@ -138,7 +116,7 @@ public class BaseArmorItem extends ArmorItem implements GeoItem {
                 wornArmor.add(stack.getItem());
             }
 
-            boolean isWearingAll = ModArmorUtils.getArmorPartsListByMaterial(pMaterial).containsAll(wornArmor);
+            boolean isWearingAll = ModArmorUtils.getArmorPartsListByMaterial(this.getMaterial()).containsAll(wornArmor);
 
             return isWearingAll ? PlayState.CONTINUE : PlayState.STOP;
         }

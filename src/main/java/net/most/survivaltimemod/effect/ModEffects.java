@@ -11,8 +11,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 
-import java.util.Iterator;
-
 public class ModEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, SurvivalTimeMod.MOD_ID);
 
@@ -36,6 +34,11 @@ public class ModEffects {
             () -> new InstantTimeDamage(MobEffectCategory.HARMFUL, 0xff4e1610));
     public static final RegistryObject<MobEffect> INSTANT_TIME_REGEN = MOB_EFFECTS.register("instant_time_regen",
             () -> new InstantTimeRegen(MobEffectCategory.BENEFICIAL, 0xff6bff7c));
+
+    public static final RegistryObject<RandomIncrementTimeEffect> RANDOM_INCREMENT_TIME_EFFECT = MOB_EFFECTS.register("random_increment_time_effect",
+            () -> new RandomIncrementTimeEffect(MobEffectCategory.BENEFICIAL, 0x3de699));
+    public static final RegistryObject<RandomDecrementTimeEffect> RANDOM_DECREMENT_TIME_EFFECT = MOB_EFFECTS.register("random_decrement_time_effect",
+            () -> new RandomDecrementTimeEffect(MobEffectCategory.HARMFUL, 0xdb676e));
 
 
 

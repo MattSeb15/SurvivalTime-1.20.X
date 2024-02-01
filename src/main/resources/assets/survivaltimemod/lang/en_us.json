@@ -132,6 +132,9 @@
   "effect.survivaltimemod.instant_time_regen": "Instant Time Regeneration",
   "effect.survivaltimemod.time_extinguisher": "Time Extinguisher",
   "effect.survivaltimemod.time_ignite": "Time Ignite",
+  "effect.survivaltimemod.random_increment_time_effect": "RIT",
+  "effect.survivaltimemod.random_decrement_time_effect": "RET",
+
 
   "item.minecraft.potion.effect.golden_time_potion": "Golden Time Potion",
   "item.minecraft.splash_potion.effect.golden_time_potion": "Golden Time Splash Potion",
@@ -157,6 +160,14 @@
   "item.minecraft.splash_potion.effect.time_ignite_potion": "Time Ignite Splash Potion",
   "item.minecraft.lingering_potion.effect.time_ignite_potion": "Time Ignite Lingering Potion",
   "item.minecraft.tipped_arrow.effect.time_ignite_potion": "Time Ignite Tipped Arrow",
+  "item.minecraft.potion.effect.random_increment_time_effect_potion": "Random Increment Time Effect Potion",
+  "item.minecraft.splash_potion.effect.random_increment_time_effect_potion": "Random Increment Time Effect Splash Potion",
+  "item.minecraft.lingering_potion.effect.random_increment_time_effect_potion": "Random Increment Time Effect Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.random_increment_time_effect_potion": "Random Increment Time Effect Tipped Arrow",
+  "item.minecraft.potion.effect.random_decrement_time_effect_potion": "Random Decrement Time Effect Potion",
+  "item.minecraft.splash_potion.effect.random_decrement_time_effect_potion": "Random Decrement Time Effect Splash Potion",
+  "item.minecraft.lingering_potion.effect.random_decrement_time_effect_potion": "Random Decrement Time Effect Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.random_decrement_time_effect_potion": "Random Decrement Time Effect Tipped Arrow",
 
   "sounds.survivaltimemod.timekeeper.ambient": "Timekeeper Ambient",
   "sounds.survivaltimemod.timekeeper.bad": "Timekeeper Bad",

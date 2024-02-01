@@ -177,27 +177,27 @@ public class ModItems {
     public static final RegistryObject<Item> CHRONO_COIN = ITEMS.register("chrono_coin", () -> new ChronoCoin(new Item.Properties()));
 
     public static final RegistryObject<Item> LOOP_HELMET = ITEMS.register("loop_helmet", () -> new BaseArmorItem(ModArmorMaterials.LOOP, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> LOOP_CHESTPLATE = ITEMS.register("loop_chestplate", () -> new BaseArmorItem(ModArmorMaterials.LOOP, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> LOOP_CHESTPLATE = ITEMS.register("loop_chestplate", () -> new BaseArmorItemEffect(ModArmorMaterials.LOOP, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> LOOP_LEGGINGS = ITEMS.register("loop_leggings", () -> new BaseArmorItem(ModArmorMaterials.LOOP, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> LOOP_BOOTS = ITEMS.register("loop_boots", () -> new BaseArmorItem(ModArmorMaterials.LOOP, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> FLUX_HELMET = ITEMS.register("flux_helmet", () -> new BaseArmorItem(ModArmorMaterials.FLUX, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> FLUX_CHESTPLATE = ITEMS.register("flux_chestplate", () -> new BaseArmorItem(ModArmorMaterials.FLUX, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> FLUX_CHESTPLATE = ITEMS.register("flux_chestplate", () -> new BaseArmorItemEffect(ModArmorMaterials.FLUX, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> FLUX_LEGGINGS = ITEMS.register("flux_leggings", () -> new BaseArmorItem(ModArmorMaterials.FLUX, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> FLUX_BOOTS = ITEMS.register("flux_boots", () -> new BaseArmorItem(ModArmorMaterials.FLUX, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> EPOCH_HELMET = ITEMS.register("epoch_helmet", () -> new BaseArmorItem(ModArmorMaterials.EPOCH, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> EPOCH_CHESTPLATE = ITEMS.register("epoch_chestplate", () -> new BaseArmorItem(ModArmorMaterials.EPOCH, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> EPOCH_CHESTPLATE = ITEMS.register("epoch_chestplate", () -> new BaseArmorItemEffect(ModArmorMaterials.EPOCH, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> EPOCH_LEGGINGS = ITEMS.register("epoch_leggings", () -> new BaseArmorItem(ModArmorMaterials.EPOCH, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> EPOCH_BOOTS = ITEMS.register("epoch_boots", () -> new BaseArmorItem(ModArmorMaterials.EPOCH, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> TEMPORA_HELMET = ITEMS.register("tempora_helmet", () -> new BaseArmorItem(ModArmorMaterials.TEMPORA, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> TEMPORA_CHESTPLATE = ITEMS.register("tempora_chestplate", () -> new BaseArmorItem(ModArmorMaterials.TEMPORA, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> TEMPORA_CHESTPLATE = ITEMS.register("tempora_chestplate", () -> new BaseArmorItemEffect(ModArmorMaterials.TEMPORA, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> TEMPORA_LEGGINGS = ITEMS.register("tempora_leggings", () -> new BaseArmorItem(ModArmorMaterials.TEMPORA, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> TEMPORA_BOOTS = ITEMS.register("tempora_boots", () -> new BaseArmorItem(ModArmorMaterials.TEMPORA, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> CHRONA_HELMET = ITEMS.register("chrona_helmet", () -> new BaseArmorItem(ModArmorMaterials.CHRONA, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> CHRONA_CHESTPLATE = ITEMS.register("chrona_chestplate", () -> new BaseArmorItem(ModArmorMaterials.CHRONA, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> CHRONA_CHESTPLATE = ITEMS.register("chrona_chestplate", () -> new BaseArmorItemEffect(ModArmorMaterials.CHRONA, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> CHRONA_LEGGINGS = ITEMS.register("chrona_leggings", () -> new BaseArmorItem(ModArmorMaterials.CHRONA, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> CHRONA_BOOTS = ITEMS.register("chrona_boots", () -> new BaseArmorItem(ModArmorMaterials.CHRONA, ArmorItem.Type.BOOTS, new Item.Properties()));
 
