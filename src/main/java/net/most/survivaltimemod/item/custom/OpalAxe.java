@@ -26,7 +26,7 @@ public class OpalAxe extends AxeItem implements OpalTool {
 
     public OpalAxe(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, float timeStealMultiplier,
                    float probability, Properties pProperties) {
-        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties.fireResistant());
         this.timeStealMultiplier = timeStealMultiplier;
         this.probability = probability;
     }

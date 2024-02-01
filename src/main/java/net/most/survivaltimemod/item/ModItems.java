@@ -64,79 +64,79 @@ public class ModItems {
             new Item.Properties()));
     //shard swords modify pAttackDamage by 1 and attackSpeed by 0.5
     public static final RegistryObject<Item> CHRONA_SWORD = ITEMS.register("chrona_sword", () -> new OpalSword(ModToolTiers.CHRONA, 4, -2.2f, 5.0f, 0.75f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
     public static final RegistryObject<Item> TEMPORA_SWORD = ITEMS.register("tempora_sword", () -> new OpalSword(ModToolTiers.TEMPORA, 4, -2.2f, 3.2f, 0.62f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
     public static final RegistryObject<Item> EPOCH_SWORD = ITEMS.register("epoch_sword", () -> new OpalSword(ModToolTiers.EPOCH, 3, -2.2f, 2.3f, 0.51f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
     public static final RegistryObject<Item> FLUX_SWORD = ITEMS.register("flux_sword", () -> new OpalSword(ModToolTiers.FLUX, 2, -2.2f, 1.5f, 0.46f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> LOOP_SWORD = ITEMS.register("loop_sword", () -> new OpalSword(ModToolTiers.LOOP, 2, -5.0f, 1.2f, 0.3333f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> LOOP_SWORD = ITEMS.register("loop_sword", () -> new OpalSword(ModToolTiers.LOOP, 2, -2.2f, 1.2f, 0.3333f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> CHRONA_PICKAXE = ITEMS.register("chrona_pickaxe", () -> new OpalPickaxe(ModToolTiers.CHRONA, -5, -3.0f, 5.0f, 0.3999f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> CHRONA_PICKAXE = ITEMS.register("chrona_pickaxe", () -> new OpalPickaxe(ModToolTiers.CHRONA, -2, -2.5f, 5.0f, 0.3999f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> TEMPORA_PICKAXE = ITEMS.register("tempora_pickaxe", () -> new OpalPickaxe(ModToolTiers.TEMPORA, -5, -3.0f, 3.2f, 0.2755f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> TEMPORA_PICKAXE = ITEMS.register("tempora_pickaxe", () -> new OpalPickaxe(ModToolTiers.TEMPORA, -2, -2.5f, 3.2f, 0.2755f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> EPOCH_PICKAXE = ITEMS.register("epoch_pickaxe", () -> new OpalPickaxe(ModToolTiers.EPOCH, -5, -3.0f, 2.3f, 0.2215f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> EPOCH_PICKAXE = ITEMS.register("epoch_pickaxe", () -> new OpalPickaxe(ModToolTiers.EPOCH, -2, -2.5f, 2.3f, 0.2215f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> FLUX_PICKAXE = ITEMS.register("flux_pickaxe", () -> new OpalPickaxe(ModToolTiers.FLUX, -5, -3.0f, 1.5f, 0.1788f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> FLUX_PICKAXE = ITEMS.register("flux_pickaxe", () -> new OpalPickaxe(ModToolTiers.FLUX, -2, -2.5f, 1.5f, 0.1788f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> LOOP_PICKAXE = ITEMS.register("loop_pickaxe", () -> new OpalPickaxe(ModToolTiers.LOOP, -5, -3.0f, 1.2f, 0.12f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> LOOP_PICKAXE = ITEMS.register("loop_pickaxe", () -> new OpalPickaxe(ModToolTiers.LOOP, -2, -2.5f, 1.2f, 0.12f,
+            new Item.Properties()));
 
     public static final RegistryObject<Item> CHRONA_AXE = ITEMS.register("chrona_axe", () -> new OpalAxe(ModToolTiers.CHRONA, 5, -3.0f, 4.0f, 0.2599f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
     public static final RegistryObject<Item> TEMPORA_AXE = ITEMS.register("tempora_axe", () -> new OpalAxe(ModToolTiers.TEMPORA, 5, -3.1f, 3.0f, 0.1755f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
     public static final RegistryObject<Item> EPOCH_AXE = ITEMS.register("epoch_axe", () -> new OpalAxe(ModToolTiers.EPOCH, 5, -3.2f, 2.5f, 0.1215f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
     public static final RegistryObject<Item> FLUX_AXE = ITEMS.register("flux_axe", () -> new OpalAxe(ModToolTiers.FLUX, 5, -3.3f, 2.1f, 0.0888f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
     public static final RegistryObject<Item> LOOP_AXE = ITEMS.register("loop_axe", () -> new OpalAxe(ModToolTiers.LOOP, 5, -3.4f, 1.7f, 0.06f,
-            new Item.Properties().fireResistant()));
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> CHRONA_SHOVEL = ITEMS.register("chrona_shovel", () -> new OpalShovel(ModToolTiers.CHRONA, -5, -3.0f, 4.8f, 0.1587f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> CHRONA_SHOVEL = ITEMS.register("chrona_shovel", () -> new OpalShovel(ModToolTiers.CHRONA, -1, -3.0f, 4.8f, 0.1587f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> TEMPORA_SHOVEL = ITEMS.register("tempora_shovel", () -> new OpalShovel(ModToolTiers.TEMPORA, -5, -3.0f, 3.5f, 0.1234f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> TEMPORA_SHOVEL = ITEMS.register("tempora_shovel", () -> new OpalShovel(ModToolTiers.TEMPORA, -1, -3.0f, 3.5f, 0.1234f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> EPOCH_SHOVEL = ITEMS.register("epoch_shovel", () -> new OpalShovel(ModToolTiers.EPOCH, -5, -3.0f, 2.11f, 0.0999f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> EPOCH_SHOVEL = ITEMS.register("epoch_shovel", () -> new OpalShovel(ModToolTiers.EPOCH, -1, -3.0f, 2.11f, 0.0999f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> FLUX_SHOVEL = ITEMS.register("flux_shovel", () -> new OpalShovel(ModToolTiers.FLUX, -5, -3.0f, 1.7f, 0.05f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> FLUX_SHOVEL = ITEMS.register("flux_shovel", () -> new OpalShovel(ModToolTiers.FLUX, -1, -3.0f, 1.7f, 0.05f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> LOOP_SHOVEL = ITEMS.register("loop_shovel", () -> new OpalShovel(ModToolTiers.LOOP, -5, -3.0f, 1.2f, 0.02f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> LOOP_SHOVEL = ITEMS.register("loop_shovel", () -> new OpalShovel(ModToolTiers.LOOP, -1, -3.0f, 1.2f, 0.02f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> CHRONA_HOE = ITEMS.register("chrona_hoe", () -> new OpalHoe(ModToolTiers.CHRONA, -5, -3.0f, 6.2f, 0.030f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> CHRONA_HOE = ITEMS.register("chrona_hoe", () -> new OpalHoe(ModToolTiers.CHRONA, -10, 2.4f, 6.2f, 0.030f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> TEMPORA_HOE = ITEMS.register("tempora_hoe", () -> new OpalHoe(ModToolTiers.TEMPORA, -5, -3.0f, 5.8f, 0.021f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> TEMPORA_HOE = ITEMS.register("tempora_hoe", () -> new OpalHoe(ModToolTiers.TEMPORA, -9, 2.3f, 5.8f, 0.021f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> EPOCH_HOE = ITEMS.register("epoch_hoe", () -> new OpalHoe(ModToolTiers.EPOCH, -5, -3.0f, 5.5f, 0.017f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> EPOCH_HOE = ITEMS.register("epoch_hoe", () -> new OpalHoe(ModToolTiers.EPOCH, -8, 2.2f, 5.5f, 0.017f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> FLUX_HOE = ITEMS.register("flux_hoe", () -> new OpalHoe(ModToolTiers.FLUX, -5, -3.0f, 5.2f, 0.015f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> FLUX_HOE = ITEMS.register("flux_hoe", () -> new OpalHoe(ModToolTiers.FLUX, -7, 2.1f, 5.2f, 0.015f,
+            new Item.Properties()));
 
-    public static final RegistryObject<Item> LOOP_HOE = ITEMS.register("loop_hoe", () -> new OpalHoe(ModToolTiers.LOOP, -5, -3.0f, 5.0f, 0.01f,
-            new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> LOOP_HOE = ITEMS.register("loop_hoe", () -> new OpalHoe(ModToolTiers.LOOP, -6, 2.0f, 5.0f, 0.01f,
+            new Item.Properties()));
 
 
     public static final RegistryObject<Item> ORACLE_IS_HOURGLASS = ITEMS.register("oracle_is_hourglass", () -> new OracleIsHourglassItem(new Item.Properties()));

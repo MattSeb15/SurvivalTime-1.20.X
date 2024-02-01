@@ -26,7 +26,7 @@ public class OpalSword extends SwordItem {
 
     public OpalSword(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, float timeStealMultiplier, float probability,
                      Properties pProperties) {
-        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties.fireResistant());
         this.timeStealMultiplier = timeStealMultiplier;
         this.probability = probability;
     }
