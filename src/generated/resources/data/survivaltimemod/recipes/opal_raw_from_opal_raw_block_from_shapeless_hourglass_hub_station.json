@@ -1,0 +1,14 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shapeless",
+  "craftTime": 7200,
+  "energyCost": 1800,
+  "ingredients": [
+    {
+      "item": "survivaltimemod:opal_raw_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "survivaltimemod:opal_raw"
+  }
+}

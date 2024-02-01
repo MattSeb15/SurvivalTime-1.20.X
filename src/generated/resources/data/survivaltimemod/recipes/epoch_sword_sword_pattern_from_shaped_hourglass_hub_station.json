@@ -11,13 +11,16 @@
     },
     "S": {
       "item": "survivaltimemod:epoch_stick"
+    },
+    "T": {
+      "item": "survivaltimemod:flux_sword"
     }
   },
   "pattern": [
-    "  M  ",
-    "  M  ",
-    "  M  ",
-    " DSD ",
+    "  D  ",
+    " DDD ",
+    " DTD ",
+    " MSM ",
     "  S  "
   ],
   "result": {

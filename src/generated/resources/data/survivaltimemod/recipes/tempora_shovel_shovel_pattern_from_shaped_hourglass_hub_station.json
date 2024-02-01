@@ -11,11 +11,14 @@
     },
     "S": {
       "item": "survivaltimemod:tempora_stick"
+    },
+    "T": {
+      "item": "survivaltimemod:epoch_shovel"
     }
   },
   "pattern": [
-    "  M  ",
-    "  D  ",
+    " DMD ",
+    " DTD ",
     "  S  ",
     "  S  ",
     "  S  "

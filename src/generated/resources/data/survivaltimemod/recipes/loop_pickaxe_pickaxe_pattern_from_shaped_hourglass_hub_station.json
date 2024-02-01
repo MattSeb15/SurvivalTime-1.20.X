@@ -11,12 +11,15 @@
     },
     "S": {
       "item": "survivaltimemod:loop_stick"
+    },
+    "T": {
+      "item": "minecraft:netherite_pickaxe"
     }
   },
   "pattern": [
     " DMD ",
     "M S M",
-    "  S  ",
+    "  T  ",
     "  S  ",
     "  S  "
   ],

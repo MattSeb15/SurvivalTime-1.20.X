@@ -1,0 +1,13 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shapeless",
+  "craftTime": 4800,
+  "energyCost": 1200,
+  "ingredients": [
+    {
+      "item": "survivaltimemod:raw_tempora"
+    }
+  ],
+  "result": {
+    "item": "survivaltimemod:tempora_ingot"
+  }
+}

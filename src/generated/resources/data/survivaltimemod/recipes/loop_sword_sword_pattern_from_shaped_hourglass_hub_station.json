@@ -11,13 +11,16 @@
     },
     "S": {
       "item": "survivaltimemod:loop_stick"
+    },
+    "T": {
+      "item": "minecraft:netherite_sword"
     }
   },
   "pattern": [
-    "  M  ",
-    "  M  ",
-    "  M  ",
-    " DSD ",
+    "  D  ",
+    " DDD ",
+    " DTD ",
+    " MSM ",
     "  S  "
   ],
   "result": {

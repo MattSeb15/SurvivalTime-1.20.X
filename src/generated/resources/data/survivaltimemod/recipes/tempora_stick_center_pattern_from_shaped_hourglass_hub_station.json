@@ -1,13 +1,13 @@
 {
   "type": "survivaltimemod:hourglass_hub_shaped",
   "craftTime": 800,
-  "energyCost": 240,
+  "energyCost": 480,
   "key": {
     "B": {
       "item": "survivaltimemod:opal_shard_tempora"
     },
     "C": {
-      "item": "minecraft:stick"
+      "item": "survivaltimemod:epoch_stick"
     }
   },
   "pattern": [

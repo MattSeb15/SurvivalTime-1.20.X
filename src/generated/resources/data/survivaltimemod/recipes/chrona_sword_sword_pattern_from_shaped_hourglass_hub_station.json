@@ -11,13 +11,16 @@
     },
     "S": {
       "item": "survivaltimemod:chrona_stick"
+    },
+    "T": {
+      "item": "survivaltimemod:tempora_sword"
     }
   },
   "pattern": [
-    "  M  ",
-    "  M  ",
-    "  M  ",
-    " DSD ",
+    "  D  ",
+    " DDD ",
+    " DTD ",
+    " MSM ",
     "  S  "
   ],
   "result": {

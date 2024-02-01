@@ -1,7 +1,7 @@
 {
   "type": "survivaltimemod:hourglass_hub_shaped",
-  "craftTime": 2400,
-  "energyCost": 600,
+  "craftTime": 8400,
+  "energyCost": 2100,
   "key": {
     "#": {
       "item": "survivaltimemod:raw_chrona"

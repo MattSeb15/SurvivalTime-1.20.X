@@ -11,11 +11,14 @@
     },
     "S": {
       "item": "survivaltimemod:loop_stick"
+    },
+    "T": {
+      "item": "minecraft:netherite_shovel"
     }
   },
   "pattern": [
-    "  M  ",
-    "  D  ",
+    " DMD ",
+    " DTD ",
     "  S  ",
     "  S  ",
     "  S  "

@@ -11,12 +11,15 @@
     },
     "S": {
       "item": "survivaltimemod:chrona_stick"
+    },
+    "T": {
+      "item": "survivaltimemod:tempora_pickaxe"
     }
   },
   "pattern": [
     " DMD ",
     "M S M",
-    "  S  ",
+    "  T  ",
     "  S  ",
     "  S  "
   ],

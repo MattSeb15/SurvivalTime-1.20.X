@@ -1,8 +1,12 @@
 package net.most.survivaltimemod.datagen.pattern;
 
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.most.survivaltimemod.SurvivalTimeMod;
 
-public class FullBorderPattern extends HourglassPattern {
+import java.util.function.Consumer;
+
+public class FullBorderPattern extends HourglassPattern implements IHourglassPattern{
     private final ItemLike pIngredientA;
     private final ItemLike pIngredientB;
     private final ItemLike pIngredientC;
@@ -25,5 +29,21 @@ public class FullBorderPattern extends HourglassPattern {
 
     public ItemLike getIngredientC() {
         return pIngredientC;
+    }
+
+    @Override
+    public void create(Consumer<FinishedRecipe> pWriter) {
+        ItemLike ingredientA = getIngredientA();
+         getShapedBuilder()
+                 .pattern("AAAAA")
+                .pattern("ABBBA")
+                .pattern("ABCBA")
+                .pattern("ABBBA")
+                .pattern("AAAAA")
+                .define('A', ingredientA)
+                .define('B', getIngredientB())
+                .define('C', getIngredientC())
+                .unlockedBy(getHasName(ingredientA), has(ingredientA))
+                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(getResult()) + "_full_border_pattern");
     }
 }

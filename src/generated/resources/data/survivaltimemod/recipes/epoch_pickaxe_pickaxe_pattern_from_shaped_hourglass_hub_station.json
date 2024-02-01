@@ -11,12 +11,15 @@
     },
     "S": {
       "item": "survivaltimemod:epoch_stick"
+    },
+    "T": {
+      "item": "survivaltimemod:flux_pickaxe"
     }
   },
   "pattern": [
     " DMD ",
     "M S M",
-    "  S  ",
+    "  T  ",
     "  S  ",
     "  S  "
   ],

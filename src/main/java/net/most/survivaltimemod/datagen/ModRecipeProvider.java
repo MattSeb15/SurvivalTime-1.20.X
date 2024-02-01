@@ -18,6 +18,8 @@ import net.most.survivaltimemod.datagen.util.SurvivalTimeUtilGenerator;
 import net.most.survivaltimemod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -80,62 +82,77 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.OPAL_RAW.get()), has(ModItems.OPAL_RAW.get()))
                 .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(ModItems.OPAL_RAW.get()) + "_from_shards");
 
-        for (Map.Entry<ItemLike, ItemLike> entry : SurvivalTimeUtilGenerator.BLOCK_FROM_ITEM_RECIPE_MAP.entrySet()) {
-            ItemLike block = entry.getKey();
-            ItemLike item = entry.getValue();
+        List<List<? extends IHourglassPattern>> allPatterns = new ArrayList<>();
 
-            blockItemPattern(pWriter, block, item);
-        }
-
-        for (FullBorderPattern fullBorderPattern : SurvivalTimeUtilGenerator.FULL_BORDER_PATTERN_LIST) {
-            fullBorderPattern(pWriter, fullBorderPattern);
-        }
-
-        for (MediumBorderPattern mediumBorderPattern : SurvivalTimeUtilGenerator.MEDIUM_BORDER_PATTERN_LIST) {
-            mediumBorderPattern(pWriter, mediumBorderPattern);
-        }
-        for (SwordPattern swordPattern : SurvivalTimeUtilGenerator.SWORD_PATTERN_LIST) {
-            swordPattern(pWriter, swordPattern);
-        }
-        for (PickaxePattern pickaxePattern : SurvivalTimeUtilGenerator.PICKAXE_PATTERN_LIST) {
-            pickaxePattern(pWriter, pickaxePattern);
-        }
-        for (AxePattern axePattern : SurvivalTimeUtilGenerator.AXE_PATTERN_LIST) {
-            axePattern(pWriter, axePattern);
-        }
-        for (ShovelPattern shovelPattern : SurvivalTimeUtilGenerator.SHOVEL_PATTERN_LIST) {
-            shovelPattern(pWriter, shovelPattern);
-        }
-        for (HoePattern hoePattern : SurvivalTimeUtilGenerator.HOE_PATTERN_LIST) {
-            hoePattern(pWriter, hoePattern);
+        for (Field field : SurvivalTimeUtilGenerator.class.getDeclaredFields()) {
+            if (List.class.isAssignableFrom(field.getType())) {
+                try {
+                    List<?> potentialPatternList = (List<?>) field.get(null);
+                    if (!potentialPatternList.isEmpty() && potentialPatternList.get(0) instanceof IHourglassPattern) {
+                        allPatterns.add((List<? extends IHourglassPattern>) potentialPatternList);
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        for (StarCenterPattern starCenterPattern : SurvivalTimeUtilGenerator.STAR_CENTER_PATTERN_LIST) {
-            starCenterPattern(pWriter, starCenterPattern);
-        }
-        for (MonoMaterialPattern monoMaterialPattern : SurvivalTimeUtilGenerator.MONO_MATERIAL_PATTERN_LIST) {
-            monoMaterialPattern(pWriter, monoMaterialPattern);
-        }
-
-        for (XMaterialShapelessPattern xMaterialShapelessPattern : SurvivalTimeUtilGenerator.X_MATERIALS_PATTERN_LIST) {
-            xMaterialShapelessPattern(pWriter, xMaterialShapelessPattern);
+        for (List<? extends IHourglassPattern> patternList : allPatterns) {
+            for (IHourglassPattern pattern : patternList) {
+                pattern.create(pWriter);
+            }
         }
 
-        for (HelmetArmorPattern helmetPattern : SurvivalTimeUtilGenerator.HELMET_PATTERN_LIST) {
-            helmetPattern.create(pWriter);
-        }
 
-        for (ChestplateArmorPattern chestplatePattern : SurvivalTimeUtilGenerator.CHESTPLATE_PATTERN_LIST) {
-            chestplatePattern.create(pWriter);
-        }
-
-        for (LeggingsArmorPattern leggingsPattern : SurvivalTimeUtilGenerator.LEGGINGS_PATTERN_LIST) {
-            leggingsPattern.create(pWriter);
-        }
-
-        for (BootsArmorPattern bootsPattern : SurvivalTimeUtilGenerator.BOOTS_PATTERN_LIST) {
-            bootsPattern.create(pWriter);
-        }
+//        for (FullBorderPattern fullBorderPattern : SurvivalTimeUtilGenerator.FULL_BORDER_PATTERN_LIST) {
+//            fullBorderPattern.create(pWriter);
+//        }
+//
+//        for (MediumBorderPattern mediumBorderPattern : SurvivalTimeUtilGenerator.MEDIUM_BORDER_PATTERN_LIST) {
+//            mediumBorderPattern.create(pWriter);
+//        }
+//        for (SwordPattern swordPattern : SurvivalTimeUtilGenerator.SWORD_PATTERN_LIST) {
+//            swordPattern.create(pWriter);
+//        }
+//        for (PickaxePattern pickaxePattern : SurvivalTimeUtilGenerator.PICKAXE_PATTERN_LIST) {
+//            pickaxePattern.create(pWriter);
+//        }
+//        for (AxePattern axePattern : SurvivalTimeUtilGenerator.AXE_PATTERN_LIST) {
+//            axePattern.create(pWriter);
+//        }
+//        for (ShovelPattern shovelPattern : SurvivalTimeUtilGenerator.SHOVEL_PATTERN_LIST) {
+//            shovelPattern.create(pWriter);
+//        }
+//        for (HoePattern hoePattern : SurvivalTimeUtilGenerator.HOE_PATTERN_LIST) {
+//            hoePattern.create(pWriter);
+//        }
+//
+//        for (StarCenterPattern starCenterPattern : SurvivalTimeUtilGenerator.STAR_CENTER_PATTERN_LIST) {
+//            starCenterPattern.create(pWriter);
+//        }
+//        for (MonoMaterialPattern monoMaterialPattern : SurvivalTimeUtilGenerator.MONO_MATERIAL_PATTERN_LIST) {
+//            monoMaterialPattern.create(pWriter);
+//        }
+//
+//        for (XMaterialShapelessPattern xMaterialShapelessPattern : SurvivalTimeUtilGenerator.X_MATERIALS_PATTERN_LIST) {
+//            xMaterialShapelessPattern.create(pWriter);
+//        }
+//
+//        for (HelmetHourglassPattern helmetPattern : SurvivalTimeUtilGenerator.HELMET_PATTERN_LIST) {
+//            helmetPattern.create(pWriter);
+//        }
+//
+//        for (ChestplateHourglassPattern chestplatePattern : SurvivalTimeUtilGenerator.CHESTPLATE_PATTERN_LIST) {
+//            chestplatePattern.create(pWriter);
+//        }
+//
+//        for (LeggingsHourglassPattern leggingsPattern : SurvivalTimeUtilGenerator.LEGGINGS_PATTERN_LIST) {
+//            leggingsPattern.create(pWriter);
+//        }
+//
+//        for (BootsHourglassPattern bootsPattern : SurvivalTimeUtilGenerator.BOOTS_PATTERN_LIST) {
+//            bootsPattern.create(pWriter);
+//        }
 
 
 //        HourglassHubShapelessRecipeBuilder.recipe(ModItems.COMPACTED_MILK.get(), 1)
@@ -161,189 +178,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 //                .save(pWriter);
 
 
-    }
-
-    private void monoMaterialPattern(Consumer<FinishedRecipe> pWriter, MonoMaterialPattern pattern) {
-
-        if (pattern.getIngredientCount() >= 1 && pattern.getIngredientCount() <= 25) {
-            HourglassHubShapelessRecipeBuilder.recipe(pattern.getResult(), pattern.getResultCount())
-                    .requires(pattern.getIngredient(), pattern.getIngredientCount())
-                    .energyCost(pattern.getEnergyCost())
-                    .craftTime(pattern.getCraftTime())
-                    .unlockedBy(getHasName(pattern.getIngredient()), has(pattern.getIngredient()))
-                    .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pattern.getResult()) + "_mono_material_pattern");
-        }
-
-    }
-
-    private void xMaterialShapelessPattern(Consumer<FinishedRecipe> pWriter, XMaterialShapelessPattern pattern) {
-        HourglassHubShapelessRecipeBuilder.recipe(pattern.getResult(), pattern.getResultCount())
-                .requires(pattern.getIngredients())
-                .craftTime(pattern.getCraftTime())
-                .energyCost(pattern.getEnergyCost())
-                .unlockedBy(getHasName(pattern.getIngredients()[0]), has(pattern.getIngredients()[0]))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pattern.getResult()) + "_x_material_shapeless_pattern");
-
-    }
-
-    private void swordPattern(Consumer<FinishedRecipe> pWriter, SwordPattern swordPattern) {
-        HourglassHubShapedRecipeBuilder.shaped(swordPattern.getResult(), swordPattern.getResultCount())
-                .pattern("  M  ")
-                .pattern("  M  ")
-                .pattern("  M  ")
-                .pattern(" DSD ")
-                .pattern("  S  ")
-                .define('M', swordPattern.getBladeIngredient())
-                .define('D', swordPattern.getShardIngredient())
-                .define('S', swordPattern.getStickIngredient())
-                .craftTime(swordPattern.getCraftTime())
-                .energyCost(swordPattern.getEnergyCost())
-                .unlockedBy(getHasName(swordPattern.getBladeIngredient()), has(swordPattern.getBladeIngredient()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(swordPattern.getResult()) + "_sword_pattern");
-    }
-
-    private void pickaxePattern(Consumer<FinishedRecipe> pWriter, PickaxePattern pickaxePattern) {
-
-        HourglassHubShapedRecipeBuilder.shaped(pickaxePattern.getResult(), pickaxePattern.getResultCount())
-                .pattern(" DMD ")
-                .pattern("M S M")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .define('M', pickaxePattern.getBladeIngredient())
-                .define('D', pickaxePattern.getShardIngredient())
-                .define('S', pickaxePattern.getStickIngredient())
-                .craftTime(pickaxePattern.getCraftTime() + 20 * 60 * 15)
-                .energyCost(pickaxePattern.getEnergyCost() + 60 * 15)
-                .unlockedBy(getHasName(pickaxePattern.getBladeIngredient()), has(pickaxePattern.getBladeIngredient()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pickaxePattern.getResult()) + "_pickaxe_pattern");
-
-    }
-
-    private void hoePattern(Consumer<FinishedRecipe> pWriter, HoePattern hoePattern) {
-        HourglassHubShapedRecipeBuilder.shaped(hoePattern.getResult(), hoePattern.getResultCount())
-                .pattern("  MDM")
-                .pattern("  D  ")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .define('M', hoePattern.getBladeIngredient())
-                .define('D', hoePattern.getShardIngredient())
-                .define('S', hoePattern.getStickIngredient())
-                .craftTime(hoePattern.getCraftTime())
-                .energyCost(hoePattern.getEnergyCost())
-                .unlockedBy(getHasName(hoePattern.getBladeIngredient()), has(hoePattern.getBladeIngredient()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(hoePattern.getResult()) + "_hoe_pattern");
-
-    }
-
-    private void shovelPattern(Consumer<FinishedRecipe> pWriter, ShovelPattern shovelPattern) {
-
-        HourglassHubShapedRecipeBuilder.shaped(shovelPattern.getResult(), shovelPattern.getResultCount())
-                .pattern("  M  ")
-                .pattern("  D  ")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .define('M', shovelPattern.getBladeIngredient())
-                .define('D', shovelPattern.getShardIngredient())
-                .define('S', shovelPattern.getStickIngredient())
-                .craftTime(shovelPattern.getCraftTime())
-                .energyCost(shovelPattern.getEnergyCost())
-                .unlockedBy(getHasName(shovelPattern.getBladeIngredient()), has(shovelPattern.getBladeIngredient()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(shovelPattern.getResult()) + "_shovel_pattern");
-
-    }
-
-    private void axePattern(Consumer<FinishedRecipe> pWriter, AxePattern axePattern) {
-        HourglassHubShapedRecipeBuilder.shaped(axePattern.getResult(), axePattern.getResultCount())
-                .pattern("D M D")
-                .pattern("DMSMD")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .pattern("  S  ")
-                .define('M', axePattern.getBladeIngredient())
-                .define('D', axePattern.getShardIngredient())
-                .define('S', axePattern.getStickIngredient())
-                .craftTime(axePattern.getCraftTime())
-                .energyCost(axePattern.getEnergyCost())
-                .unlockedBy(getHasName(axePattern.getBladeIngredient()), has(axePattern.getBladeIngredient()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(axePattern.getResult()) + "_axe_pattern");
-
-
-    }
-
-    private void blockItemPattern(Consumer<FinishedRecipe> pWriter, ItemLike block, ItemLike item) {
-        HourglassHubShapedRecipeBuilder.shaped(block)
-                .pattern("     ")
-                .pattern(" ### ")
-                .pattern(" ### ")
-                .pattern(" ### ")
-                .pattern("     ")
-                .define('#', item)
-                .craftTime(20 * 120)
-                .energyCost(60 * 10)
-                .unlockedBy(getHasName(item), has(item))
-                .save(pWriter);
-
-        HourglassHubShapelessRecipeBuilder.recipe(item, 9)
-                .requires(block)
-                .craftTime(20 * 60)
-                .energyCost(60 * 5)
-                .unlockedBy(getHasName(block), has(block))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(item) + "_from_block");
-
-    }
-
-
-    protected static void fullBorderPattern(Consumer<FinishedRecipe> pWriter, FullBorderPattern pFullBorderPattern) {
-        ItemLike ingredientA = pFullBorderPattern.getIngredientA();
-
-        HourglassHubShapedRecipeBuilder.shaped(pFullBorderPattern.getResult(), pFullBorderPattern.getResultCount())
-                .pattern("AAAAA")
-                .pattern("ABBBA")
-                .pattern("ABCBA")
-                .pattern("ABBBA")
-                .pattern("AAAAA")
-                .define('A', ingredientA)
-                .define('B', pFullBorderPattern.getIngredientB())
-                .define('C', pFullBorderPattern.getIngredientC())
-                .craftTime(pFullBorderPattern.getCraftTime())
-                .energyCost(pFullBorderPattern.getEnergyCost())
-                .unlockedBy(getHasName(ingredientA), has(ingredientA))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pFullBorderPattern.getResult()) + "_full_border_pattern");
-    }
-
-    protected static void mediumBorderPattern(Consumer<FinishedRecipe> pWriter, MediumBorderPattern pFullBorderPattern) {
-        ItemLike ingredientB = pFullBorderPattern.getIngredientB();
-
-        HourglassHubShapedRecipeBuilder.shaped(pFullBorderPattern.getResult(), pFullBorderPattern.getResultCount())
-                .pattern("     ")
-                .pattern(" BBB ")
-                .pattern(" BCB ")
-                .pattern(" BBB ")
-                .pattern("     ")
-                .define('B', pFullBorderPattern.getIngredientB())
-                .define('C', pFullBorderPattern.getIngredientC())
-                .craftTime(pFullBorderPattern.getCraftTime())
-                .energyCost(pFullBorderPattern.getEnergyCost())
-                .unlockedBy(getHasName(ingredientB), has(ingredientB))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(pFullBorderPattern.getResult()) + "_medium_border_pattern");
-    }
-
-    protected static void starCenterPattern(Consumer<FinishedRecipe> pWriter, StarCenterPattern starCenterPattern) {
-        HourglassHubShapedRecipeBuilder.shaped(starCenterPattern.getResult(), starCenterPattern.getResultCount())
-                .pattern("     ")
-                .pattern("  B  ")
-                .pattern(" BCB ")
-                .pattern("  B  ")
-                .pattern("     ")
-                .define('B', starCenterPattern.getIngredientBorder())
-                .define('C', starCenterPattern.getIngredientCenter())
-                .craftTime(starCenterPattern.getCraftTime())
-                .energyCost(starCenterPattern.getEnergyCost())
-                .unlockedBy(getHasName(starCenterPattern.getResult()), has(starCenterPattern.getResult()))
-                .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(starCenterPattern.getResult()) + "_center_pattern");
     }
 
     protected static void oreSmelting(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients,

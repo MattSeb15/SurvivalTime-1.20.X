@@ -11,12 +11,15 @@
     },
     "S": {
       "item": "survivaltimemod:flux_stick"
+    },
+    "T": {
+      "item": "survivaltimemod:loop_pickaxe"
     }
   },
   "pattern": [
     " DMD ",
     "M S M",
-    "  S  ",
+    "  T  ",
     "  S  ",
     "  S  "
   ],
