@@ -19,6 +19,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -96,10 +97,11 @@ public class ModEvents {
                     if (gameType == GameType.SPECTATOR && playerTime.getTime() > 0) {
                         player.setGameMode(GameType.SURVIVAL);
                     }
+                    playerTime.incrementTimePlayed(1);
                     playerTime.decrementTime(1, player);
                     player.displayClientMessage(
                             Component.literal("T: " + playerTime.getFormattedTime() +" | MT: " + playerTime.getFormattedMaxTime() + " (x" +
-                                    playerTime.getTimeMultiplier() + ")"),
+                                    playerTime.getTimeMultiplier() + ")" + "TP: "+ playerTime.getFormattedPlayedTime()),
                             true);
                 }, 0, 1, TimeUnit.SECONDS);
                 playerSchedulers.put(player.getUUID(), playerScheduler);

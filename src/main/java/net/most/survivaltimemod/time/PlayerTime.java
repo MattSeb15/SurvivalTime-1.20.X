@@ -24,6 +24,7 @@ public class PlayerTime {
     public static final double DEFAULT_COINS = 0;
 
     public static final float DEFAULT_COINS_MULTIPLIER = 1.0F;
+    public static final double DEFAULT_TIME_PLAYED = 0;
 
     private PlayerTimeData playerTimeData = new PlayerTimeData(
             DEFAULT_TIME,
@@ -34,7 +35,8 @@ public class PlayerTime {
             DEFAULT_EFFECT_INSTANCES,
             DEFAULT_LAST_STATS,
             DEFAULT_COINS,
-            DEFAULT_COINS_MULTIPLIER
+            DEFAULT_COINS_MULTIPLIER,
+            DEFAULT_TIME_PLAYED
     );
     public static final String COMPOUND_TAG_KEY = "player_time_data";
 
@@ -247,6 +249,10 @@ public class PlayerTime {
         return this.playerTimeData.getCoinsMultiplier();
     }
 
+    public double getTimePlayed() {
+        return this.playerTimeData.getTimePlayed();
+    }
+
     private void incrementTime(float increment) {
         float currentTime = this.playerTimeData.getTime();
         float multiplier = this.playerTimeData.getTimeMultiplier();
@@ -291,6 +297,17 @@ public class PlayerTime {
 
     public void decrementTime(float decrement, ServerPlayer player) {
         this.decrementTime(decrement, player, false);
+    }
+
+    public void incrementTimePlayed(double increment) {
+        double currentTimePlayed = this.playerTimeData.getTimePlayed();
+        double newTimePlayed = currentTimePlayed + increment;
+        this.playerTimeData.setTimePlayed(newTimePlayed);
+    }
+
+    public void incrementTimePlayed(double increment, ServerPlayer player) {
+        this.incrementTimePlayed(increment);
+        syncServerToClientData(player);
     }
 
 
@@ -392,6 +409,7 @@ public class PlayerTime {
         playerTimeDataTag.putIntArray("effect_instances_duration", playerTimeData.getEffectInstancesDuration());
         playerTimeDataTag.putDouble("coins", playerTimeData.getCoins());
         playerTimeDataTag.putFloat("coins_multiplier", playerTimeData.getCoinsMultiplier());
+        playerTimeDataTag.putDouble("time_played", playerTimeData.getTimePlayed());
         compoundTag.put(COMPOUND_TAG_KEY, playerTimeDataTag);
     }
 
@@ -405,6 +423,7 @@ public class PlayerTime {
         playerTimeData.setEffectInstancesDuration(playerTimeDataTag.getIntArray("effect_instances_duration"));
         playerTimeData.setCoins(playerTimeDataTag.getDouble("coins"));
         playerTimeData.setCoinsMultiplier(playerTimeDataTag.getFloat("coins_multiplier"));
+        playerTimeData.setTimePlayed(playerTimeDataTag.getDouble("time_played"));
 
     }
 
@@ -431,4 +450,11 @@ public class PlayerTime {
     }
 
 
+    public String getFormattedPlayedTime() {
+        return getFormattedTime(this.playerTimeData.getTimePlayed());
+    }
+
+    private String getFormattedTime(double timePlayed) {
+        return FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, (float) timePlayed);
+    }
 }

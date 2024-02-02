@@ -25,6 +25,7 @@ public class TimeDataSyncS2CPacket {
         float[] lastStats = readFloatArray(buf);
         double coins = buf.readDouble();
         float coinsMultiplier = buf.readFloat();
+        double timePlayed = buf.readDouble();
 
 
         playerTimeData = new PlayerTimeData(maxTime,
@@ -35,7 +36,8 @@ public class TimeDataSyncS2CPacket {
                 effectInstancesDuration,
                 lastStats,
                 coins,
-                coinsMultiplier);
+                coinsMultiplier,
+                timePlayed);
     }
 
     private float[] readFloatArray(FriendlyByteBuf buf) {
@@ -64,6 +66,7 @@ public class TimeDataSyncS2CPacket {
         writeFloatArray(buf, playerTimeData.getLastStats());
         buf.writeDouble(playerTimeData.getCoins());
         buf.writeFloat(playerTimeData.getCoinsMultiplier());
+        buf.writeDouble(playerTimeData.getTimePlayed());
 
     }
 

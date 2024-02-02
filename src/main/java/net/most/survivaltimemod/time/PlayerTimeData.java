@@ -11,8 +11,9 @@ public class PlayerTimeData {
     public float[] LAST_STATS;
     public double COINS;
     public float COINS_MULTIPLIER;
+    public double TIME_PLAYED;
 
-    public PlayerTimeData(float maxTime, float time, boolean isTimeStopped, float timeMultiplier, float damageMultiplier, int[] effectInstancesDuration, float[] lastStats, double coins, float coinsMultiplier) {
+    public PlayerTimeData(float maxTime, float time, boolean isTimeStopped, float timeMultiplier, float damageMultiplier, int[] effectInstancesDuration, float[] lastStats, double coins, float coinsMultiplier, double timePlayed) {
         this.MAX_TIME = maxTime;
         this.TIME = time;
         this.IS_TIME_STOPPED = isTimeStopped;
@@ -22,6 +23,7 @@ public class PlayerTimeData {
         this.LAST_STATS = lastStats;
         this.COINS = coins;
         this.COINS_MULTIPLIER = coinsMultiplier;
+        this.TIME_PLAYED = timePlayed;
     }
 
     public float getMaxTime() {
@@ -54,6 +56,10 @@ public class PlayerTimeData {
 
     public float getCoinsMultiplier() {
         return this.COINS_MULTIPLIER;
+    }
+
+    public double getTimePlayed() {
+        return this.TIME_PLAYED;
     }
 
     public void setMaxTime(float maxTime) {
@@ -94,5 +100,9 @@ public class PlayerTimeData {
 
     public void setCoinsMultiplier(float coinsMultiplier) {
         this.COINS_MULTIPLIER = coinsMultiplier;
+    }
+
+    public void setTimePlayed(double timePlayed) {
+        this.TIME_PLAYED = timePlayed;
     }
 }
