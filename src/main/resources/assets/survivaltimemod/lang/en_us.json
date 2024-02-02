@@ -249,6 +249,7 @@
   "chat.notification.sut.time.subtract": "Subtracted %s from your time",
   "chat.notification.sut.time.toggle_players": "Time toggled for %s",
   "chat.notification.sut.time_multiplier.info": "%s. Username: %s | TimeMult.: %s",
+  "chat.notification.sut.timeplayed.info": "%s. Username: %s | TimePlayed: %s",
   "chat.notification.sut.time.multiplier.default": "Your time multiplier has been set to default",
   "chat.notification.sut.time.multiplier.default_players": "Set default time multiplier to %s",
   "chat.notification.sut.time.multiplier.set": "Your time multiplier has been set to %s",

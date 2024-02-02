@@ -39,6 +39,7 @@ import net.most.survivaltimemod.command.maxtime.SetMaxTimeCommand;
 import net.most.survivaltimemod.command.maxtime.SubtractMaxTimeCommand;
 import net.most.survivaltimemod.command.time.*;
 import net.most.survivaltimemod.command.timeplayed.AddTimePlayedCommand;
+import net.most.survivaltimemod.command.timeplayed.InfoTimePlayedCommand;
 import net.most.survivaltimemod.command.timeplayed.SetTimePlayedCommand;
 import net.most.survivaltimemod.command.timeplayed.SubtractTimePlayedCommand;
 import net.most.survivaltimemod.command.tmultiplier.*;
@@ -235,6 +236,7 @@ public class ModEvents {
         new InfoTimeMultiplierCommand(event.getDispatcher());
         new SetTimePlayedCommand(event.getDispatcher());
         new AddTimePlayedCommand(event.getDispatcher());
+        new InfoTimePlayedCommand(event.getDispatcher());
         new SubtractTimePlayedCommand(event.getDispatcher());
         new AddCoinMultiplierCommand(event.getDispatcher());
         new SubtractTimeMultiplierCommand(event.getDispatcher());
