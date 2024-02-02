@@ -175,7 +175,7 @@ public class TimeHudOverlay {
         int increment = 19;
 
         guiGraphics.drawString(gui.getFont(), CoinFormatter.formatCoins(coins), pX, pY, 0xFFFFFF);
-        guiGraphics.drawString(gui.getFont(), "1D = "+ CoinFormatter.formatCoins(damageMultiplier) + "D", pX, pY + increment, 0xFFFFFF);
+        guiGraphics.drawString(gui.getFont(), "1D = "+ String.format("%.1f", damageMultiplier) + "D", pX, pY + increment, 0xFFFFFF);
         guiGraphics.drawString(gui.getFont(), "1s = "+ FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, timeMultiplier), pX, pY + increment * 2, 0xFFFFFF);
 
         guiGraphics.drawString(gui.getFont(), "x" + coinsMultiplier, pX,  pyMultipliers, 0xF5AE2B);
