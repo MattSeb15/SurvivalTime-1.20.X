@@ -29,7 +29,7 @@ public class CoinFormatter {
         }
         int exponent = (int) (Math.log10(coins) / 3.0) * 3;
         double formattedCount = Math.floor(coins / Math.pow(10, exponent) * 10) / 10.0;
-        return String.format("%.2f%s", formattedCount, letters.get(exponent));
+        return String.format("%.1f%s", formattedCount, letters.get(exponent));
     }
 
     public static String simpleFormatCoins(double coins){
