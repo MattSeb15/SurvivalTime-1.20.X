@@ -20,10 +20,6 @@ public enum FormatTimeType {
         int hours = parseHours(time);
         int minutes = parseMinutes(time);
         int seconds = parseSeconds(time);
-        if (hours == 0) return String.format("%02d:%02d", minutes, seconds);
-        if (minutes == 0) return String.format("%02d:%02d", hours, seconds);
-        if (seconds == 0) return String.format("%02d:%02d", hours, minutes);
-
 
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
