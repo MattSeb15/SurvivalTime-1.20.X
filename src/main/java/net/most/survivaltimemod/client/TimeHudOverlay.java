@@ -1,9 +1,11 @@
 package net.most.survivaltimemod.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
@@ -129,10 +131,7 @@ public class TimeHudOverlay {
                 }
 
                 drawStatsHub(guiGraphics, playerTimeData, gui, screenWidth, screenHeight);
-
-                //                drawDamageMultiplier(guiGraphics, x, y + screenHeight/2 - 14, playerTimeData, gui);
-                //                drawTimeMultiplier(guiGraphics,x,y + screenHeight/2 -14*2 -2, playerTimeData, gui);
-
+                drawTimePlayed(guiGraphics, playerTimeData, gui, screenWidth, screenHeight);
 
                 RenderSystem.disableBlend();
             }
@@ -142,6 +141,21 @@ public class TimeHudOverlay {
 
 
     });
+
+    private static void drawTimePlayed(GuiGraphics guiGraphics, PlayerTimeData playerTimeData, ForgeGui gui, int screenWidth, int screenHeight) {
+        float timePlayed = (float) playerTimeData.getTimePlayed();
+
+        String formattedTimePlayed = FormatTimeType.getFormattedStringByType(FormatTimeType.DEFAULT, timePlayed);
+        int width = 69;
+        int height = 12;
+        ExtraPositionIconTexture extraPositionIconTexture = new ExtraPositionIconTexture(0, 116, width, height);
+        int px  = 5;
+        int py = screenHeight - height - 20;
+        IconTexture.drawIcon(guiGraphics, extraPositionIconTexture, px, py);
+        int tx = px + 2 + width/2 ;
+        int ty = py + 2;
+        guiGraphics.drawCenteredString(gui.getFont(), formattedTimePlayed, tx, ty, 0x00FF00);
+    }
 
     private static void drawStatsHub(GuiGraphics guiGraphics, PlayerTimeData playerTimeData, ForgeGui gui, int screenWidth, int screenHeight) {
         float timeMultiplier = playerTimeData.getTimeMultiplier();

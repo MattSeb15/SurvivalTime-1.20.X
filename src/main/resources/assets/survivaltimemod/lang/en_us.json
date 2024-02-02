@@ -261,6 +261,7 @@
   "chat.notification.sut.timeplayed.add": "Added %s to your timeplayed",
   "chat.notification.sut.timeplayed.subtract": "Subtracted %s from your timeplayed",
   "chat.notification.sut.time_multiplier.add": "Added %s to your time multiplier",
-  "chat.notification.sut.time_multiplier.subtract": "Subtracted %s from your time multiplier"
+  "chat.notification.sut.time_multiplier.subtract": "Subtracted %s from your time multiplier",
+  "hud.time_played": "%s"
 
 }
