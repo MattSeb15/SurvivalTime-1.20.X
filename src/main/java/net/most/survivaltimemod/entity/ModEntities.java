@@ -9,6 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.entity.custom.animal.TimmyEntity;
+import net.most.survivaltimemod.entity.custom.monster.GhostWitchEntity;
 import net.most.survivaltimemod.entity.custom.monster.TimeDevourerEntity;
 import net.most.survivaltimemod.entity.custom.animal.TimekeeperEntity;
 import net.most.survivaltimemod.entity.custom.throwable.CurseEntity;
@@ -64,6 +65,14 @@ public class ModEntities {
             () -> EntityType.Builder.of(TimmyEntity::new, MobCategory.CREATURE)
                     .sized(1.5f, 1.0f)
                     .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "timmy").toString())
+    );
+
+    public static final RegistryObject<EntityType<GhostWitchEntity>> GHOST_WITCH = ENTITY_TYPES.register("ghost_witch",
+            () -> EntityType.Builder.of(GhostWitchEntity::new, MobCategory.MONSTER)
+                    .sized(1.0f, 1.0f)
+                    .setTrackingRange(40)
+                    .fireImmune()
+                    .build(new ResourceLocation(SurvivalTimeMod.MOD_ID, "ghost_witch").toString())
     );
 
     public static void register(IEventBus eventBus) {

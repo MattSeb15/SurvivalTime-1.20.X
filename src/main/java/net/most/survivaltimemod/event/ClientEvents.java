@@ -21,8 +21,8 @@ import net.most.survivaltimemod.client.gui.HourglassHubStationScreen;
 import net.most.survivaltimemod.entity.ModEntities;
 import net.most.survivaltimemod.entity.client.animal.timekeeper.TimekeeperRenderer;
 import net.most.survivaltimemod.entity.client.animal.timmy.TimmyRenderer;
+import net.most.survivaltimemod.entity.client.monster.ghostwitch.GhostWitchRenderer;
 import net.most.survivaltimemod.entity.client.monster.timedevourer.TimeDevourerRenderer;
-import net.most.survivaltimemod.entity.custom.monster.TimeDevourerEntity;
 import net.most.survivaltimemod.screen.ModMenuTypes;
 
 public class ClientEvents {
@@ -52,6 +52,7 @@ public class ClientEvents {
                 EntityRenderers.register(ModEntities.PROSPERITY_PROJECTILE.get(), ThrownItemRenderer::new);
                 EntityRenderers.register(ModEntities.CURSE_PROJECTILE.get(), ThrownItemRenderer::new);
                 EntityRenderers.register(ModEntities.TIMMY.get(), TimmyRenderer::new);
+                EntityRenderers.register(ModEntities.GHOST_WITCH.get(), GhostWitchRenderer::new);
             });
 
         }

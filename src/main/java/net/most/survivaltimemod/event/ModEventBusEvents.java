@@ -2,6 +2,7 @@ package net.most.survivaltimemod.event;
 
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -12,6 +13,7 @@ import net.most.survivaltimemod.SurvivalTimeMod;
 import net.most.survivaltimemod.entity.ModEntities;
 import net.most.survivaltimemod.entity.custom.animal.TimekeeperEntity;
 import net.most.survivaltimemod.entity.custom.animal.TimmyEntity;
+import net.most.survivaltimemod.entity.custom.monster.GhostWitchEntity;
 import net.most.survivaltimemod.entity.custom.monster.TimeDevourerEntity;
 
 @Mod.EventBusSubscriber(modid = SurvivalTimeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -21,6 +23,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.TIMEKEEPER.get(), TimekeeperEntity.setAttributes());
         event.put(ModEntities.TIME_DEVOURER.get(), TimeDevourerEntity.setAttributes());
         event.put(ModEntities.TIMMY.get(), TimmyEntity.createAttributes().build());
+        event.put(ModEntities.GHOST_WITCH.get(), GhostWitchEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -29,5 +32,9 @@ public class ModEventBusEvents {
                 Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.TIME_DEVOURER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkAnyLightMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.TIMMY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.GHOST_WITCH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                GhostWitchEntity::checkGhostWitchSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

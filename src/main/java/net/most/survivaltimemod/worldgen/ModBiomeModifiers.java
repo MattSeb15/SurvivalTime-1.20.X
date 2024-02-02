@@ -33,13 +33,12 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_TIME_DEVOURER = registerKey("spawn_time_devourer");
     public static final ResourceKey<BiomeModifier> SPAWN_TIME_DEVOURER_NETHER = registerKey("spawn_time_devourer_nether");
     public static final ResourceKey<BiomeModifier> SPAWN_TIMMY = registerKey("spawn_timmy");
+    public static final ResourceKey<BiomeModifier> SPAWN_GHOST_WITCH = registerKey("spawn_ghost_witch");
+    public static final ResourceKey<BiomeModifier> SPAWN_GHOST_WITCH_NETHER = registerKey("spawn_ghost_witch_nether");
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
-
-
-
 
         context.register(ADD_OPAL_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
@@ -58,7 +57,7 @@ public class ModBiomeModifiers {
 
         context.register(SPAWN_TIMEKEEPER, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_DESERT),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.TIMEKEEPER.get(), 100, 1, 2))
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.TIMEKEEPER.get(), 95, 1, 2))
         ));
 
 
@@ -75,6 +74,16 @@ public class ModBiomeModifiers {
         context.register(SPAWN_TIMMY, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_JUNGLE),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.TIMMY.get(), 60, 1, 2))
+        ));
+
+        context.register(SPAWN_GHOST_WITCH, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.GHOST_WITCH.get(), 65, 1, 2))
+        ));
+
+        context.register(SPAWN_GHOST_WITCH_NETHER, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_NETHER),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.GHOST_WITCH.get(), 70, 2, 4))
         ));
 
     }

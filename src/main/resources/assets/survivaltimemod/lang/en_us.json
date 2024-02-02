@@ -38,6 +38,8 @@
   "item.survivaltimemod.timekeeper_spawn_egg": "Timekeeper Spawn Egg",
   "item.survivaltimemod.clock_fragment": "Clock Fragment",
   "item.survivaltimemod.time_devourer_spawn_egg": "Time Devourer Spawn Egg",
+  "item.survivaltimemod.timmy_spawn_egg": "Timmy Spawn Egg",
+  "item.survivaltimemod.ghost_witch_spawn_egg": "Ghost Witch Spawn Egg",
   "item.survivaltimemod.purifier_item": "Purifier",
   "item.survivaltimemod.prosperity_item": "Prosperity",
   "item.survivaltimemod.curse_item": "Curse",
@@ -84,6 +86,7 @@
   "item.survivaltimemod.chrona_chestplate": "Chrona Chestplate",
   "item.survivaltimemod.chrona_leggings": "Chrona Leggings",
   "item.survivaltimemod.chrona_boots": "Chrona Boots",
+  "item.survivaltimemod.ghostwitch_tear": "Ghost Witch Tear",
 
   "block.survivaltimemod.fiery_time_block": "Fiery Time Block",
   "block.survivaltimemod.opal_block": "Block of Opal",
@@ -198,6 +201,7 @@
   "entity.survival_time_mod.time_devourer": "Time Devourer",
   "entity.survival_time_mod.timmy": "Timmy",
   "entity.survival_time_mod.timekeeper": "Timekeeper",
+  "entity.survival_time_mod.ghost_witch": "Ghost Witch",
 
   "item.survival_time_mod.opal_tool.tooltip.time_steal_multiplier": "Timesteal mult.: %s",
   "item.survival_time_mod.opal_tool.tooltip.probability": "Probability: %s",
@@ -213,6 +217,9 @@
   "commands.sut.damage_multiplier.info": "%s. Username: %s | DamageMult.: %s",
   "commands.sut.time_multiplier.info": "%s. Username: %s | TimeMult.: %s",
   "chat.notification.time_out": "%s's time has run out",
-  "multiplayer.disconnect.timed_out": "Thanks for playing"
+  "multiplayer.disconnect.timed_out": "Thanks for playing",
+  "gui.survivaltimemod.hourglass_hub_station.crafting": "Crafting in progress...",
+  "gui.survivaltimemod.hourglass_hub_station.no_energy": "You do not have enough energy (TE),",
+  "gui.survivaltimemod.hourglass_hub_station.no_energy_2": "to craft this item."
 
 }

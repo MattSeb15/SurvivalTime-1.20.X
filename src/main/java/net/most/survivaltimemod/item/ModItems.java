@@ -166,6 +166,8 @@ public class ModItems {
             0x000000, 0xffffff, new Item.Properties()));
     public static final RegistryObject<Item> TIMMY_SPAWN_EGG = ITEMS.register("timmy_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.TIMMY, 0xffffe082, 0xffffd54f,
             new Item.Properties()));
+    public static final RegistryObject<Item> GHOST_WITCH_SPAWN_EGG = ITEMS.register("ghost_witch_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.GHOST_WITCH, 0xa7303f,
+            0x540000, new Item.Properties()));
 
     public static final RegistryObject<Item> PURIFIER_ITEM = ITEMS.register("purifier_item", () -> new PurifierItem(new Item.Properties().stacksTo(8)));
     public static final RegistryObject<Item> PROSPERITY_ITEM = ITEMS.register("prosperity_item", () -> new ProsperityItem(new Item.Properties().stacksTo(8)));
@@ -201,6 +203,7 @@ public class ModItems {
     public static final RegistryObject<Item> CHRONA_LEGGINGS = ITEMS.register("chrona_leggings", () -> new BaseArmorItem(ModArmorMaterials.CHRONA, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> CHRONA_BOOTS = ITEMS.register("chrona_boots", () -> new BaseArmorItem(ModArmorMaterials.CHRONA, ArmorItem.Type.BOOTS, new Item.Properties()));
 
+    public static final RegistryObject<Item> GHOST_WITCH_TEAR = ITEMS.register("ghostwitch_tear", () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
