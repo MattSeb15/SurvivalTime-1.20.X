@@ -38,7 +38,7 @@ public class InfoMaxTimeCommand {
                     String playerName = player.getGameProfile().getName();
                     int playerIndex = players.stream().toList().indexOf(player) + 1;
 
-                    context.getSource().sendSuccess(() -> Component.translatable("commands.sut.maxtime.info", playerIndex, playerName,
+                    context.getSource().sendSuccess(() -> Component.translatable("chat.notification.sut.maxtime.info", playerIndex, playerName,
                             currentFormattedTime), false);
                 });
 

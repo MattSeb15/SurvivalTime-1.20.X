@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.IpBanList;
 import net.minecraft.server.players.IpBanListEntry;
 import net.minecraft.server.players.PlayerList;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +18,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,19 +27,21 @@ import net.most.survivaltimemod.command.coin.AddCoinCommand;
 import net.most.survivaltimemod.command.coin.InfoCoinCommand;
 import net.most.survivaltimemod.command.coin.SetCoinCommand;
 import net.most.survivaltimemod.command.coin.SubtractCoinCommand;
+import net.most.survivaltimemod.command.coinmultiplier.AddCoinMultiplierCommand;
 import net.most.survivaltimemod.command.coinmultiplier.InfoCoinMultiplierCommand;
 import net.most.survivaltimemod.command.coinmultiplier.SetCoinMultiplierCommand;
 import net.most.survivaltimemod.command.coinmultiplier.SetDefaultCoinMultiplierCommand;
-import net.most.survivaltimemod.command.dmultiplier.InfoDamageMultiplierCommand;
-import net.most.survivaltimemod.command.dmultiplier.SetDamageMultiplierCommand;
-import net.most.survivaltimemod.command.dmultiplier.SetDefaultDamageMultiplierCommand;
+import net.most.survivaltimemod.command.dmultiplier.*;
 import net.most.survivaltimemod.command.item.AddNbtToItem;
+import net.most.survivaltimemod.command.maxtime.AddMaxTimeCommand;
 import net.most.survivaltimemod.command.maxtime.InfoMaxTimeCommand;
 import net.most.survivaltimemod.command.maxtime.SetMaxTimeCommand;
+import net.most.survivaltimemod.command.maxtime.SubtractMaxTimeCommand;
 import net.most.survivaltimemod.command.time.*;
-import net.most.survivaltimemod.command.tmultiplier.InfoTimeMultiplierCommand;
-import net.most.survivaltimemod.command.tmultiplier.SetDefaultTimeMultiplierCommand;
-import net.most.survivaltimemod.command.tmultiplier.SetTimeMultiplierCommand;
+import net.most.survivaltimemod.command.timeplayed.AddTimePlayedCommand;
+import net.most.survivaltimemod.command.timeplayed.SetTimePlayedCommand;
+import net.most.survivaltimemod.command.timeplayed.SubtractTimePlayedCommand;
+import net.most.survivaltimemod.command.tmultiplier.*;
 import net.most.survivaltimemod.effect.ModEffects;
 import net.most.survivaltimemod.item.ModItems;
 import net.most.survivaltimemod.time.PlayerTime;
@@ -97,8 +97,29 @@ public class ModEvents {
                     if (gameType == GameType.SPECTATOR && playerTime.getTime() > 0) {
                         player.setGameMode(GameType.SURVIVAL);
                     }
+
                     playerTime.incrementTimePlayed(1);
                     playerTime.decrementTime(1, player);
+                    double timePlayed =  playerTime.getTimePlayed();
+                    if(timePlayed % 1800 == 0){
+                        int pCount = player.getRandom().nextInt(9) + 1;
+                        if(!player.addItem(new ItemStack(ModItems.CHRONO_COIN.get(), pCount))){
+                            player.drop(new ItemStack(ModItems.CHRONO_COIN.get(), pCount), true, true);
+                        }
+                    }
+                    if(timePlayed% 7200 == 0){
+                        playerTime.incrementCoinMultiplier(0.1f, player);
+                        playerTime.decrementDamageMultiplier(0.1f, player);
+                        player.displayClientMessage(ComponentHelper.getOnCoinsMultiplierChangeComponent(playerTime.getCoinsMultiplier(), playerTime.getDamageMultiplier()), false);
+                    }
+                    if(timePlayed % 10800 == 0){
+                        playerTime.incrementTimeMultiplier(0.2f, player);
+                        player.displayClientMessage(ComponentHelper.getOnTimeMultiplierChangeComponent(playerTime.getTimeMultiplier()), false);
+                    }
+                    if (timePlayed % 18000 == 0){
+                        playerTime.incrementMaxTime(3600, player);
+                        player.displayClientMessage(ComponentHelper.getOnMaxTimeChangeComponent(playerTime.getMaxTime()), false);
+                    }
                     player.displayClientMessage(
                             Component.literal("T: " + playerTime.getFormattedTime() +" | MT: " + playerTime.getFormattedMaxTime() + " (x" +
                                     playerTime.getTimeMultiplier() + ")" + "TP: "+ playerTime.getFormattedPlayedTime()),
@@ -212,6 +233,17 @@ public class ModEvents {
         new InfoCoinMultiplierCommand(event.getDispatcher());
         new InfoDamageMultiplierCommand(event.getDispatcher());
         new InfoTimeMultiplierCommand(event.getDispatcher());
+        new SetTimePlayedCommand(event.getDispatcher());
+        new AddTimePlayedCommand(event.getDispatcher());
+        new SubtractTimePlayedCommand(event.getDispatcher());
+        new AddCoinMultiplierCommand(event.getDispatcher());
+        new SubtractTimeMultiplierCommand(event.getDispatcher());
+        new AddDamageMultiplierCommand(event.getDispatcher());
+        new SubtractDamageMultiplierCommand(event.getDispatcher());
+        new AddMaxTimeCommand(event.getDispatcher());
+        new SubtractMaxTimeCommand(event.getDispatcher());
+        new AddTimeMultiplierCommand(event.getDispatcher());
+        new SubtractTimeMultiplierCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

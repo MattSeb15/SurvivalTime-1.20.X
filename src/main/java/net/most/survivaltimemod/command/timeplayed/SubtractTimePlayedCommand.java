@@ -1,4 +1,4 @@
-package net.most.survivaltimemod.command.time;
+package net.most.survivaltimemod.command.timeplayed;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -15,16 +15,17 @@ import net.most.survivaltimemod.time.PlayerTimeProvider;
 
 import java.util.Collection;
 
-public class SubtractTimeCommand {
-    public SubtractTimeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+public class SubtractTimePlayedCommand {
+    public SubtractTimePlayedCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("sut")
                 .requires(
                         (source) -> source.hasPermission(Commands.LEVEL_OWNERS)
+
                 )
-                .then(Commands.literal("time").then(Commands.literal("subtract").then(
+                .then(Commands.literal("timeplayed").then(Commands.literal("subtract").then(
                         Commands.argument("player", EntityArgument.players()).then(
                                 Commands.argument("time",
-                                        IntegerArgumentType.integer(0, 10 * 3600)).executes(this::execute)
+                                        IntegerArgumentType.integer(0, 24 * 3600)).executes(this::execute)
                         )
                 )))
         );
@@ -35,29 +36,27 @@ public class SubtractTimeCommand {
         try {
 
             Collection<ServerPlayer> players = EntityArgument.getPlayers(context, "player");
-            int timeToSubtract = context.getArgument("time", Integer.class);
-            String formattedTime = FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED,
-                    timeToSubtract);
+            int timeToSet = context.getArgument("time", Integer.class);
+            String formattedTime = FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, timeToSet);
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    playerTime.decrementTime(timeToSubtract, player);
+                    playerTime.decrementTimePlayed(timeToSet, player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");
                     } else {
                         playerNames.append(player.getName().getString()).append(", ");
                     }
 
-                    player.displayClientMessage(
-                            Component.translatable("chat.notification.sut.time.subtract", formattedTime).withStyle(ChatFormatting.AQUA),
-                            false
-                    );
+                    //set time message your time has been set to x seconds
+                    player.displayClientMessage(Component.translatable("chat.notification.sut.timeplayed.subtract", formattedTime).withStyle(ChatFormatting.AQUA),
+                            false);
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.translatable("chat.notification.general_command.sub_players", formattedTime, "Time", playerNames.toString()).withStyle(ChatFormatting.GREEN),
-                    false
+                    ()-> Component.translatable("chat.notification.general_command.sub_players", formattedTime, "Time Played" , playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    true
             );
 
         } catch (CommandSyntaxException e) {

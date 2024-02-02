@@ -1,10 +1,8 @@
 package net.most.survivaltimemod.command.time;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -40,7 +38,7 @@ public class InfoTimeCommand {
                     String playerName = player.getGameProfile().getName();
                     int playerIndex = players.stream().toList().indexOf(player) + 1;
 
-                    context.getSource().sendSuccess(() -> Component.translatable("commands.sut.time.info", playerIndex, playerName,
+                    context.getSource().sendSuccess(() -> Component.translatable("chat.notification.sut.time.info", playerIndex, playerName,
                             currentFormattedTime), false);
                 });
 

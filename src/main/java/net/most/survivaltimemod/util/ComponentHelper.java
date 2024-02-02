@@ -41,4 +41,41 @@ public class ComponentHelper {
                         .withStyle(ChatFormatting.DARK_RED)
         );
     }
+
+    public static Component getOnCoinsMultiplierChangeComponent(float coinsMultiplier, float damageMultiplier) {
+        return Component.empty()
+                .append(Component.translatable("chat.notification.multipliers_changed"))
+
+        .append(
+                Component.literal(" coins mult.: " + coinsMultiplier)
+                        .withStyle(ChatFormatting.GOLD)
+        ).append(
+                Component.literal(" | ")
+                        .withStyle(ChatFormatting.DARK_GRAY)
+        ).append(
+                Component.literal(" damage mult.: " + damageMultiplier)
+                        .withStyle(ChatFormatting.YELLOW)
+        );
+    }
+
+    public static Component getOnMaxTimeChangeComponent(float maxTime) {
+        return Component.empty()
+                .append(Component.translatable("chat.notification.max_time_changed"))
+                .append(
+                        Component.literal(" " + FormatTimeType.getFormattedStringByType(
+                                FormatTimeType.DEPENDS_NAMED, maxTime
+                        ))
+                                .withStyle(ChatFormatting.GOLD)
+                );
+
+    }
+
+    public static Component getOnTimeMultiplierChangeComponent(float timeMultiplier) {
+        return Component.empty()
+                .append(Component.translatable("chat.notification.time_multiplier_changed"))
+                .append(
+                        Component.literal(" " + timeMultiplier)
+                                .withStyle(ChatFormatting.GOLD)
+                );
+    }
 }

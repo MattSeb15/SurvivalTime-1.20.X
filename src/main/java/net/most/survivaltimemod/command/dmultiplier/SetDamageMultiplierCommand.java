@@ -48,18 +48,14 @@ public class SetDamageMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your damage multiplier has been set to " + multiplier).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.damage_multiplier.set", multiplier).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            "x(" + multiplier + ") damage multiplier"
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", "x"+multiplier, "Damage Multiplier", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 

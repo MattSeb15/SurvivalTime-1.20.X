@@ -94,7 +94,7 @@
 
   "jei.tooltip.recipe.shapeless": "Forma Libre",
 
-  "commands.sut.time.info": "%s. Username: %s | Tiempo Actual: %s",
-  "commands.sut.maxtime.set": "Tiempo Máximo se ha establecido a %s",
-  "commands.sut.maxtime.info": "%s. Username: %s | MaxTime Actual: %s"
+  "chat.notification.sut.time.info": "%s. Username: %s | Tiempo Actual: %s",
+  "chat.notification.sut.maxtime.set": "Tiempo Máximo se ha establecido a %s",
+  "chat.notification.sut.maxtime.info": "%s. Username: %s | MaxTime Actual: %s"
 }

@@ -37,7 +37,7 @@ public class SetCoinCommand {
 
             Collection<ServerPlayer> players = EntityArgument.getPlayers(context, "player");
             int coinsToSet = context.getArgument("coins", Integer.class);
-            String formattedTime = CoinFormatter.formatCoins(coinsToSet);
+            String formattedCoins = CoinFormatter.formatCoins(coinsToSet);
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
@@ -50,18 +50,14 @@ public class SetCoinCommand {
 
                     //set time message your time has been set to x seconds
                     player.displayClientMessage(
-                            Component.literal("Your coins has been set to " + formattedTime).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.coin.set", formattedCoins).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            formattedTime + " "
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players",formattedCoins, "Coins", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

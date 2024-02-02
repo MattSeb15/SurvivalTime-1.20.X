@@ -53,18 +53,14 @@ public class SetMaxTimeCommand {
 
 
                     player.displayClientMessage(
-                            Component.translatable("commands.sut.maxtime.set", formattedTime).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.maxtime.set", formattedTime).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            formattedTime + " "
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", formattedTime, "Max Time", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

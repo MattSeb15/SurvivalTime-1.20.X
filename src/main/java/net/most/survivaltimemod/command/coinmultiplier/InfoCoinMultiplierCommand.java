@@ -38,7 +38,7 @@ public class InfoCoinMultiplierCommand {
                     String playerName = player.getGameProfile().getName();
                     int playerIndex = players.stream().toList().indexOf(player) + 1;
 
-                    context.getSource().sendSuccess(() -> Component.translatable("commands.sut.coin_multiplier.info", playerIndex, playerName,
+                    context.getSource().sendSuccess(() -> Component.translatable("chat.notification.sut.coin_multiplier.info", playerIndex, playerName,
                             currentCoinMultiplier), false);
                 });
 

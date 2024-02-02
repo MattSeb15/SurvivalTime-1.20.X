@@ -41,7 +41,7 @@ public class SubtractCoinCommand {
             StringBuilder playerNames = new StringBuilder().append("[");
             for (ServerPlayer player : players) {
                 player.getCapability(PlayerTimeProvider.PLAYER_TIME_CAPABILITY).ifPresent(playerTime -> {
-                    playerTime.subtractCoins(coinsToSubtract, player);
+                    playerTime.decrementCoins(coinsToSubtract, player);
                     if (player == players.toArray()[players.size() - 1]) {
                         playerNames.append(player.getName().getString()).append("]");
                     } else {
@@ -50,18 +50,14 @@ public class SubtractCoinCommand {
 
 
                     player.displayClientMessage(
-                            Component.translatable("commands.sut.coin.subtract", formattedCoins).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.coin.subtract", formattedCoins).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            formattedCoins + " "
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.sub_players",formattedCoins, "Coins", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

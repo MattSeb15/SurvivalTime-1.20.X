@@ -41,16 +41,15 @@ public class SetDefaultCoinMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your coin multiplier has been set to default").withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.coin_multiplier.set_default").withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
+
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set default coin multiplier to ")
-                            .append(playerNames.toString())
-                            .withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", "DEFAULT", "Coin Multiplier", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 

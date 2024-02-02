@@ -49,7 +49,7 @@ public class PlayTimeCommand {
 
                     if (isTimeStopped) {
                         player.displayClientMessage(
-                                Component.literal("Time resumed").withStyle(ChatFormatting.GREEN),
+                                Component.translatable("chat.notification.sut.time.play").withStyle(ChatFormatting.AQUA),
                                 false
                         );
                     }
@@ -59,9 +59,7 @@ public class PlayTimeCommand {
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Time resumed for ").append(
-                            playerNames.toString()
-                    ).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.sut.time.play_players", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

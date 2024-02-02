@@ -34,7 +34,7 @@ public class AddNbtToItem {
 
         assert executor != null;
         if (executor.getMainHandItem().isEmpty() || executor.getMainHandItem().getItem() != ModItems.LOST_TIME_SPHERE.get()) {
-            context.getSource().sendFailure(Component.literal("You must have lost time sphere item in your main hand!"));
+            context.getSource().sendFailure(Component.translatable("chat.notification.sut.item.lts.fail"));
             return 0;
         }
 
@@ -42,7 +42,7 @@ public class AddNbtToItem {
 
 
         context.getSource().sendSuccess(
-                () -> Component.literal("You have put " + formattedTime + " on the item!"),
+                () -> Component.translatable("chat.notification.sut.item.lts.success", formattedTime),
                 true
         );
 

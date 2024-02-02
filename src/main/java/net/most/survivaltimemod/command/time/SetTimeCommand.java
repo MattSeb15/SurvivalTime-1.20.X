@@ -50,18 +50,14 @@ public class SetTimeCommand {
 
                     //set time message your time has been set to x seconds
                     player.displayClientMessage(
-                            Component.literal("Your time has been set to " + formattedTime).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.time.set", formattedTime).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            formattedTime + " "
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", formattedTime, "Time", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

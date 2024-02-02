@@ -37,7 +37,7 @@ public class InfoTimeMultiplierCommand {
                     String playerName = player.getGameProfile().getName();
                     int playerIndex = players.stream().toList().indexOf(player) + 1;
 
-                    context.getSource().sendSuccess(() -> Component.translatable("commands.sut.time_multiplier.info", playerIndex, playerName,
+                    context.getSource().sendSuccess(() -> Component.translatable("chat.notification.sut.time_multiplier.info", playerIndex, playerName,
                             currentTimeMultiplier), false);
                 });
 

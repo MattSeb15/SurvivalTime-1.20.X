@@ -47,8 +47,8 @@ public class ToggleTimeStatusCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal(isTimeStopped
-                                    ? "Your time has been resumed" : "Your time has been paused").withStyle(ChatFormatting.GREEN),
+                            isTimeStopped ? Component.translatable("chat.notification.sut.time.play").withStyle(ChatFormatting.AQUA)
+                                    : Component.translatable("chat.notification.sut.time.pause").withStyle(ChatFormatting.AQUA),
                             false
                     );
                     playerTime.toggleTimeStatus(player);
@@ -57,9 +57,7 @@ public class ToggleTimeStatusCommand {
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Time toggled for ").append(
-                            playerNames.toString()
-                    ).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.sut.time.toggle_players", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 

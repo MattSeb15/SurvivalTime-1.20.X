@@ -41,16 +41,14 @@ public class SetDefaultDamageMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your damage multiplier has been set to default").withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.damage_multiplier.set_default").withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set default damage multiplier to ")
-                            .append(playerNames.toString())
-                            .withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", "DEFAULT", "Damage Multiplier", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 

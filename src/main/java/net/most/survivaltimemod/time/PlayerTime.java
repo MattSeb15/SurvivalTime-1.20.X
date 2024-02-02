@@ -106,7 +106,7 @@ public class PlayerTime {
 
     private void incrementMaxTime(float increment) {
         float currentMaxTime = this.playerTimeData.getMaxTime();
-        float newMaxTime = currentMaxTime + increment;
+        float newMaxTime = Math.min(currentMaxTime + increment, 30*3600);
         this.playerTimeData.setMaxTime(newMaxTime);
     }
 
@@ -117,7 +117,7 @@ public class PlayerTime {
 
     private void decrementMaxTime(float decrement) {
         float currentMaxTime = this.playerTimeData.getMaxTime();
-        float newMaxTime = Math.max(currentMaxTime - decrement, MIN_TIME);
+        float newMaxTime = Math.max(currentMaxTime - decrement, 3600);
         this.playerTimeData.setMaxTime(newMaxTime);
     }
 
@@ -142,6 +142,18 @@ public class PlayerTime {
     public void setTimeMultiplier(float timeMultiplier, ServerPlayer player) {
         this.setTimeMultiplier(timeMultiplier);
         syncServerToClientData(player);
+    }
+
+    public void incrementTimeMultiplier(float timeMultiplier, ServerPlayer player) {
+        float currentTimeMultiplier = this.getTimeMultiplier();
+        float newTimeMultiplier = Math.min(currentTimeMultiplier + timeMultiplier, Float.MAX_VALUE);
+        this.setTimeMultiplier(newTimeMultiplier, player);
+    }
+
+    public void decrementTimeMultiplier(float timeMultiplier, ServerPlayer player) {
+        float currentTimeMultiplier = this.getTimeMultiplier();
+        float newTimeMultiplier = Math.max(currentTimeMultiplier - timeMultiplier, 0.01f);
+        this.setTimeMultiplier(newTimeMultiplier, player);
     }
 
     public void setDefaultTimeMultiplier(ServerPlayer player) {
@@ -310,6 +322,17 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
+    public void decrementTimePlayed(double decrement) {
+        double currentTimePlayed = this.playerTimeData.getTimePlayed();
+        double newTimePlayed = Math.max(currentTimePlayed - decrement, 0);
+        this.playerTimeData.setTimePlayed(newTimePlayed);
+    }
+
+    public void decrementTimePlayed(double decrement, ServerPlayer player) {
+        this.decrementTimePlayed(decrement);
+        syncServerToClientData(player);
+    }
+
 
     private void resetTime() {
         float currentTime = this.playerTimeData.getTime();
@@ -361,6 +384,18 @@ public class PlayerTime {
         syncServerToClientData(player);
     }
 
+    public void incrementDamageMultiplier(float damageMultiplier, ServerPlayer player) {
+        float currentDamageMultiplier = this.getDamageMultiplier();
+        float newDamageMultiplier = Math.min(currentDamageMultiplier + damageMultiplier, Float.MAX_VALUE);
+        this.setDamageMultiplier(newDamageMultiplier, player);
+    }
+
+    public void decrementDamageMultiplier(float damageMultiplier, ServerPlayer player) {
+        float currentDamageMultiplier = this.getDamageMultiplier();
+        float newDamageMultiplier = Math.max(currentDamageMultiplier - damageMultiplier, 0.1f);
+        this.setDamageMultiplier(newDamageMultiplier, player);
+    }
+
     public void setDefaultDamageMultiplier(ServerPlayer player) {
         this.setDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER, player);
 
@@ -374,12 +409,12 @@ public class PlayerTime {
     public void incrementCoins(long coins, ServerPlayer player) {
         double currentCoins = this.getCoins();
         float coinsMultiplier = this.getCoinsMultiplier();
-        double newCoins = currentCoins + coins * coinsMultiplier;
+        double newCoins = Math.min(currentCoins + coins * coinsMultiplier, Long.MAX_VALUE);
         this.setCoins(newCoins, player);
 
     }
 
-    public void subtractCoins(long coins, ServerPlayer player) {
+    public void decrementCoins(long coins, ServerPlayer player) {
         double currentCoins = this.getCoins();
         float coinsMultiplier = this.getCoinsMultiplier();
         double newCoins = Math.max(currentCoins - coins * coinsMultiplier, 0);
@@ -389,6 +424,18 @@ public class PlayerTime {
     public void setCoinsMultiplier(float coinsMultiplier, ServerPlayer player) {
         this.playerTimeData.setCoinsMultiplier(coinsMultiplier);
         syncServerToClientData(player);
+    }
+
+    public void incrementCoinMultiplier(float coinsMultiplier, ServerPlayer player) {
+        float currentCoinMultiplier = this.getCoinsMultiplier();
+        float newCoinMultiplier = Math.min(currentCoinMultiplier + coinsMultiplier, Float.MAX_VALUE);
+        this.setCoinsMultiplier(newCoinMultiplier, player);
+    }
+
+    public void decrementCoinMultiplier(float coinsMultiplier, ServerPlayer player) {
+        float currentCoinMultiplier = this.getCoinsMultiplier();
+        float newCoinMultiplier = Math.max(currentCoinMultiplier - coinsMultiplier, DEFAULT_COINS_MULTIPLIER);
+        this.setCoinsMultiplier(newCoinMultiplier, player);
     }
 
     public void setDefaultCoinMultiplier(ServerPlayer player) {
@@ -456,5 +503,11 @@ public class PlayerTime {
 
     private String getFormattedTime(double timePlayed) {
         return FormatTimeType.getFormattedStringByType(FormatTimeType.DEPENDS_NAMED, (float) timePlayed);
+    }
+
+    public void setTimePlayed(int timeToSet, ServerPlayer player) {
+        this.playerTimeData.setTimePlayed(timeToSet);
+        syncServerToClientData(player);
+
     }
 }

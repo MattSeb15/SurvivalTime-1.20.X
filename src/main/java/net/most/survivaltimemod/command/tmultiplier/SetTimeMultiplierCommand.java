@@ -51,18 +51,14 @@ public class SetTimeMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your time multiplier has been set to " + multiplier).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.time.multiplier.set", "x"+multiplier).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            "x(" + multiplier + ") time multiplier"
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", "x"+multiplier, "Time Multiplier", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 

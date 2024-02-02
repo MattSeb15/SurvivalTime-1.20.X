@@ -48,8 +48,7 @@ public class AddTimeCommand {
                         playerNames.append(player.getName().getString()).append(", ");
                     }
                     player.displayClientMessage(
-                            Component.literal("Added " + formattedTime + " " +
-                                    "to your time").withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.time.add", formattedTime).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
@@ -57,11 +56,7 @@ public class AddTimeCommand {
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Added ").append(
-                            formattedTime + " "
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.add_players", "+" + formattedTime, "Time", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

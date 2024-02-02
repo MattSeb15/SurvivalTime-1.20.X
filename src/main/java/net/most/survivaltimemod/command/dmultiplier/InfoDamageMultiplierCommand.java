@@ -38,7 +38,7 @@ public class InfoDamageMultiplierCommand {
                     String playerName = player.getGameProfile().getName();
                     int playerIndex = players.stream().toList().indexOf(player) + 1;
 
-                    context.getSource().sendSuccess(() -> Component.translatable("commands.sut.damage_multiplier.info", playerIndex, playerName,
+                    context.getSource().sendSuccess(() -> Component.translatable("chat.notification.sut.damage_multiplier.info", playerIndex, playerName,
                             currentDamageMultiplier), false);
                 });
 

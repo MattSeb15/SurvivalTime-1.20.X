@@ -48,18 +48,14 @@ public class SetCoinMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your coin multiplier has been set to " + multiplier).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.coin_multiplier.set", multiplier).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            "x(" + multiplier + ") coin multiplier"
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", "x"+multiplier, "Coin Multiplier", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 

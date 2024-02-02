@@ -49,7 +49,7 @@ public class StopTimeCommand {
 
                     if (!isTimeStopped) {
                         player.displayClientMessage(
-                                Component.literal("Time stopped").withStyle(ChatFormatting.GREEN),
+                                Component.translatable("chat.notification.sut.time.pause").withStyle(ChatFormatting.AQUA),
                                 false
                         );
                     }
@@ -59,9 +59,7 @@ public class StopTimeCommand {
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Time stopped for ").append(
-                            playerNames.toString()
-                    ).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.sut.time.pause_players", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

@@ -50,18 +50,16 @@ public class AddCoinCommand {
 
 
                     player.displayClientMessage(
-                            Component.translatable("commands.sut.coin.add", formattedCoins).withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.coin.add", formattedCoins).withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
+
+
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set ").append(
-                            formattedCoins + " "
-                    ).append(
-                            "to "
-                    ).append(playerNames.toString()).withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.general_command.set_players", formattedCoins, "Coins" , playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     true
             );
 

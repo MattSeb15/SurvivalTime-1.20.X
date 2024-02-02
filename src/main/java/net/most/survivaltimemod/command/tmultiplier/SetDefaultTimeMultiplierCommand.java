@@ -42,16 +42,14 @@ public class SetDefaultTimeMultiplierCommand {
                     }
 
                     player.displayClientMessage(
-                            Component.literal("Your time multiplier has been set to default").withStyle(ChatFormatting.AQUA),
+                            Component.translatable("chat.notification.sut.time.multiplier.default").withStyle(ChatFormatting.AQUA),
                             false
                     );
                 });
 
             }
             context.getSource().sendSuccess(
-                    () -> Component.literal("Set default time multiplier to ")
-                            .append(playerNames.toString())
-                            .withStyle(ChatFormatting.GREEN),
+                    () -> Component.translatable("chat.notification.sut.time.multiplier.default_players", playerNames.toString()).withStyle(ChatFormatting.GREEN),
                     false
             );
 
