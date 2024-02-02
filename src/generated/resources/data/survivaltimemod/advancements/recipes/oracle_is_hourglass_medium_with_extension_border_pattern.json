@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_tempora_block": {
+    "has_clock_fragment": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:tempora_block"
+              "survivaltimemod:clock_fragment"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:tempora_ingot_from_tempora_block"
+        "recipe": "survivaltimemod:oracle_is_hourglass_medium_with_extension_border_pattern"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_tempora_block",
+      "has_clock_fragment",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:tempora_ingot_from_tempora_block"
+      "survivaltimemod:oracle_is_hourglass_medium_with_extension_border_pattern"
     ]
   },
   "sends_telemetry_event": true

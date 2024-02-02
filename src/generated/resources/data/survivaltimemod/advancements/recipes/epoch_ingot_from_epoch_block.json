@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_fiery_time_block": {
+    "has_epoch_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:fiery_time_block"
+              "survivaltimemod:epoch_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:fiery_time_from_fiery_time_block"
+        "recipe": "survivaltimemod:epoch_ingot_from_epoch_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_fiery_time_block",
+      "has_epoch_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:fiery_time_from_fiery_time_block"
+      "survivaltimemod:epoch_ingot_from_epoch_block"
     ]
   },
   "sends_telemetry_event": true

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_opal_block": {
+    "has_chrona_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:opal_block"
+              "survivaltimemod:chrona_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:opal_ingot_from_opal_block"
+        "recipe": "survivaltimemod:chrona_ingot_from_chrona_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_opal_block",
+      "has_chrona_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:opal_ingot_from_opal_block"
+      "survivaltimemod:chrona_ingot_from_chrona_block"
     ]
   },
   "sends_telemetry_event": true

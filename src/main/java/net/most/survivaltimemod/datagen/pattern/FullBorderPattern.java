@@ -6,36 +6,18 @@ import net.most.survivaltimemod.SurvivalTimeMod;
 
 import java.util.function.Consumer;
 
-public class FullBorderPattern extends HourglassPattern implements IHourglassPattern{
-    private final ItemLike pIngredientA;
-    private final ItemLike pIngredientB;
-    private final ItemLike pIngredientC;
+public class FullBorderPattern extends TriIngredientPattern implements IHourglassPattern{
 
     public FullBorderPattern(ItemLike result, int resultCount, int craftTime, int energyCost, ItemLike pIngredientA, ItemLike pIngredientB,
                              ItemLike pIngredientC) {
-        super(result, resultCount, craftTime, energyCost);
-        this.pIngredientA = pIngredientA;
-        this.pIngredientB = pIngredientB;
-        this.pIngredientC = pIngredientC;
-    }
-
-    public ItemLike getIngredientA() {
-        return pIngredientA;
-    }
-
-    public ItemLike getIngredientB() {
-        return pIngredientB;
-    }
-
-    public ItemLike getIngredientC() {
-        return pIngredientC;
+        super(result, resultCount, craftTime, energyCost, pIngredientA, pIngredientB, pIngredientC);
     }
 
     @Override
     public void create(Consumer<FinishedRecipe> pWriter) {
         ItemLike ingredientA = getIngredientA();
          getShapedBuilder()
-                 .pattern("AAAAA")
+                .pattern("AAAAA")
                 .pattern("ABBBA")
                 .pattern("ABCBA")
                 .pattern("ABBBA")

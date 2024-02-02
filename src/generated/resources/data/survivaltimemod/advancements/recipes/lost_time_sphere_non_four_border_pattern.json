@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_tempora": {
+    "has_opal_shard_epoch": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:raw_tempora"
+              "survivaltimemod:opal_shard_epoch"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:tempora_ingot_from_raw_tempora"
+        "recipe": "survivaltimemod:lost_time_sphere_non_four_border_pattern"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_raw_tempora",
+      "has_opal_shard_epoch",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:tempora_ingot_from_raw_tempora"
+      "survivaltimemod:lost_time_sphere_non_four_border_pattern"
     ]
   },
   "sends_telemetry_event": true

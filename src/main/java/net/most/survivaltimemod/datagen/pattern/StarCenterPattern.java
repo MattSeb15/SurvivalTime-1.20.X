@@ -6,23 +6,12 @@ import net.most.survivaltimemod.SurvivalTimeMod;
 
 import java.util.function.Consumer;
 
-public class StarCenterPattern extends HourglassPattern implements IHourglassPattern{
-    private final ItemLike ingredientBorder;
-    private final ItemLike ingredientCenter;
+public class StarCenterPattern extends DuoIngredientPattern implements IHourglassPattern{
+
 
     public StarCenterPattern(ItemLike result, int resultCount, int craftTime, int energyCost, ItemLike ingredientBorder, ItemLike ingredientCenter) {
-        super(result, resultCount, craftTime, energyCost);
-        this.ingredientBorder = ingredientBorder;
-        this.ingredientCenter = ingredientCenter;
-    }
+        super(result, resultCount, craftTime, energyCost, ingredientBorder, ingredientCenter);
 
-
-    public ItemLike getIngredientBorder() {
-        return ingredientBorder;
-    }
-
-    public ItemLike getIngredientCenter() {
-        return ingredientCenter;
     }
 
     @Override
@@ -33,8 +22,8 @@ public class StarCenterPattern extends HourglassPattern implements IHourglassPat
                 .pattern(" BCB ")
                 .pattern("  B  ")
                 .pattern("     ")
-                .define('B', getIngredientBorder())
-                .define('C', getIngredientCenter())
+                .define('B', getIngredientA())
+                .define('C', getIngredientB())
                 .unlockedBy(getHasName(getResult()), has(getResult()))
                 .save(pWriter, SurvivalTimeMod.MOD_ID + ":" + getItemName(getResult()) + "_center_pattern");
     }

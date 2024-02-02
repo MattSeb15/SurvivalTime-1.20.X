@@ -6,24 +6,14 @@ import net.most.survivaltimemod.SurvivalTimeMod;
 
 import java.util.function.Consumer;
 
-public class BlockPattern extends HourglassPattern implements IHourglassPattern{
-    public final ItemLike itemIngredient;
-
+public class BlockPattern extends MonoIngredientPattern implements IHourglassPattern{
     public BlockPattern(ItemLike result, int resultCount, int craftTime, int energyCost, ItemLike itemIngredient) {
-        super(result, resultCount, craftTime, energyCost);
-        this.itemIngredient = itemIngredient;
-    }
+        super(result, resultCount, craftTime, energyCost, itemIngredient);
 
+    }
     public BlockPattern(ItemLike result, int craftTime, int energyCost, ItemLike itemIngredient) {
-        super(result, 1, craftTime, energyCost);
-        this.itemIngredient = itemIngredient;
+        super(result, 1, craftTime, energyCost, itemIngredient);
     }
-
-
-    public ItemLike getItemIngredient() {
-        return itemIngredient;
-    }
-
     @Override
     public void create(Consumer<FinishedRecipe> pWriter) {
         getShapedBuilder()
@@ -32,8 +22,8 @@ public class BlockPattern extends HourglassPattern implements IHourglassPattern{
                 .pattern(" ### ")
                 .pattern(" ### ")
                 .pattern("     ")
-                .define('#', getItemIngredient())
-                .unlockedBy(getHasName(getItemIngredient()), has(getItemIngredient()))
+                .define('#', getIngredientA())
+                .unlockedBy(getHasName(getIngredientA()), has(getIngredientA()))
                 .save(pWriter);
     }
 }

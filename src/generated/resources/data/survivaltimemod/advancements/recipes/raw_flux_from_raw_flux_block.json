@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:raw_flux_from_raw_flux_block"
+        "recipe": "survivaltimemod:raw_flux_from_raw_flux_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:raw_flux_from_raw_flux_block"
+      "survivaltimemod:raw_flux_from_raw_flux_block"
     ]
   },
   "sends_telemetry_event": true

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chrona_block": {
+    "has_prosperity_item": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:chrona_block"
+              "survivaltimemod:prosperity_item"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:chrona_ingot_from_chrona_block"
+        "recipe": "survivaltimemod:prosperity_item_center_pattern"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_chrona_block",
+      "has_prosperity_item",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:chrona_ingot_from_chrona_block"
+      "survivaltimemod:prosperity_item_center_pattern"
     ]
   },
   "sends_telemetry_event": true

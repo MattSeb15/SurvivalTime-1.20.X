@@ -4,7 +4,7 @@
   "energyCost": 300,
   "key": {
     "B": {
-      "item": "survivaltimemod:pile_of_meat"
+      "item": "minecraft:honey_bottle"
     },
     "C": {
       "item": "survivaltimemod:purifier_item"
@@ -18,6 +18,6 @@
     "     "
   ],
   "result": {
-    "item": "survivaltimemod:curse_item"
+    "item": "survivaltimemod:prosperity_item"
   }
 }

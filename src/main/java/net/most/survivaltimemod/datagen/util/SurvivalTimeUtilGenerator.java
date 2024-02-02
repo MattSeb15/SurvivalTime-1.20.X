@@ -177,7 +177,8 @@ public class SurvivalTimeUtilGenerator {
             ModItems.CHRONA_HELMET,
             ModItems.CHRONA_CHESTPLATE,
             ModItems.CHRONA_LEGGINGS,
-            ModItems.CHRONA_BOOTS
+            ModItems.CHRONA_BOOTS,
+            ModItems.GHOST_WITCH_TEAR
     );
 
     ////----->>> RECIPES <<<-----\\\\----------------------->>> RECIPES <<<-----\\\\
@@ -186,6 +187,14 @@ public class SurvivalTimeUtilGenerator {
     );
     public final static List<MediumBorderPattern> MEDIUM_BORDER_PATTERN_LIST = List.of(
 
+    );
+
+    public final static List<MediumWithExtensionBorderPattern> MEDIUM_WITH_EXTENSION_BORDER_PATTERN_LIST = List.of(
+            new MediumWithExtensionBorderPattern(ModItems.ORACLE_IS_HOURGLASS.get(), 1, 20 * 60 * 10, 60 * 20, ModItems.IFLUX.get(), ModItems.CLOCK_FRAGMENT.get(), Items.CLOCK)
+    );
+
+    public final static List<NonFourBorderPattern> NON_FOUR_BORDER_PATTERN_LIST = List.of(
+            new NonFourBorderPattern(ModItems.LOST_TIME_SPHERE.get(), 1, 20 * 60 * 60, 0, Items.CLOCK, ModItems.OPAL_SHARD_EPOCH.get())
     );
 
     public final static List<MonoMaterialPattern> MONO_MATERIAL_PATTERN_LIST = List.of(
@@ -208,7 +217,8 @@ public class SurvivalTimeUtilGenerator {
             new MonoMaterialPattern(ModItems.TEMPORA_INGOT.get(), 9, 20 * 60 * 5, 60 * 25, ModBlocks.TEMPORA_BLOCK.get()),
             new MonoMaterialPattern(ModItems.EPOCH_INGOT.get(), 9, 20 * 60 * 4, 60 * 20, ModBlocks.EPOCH_BLOCK.get()),
             new MonoMaterialPattern(ModItems.FLUX_INGOT.get(), 9, 20 * 60 * 3, 60 * 15, ModBlocks.FLUX_BLOCK.get()),
-            new MonoMaterialPattern(ModItems.LOOP_INGOT.get(), 9, 20 * 60 * 2, 60 * 10, ModBlocks.LOOP_BLOCK.get())
+            new MonoMaterialPattern(ModItems.LOOP_INGOT.get(), 9, 20 * 60 * 2, 60 * 10, ModBlocks.LOOP_BLOCK.get()),
+            new MonoMaterialPattern(ModItems.PURIFIER_ITEM.get(), 8, 20 * 60 * 5, 60 * 10, ModItems.COMPACTED_MILK.get())
     );
     public final static List<BlockPattern> BLOCK_PATTERN_LIST = List.of(
             new BlockPattern(ModBlocks.FIERY_TIME_BLOCK.get(),20 * 60 * 6, 60 * 10, ModItems.FIERY_TIME.get()),
@@ -272,7 +282,6 @@ public class SurvivalTimeUtilGenerator {
     );
 
     public final static List<StarCenterPattern> STAR_CENTER_PATTERN_LIST = List.of(
-            new StarCenterPattern(ModItems.CURSE_ITEM.get(), 1, 20 * 60 * 5, 60 * 15, ModItems.PILE_OF_MEAT.get(), ModItems.COMPACTED_MILK.get()),
             new StarCenterPattern(ModItems.RAW_LOOP.get(), 1 , 20 * 30, 60 * 7, ModItems.OPAL_SHARD_LOOP.get() , Items.CLOCK),
             new StarCenterPattern(ModItems.RAW_FLUX.get(), 1 , 20 * 30 * 2, 60 * 10, ModItems.OPAL_SHARD_FLUX.get(), ModItems.RAW_LOOP.get()),
             new StarCenterPattern(ModItems.RAW_EPOCH.get(), 1 , 20 * 30 * 3, 60 * 13, ModItems.OPAL_SHARD_EPOCH.get(), ModItems.RAW_FLUX.get()),
@@ -282,7 +291,9 @@ public class SurvivalTimeUtilGenerator {
             new StarCenterPattern(ModItems.FLUX_STICK.get(), 1, 20 * 10 * 2, 60 * 6, ModItems.OPAL_SHARD_FLUX.get(), ModItems.LOOP_STICK.get()),
             new StarCenterPattern(ModItems.EPOCH_STICK.get(), 1, 20 * 10 * 3, 60 * 7, ModItems.OPAL_SHARD_EPOCH.get(), ModItems.FLUX_STICK.get()),
             new StarCenterPattern(ModItems.TEMPORA_STICK.get(), 1, 20 * 10 * 4, 60 * 8, ModItems.OPAL_SHARD_TEMPORA.get(), ModItems.EPOCH_STICK.get()),
-            new StarCenterPattern(ModItems.CHRONA_STICK.get(), 1, 20 * 10 * 5, 60 * 10, ModItems.OPAL_SHARD_CHRONA.get(), ModItems.TEMPORA_STICK.get())
+            new StarCenterPattern(ModItems.CHRONA_STICK.get(), 1, 20 * 10 * 5, 60 * 10, ModItems.OPAL_SHARD_CHRONA.get(), ModItems.TEMPORA_STICK.get()),
+            new StarCenterPattern(ModItems.PROSPERITY_ITEM.get(), 1, 20 * 60 * 2, 60 * 5, Items.HONEY_BOTTLE, ModItems.PURIFIER_ITEM.get()),
+            new StarCenterPattern(ModItems.CURSE_ITEM.get(), 1, 20 * 60 * 2, 60 * 5, ModItems.PILE_OF_MEAT.get(), ModItems.PURIFIER_ITEM.get())
     );
 
     public final static List<HelmetHourglassPattern> HELMET_PATTERN_LIST = List.of(

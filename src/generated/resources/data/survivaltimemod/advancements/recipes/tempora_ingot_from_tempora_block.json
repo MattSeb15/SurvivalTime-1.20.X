@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_milk_bucket": {
+    "has_tempora_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:milk_bucket"
+              "survivaltimemod:tempora_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:compacted_milk_from_milk_bucket"
+        "recipe": "survivaltimemod:tempora_ingot_from_tempora_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_milk_bucket",
+      "has_tempora_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:compacted_milk_from_milk_bucket"
+      "survivaltimemod:tempora_ingot_from_tempora_block"
     ]
   },
   "sends_telemetry_event": true

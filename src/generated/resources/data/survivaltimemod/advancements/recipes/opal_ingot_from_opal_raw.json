@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_loop_block": {
+    "has_opal_raw": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:loop_block"
+              "survivaltimemod:opal_raw"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:loop_ingot_from_loop_block"
+        "recipe": "survivaltimemod:opal_ingot_from_opal_raw"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_loop_block",
+      "has_opal_raw",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:loop_ingot_from_loop_block"
+      "survivaltimemod:opal_ingot_from_opal_raw"
     ]
   },
   "sends_telemetry_event": true

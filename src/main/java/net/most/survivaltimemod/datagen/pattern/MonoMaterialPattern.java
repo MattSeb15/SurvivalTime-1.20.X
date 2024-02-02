@@ -2,30 +2,23 @@ package net.most.survivaltimemod.datagen.pattern;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.most.survivaltimemod.SurvivalTimeMod;
 
 import java.util.function.Consumer;
 
-public class MonoMaterialPattern extends HourglassPattern implements IHourglassPattern {
+public class MonoMaterialPattern extends MonoIngredientPattern implements IHourglassPattern {
 
-    public final ItemLike ingredient;
     public final int ingredientCount;
 
     public MonoMaterialPattern(ItemLike result, int resultCount, int craftTime, int energyCost, ItemLike ingredient, int ingredientCount) {
-        super(result, resultCount, craftTime, energyCost);
-        this.ingredient = ingredient;
+        super(result, resultCount, craftTime, energyCost, ingredient);
         this.ingredientCount = ingredientCount;
     }
 
     public MonoMaterialPattern(ItemLike result, int resultCount, int craftTime, int energyCost, ItemLike ingredient) {
-        super(result, resultCount, craftTime, energyCost);
-        this.ingredient = ingredient;
+        super(result, resultCount, craftTime, energyCost, ingredient);
         this.ingredientCount = 1;
     }
-
-    public ItemLike getIngredient() {
-        return ingredient;
-    }
-
     public int getIngredientCount() {
         return ingredientCount;
     }
@@ -35,9 +28,10 @@ public class MonoMaterialPattern extends HourglassPattern implements IHourglassP
         if(getIngredientCount() >= 1 && getIngredientCount() <= 25){
 
         getShapelessBuilder()
-                .requires(getIngredient(), getIngredientCount())
-                .unlockedBy(getHasName(getIngredient()), has(getIngredient()))
-                .save(pWriter,getItemName(getResult()) + "_from_" + getItemName(getIngredient()));
+                .requires(getIngredientA(), getIngredientCount())
+                .unlockedBy(getHasName(getIngredientA()), has(getIngredientA()))
+                .save(pWriter,SurvivalTimeMod.MOD_ID + ":" + getItemName(getResult()) + "_from_" + getItemName(getIngredientA()));
+
         }
 
     }

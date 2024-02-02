@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_epoch_block": {
+    "has_raw_tempora_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:raw_epoch_block"
+              "survivaltimemod:raw_tempora_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:raw_epoch_from_raw_epoch_block"
+        "recipe": "survivaltimemod:raw_tempora_from_raw_tempora_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_raw_epoch_block",
+      "has_raw_tempora_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:raw_epoch_from_raw_epoch_block"
+      "survivaltimemod:raw_tempora_from_raw_tempora_block"
     ]
   },
   "sends_telemetry_event": true

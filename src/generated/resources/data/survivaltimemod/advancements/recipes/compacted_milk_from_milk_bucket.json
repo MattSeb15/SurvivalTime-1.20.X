@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_chrona_block": {
+    "has_milk_bucket": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:raw_chrona_block"
+              "minecraft:milk_bucket"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:raw_chrona_from_raw_chrona_block"
+        "recipe": "survivaltimemod:compacted_milk_from_milk_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_raw_chrona_block",
+      "has_milk_bucket",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:raw_chrona_from_raw_chrona_block"
+      "survivaltimemod:compacted_milk_from_milk_bucket"
     ]
   },
   "sends_telemetry_event": true

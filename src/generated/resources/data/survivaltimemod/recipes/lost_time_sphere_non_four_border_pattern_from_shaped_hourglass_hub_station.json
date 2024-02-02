@@ -1,0 +1,23 @@
+{
+  "type": "survivaltimemod:hourglass_hub_shaped",
+  "craftTime": 72000,
+  "energyCost": 0,
+  "key": {
+    "B": {
+      "item": "minecraft:clock"
+    },
+    "C": {
+      "item": "survivaltimemod:opal_shard_epoch"
+    }
+  },
+  "pattern": [
+    " BBB ",
+    "BBBBB",
+    "BBCBB",
+    "BBBBB",
+    " BBB "
+  ],
+  "result": {
+    "item": "survivaltimemod:lost_time_sphere"
+  }
+}

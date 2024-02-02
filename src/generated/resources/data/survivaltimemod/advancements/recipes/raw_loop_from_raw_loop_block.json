@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flux_block": {
+    "has_raw_loop_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "survivaltimemod:flux_block"
+              "survivaltimemod:raw_loop_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:flux_ingot_from_flux_block"
+        "recipe": "survivaltimemod:raw_loop_from_raw_loop_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_flux_block",
+      "has_raw_loop_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:flux_ingot_from_flux_block"
+      "survivaltimemod:raw_loop_from_raw_loop_block"
     ]
   },
   "sends_telemetry_event": true
