@@ -1,6 +1,7 @@
 package net.most.survivaltimemod.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -18,6 +19,7 @@ import net.most.survivaltimemod.screen.renderer.EnergyDisplayTooltipArea;
 import net.most.survivaltimemod.util.MouseUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Optional;
 
 public class HourglassHubStationScreen extends AbstractContainerScreen<HourglassHubStationMenu> {
@@ -67,7 +69,34 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
 
         renderEnergyAreaToolTip(pGuiGraphics, pMouseX, pMouseY);
         renderProgressTooltip(pGuiGraphics, pMouseX, pMouseY);
+        renderStatusIconToolTip(pGuiGraphics, pMouseX, pMouseY);
 
+    }
+
+    private void renderStatusIconToolTip(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        if(isMouseAboveArea(pMouseX, pMouseY, leftPos, topPos, 121, 81-18, 24, 18)){
+            if(menu.blockEntity.canCraftButNoEnergy()){
+                pGuiGraphics.renderTooltip(this.font, this.getNoEnergyTooltip(),
+                        Optional.empty(),
+                        pMouseX - leftPos,
+                        pMouseY - topPos);
+            }else if(menu.blockEntity.canCraft()){
+                pGuiGraphics.renderTooltip(this.font, this.getCraftingTooltip(),
+                        Optional.empty(),
+                        pMouseX - leftPos,
+                        pMouseY - topPos);
+            }
+        }
+    }
+
+    private @NotNull List<Component> getCraftingTooltip() {
+        return List.of(Component.translatable("gui.survivaltimemod.hourglass_hub_station.crafting").withStyle(ChatFormatting.GREEN)
+        );
+    }
+
+    private @NotNull List<Component> getNoEnergyTooltip() {
+        return List.of(Component.translatable("gui.survivaltimemod.hourglass_hub_station.no_energy").withStyle(ChatFormatting.RED),
+                Component.translatable("gui.survivaltimemod.hourglass_hub_station.no_energy_2").withStyle(ChatFormatting.RED));
     }
 
     private void renderEnergyAreaToolTip(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
@@ -103,13 +132,22 @@ public class HourglassHubStationScreen extends AbstractContainerScreen<Hourglass
 
         renderProgressArrow(guiGraphics, x, y);
         energyDisplayTooltipArea.render(guiGraphics);
+        renderStatusIcon(guiGraphics, x, y);
 
 
     }
 
+    private void renderStatusIcon(GuiGraphics guiGraphics, int x, int y) {
+        if(menu.blockEntity.canCraftButNoEnergy()){
+            guiGraphics.blit(TEXTURE, x + 120, y+80, 176, 10, 26, 20);
+        }else if(menu.blockEntity.canCraft()){
+            guiGraphics.blit(TEXTURE, x + 120, y+80, 176, 30, 26, 20);
+        }
+    }
+
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if (menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 120, y + 51, 176, 0, menu.getScaledProgress(), 9);
+            guiGraphics.blit(TEXTURE, x + 120, y + 51, 176, 0, menu.getScaledProgress(), 10);
         }
     }
 

@@ -228,7 +228,7 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         fillUpOnEnergyThenConsumeItem();
 
 
-        if (isOutputSlotEmptyOrReceivable() && hasRecipe() && hasEnoughEnergyToCraft()) {
+        if (canCraft()) {
             increaseCraftingProgress();
 
             setChanged(level, pPos, pState);
@@ -247,6 +247,12 @@ public class HourglassHubStationBlockEntity extends BlockEntity implements MenuP
         }
 
 
+    }
+    public boolean canCraft(){
+        return isOutputSlotEmptyOrReceivable() && hasRecipe() && hasEnoughEnergyToCraft();
+    }
+    public boolean canCraftButNoEnergy(){
+        return isOutputSlotEmptyOrReceivable() && hasRecipe() && !hasEnoughEnergyToCraft();
     }
 
     private void makeSound() {
